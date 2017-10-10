@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://zhazhapan.com">
-  <title>渣渣潘的博客</title>
+  <title>使用sftp在Linux（MacOS）之间进行文件传输 | 渣渣潘的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="欢迎来到渣渣的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="渣渣潘的博客">
-<meta property="og:url" content="http://zhazhapan.com/index.html">
+  <meta name="description" content="1. 连接远程Linux12sftp user@host例如：sftp root@192.168.1.2 2. 上传文件12put local_path remote_path例如：put -r /home/share/read.txt /home/root 3. 下载文件12get remote_path local_path例如：get -r /usr/local/some.zip /home">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用sftp在Linux（MacOS）之间进行文件传输">
+<meta property="og:url" content="http://zhazhapan.com/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/index.html">
 <meta property="og:site_name" content="渣渣潘的博客">
-<meta property="og:description" content="欢迎来到渣渣的博客">
+<meta property="og:description" content="1. 连接远程Linux12sftp user@host例如：sftp root@192.168.1.2 2. 上传文件12put local_path remote_path例如：put -r /home/share/read.txt /home/root 3. 下载文件12get remote_path local_path例如：get -r /usr/local/some.zip /home">
 <meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2017-10-10T15:25:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="渣渣潘的博客">
-<meta name="twitter:description" content="欢迎来到渣渣的博客">
+<meta name="twitter:title" content="使用sftp在Linux（MacOS）之间进行文件传输">
+<meta name="twitter:description" content="1. 连接远程Linux12sftp user@host例如：sftp root@192.168.1.2 2. 上传文件12put local_path remote_path例如：put -r /home/share/read.txt /home/root 3. 下载文件12get remote_path local_path例如：get -r /usr/local/some.zip /home">
   
     <link rel="alternative" href="/atom.xml" title="渣渣潘的博客" type="application/atom+xml">
   
@@ -153,16 +154,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-使用sftp在Linux（MacOS）之间进行文件传输" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-使用sftp在Linux（MacOS）之间进行文件传输" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/">使用sftp在Linux（MacOS）之间进行文件传输</a>
+    <h1 class="article-title" itemprop="name">
+      使用sftp在Linux（MacOS）之间进行文件传输
     </h1>
   
 
@@ -183,6 +182,37 @@
       
 
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -190,16 +220,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://zhazhapan.com/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/10/代码生成器JHipster入门教程——安装/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">代码生成器JHipster入门教程——安装</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -219,508 +308,41 @@
 
 
 
-
   
-    <article id="post-代码生成器JHipster入门教程——安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/10/代码生成器JHipster入门教程——安装/">代码生成器JHipster入门教程——安装</a>
-    </h1>
   
-
-        
-        <a href="/2017/10/10/代码生成器JHipster入门教程——安装/" class="archive-article-date">
-  	<time datetime="2017-10-10T14:42:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>JHipster是一个代码生成器，可以用来生成基于Spring Boot 和 AngularJS的项目</strong></p>
-<p><strong>1. 安装 Node.js</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install node</div></pre></td></tr></table></figure></p>
-<p><strong>2. 安装Git客户端</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install git</div></pre></td></tr></table></figure></p>
-<p><strong>3. 安装npm包管理器</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install npm</div></pre></td></tr></table></figure></p>
-<p><strong>4. 安装Yeoman generator</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g yo</div></pre></td></tr></table></figure></p>
-<p><strong>5. 安装Bower</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g bower</div></pre></td></tr></table></figure></p>
-<p><strong>6. 安装Grunt</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g grunt-cli</div></pre></td></tr></table></figure></p>
-<p><strong>7. 安装Yarn</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install yarn</div></pre></td></tr></table></figure></p>
-<p><strong>8. 使用JHipster生成项目</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir hello</div><div class="line">cd hello</div><div class="line">yo jhipster</div></pre></td></tr></table></figure></p>
-<p><strong>9. 接下来按照向导进行操作即可</strong></p>
-<p><img src="http://img.blog.csdn.net/20171010220454974?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="jhipster01"></p>
-<blockquote>
-<p>到后面会有多项选择，使用空格选择或取消选择，a和i全选或全不选</p>
-</blockquote>
-<p><img src="http://img.blog.csdn.net/20171010220840244?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="jhipster02"></p>
-<p><img src="http://img.blog.csdn.net/20171010221239500?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="jhipster03"></p>
-<pre><code>接下来等待完成即可。
-</code></pre><p><strong>10. 修改数据库连接信息</strong></p>
-<pre><code>进入目录src/main/resources/config找到配置文件application-dev.yml和application-prod.yml修改以下内容：
-</code></pre><p><img src="http://img.blog.csdn.net/20171010222655034?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="database"></p>
-<p><strong>11. 运行项目</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./mvnw</div></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/10/代码生成器JHipster入门教程——安装/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Eclipse插件推荐" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/30/Eclipse插件推荐/">Eclipse插件推荐</a>
-    </h1>
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://zhazhapan.com/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/", 
+    sourceId: "使用sftp在Linux（MacOS）之间进行文件传输",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-        
-        <a href="/2017/09/30/Eclipse插件推荐/" class="archive-article-date">
-  	<time datetime="2017-09-30T10:42:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>打开Eclipse Marketplace搜索插件名即可</p>
-</blockquote>
-<ol>
-<li><p><code>Properties Editor</code>：一个好用的属性编辑器</p>
-</li>
-<li><p><code>Class Decompiler</code>：Java反编译插件</p>
-</li>
-<li><p><code>Color Theme</code>：编辑器主题修改，有很多好看的主题</p>
-</li>
-<li><p><code>Darkest Dask Theme</code>：Eclipse暗黑主题，很好看</p>
-</li>
-<li><p><code>Spring Tools</code>：Spring开发必备工具</p>
-</li>
-<li><p><code>Subversion</code>：版本管理</p>
-</li>
-<li><p><code>JBoss Tools</code>：Hibernate开发必备</p>
-</li>
-<li><p><code>DevUtils</code>：一个好用的开发者工具</p>
-</li>
-<li><p><code>FindBug</code>：代码检查，默认是不触发，需要到设置里设置</p>
-</li>
-<li><p><code>Checkstyle</code>：代码风格检查</p>
-</li>
-<li><p><code>QuickImage</code>：可在Eclipse内查看图片</p>
-</li>
-<li><p><code>UML Designer</code>：UML插件工具</p>
-</li>
-<li><p><code>pmd</code>：代码分析工具</p>
-</li>
-<li><p><code>TestNG</code>：单元测试工具</p>
-</li>
-<li><p><code>Maven Integration for Eclipse</code>：Maven项目管理插件</p>
-</li>
-<li><p><code>DevStyle</code>：美化Eclipse，请你的Eclipse和IntelliJ一样好看</p>
-</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/30/Eclipse插件推荐/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Eclipse新建Spring-Boot项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/30/Eclipse新建Spring-Boot项目/">Eclipse新建Spring Boot项目</a>
-    </h1>
   
 
-        
-        <a href="/2017/09/30/Eclipse新建Spring-Boot项目/" class="archive-article-date">
-  	<time datetime="2017-09-30T10:39:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. 下载Spring Tool Suite插件</strong></p>
-<p><img src="http://img.blog.csdn.net/20170925193715631?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="spring tool suite"></p>
-<p><strong>2. 新建Spring Boot项目</strong></p>
-<p><img src="http://img.blog.csdn.net/20170925193908949?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="spring starter project"></p>
-<p><strong>3. 填写项目信息</strong></p>
-<p><img src="http://img.blog.csdn.net/20170925194308898?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="填写项目信息"></p>
-<p><strong>4. 选择项目依赖</strong></p>
-<p><img src="http://img.blog.csdn.net/20170925194616038?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="项目依赖"></p>
-<p><strong>5. 完成项目新建</strong></p>
-<p><img src="http://img.blog.csdn.net/20170925194809527?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="完成项目新建"></p>
-<p><strong>6. 添加一个测试控制器，代码如下</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * </div><div class="line"> */</div><div class="line">package com.zhazhapan.spring.springboot;</div><div class="line"></div><div class="line">import org.springframework.boot.SpringApplication;</div><div class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</div><div class="line">import org.springframework.web.bind.annotation.RequestMapping;</div><div class="line">import org.springframework.web.bind.annotation.RestController;</div><div class="line"></div><div class="line">/**</div><div class="line"> * @author pantao</div><div class="line"> *</div><div class="line"> */</div><div class="line">@RestController</div><div class="line">@SpringBootApplication // 开启自动配置</div><div class="line">public class BootTestApplication &#123;</div><div class="line">	@RequestMapping(&quot;/&quot;)</div><div class="line">	String index() &#123;</div><div class="line">		return &quot;Hello Spring Boot&quot;;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		SpringApplication.run(BootTestApplication.class, args);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>7. 右键项目，选择Spring Boot App运行，并选择一个项目入口</strong></p>
-<p><img src="http://img.blog.csdn.net/20170925214045257?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="spring boot app"></p>
-<p><img src="http://img.blog.csdn.net/20170925214549614?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="run"></p>
-<p><strong>8. 运行效果</strong></p>
-<p><img src="http://img.blog.csdn.net/20170925213649015?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="运行效果"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/30/Eclipse新建Spring-Boot项目/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-VMware-Workstation-14永久激活密钥" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/30/VMware-Workstation-14永久激活密钥/">VMware Workstation 14永久激活密钥</a>
-    </h1>
+    <section id="comments">
+      <div id="disqus_thread"></div>
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'true'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </section>
   
 
-        
-        <a href="/2017/09/30/VMware-Workstation-14永久激活密钥/" class="archive-article-date">
-  	<time datetime="2017-09-30T10:38:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>VMware Workstation是一款功能强大的桌面虚拟计算机软件，简单来说就是最强的中文虚拟机了，可以在桌面上运行不同的操作系统，下面就把VMware Workstation 14的激活密钥分享给大家！</p>
-<p><strong>VMware workstation 14永久激活密钥分享：</strong></p>
-<pre><code>CG54H-D8D0H-H8DHY-C6X7X-N2KG6
-
-ZC3WK-AFXEK-488JP-A7MQX-XL8YF
-
-AC5XK-0ZD4H-088HP-9NQZV-ZG2R4
-
-ZC5XK-A6E0M-080XQ-04ZZG-YF08D
-
-ZY5H0-D3Y8K-M89EZ-AYPEG-MYUA8
-
-FF590-2DX83-M81LZ-XDM7E-MKUT4
-
-FF31K-AHZD1-H8ETZ-8WWEZ-WUUVA
-
-CV7T2-6WY5Q-48EWP-ZXY7X-QGUWD
-
-AALYG-20HVE-WHQ13-67MUP-XVMF3
-</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/30/VMware-Workstation-14永久激活密钥/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-MacOS安装Docker" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/30/MacOS安装Docker/"> MacOS安装Docker</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/30/MacOS安装Docker/" class="archive-article-date">
-  	<time datetime="2017-09-30T10:34:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. <a href="https://download.docker.com/mac/stable/Docker.dmg" title="下载Docker for mac" target="_blank" rel="external">下载Docker for Mac</a></strong></p>
-<p><strong>2. 系统要求，只有在满足以下需求的情况下，Docker才会启动</strong></p>
-<ul>
-<li><p>Mac必须是2010年或更新的型号，英特尔的硬件支持内存管理单元(MMU)虚拟化。即扩展页表(概念)和不受限制的模式。</p>
-</li>
-<li><p>OS X El Capitan 10.11和更新的macOS版本。至少，对于Mac来说，Docker需要macOS Yosemite的10.10.3或更新的版本。</p>
-</li>
-<li><p>从Docker开始，Mac稳定版本1.13(即将发布)和并行发布版本，我们将不再讨论OS X Yosemite 10.10所特有的问题。在未来的版本中，由于Mac OS X版本的弃用，Mac版的Docker可能会停止在OS X Yosemite上的工作。我们建议升级到最新版的macOS。</p>
-</li>
-<li><p>至少4GB的内存</p>
-</li>
-<li><p>在版本4.3.30之前的VirtualBox不能安装(它与此版本的Docker不兼容)。如果你安装了一个新版本的VirtualBox，是可以的。</p>
-</li>
-</ul>
-<p><strong>3. 安装Docker。双击Docker.dmg，运行即可。</strong></p>
-<p><strong>4. 运行Docker，首次运行Docker需要请求权限，确定并输入密码即可</strong></p>
-<p><img src="http://img.blog.csdn.net/20170929162142852?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="Docker"></p>
-<p><img src="http://img.blog.csdn.net/20170929162235325?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="Docker"></p>
-<p><strong>5. 启动一个Web服务，在终端执行以下命令：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">docker run -d -p 80:80 --name webserver nginx</div><div class="line"><span class="comment">#停止运行服务执行命令 `docker stop webserver` 即可</span></div><div class="line"><span class="comment">#再次运行执行命令 `docker start webserver` 即可</span></div></pre></td></tr></table></figure></p>
-<p>访问localhost看到如下内容表示Docker安装成功：</p>
-<p><img src="http://img.blog.csdn.net/20170929162926173?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="Docker"></p>
-<p><strong>7. 查看Docker运行的容器可执行以下命令</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">docker ps -l	<span class="comment">#或docker ps -a</span></div><div class="line"><span class="comment">#退出并删除容器可执行以下命令</span></div><div class="line">docker <span class="built_in">kill</span> &lt;CONTAINER ID&gt;</div><div class="line">docker rm &lt;CONTAINER ID&gt;</div></pre></td></tr></table></figure></p>
-<p><strong>8. 停止并删除Web服务器，可执行以下命令</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker stop webserver</div><div class="line">docker rm webserver</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p><a href="https://docs.docker.com/docker-for-mac/" title="Docker for Mac官方文档" target="_blank" rel="external">参考自Docker for Mac官方文档</a></p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/30/MacOS安装Docker/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/29/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/29/hello-world/" class="archive-article-date">
-  	<time datetime="2017-09-29T14:38:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/29/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -743,8 +365,8 @@ AALYG-20HVE-WHQ13-67MUP-XVMF3
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
