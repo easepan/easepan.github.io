@@ -6,18 +6,32 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://zhazhapan.com">
-  <title>Archives: 2017 | 渣渣潘的博客</title>
+  <title>JavaFX Dialog对话框 | 渣渣潘的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="欢迎来到渣渣的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="渣渣潘的博客">
-<meta property="og:url" content="https://zhazhapan.com/archives/2017/index.html">
+  <meta name="description" content="1. 标准对话框 消息对话框123456Alert alert = new Alert(AlertType.INFORMATION);alert.setTitle(&quot;Information Dialog&quot;);alert.setHeaderText(&quot;Look, an Information Dialog&quot;);alert.setContentText(&quot;I have a great message">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaFX Dialog对话框">
+<meta property="og:url" content="https://zhazhapan.com/2017/10/12/JavaFX-Dialog对话框/index.html">
 <meta property="og:site_name" content="渣渣潘的博客">
-<meta property="og:description" content="欢迎来到渣渣的博客">
+<meta property="og:description" content="1. 标准对话框 消息对话框123456Alert alert = new Alert(AlertType.INFORMATION);alert.setTitle(&quot;Information Dialog&quot;);alert.setHeaderText(&quot;Look, an Information Dialog&quot;);alert.setContentText(&quot;I have a great message">
 <meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://img.blog.csdn.net/20171012144601083?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171012144719712?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171012144949166?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171012145044099?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171012145457913?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171012145724063?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171012150009401?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171012150524109?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171012150757770?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171012151145160?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171012151651236?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171012152131364?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-10-12T07:43:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="渣渣潘的博客">
-<meta name="twitter:description" content="欢迎来到渣渣的博客">
+<meta name="twitter:title" content="JavaFX Dialog对话框">
+<meta name="twitter:description" content="1. 标准对话框 消息对话框123456Alert alert = new Alert(AlertType.INFORMATION);alert.setTitle(&quot;Information Dialog&quot;);alert.setHeaderText(&quot;Look, an Information Dialog&quot;);alert.setContentText(&quot;I have a great message">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20171012144601083?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
   
     <link rel="alternative" href="/atom.xml" title="渣渣潘的博客" type="application/atom+xml">
   
@@ -153,265 +167,250 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-JavaFX-Dialog对话框" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      JavaFX Dialog对话框
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/12/JavaFX-Dialog对话框/" class="archive-article-date">
+
+        
+        <a href="/2017/10/12/JavaFX-Dialog对话框/" class="archive-article-date">
   	<time datetime="2017-10-12T07:41:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-12</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/12/JavaFX-Dialog对话框/">JavaFX Dialog对话框</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-标准对话框"><a href="#1-标准对话框" class="headerlink" title="1. 标准对话框"></a>1. 标准对话框</h2><ul>
+<li><strong>消息对话框</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Alert alert = <span class="keyword">new</span> Alert(AlertType.INFORMATION);</div><div class="line">alert.setTitle(<span class="string">"Information Dialog"</span>);</div><div class="line">alert.setHeaderText(<span class="string">"Look, an Information Dialog"</span>);</div><div class="line">alert.setContentText(<span class="string">"I have a great message for you!"</span>);</div><div class="line"></div><div class="line">alert.showAndWait();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20171012144601083?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="information dialog"></p>
+<ul>
+<li><strong>没有标题的消息对话框</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Alert alert = <span class="keyword">new</span> Alert(AlertType.INFORMATION);</div><div class="line">alert.setTitle(<span class="string">"Information Dialog"</span>);</div><div class="line">alert.setHeaderText(<span class="keyword">null</span>);</div><div class="line">alert.setContentText(<span class="string">"I have a great message for you!"</span>);</div><div class="line"></div><div class="line">alert.showAndWait();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20171012144719712?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="information dialog no header"></p>
+<h2 id="2-警告对话框"><a href="#2-警告对话框" class="headerlink" title="2. 警告对话框"></a>2. 警告对话框</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Alert alert = <span class="keyword">new</span> Alert(AlertType.WARNING);</div><div class="line">alert.setTitle(<span class="string">"Warning Dialog"</span>);</div><div class="line">alert.setHeaderText(<span class="string">"Look, a Warning Dialog"</span>);</div><div class="line">alert.setContentText(<span class="string">"Careful with the next step!"</span>);</div><div class="line"></div><div class="line">alert.showAndWait();</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20171012144949166?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="warning dialog"></p>
+<h2 id="3-错误对话框"><a href="#3-错误对话框" class="headerlink" title="3. 错误对话框"></a>3. 错误对话框</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Alert alert = <span class="keyword">new</span> Alert(AlertType.ERROR);</div><div class="line">alert.setTitle(<span class="string">"Error Dialog"</span>);</div><div class="line">alert.setHeaderText(<span class="string">"Look, an Error Dialog"</span>);</div><div class="line">alert.setContentText(<span class="string">"Ooops, there was an error!"</span>);</div><div class="line"></div><div class="line">alert.showAndWait();</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20171012145044099?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="error dialog"></p>
+<h2 id="4-异常对话框"><a href="#4-异常对话框" class="headerlink" title="4. 异常对话框"></a>4. 异常对话框</h2><p>这不是一个完整的异常对话框。但我们可以很容易地将 <code>TextArea</code> 作为可扩展的内容。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">Alert alert = <span class="keyword">new</span> Alert(AlertType.ERROR);</div><div class="line">alert.setTitle(<span class="string">"Exception Dialog"</span>);</div><div class="line">alert.setHeaderText(<span class="string">"Look, an Exception Dialog"</span>);</div><div class="line">alert.setContentText(<span class="string">"Could not find file blabla.txt!"</span>);</div><div class="line"></div><div class="line">Exception ex = <span class="keyword">new</span> FileNotFoundException(<span class="string">"Could not find file blabla.txt"</span>);</div><div class="line"></div><div class="line"><span class="comment">// Create expandable Exception.</span></div><div class="line">StringWriter sw = <span class="keyword">new</span> StringWriter();</div><div class="line">PrintWriter pw = <span class="keyword">new</span> PrintWriter(sw);</div><div class="line">ex.printStackTrace(pw);</div><div class="line">String exceptionText = sw.toString();</div><div class="line"></div><div class="line">Label label = <span class="keyword">new</span> Label(<span class="string">"The exception stacktrace was:"</span>);</div><div class="line"></div><div class="line">TextArea textArea = <span class="keyword">new</span> TextArea(exceptionText);</div><div class="line">textArea.setEditable(<span class="keyword">false</span>);</div><div class="line">textArea.setWrapText(<span class="keyword">true</span>);</div><div class="line"></div><div class="line">textArea.setMaxWidth(Double.MAX_VALUE);</div><div class="line">textArea.setMaxHeight(Double.MAX_VALUE);</div><div class="line">GridPane.setVgrow(textArea, Priority.ALWAYS);</div><div class="line">GridPane.setHgrow(textArea, Priority.ALWAYS);</div><div class="line"></div><div class="line">GridPane expContent = <span class="keyword">new</span> GridPane();</div><div class="line">expContent.setMaxWidth(Double.MAX_VALUE);</div><div class="line">expContent.add(label, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">expContent.add(textArea, <span class="number">0</span>, <span class="number">1</span>);</div><div class="line"></div><div class="line"><span class="comment">// Set expandable Exception into the dialog pane.</span></div><div class="line">alert.getDialogPane().setExpandableContent(expContent);</div><div class="line"></div><div class="line">alert.showAndWait();</div></pre></td></tr></table></figure></p>
+<p><img src="http://img.blog.csdn.net/20171012145457913?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="exception dialog"></p>
+<h2 id="5-确认对话框"><a href="#5-确认对话框" class="headerlink" title="5. 确认对话框"></a>5. 确认对话框</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Alert alert = <span class="keyword">new</span> Alert(AlertType.CONFIRMATION);</div><div class="line">alert.setTitle(<span class="string">"Confirmation Dialog"</span>);</div><div class="line">alert.setHeaderText(<span class="string">"Look, a Confirmation Dialog"</span>);</div><div class="line">alert.setContentText(<span class="string">"Are you ok with this?"</span>);</div><div class="line"></div><div class="line">Optional&lt;ButtonType&gt; result = alert.showAndWait();</div><div class="line"><span class="keyword">if</span> (result.get() == ButtonType.OK)&#123;</div><div class="line">    <span class="comment">// ... user chose OK</span></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">// ... user chose CANCEL or closed the dialog</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20171012145724063?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="confirmation dialog"></p>
+<h2 id="6-自定义确认对话框"><a href="#6-自定义确认对话框" class="headerlink" title="6. 自定义确认对话框"></a>6. 自定义确认对话框</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">Alert alert = <span class="keyword">new</span> Alert(AlertType.CONFIRMATION);</div><div class="line">alert.setTitle(<span class="string">"Confirmation Dialog with Custom Actions"</span>);</div><div class="line">alert.setHeaderText(<span class="string">"Look, a Confirmation Dialog with Custom Actions"</span>);</div><div class="line">alert.setContentText(<span class="string">"Choose your option."</span>);</div><div class="line"></div><div class="line">ButtonType buttonTypeOne = <span class="keyword">new</span> ButtonType(<span class="string">"One"</span>);</div><div class="line">ButtonType buttonTypeTwo = <span class="keyword">new</span> ButtonType(<span class="string">"Two"</span>);</div><div class="line">ButtonType buttonTypeThree = <span class="keyword">new</span> ButtonType(<span class="string">"Three"</span>);</div><div class="line">ButtonType buttonTypeCancel = <span class="keyword">new</span> ButtonType(<span class="string">"Cancel"</span>, ButtonData.CANCEL_CLOSE);</div><div class="line"></div><div class="line">alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeThree, buttonTypeCancel);</div><div class="line"></div><div class="line">Optional&lt;ButtonType&gt; result = alert.showAndWait();</div><div class="line"><span class="keyword">if</span> (result.get() == buttonTypeOne)&#123;</div><div class="line">    <span class="comment">// ... user chose "One"</span></div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (result.get() == buttonTypeTwo) &#123;</div><div class="line">    <span class="comment">// ... user chose "Two"</span></div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (result.get() == buttonTypeThree) &#123;</div><div class="line">    <span class="comment">// ... user chose "Three"</span></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">// ... user chose CANCEL or closed the dialog</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20171012150009401?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="custom action confirmation dialog"></p>
+<h2 id="7-可输入的对话框"><a href="#7-可输入的对话框" class="headerlink" title="7. 可输入的对话框"></a>7. 可输入的对话框</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">TextInputDialog dialog = <span class="keyword">new</span> TextInputDialog(<span class="string">"walter"</span>);</div><div class="line">dialog.setTitle(<span class="string">"Text Input Dialog"</span>);</div><div class="line">dialog.setHeaderText(<span class="string">"Look, a Text Input Dialog"</span>);</div><div class="line">dialog.setContentText(<span class="string">"Please enter your name:"</span>);</div><div class="line"></div><div class="line"><span class="comment">// Traditional way to get the response value.</span></div><div class="line">Optional&lt;String&gt; result = dialog.showAndWait();</div><div class="line"><span class="keyword">if</span> (result.isPresent())&#123;</div><div class="line">    System.out.println(<span class="string">"Your name: "</span> + result.get());</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// The Java 8 way to get the response value (with lambda expression).</span></div><div class="line">result.ifPresent(name -&gt; System.out.println(<span class="string">"Your name: "</span> + name));</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20171012150524109?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="text input dialog"></p>
+<blockquote>
+<p>说明：如果用户点击了取消按钮<code>result.isPresent()</code>将会返回false</p>
+</blockquote>
+<h2 id="8-可选择的对话框"><a href="#8-可选择的对话框" class="headerlink" title="8. 可选择的对话框"></a>8. 可选择的对话框</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">List&lt;String&gt; choices = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">choices.add(<span class="string">"a"</span>);</div><div class="line">choices.add(<span class="string">"b"</span>);</div><div class="line">choices.add(<span class="string">"c"</span>);</div><div class="line"></div><div class="line">ChoiceDialog&lt;String&gt; dialog = <span class="keyword">new</span> ChoiceDialog&lt;&gt;(<span class="string">"b"</span>, choices);</div><div class="line">dialog.setTitle(<span class="string">"Choice Dialog"</span>);</div><div class="line">dialog.setHeaderText(<span class="string">"Look, a Choice Dialog"</span>);</div><div class="line">dialog.setContentText(<span class="string">"Choose your letter:"</span>);</div><div class="line"></div><div class="line"><span class="comment">// Traditional way to get the response value.</span></div><div class="line">Optional&lt;String&gt; result = dialog.showAndWait();</div><div class="line"><span class="keyword">if</span> (result.isPresent())&#123;</div><div class="line">    System.out.println(<span class="string">"Your choice: "</span> + result.get());</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// The Java 8 way to get the response value (with lambda expression).</span></div><div class="line">result.ifPresent(letter -&gt; System.out.println(<span class="string">"Your choice: "</span> + letter));</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20171012150757770?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="choice dialog"></p>
+<blockquote>
+<p>说明：如果用户没有选择或点击了取消，<code>result.isPresent()</code>将会返回false</p>
+</blockquote>
+<h2 id="9-自定义登录框"><a href="#9-自定义登录框" class="headerlink" title="9. 自定义登录框"></a>9. 自定义登录框</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Create the custom dialog.</span></div><div class="line">Dialog&lt;Pair&lt;String, String&gt;&gt; dialog = <span class="keyword">new</span> Dialog&lt;&gt;();</div><div class="line">dialog.setTitle(<span class="string">"Login Dialog"</span>);</div><div class="line">dialog.setHeaderText(<span class="string">"Look, a Custom Login Dialog"</span>);</div><div class="line"></div><div class="line"><span class="comment">// Set the icon (must be included in the project).</span></div><div class="line">dialog.setGraphic(<span class="keyword">new</span> ImageView(<span class="keyword">this</span>.getClass().getResource(<span class="string">"login.png"</span>).toString()));</div><div class="line"></div><div class="line"><span class="comment">// Set the button types.</span></div><div class="line">ButtonType loginButtonType = <span class="keyword">new</span> ButtonType(<span class="string">"Login"</span>, ButtonData.OK_DONE);</div><div class="line">dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);</div><div class="line"></div><div class="line"><span class="comment">// Create the username and password labels and fields.</span></div><div class="line">GridPane grid = <span class="keyword">new</span> GridPane();</div><div class="line">grid.setHgap(<span class="number">10</span>);</div><div class="line">grid.setVgap(<span class="number">10</span>);</div><div class="line">grid.setPadding(<span class="keyword">new</span> Insets(<span class="number">20</span>, <span class="number">150</span>, <span class="number">10</span>, <span class="number">10</span>));</div><div class="line"></div><div class="line">TextField username = <span class="keyword">new</span> TextField();</div><div class="line">username.setPromptText(<span class="string">"Username"</span>);</div><div class="line">PasswordField password = <span class="keyword">new</span> PasswordField();</div><div class="line">password.setPromptText(<span class="string">"Password"</span>);</div><div class="line"></div><div class="line">grid.add(<span class="keyword">new</span> Label(<span class="string">"Username:"</span>), <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">grid.add(username, <span class="number">1</span>, <span class="number">0</span>);</div><div class="line">grid.add(<span class="keyword">new</span> Label(<span class="string">"Password:"</span>), <span class="number">0</span>, <span class="number">1</span>);</div><div class="line">grid.add(password, <span class="number">1</span>, <span class="number">1</span>);</div><div class="line"></div><div class="line"><span class="comment">// Enable/Disable login button depending on whether a username was entered.</span></div><div class="line">Node loginButton = dialog.getDialogPane().lookupButton(loginButtonType);</div><div class="line">loginButton.setDisable(<span class="keyword">true</span>);</div><div class="line"></div><div class="line"><span class="comment">// Do some validation (using the Java 8 lambda syntax).</span></div><div class="line">username.textProperty().addListener((observable, oldValue, newValue) -&gt; &#123;</div><div class="line">    loginButton.setDisable(newValue.trim().isEmpty());</div><div class="line">&#125;);</div><div class="line"></div><div class="line">dialog.getDialogPane().setContent(grid);</div><div class="line"></div><div class="line"><span class="comment">// Request focus on the username field by default.</span></div><div class="line">Platform.runLater(() -&gt; username.requestFocus());</div><div class="line"></div><div class="line"><span class="comment">// Convert the result to a username-password-pair when the login button is clicked.</span></div><div class="line">dialog.setResultConverter(dialogButton -&gt; &#123;</div><div class="line">    <span class="keyword">if</span> (dialogButton == loginButtonType) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Pair&lt;&gt;(username.getText(), password.getText());</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">Optional&lt;Pair&lt;String, String&gt;&gt; result = dialog.showAndWait();</div><div class="line"></div><div class="line">result.ifPresent(usernamePassword -&gt; &#123;</div><div class="line">    System.out.println(<span class="string">"Username="</span> + usernamePassword.getKey() + <span class="string">", Password="</span> + usernamePassword.getValue());</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20171012151145160?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="login dialog"></p>
+<h2 id="10-修改对话框样式"><a href="#10-修改对话框样式" class="headerlink" title="10. 修改对话框样式"></a>10. 修改对话框样式</h2><ul>
+<li><strong>自定义图标</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Get the Stage.</span></div><div class="line">Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();</div><div class="line"></div><div class="line"><span class="comment">// Add a custom icon.</span></div><div class="line">stage.getIcons().add(<span class="keyword">new</span> Image(<span class="keyword">this</span>.getClass().getResource(<span class="string">"login.png"</span>).toString()));</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20171012151651236?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="custom icon"></p>
+<p>说明：根据JavaFX 8u40最终版本的BUG报告，应该使用与它正在运行的应用程序相同的图标。在这种情况下，你还需要设置它的所有者，对话框会得到所有者的图标:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dialog.initOwner(otherStage);</div></pre></td></tr></table></figure></p>
+<ul>
+<li>不使用图标<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dialog.initStyle(StageStyle.UTILITY);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20171012152131364?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="minimal"></p>
+<h2 id="11-其他操作"><a href="#11-其他操作" class="headerlink" title="11. 其他操作"></a>11. 其他操作</h2><ul>
+<li>设置拥有者<br>你可以为每一个对话框指定所有者。如果指定所有者或拥有者为null，那么它是一个顶级的、未拥有的对话框。<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">dialog.initOwner(parentWindow);</div><div class="line">``` </div><div class="line">- 设置模式</div><div class="line">你可以指定对话框的模式，包括`Modality.NONE`、`WINDOW_MODAL`或`Modality.APPLICATION_MODAL`。</div><div class="line">``` java</div><div class="line">dialog.initModality(Modality.NONE);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="12-API-文档"><a href="#12-API-文档" class="headerlink" title="12. API 文档"></a>12. API 文档</h2><p>关于对话框的更多信息，请看JavaFX API官方文档:</p>
+<ul>
+<li><a href="http://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Alert.html" target="_blank" rel="external">Alert</a></li>
+<li><a href="http://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Dialog.html" target="_blank" rel="external">Dialog</a></li>
+<li><a href="http://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/TextInputDialog.html" target="_blank" rel="external">TextInputDialog</a></li>
+<li><a href="http://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ChoiceDialog.html" target="_blank" rel="external">ChoiceDialog</a></li>
+<li><a href="http://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/DialogPane.html" target="_blank" rel="external">DialogPane</a></li>
+</ul>
+<blockquote>
+<p><a href="http://code.makery.ch/blog/javafx-dialogs-official/" target="_blank" rel="external">阅读原文点击这里</a></p>
+</blockquote>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://zhazhapan.com/2017/10/12/JavaFX-Dialog对话框/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/11/JavaFX-HelloWord/" class="archive-article-date">
-  	<time datetime="2017-10-11T15:08:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-11</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/11/JavaFX-HelloWord/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaFX HelloWord</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/11/JavaFX-HelloWord/">JavaFX HelloWord</a>
-    </h1>
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "https://zhazhapan.com/2017/10/12/JavaFX-Dialog对话框/", 
+    sourceId: "JavaFX-Dialog对话框",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/" class="archive-article-date">
-  	<time datetime="2017-10-10T15:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/">使用sftp在Linux（MacOS）之间进行文件传输</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
+  
+    <section id="comments">
+      <div id="disqus_thread"></div>
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'true'; // required: replace example with your forum shortname
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/10/代码生成器JHipster入门教程——安装/" class="archive-article-date">
-  	<time datetime="2017-10-10T14:42:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/10/代码生成器JHipster入门教程——安装/">代码生成器JHipster入门教程——安装</a>
-    </h1>
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </section>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/30/Eclipse插件推荐/" class="archive-article-date">
-  	<time datetime="2017-09-30T10:42:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/30/Eclipse插件推荐/">Eclipse插件推荐</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/30/Eclipse新建Spring-Boot项目/" class="archive-article-date">
-  	<time datetime="2017-09-30T10:39:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/30/Eclipse新建Spring-Boot项目/">Eclipse新建Spring Boot项目</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/30/VMware-Workstation-14永久激活密钥/" class="archive-article-date">
-  	<time datetime="2017-09-30T10:38:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/30/VMware-Workstation-14永久激活密钥/">VMware Workstation 14永久激活密钥</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/30/MacOS安装Docker/" class="archive-article-date">
-  	<time datetime="2017-09-30T10:34:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/30/MacOS安装Docker/"> MacOS安装Docker</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/29/hello-world/" class="archive-article-date">
-  	<time datetime="2017-09-29T14:38:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/29/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -434,8 +433,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
