@@ -6,24 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://hexo.zhazhapan.com">
-  <title>代码生成器JHipster入门教程——安装 | 渣渣潘的博客</title>
+  <title>基于CentOS搭建搭建FTP文件服务 | 渣渣潘的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="JHipster是一个代码生成器，可以用来生成基于Spring Boot 和 AngularJS的项目 1. 安装 Node.js1sudo apt-get install node 2. 安装Git客户端1sudo apt-get install git 3. 安装npm包管理器1sudo apt-get install npm 4. 安装Yeoman generator1npm instal">
+  <meta name="description" content="1. 安装并启动 FTP 服务  安装 VSFTPD   使用 yum 安装 vsftpd：   1yum install vsftpd -y  启动 VSFTPD   安装完成后，启动 FTP 服务：   1service vsftpd start   启动后，可以看到系统已经监听了 21 端口：   1netstat -nltp | grep 21   此时，访问 ftp://yourdoma">
 <meta property="og:type" content="article">
-<meta property="og:title" content="代码生成器JHipster入门教程——安装">
-<meta property="og:url" content="http://hexo.zhazhapan.com/2017/10/10/代码生成器JHipster入门教程——安装/index.html">
+<meta property="og:title" content="基于CentOS搭建搭建FTP文件服务">
+<meta property="og:url" content="http://hexo.zhazhapan.com/2017/10/16/基于CentOS搭建搭建FTP文件服务/index.html">
 <meta property="og:site_name" content="渣渣潘的博客">
-<meta property="og:description" content="JHipster是一个代码生成器，可以用来生成基于Spring Boot 和 AngularJS的项目 1. 安装 Node.js1sudo apt-get install node 2. 安装Git客户端1sudo apt-get install git 3. 安装npm包管理器1sudo apt-get install npm 4. 安装Yeoman generator1npm instal">
+<meta property="og:description" content="1. 安装并启动 FTP 服务  安装 VSFTPD   使用 yum 安装 vsftpd：   1yum install vsftpd -y  启动 VSFTPD   安装完成后，启动 FTP 服务：   1service vsftpd start   启动后，可以看到系统已经监听了 21 端口：   1netstat -nltp | grep 21   此时，访问 ftp://yourdoma">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="http://img.blog.csdn.net/20171010220454974?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20171010220840244?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20171010221239500?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20171010222655034?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-10-10T14:50:28.000Z">
+<meta property="og:updated_time" content="2017-10-16T10:08:45.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="代码生成器JHipster入门教程——安装">
-<meta name="twitter:description" content="JHipster是一个代码生成器，可以用来生成基于Spring Boot 和 AngularJS的项目 1. 安装 Node.js1sudo apt-get install node 2. 安装Git客户端1sudo apt-get install git 3. 安装npm包管理器1sudo apt-get install npm 4. 安装Yeoman generator1npm instal">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20171010220454974?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:title" content="基于CentOS搭建搭建FTP文件服务">
+<meta name="twitter:description" content="1. 安装并启动 FTP 服务  安装 VSFTPD   使用 yum 安装 vsftpd：   1yum install vsftpd -y  启动 VSFTPD   安装完成后，启动 FTP 服务：   1service vsftpd start   启动后，可以看到系统已经监听了 21 端口：   1netstat -nltp | grep 21   此时，访问 ftp://yourdoma">
   
     <link rel="alternative" href="/atom.xml" title="渣渣潘的博客" type="application/atom+xml">
   
@@ -159,47 +154,85 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-代码生成器JHipster入门教程——安装" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-基于CentOS搭建搭建FTP文件服务" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      代码生成器JHipster入门教程——安装
+      基于CentOS搭建搭建FTP文件服务
     </h1>
   
 
         
-        <a href="/2017/10/10/代码生成器JHipster入门教程——安装/" class="archive-article-date">
-  	<time datetime="2017-10-10T14:42:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
+        <a href="/2017/10/16/基于CentOS搭建搭建FTP文件服务/" class="archive-article-date">
+  	<time datetime="2017-10-16T09:24:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>JHipster是一个代码生成器，可以用来生成基于Spring Boot 和 AngularJS的项目</strong></p>
-<p><strong>1. 安装 Node.js</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install node</div></pre></td></tr></table></figure></p>
-<p><strong>2. 安装Git客户端</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install git</div></pre></td></tr></table></figure></p>
-<p><strong>3. 安装npm包管理器</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install npm</div></pre></td></tr></table></figure></p>
-<p><strong>4. 安装Yeoman generator</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g yo</div></pre></td></tr></table></figure></p>
-<p><strong>5. 安装Bower</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g bower</div></pre></td></tr></table></figure></p>
-<p><strong>6. 安装Grunt</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g grunt-cli</div></pre></td></tr></table></figure></p>
-<p><strong>7. 安装Yarn</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install yarn</div></pre></td></tr></table></figure></p>
-<p><strong>8. 使用JHipster生成项目</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir hello</div><div class="line">cd hello</div><div class="line">yo jhipster</div></pre></td></tr></table></figure></p>
-<p><strong>9. 接下来按照向导进行操作即可</strong></p>
-<p><img src="http://img.blog.csdn.net/20171010220454974?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="jhipster01"></p>
-<blockquote>
-<p>到后面会有多项选择，使用空格选择或取消选择，a和i全选或全不选</p>
-</blockquote>
-<p><img src="http://img.blog.csdn.net/20171010220840244?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="jhipster02"></p>
-<p><img src="http://img.blog.csdn.net/20171010221239500?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="jhipster03"></p>
-<pre><code>接下来等待完成即可。
-</code></pre><p><strong>10. 修改数据库连接信息</strong></p>
-<pre><code>进入目录src/main/resources/config找到配置文件application-dev.yml和application-prod.yml修改以下内容：
-</code></pre><p><img src="http://img.blog.csdn.net/20171010222655034?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="database"></p>
-<p><strong>11. 运行项目</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./mvnw</div></pre></td></tr></table></figure></p>
+        <p><strong>1. 安装并启动 FTP 服务</strong></p>
+<ul>
+<li><p>安装 VSFTPD</p>
+<p>  使用 <code>yum</code> 安装 <code>vsftpd</code>：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install vsftpd -y</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动 VSFTPD</p>
+<p>  安装完成后，启动 FTP 服务：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service vsftpd start</div></pre></td></tr></table></figure>
+<p>  启动后，可以看到系统已经监听了 21 端口：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -nltp | grep 21</div></pre></td></tr></table></figure>
+<p>  此时，访问 ftp://yourdomain.com 可浏览机器上的 /var/ftp 目录了。</p>
+</li>
+</ul>
+<p><strong>2. 配置 FTP 权限</strong></p>
+<p>目前 FTP 服务登陆允许匿名登陆，也无法区分用户访问，我们需要配置 FTP 访问权限</p>
+<ul>
+<li><p>了解 VSFTP 配置</p>
+<p>  vsftpd 的配置目录为 <code>/etc/vsftpd</code>，包含下列的配置文件：</p>
+<ul>
+<li><code>vsftpd.conf</code> 为主要配置文件</li>
+<li><code>ftpusers</code> 配置禁止访问 FTP 服务器的用户列表</li>
+<li><code>user_list</code> 配置用户访问控制</li>
+</ul>
+</li>
+<li><p>阻止匿名访问和切换根目录</p>
+<p>  匿名访问和切换根目录都会给服务器带来安全风险，我们把这两个功能关闭。</p>
+<p>  编辑 <code>/etc/vsftpd/vsftpd.conf</code>，找到下面两处配置并修改：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 禁用匿名用户</div><div class="line">anonymous_enable=NO</div><div class="line"></div><div class="line"># 禁止切换根目录</div><div class="line">chroot_local_user=YES</div></pre></td></tr></table></figure>
+<p>  重新启动 FTP 服务</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service vsftpd restart</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建 FTP 用户</p>
+<p>  创建一个用户 <code>ftpuser</code> ：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">useradd ftpuser</div></pre></td></tr></table></figure>
+<p>  为用户 <code>ftpuser</code> 设置密码 ：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo &quot;3oEiU5s7&quot; | passwd ftpuser --stdin</div></pre></td></tr></table></figure>
+</li>
+<li><p>限制该用户仅能通过 FTP 访问</p>
+<p>  限制用户 <code>ftpuser</code> 只能通过 FTP 访问服务器，而不能直接登录服务器：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">usermod -s /sbin/nologin ftpuser</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>为用户分配主目录</p>
+<p>  为用户 <code>ftpuser</code> 创建主目录并约定：</p>
+<p>  <code>/data/ftp</code> 为主目录, 该目录不可上传文件</p>
+<p>  <code>/data/ftp/pub</code> 文件只能上传到该目录下</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/ftp/pub</div></pre></td></tr></table></figure>
+<p>  创建登录欢迎文件 ：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo &quot;Welcome to use FTP service.&quot; &gt; /data/ftp/welcome.txt</div></pre></td></tr></table></figure>
+<p>  设置访问权限：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod a-w /data/ftp &amp;&amp; chmod 777 -R /data/ftp/pub</div></pre></td></tr></table></figure>
+<p>  设置为用户的主目录：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">usermod -d /data/ftp ftpuser</div></pre></td></tr></table></figure>
+</li>
+<li><p>完成</p>
+</li>
+</ul>
 
       
 
@@ -289,7 +322,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://hexo.zhazhapan.com/2017/10/10/代码生成器JHipster入门教程——安装/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://hexo.zhazhapan.com/2017/10/16/基于CentOS搭建搭建FTP文件服务/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -303,18 +336,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/10/16/基于CentOS搭建WordPress个人博客/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          使用sftp在Linux（MacOS）之间进行文件传输
+          基于CentOS搭建WordPress个人博客
         
       </div>
     </a>
   
   
-    <a href="/2017/09/30/Eclipse插件推荐/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Eclipse插件推荐</div>
+    <a href="/2017/10/16/基于CentOS搭建Discuz/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">基于CentOS搭建Discuz</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -345,8 +378,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://hexo.zhazhapan.com/2017/10/10/代码生成器JHipster入门教程——安装/", 
-    sourceId: "代码生成器JHipster入门教程——安装",
+    url: "http://hexo.zhazhapan.com/2017/10/16/基于CentOS搭建搭建FTP文件服务/", 
+    sourceId: "基于CentOS搭建搭建FTP文件服务",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };

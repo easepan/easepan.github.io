@@ -6,24 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://hexo.zhazhapan.com">
-  <title>代码生成器JHipster入门教程——安装 | 渣渣潘的博客</title>
+  <title>基于CentOS搭建WordPress个人博客 | 渣渣潘的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="JHipster是一个代码生成器，可以用来生成基于Spring Boot 和 AngularJS的项目 1. 安装 Node.js1sudo apt-get install node 2. 安装Git客户端1sudo apt-get install git 3. 安装npm包管理器1sudo apt-get install npm 4. 安装Yeoman generator1npm instal">
+  <meta name="description" content="1. 准备 LNMP 环境 LNMP 是 Linux、Nginx、MySQL 和 PHP 的缩写，是 WordPress 博客系统依赖的基础运行环境。我们先来准备 LNMP 环境  安装 Nginx   使用 yum 安装 Nginx：   1yum install nginx -y   修改 /etc/nginx/conf.d/default.conf，去除对 IPv6 地址的监听，可参考下面的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="代码生成器JHipster入门教程——安装">
-<meta property="og:url" content="http://hexo.zhazhapan.com/2017/10/10/代码生成器JHipster入门教程——安装/index.html">
+<meta property="og:title" content="基于CentOS搭建WordPress个人博客">
+<meta property="og:url" content="http://hexo.zhazhapan.com/2017/10/16/基于CentOS搭建WordPress个人博客/index.html">
 <meta property="og:site_name" content="渣渣潘的博客">
-<meta property="og:description" content="JHipster是一个代码生成器，可以用来生成基于Spring Boot 和 AngularJS的项目 1. 安装 Node.js1sudo apt-get install node 2. 安装Git客户端1sudo apt-get install git 3. 安装npm包管理器1sudo apt-get install npm 4. 安装Yeoman generator1npm instal">
+<meta property="og:description" content="1. 准备 LNMP 环境 LNMP 是 Linux、Nginx、MySQL 和 PHP 的缩写，是 WordPress 博客系统依赖的基础运行环境。我们先来准备 LNMP 环境  安装 Nginx   使用 yum 安装 Nginx：   1yum install nginx -y   修改 /etc/nginx/conf.d/default.conf，去除对 IPv6 地址的监听，可参考下面的">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="http://img.blog.csdn.net/20171010220454974?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20171010220840244?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20171010221239500?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20171010222655034?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-10-10T14:50:28.000Z">
+<meta property="og:updated_time" content="2017-10-16T11:10:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="代码生成器JHipster入门教程——安装">
-<meta name="twitter:description" content="JHipster是一个代码生成器，可以用来生成基于Spring Boot 和 AngularJS的项目 1. 安装 Node.js1sudo apt-get install node 2. 安装Git客户端1sudo apt-get install git 3. 安装npm包管理器1sudo apt-get install npm 4. 安装Yeoman generator1npm instal">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20171010220454974?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:title" content="基于CentOS搭建WordPress个人博客">
+<meta name="twitter:description" content="1. 准备 LNMP 环境 LNMP 是 Linux、Nginx、MySQL 和 PHP 的缩写，是 WordPress 博客系统依赖的基础运行环境。我们先来准备 LNMP 环境  安装 Nginx   使用 yum 安装 Nginx：   1yum install nginx -y   修改 /etc/nginx/conf.d/default.conf，去除对 IPv6 地址的监听，可参考下面的">
   
     <link rel="alternative" href="/atom.xml" title="渣渣潘的博客" type="application/atom+xml">
   
@@ -159,47 +154,94 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-代码生成器JHipster入门教程——安装" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-基于CentOS搭建WordPress个人博客" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      代码生成器JHipster入门教程——安装
+      基于CentOS搭建WordPress个人博客
     </h1>
   
 
         
-        <a href="/2017/10/10/代码生成器JHipster入门教程——安装/" class="archive-article-date">
-  	<time datetime="2017-10-10T14:42:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
+        <a href="/2017/10/16/基于CentOS搭建WordPress个人博客/" class="archive-article-date">
+  	<time datetime="2017-10-16T10:44:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>JHipster是一个代码生成器，可以用来生成基于Spring Boot 和 AngularJS的项目</strong></p>
-<p><strong>1. 安装 Node.js</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install node</div></pre></td></tr></table></figure></p>
-<p><strong>2. 安装Git客户端</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install git</div></pre></td></tr></table></figure></p>
-<p><strong>3. 安装npm包管理器</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install npm</div></pre></td></tr></table></figure></p>
-<p><strong>4. 安装Yeoman generator</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g yo</div></pre></td></tr></table></figure></p>
-<p><strong>5. 安装Bower</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g bower</div></pre></td></tr></table></figure></p>
-<p><strong>6. 安装Grunt</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g grunt-cli</div></pre></td></tr></table></figure></p>
-<p><strong>7. 安装Yarn</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install yarn</div></pre></td></tr></table></figure></p>
-<p><strong>8. 使用JHipster生成项目</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir hello</div><div class="line">cd hello</div><div class="line">yo jhipster</div></pre></td></tr></table></figure></p>
-<p><strong>9. 接下来按照向导进行操作即可</strong></p>
-<p><img src="http://img.blog.csdn.net/20171010220454974?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="jhipster01"></p>
-<blockquote>
-<p>到后面会有多项选择，使用空格选择或取消选择，a和i全选或全不选</p>
-</blockquote>
-<p><img src="http://img.blog.csdn.net/20171010220840244?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="jhipster02"></p>
-<p><img src="http://img.blog.csdn.net/20171010221239500?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="jhipster03"></p>
-<pre><code>接下来等待完成即可。
-</code></pre><p><strong>10. 修改数据库连接信息</strong></p>
-<pre><code>进入目录src/main/resources/config找到配置文件application-dev.yml和application-prod.yml修改以下内容：
-</code></pre><p><img src="http://img.blog.csdn.net/20171010222655034?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="database"></p>
-<p><strong>11. 运行项目</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./mvnw</div></pre></td></tr></table></figure></p>
+        <p><strong>1. 准备 LNMP 环境</strong></p>
+<p>LNMP 是 Linux、Nginx、MySQL 和 PHP 的缩写，是 WordPress 博客系统依赖的基础运行环境。我们先来准备 LNMP 环境</p>
+<ul>
+<li><p>安装 Nginx</p>
+<p>  使用 <code>yum</code> 安装 Nginx：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install nginx -y</div></pre></td></tr></table></figure>
+<p>  修改 <code>/etc/nginx/conf.d/default.conf</code>，去除对 IPv6 地址的监听，可参考下面的示例：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen       80 default_server;</div><div class="line">    # listen       [::]:80 default_server;</div><div class="line">    server_name  _;</div><div class="line">    root         /usr/share/nginx/html;</div><div class="line"></div><div class="line">    # Load configuration files for the default server block.</div><div class="line">    include /etc/nginx/default.d/*.conf;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    error_page 404 /404.html;</div><div class="line">        location = /40x.html &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    error_page 500 502 503 504 /50x.html;</div><div class="line">        location = /50x.html &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  修改完成后，启动 Nginx：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nginx</div></pre></td></tr></table></figure>
+<p>  此时，可访问云服务器外网 HTTP 服务（<a href="http://yourdomain.com）来确认是否已经安装成功。" target="_blank" rel="external">http://yourdomain.com）来确认是否已经安装成功。</a></p>
+<p>  将 Nginx 设置为开机自动启动：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig nginx on</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装 MySQL</p>
+<p>  使用 <code>yum</code> 安装 MySQL：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server -y</div></pre></td></tr></table></figure>
+<p>  安装完成后，启动 MySQL 服务：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service mysqld restart</div></pre></td></tr></table></figure>
+<p>  设置 MySQL 账户 <code>root</code> 密码：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/mysqladmin -u root password &apos;MyPas$word4Word_Press&apos;</div></pre></td></tr></table></figure>
+<p>  将 MySQL 设置为开机自动启动：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig mysqld on</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装 PHP</p>
+<p>  使用 yum 安装 PHP：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php-fpm php-mysql -y</div></pre></td></tr></table></figure>
+<p>  安装之后，启动 PHP-FPM 进程：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service php-fpm start</div></pre></td></tr></table></figure>
+<p>  启动之后，可以使用下面的命令查看 PHP-FPM 进程监听哪个端口 </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -nlpt | grep php-fpm</div></pre></td></tr></table></figure>
+<p>  把 PHP-FPM 也设置成开机自动启动：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig php-fpm on</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>2. 安装并配置 WordPress</strong></p>
+<ul>
+<li><p>安装 WordPress</p>
+<p>  配置好 LNMP 环境后，继续使用 <code>yum</code> 来安装 WordPress：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install wordpress -y</div></pre></td></tr></table></figure>
+<p>  安装完成后，就可以在 <code>/usr/share/wordpress</code> 看到 WordPress 的源代码了。</p>
+<p>  删除 <code>/var/www/html</code> 目录，将 <code>wordpress</code> 复制到 <code>/var/www</code> 目录下，并重命名为 <code>html</code></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rm -rf /var/www/html</div><div class="line">cp -r /var/share/wordpress /var/www/html</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置数据库</p>
+<p>  进入 MySQL：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -uroot --password=&apos;MyPas$word4Word_Press&apos;</div></pre></td></tr></table></figure>
+<p>  为 WordPress 创建一个数据库：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CREATE DATABASE wordpress;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>MySQL 部分设置完了，我们退出 MySQL 环境：<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exit</div></pre></td></tr></table></figure></p>
+<pre><code>把上述的 DB 配置同步到 WordPress 的配置文件中，可参考下面的配置：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">/**</div><div class="line"> * The base configuration for WordPress</div><div class="line"> *</div><div class="line"> * The wp-config.php creation script uses this file during the</div><div class="line"> * installation. You don&apos;t have to use the web site, you can</div><div class="line"> * copy this file to &quot;wp-config.php&quot; and fill in the values.</div><div class="line"> *</div><div class="line"> * This file contains the following configurations:</div><div class="line"> *</div><div class="line"> * * MySQL settings</div><div class="line"> * * Secret keys</div><div class="line"> * * Database table prefix</div><div class="line"> * * ABSPATH</div><div class="line"> *</div><div class="line"> * @link https://codex.wordpress.org/Editing_wp-config.php</div><div class="line"> *</div><div class="line"> * @package WordPress</div><div class="line"> */</div><div class="line"></div><div class="line">// ** MySQL settings - You can get this info from your web host ** //</div><div class="line">/** The name of the database for WordPress */</div><div class="line">define(&apos;DB_NAME&apos;, &apos;wordpress&apos;);</div><div class="line"></div><div class="line">/** MySQL database username */</div><div class="line">define(&apos;DB_USER&apos;, &apos;root&apos;);</div><div class="line"></div><div class="line">/** MySQL database password */</div><div class="line">define(&apos;DB_PASSWORD&apos;, &apos;MyPas$word4Word_Press&apos;);</div><div class="line"></div><div class="line">/** MySQL hostname */</div><div class="line">define(&apos;DB_HOST&apos;, &apos;localhost&apos;);</div><div class="line"></div><div class="line">/** Database Charset to use in creating database tables. */</div><div class="line">define(&apos;DB_CHARSET&apos;, &apos;utf8&apos;);</div><div class="line"></div><div class="line">/** The Database Collate type. Don&apos;t change this if in doubt. */</div><div class="line">define(&apos;DB_COLLATE&apos;, &apos;&apos;);</div><div class="line"></div><div class="line">/**#@+</div><div class="line"> * Authentication Unique Keys and Salts.</div><div class="line"> *</div><div class="line"> * Change these to different unique phrases!</div><div class="line"> * You can generate these using the &#123;@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service&#125;</div><div class="line"> * You can change these at any point in time to invalidate all existing cookies. This will force all users to have to log in again.</div><div class="line"> *</div><div class="line"> * @since 2.6.0</div><div class="line"> */</div><div class="line">define(&apos;AUTH_KEY&apos;,         &apos;put your unique phrase here&apos;);</div><div class="line">define(&apos;SECURE_AUTH_KEY&apos;,  &apos;put your unique phrase here&apos;);</div><div class="line">define(&apos;LOGGED_IN_KEY&apos;,    &apos;put your unique phrase here&apos;);</div><div class="line">define(&apos;NONCE_KEY&apos;,        &apos;put your unique phrase here&apos;);</div><div class="line">define(&apos;AUTH_SALT&apos;,        &apos;put your unique phrase here&apos;);</div><div class="line">define(&apos;SECURE_AUTH_SALT&apos;, &apos;put your unique phrase here&apos;);</div><div class="line">define(&apos;LOGGED_IN_SALT&apos;,   &apos;put your unique phrase here&apos;);</div><div class="line">define(&apos;NONCE_SALT&apos;,       &apos;put your unique phrase here&apos;);</div><div class="line"></div><div class="line">/**#@-*/</div><div class="line"></div><div class="line">/**</div><div class="line"> * WordPress Database Table prefix.</div><div class="line"> *</div><div class="line"> * You can have multiple installations in one database if you give each</div><div class="line"> * a unique prefix. Only numbers, letters, and underscores please!</div><div class="line"> */</div><div class="line">$table_prefix  = &apos;wp_&apos;;</div><div class="line"></div><div class="line">/**</div><div class="line"> * See http://make.wordpress.org/core/2013/10/25/the-definitive-guide-to-disabling-auto-updates-in-wordpress-3-7</div><div class="line"> */</div><div class="line"></div><div class="line">/* Disable all file change, as RPM base installation are read-only */</div><div class="line">define(&apos;DISALLOW_FILE_MODS&apos;, true);</div><div class="line"></div><div class="line">/* Disable automatic updater, in case you want to allow</div><div class="line">   above FILE_MODS for plugins, themes, ... */</div><div class="line">define(&apos;AUTOMATIC_UPDATER_DISABLED&apos;, true);</div><div class="line"></div><div class="line">/* Core update is always disabled, WP_AUTO_UPDATE_CORE value is ignore */</div><div class="line"></div><div class="line">/**</div><div class="line"> * For developers: WordPress debugging mode.</div><div class="line"> *</div><div class="line"> * Change this to true to enable the display of notices during development.</div><div class="line"> * It is strongly recommended that plugin and theme developers use WP_DEBUG</div><div class="line"> * in their development environments.</div><div class="line"> *</div><div class="line"> * For information on other constants that can be used for debugging,</div><div class="line"> * visit the Codex.</div><div class="line"> *</div><div class="line"> * @link https://codex.wordpress.org/Debugging_in_WordPress</div><div class="line"> */</div><div class="line">define(&apos;WP_DEBUG&apos;, false);</div><div class="line"></div><div class="line">/* That&apos;s all, stop editing! Happy blogging. */</div><div class="line"></div><div class="line">/** Absolute path to the WordPress directory. */</div><div class="line">if ( !defined(&apos;ABSPATH&apos;) )</div><div class="line">    define(&apos;ABSPATH&apos;, &apos;/usr/share/wordpress&apos;);</div><div class="line"></div><div class="line">/** Sets up WordPress vars and included files. */</div><div class="line">require_once(ABSPATH . &apos;wp-settings.php&apos;);</div></pre></td></tr></table></figure>
+</code></pre><ul>
+<li><p>配置 Nginx</p>
+<p>  WordPress 已经安装完毕，我们配置 Nginx 把请求转发给 PHP-FPM 来处理</p>
+<p>  首先，重命名默认的配置文件：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /etc/nginx/conf.d/</div><div class="line">mv default.conf defaut.conf.bak</div></pre></td></tr></table></figure>
+<p>  在 <code>/etc/nginx/conf.d</code> 创建 <code>wordpress.conf</code> 配置，参考下面的内容：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    root /usr/share/wordpress;</div><div class="line">    location / &#123;</div><div class="line">        index index.php index.html index.htm;</div><div class="line">        try_files $uri $uri/ /index.php index.php;</div><div class="line">    &#125;</div><div class="line">    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</div><div class="line">    location ~ .php$ &#123;</div><div class="line">        fastcgi_pass   127.0.0.1:9000;</div><div class="line">        fastcgi_index  index.php;</div><div class="line">        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</div><div class="line">        include        fastcgi_params;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  配置后，通知 Nginx 进程重新加载：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nginx -s reload</div></pre></td></tr></table></figure>
+</li>
+<li><p>大功告成</p>
+<p>  恭喜，您的 WordPress 博客已经部署完成，您可以通过浏览器访问博客查看效果。博客访问地址：<a href="http://yourdomain.com/wp-admin/install.php" target="_blank" rel="external">http://yourdomain.com/wp-admin/install.php</a></p>
+</li>
+</ul>
 
       
 
@@ -289,7 +331,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://hexo.zhazhapan.com/2017/10/10/代码生成器JHipster入门教程——安装/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://hexo.zhazhapan.com/2017/10/16/基于CentOS搭建WordPress个人博客/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -303,18 +345,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          使用sftp在Linux（MacOS）之间进行文件传输
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/09/30/Eclipse插件推荐/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Eclipse插件推荐</div>
+    <a href="/2017/10/16/基于CentOS搭建搭建FTP文件服务/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">基于CentOS搭建搭建FTP文件服务</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -345,8 +378,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://hexo.zhazhapan.com/2017/10/10/代码生成器JHipster入门教程——安装/", 
-    sourceId: "代码生成器JHipster入门教程——安装",
+    url: "http://hexo.zhazhapan.com/2017/10/16/基于CentOS搭建WordPress个人博客/", 
+    sourceId: "基于CentOS搭建WordPress个人博客",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
