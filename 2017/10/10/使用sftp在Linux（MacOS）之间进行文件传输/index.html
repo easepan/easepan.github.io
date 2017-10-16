@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://hexo.zhazhapan.com">
   <title>使用sftp在Linux（MacOS）之间进行文件传输 | 渣渣潘的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 连接远程Linux12sftp user@host例如：sftp root@192.168.1.2 2. 上传文件12put local_path remote_path例如：put -r /home/share/read.txt /home/root 3. 下载文件12get remote_path local_path例如：get -r /usr/local/some.zip /home">
+  <meta name="description" content="1. 打开终端，连接远程Linux12sftp user@host例如：sftp root@192.168.1.2 2. 上传文件12put local_path remote_path例如：put -r /home/share/read.txt /home/root 3. 上传文件夹以文件夹里的所有内容 比如上传文件夹 folder，首先需要在远程机上创建这个文件夹，然后使用下面命令 put1p">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用sftp在Linux（MacOS）之间进行文件传输">
 <meta property="og:url" content="http://hexo.zhazhapan.com/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/index.html">
 <meta property="og:site_name" content="渣渣潘的博客">
-<meta property="og:description" content="1. 连接远程Linux12sftp user@host例如：sftp root@192.168.1.2 2. 上传文件12put local_path remote_path例如：put -r /home/share/read.txt /home/root 3. 下载文件12get remote_path local_path例如：get -r /usr/local/some.zip /home">
-<meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2017-10-10T15:25:54.000Z">
+<meta property="og:description" content="1. 打开终端，连接远程Linux12sftp user@host例如：sftp root@192.168.1.2 2. 上传文件12put local_path remote_path例如：put -r /home/share/read.txt /home/root 3. 上传文件夹以文件夹里的所有内容 比如上传文件夹 folder，首先需要在远程机上创建这个文件夹，然后使用下面命令 put1p">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:updated_time" content="2017-10-16T13:22:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用sftp在Linux（MacOS）之间进行文件传输">
-<meta name="twitter:description" content="1. 连接远程Linux12sftp user@host例如：sftp root@192.168.1.2 2. 上传文件12put local_path remote_path例如：put -r /home/share/read.txt /home/root 3. 下载文件12get remote_path local_path例如：get -r /usr/local/some.zip /home">
+<meta name="twitter:description" content="1. 打开终端，连接远程Linux12sftp user@host例如：sftp root@192.168.1.2 2. 上传文件12put local_path remote_path例如：put -r /home/share/read.txt /home/root 3. 上传文件夹以文件夹里的所有内容 比如上传文件夹 folder，首先需要在远程机上创建这个文件夹，然后使用下面命令 put1p">
   
     <link rel="alternative" href="/atom.xml" title="渣渣潘的博客" type="application/atom+xml">
   
@@ -174,10 +174,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>1. 连接远程Linux</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sftp user@host</div><div class="line">例如：sftp root@192.168.1.2</div></pre></td></tr></table></figure></p>
+        <p><strong>1. 打开终端，连接远程Linux</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sftp user@host</div><div class="line">例如：sftp root@192.168.1.2</div></pre></td></tr></table></figure></p>
 <p><strong>2. 上传文件</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">put local_path remote_path</div><div class="line">例如：put -r /home/share/read.txt /home/root</div></pre></td></tr></table></figure></p>
-<p><strong>3. 下载文件</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">get remote_path local_path</div><div class="line">例如：get -r /usr/local/some.zip /home/share</div></pre></td></tr></table></figure></p>
-<p><strong>4. 退出</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exit</div></pre></td></tr></table></figure></p>
+<p><strong>3. 上传文件夹以文件夹里的所有内容</strong></p>
+<p>比如上传文件夹 <code>folder</code>，首先需要在远程机上创建这个文件夹，然后使用下面命令 <code>put</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">put -r /home/share/folder/* /home/root/folder</div></pre></td></tr></table></figure></p>
+<p><strong>4. 下载文件</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">get remote_path local_path</div><div class="line">例如：get -r /usr/local/some.zip /home/share</div></pre></td></tr></table></figure></p>
+<p><strong>5. 下载文件夹以文件夹里的所有内容</strong></p>
+<p>比如下载文件夹 <code>folder</code>，首先需要在本机上创建这个文件夹，然后使用下面命令 <code>get</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">get -r /usr/local/folder/* /home/share/folder</div></pre></td></tr></table></figure></p>
+<p><strong>6. 退出</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exit</div></pre></td></tr></table></figure></p>
 
       
 
