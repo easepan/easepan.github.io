@@ -155,6 +155,869 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-CentOS搭建ShowDoc文档工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/18/CentOS搭建ShowDoc文档工具/">CentOS搭建ShowDoc文档工具</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/18/CentOS搭建ShowDoc文档工具/" class="archive-article-date">
+  	<time datetime="2017-10-17T16:00:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1. 准备 <code>Nginx</code> + <code>PHP</code> 环境</strong></p>
+<p><em>安装 Nginx</em></p>
+<p>使用 <code>yum</code> 安装 <code>Nginx</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install nginx</div></pre></td></tr></table></figure></p>
+<p>修改 <code>/etc/nginx/nginx.conf</code> 文件为如下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">user nginx;</div><div class="line">worker_processes auto;</div><div class="line">error_log /var/log/nginx/error.log;</div><div class="line">pid /run/nginx.pid;</div><div class="line"></div><div class="line">include /usr/share/nginx/modules/*.conf;</div><div class="line"></div><div class="line">events &#123;</div><div class="line">    worker_connections 1024;</div><div class="line">&#125;</div><div class="line"></div><div class="line">http &#123;</div><div class="line">    log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;</div><div class="line">                      &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;</div><div class="line">                      &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;</div><div class="line"></div><div class="line">    access_log  /var/log/nginx/access.log  main;</div><div class="line"></div><div class="line">    sendfile            on;</div><div class="line">    tcp_nopush          on;</div><div class="line">    tcp_nodelay         on;</div><div class="line">    keepalive_timeout   65;</div><div class="line">    types_hash_max_size 2048;</div><div class="line"></div><div class="line">    include             /etc/nginx/mime.types;</div><div class="line">    default_type        application/octet-stream;</div><div class="line">    include /etc/nginx/conf.d/*.conf;</div><div class="line"></div><div class="line">    server &#123;</div><div class="line">        listen       80;</div><div class="line">        server_name  127.0.0.1;</div><div class="line">        root         /var/www/html;</div><div class="line">        index index.php index.html</div><div class="line">        error_page  404              /404.html;</div><div class="line">        location = /40x.html &#123;</div><div class="line">        &#125;</div><div class="line">        error_page   500 502 503 504  /50x.html;</div><div class="line">        location = /50x.html &#123;</div><div class="line">        &#125;</div><div class="line">        location ~ .php$ &#123;</div><div class="line">            root           /var/www/html;</div><div class="line">            fastcgi_pass   127.0.0.1:9000;</div><div class="line">            fastcgi_index  index.php;</div><div class="line">            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</div><div class="line">            include        fastcgi_params;</div><div class="line">        &#125;</div><div class="line">        location ~ /.ht &#123;</div><div class="line">            deny  all;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>启动 Nginx 并设置为开机启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">service nginx start</div><div class="line">chkconfig nginx on</div></pre></td></tr></table></figure></p>
+<p><em>安装 PHP</em></p>
+<p>使用 <code>yum</code> 安装 <code>php-fpm</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php php-gd php-fpm php-mcrypt php-mbstring php-mysql php-pdo</div></pre></td></tr></table></figure></p>
+<p>启动 <code>php-fpm</code> 并设置为开机启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">service php-fpm start</div><div class="line">chkconfig php-fpm on</div></pre></td></tr></table></figure></p>
+<p><strong>2. 创建项目</strong></p>
+<p><em>下载安装 Composer</em></p>
+<p><code>Composer</code> 是 PHP 的一个依赖管理工具，推荐使用 Composer 创建 ShowDoc 项目。</p>
+<p>执行如下命令安装 <code>Composer</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl -sS https://getcomposer.org/installer | php</div><div class="line">mv composer.phar /usr/local/bin/composer</div></pre></td></tr></table></figure></p>
+<p><em>设置 Composer 使用国内镜像</em></p>
+<p>执行命令设置 <code>Composer</code> 使用国内镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer config -g repo.packagist composer https://packagist.phpcomposer.com</div></pre></td></tr></table></figure></p>
+<p><em>使用 Composer 创建项目</em></p>
+<p>执行命令创建项目：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /var/www/html/ &amp;&amp; composer create-project  showdoc/showdoc</div></pre></td></tr></table></figure></p>
+<p><em>设置 showdoc 目录写权限</em></p>
+<p>执行命令赋予 <code>showdoc</code> 下部分目录的写权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">chmod a+w showdoc/install</div><div class="line">chmod a+w showdoc/Sqlite</div><div class="line">chmod a+w showdoc/Sqlite/showdoc.db.php</div><div class="line">chmod a+w showdoc/Public/Uploads/</div><div class="line">chmod a+w showdoc/Application/Runtime</div><div class="line">chmod a+w showdoc/server/Application/Runtime</div><div class="line">chmod a+w showdoc/Application/Common/Conf/config.php</div><div class="line">chmod a+w showdoc/Application/Home/Conf/config.php</div></pre></td></tr></table></figure></p>
+<p>创建完毕，您现在可以通过浏览器访问 <a href="http://yourip/showdoc/install/" target="_blank" rel="external">http://yourip/showdoc/install/</a> 或 <a href="http://yourdomain.com/showdoc/install/" target="_blank" rel="external">http://yourdomain.com/showdoc/install/</a> ，进行语言的选择以后即可通过 <a href="http://yourip/showdoc" target="_blank" rel="external">http://yourip/showdoc</a> 或 <a href="http://yourdomain/showdoc" target="_blank" rel="external">http://yourdomain/showdoc</a> 查看站点效果。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/18/CentOS搭建ShowDoc文档工具/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-CentOS搭建LNMP环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/17/CentOS搭建LNMP环境/">CentOS搭建LNMP环境</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/17/CentOS搭建LNMP环境/" class="archive-article-date">
+  	<time datetime="2017-10-17T15:48:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1. 搭建 Nginx 静态服务器</strong></p>
+<p><em>安装 Nginx</em></p>
+<p>使用 <code>yum</code> 安装 Nginx：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install nginx -y</div></pre></td></tr></table></figure></p>
+<p>修改 <code>/etc/nginx/conf.d/default.conf</code>，去除对 IPv6 地址的监听，可参考下面的代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen       80 default_server;</div><div class="line">    # listen       [::]:80 default_server;</div><div class="line">    server_name  _;</div><div class="line">    root         /usr/share/nginx/html;</div><div class="line"></div><div class="line">    # Load configuration files for the default server block.</div><div class="line">    include /etc/nginx/default.d/*.conf;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    error_page 404 /404.html;</div><div class="line">        location = /40x.html &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    error_page 500 502 503 504 /50x.html;</div><div class="line">        location = /50x.html &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>修改完成后，启动 <code>Nginx</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nginx</div></pre></td></tr></table></figure></p>
+<p>此时，可访问实验机器外网 HTTP 服务（<a href="http://yourip" target="_blank" rel="external">http://yourip</a> 或 <a href="http://yourdomain.com）来确认是否已经安装成功。" target="_blank" rel="external">http://yourdomain.com）来确认是否已经安装成功。</a></p>
+<p>将 Nginx 设置为开机自动启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig nginx on</div></pre></td></tr></table></figure></p>
+<p><strong>2. 安装 MySQL 数据库服务</strong></p>
+<p><em>安装 MySQL</em></p>
+<p>使用 <code>yum</code> 安装 MySQL：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server -y</div></pre></td></tr></table></figure></p>
+<p>安装完成后，启动 MySQL 服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service mysqld restart</div></pre></td></tr></table></figure></p>
+<p>设置 MySQL 账户 root 密码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/mysqladmin -u root password &apos;WyIGmACk&apos;</div></pre></td></tr></table></figure></p>
+<p>将 MySQL 设置为开机自动启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig mysqld on</div></pre></td></tr></table></figure></p>
+<p><strong>3. 搭建 PHP 环境</strong></p>
+<p><em>安装 PHP</em></p>
+<p>使用 <code>yum</code> 安装 PHP：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php php-fpm php-mysql -y</div></pre></td></tr></table></figure></p>
+<p>安装之后，启动 <code>PHP-FPM</code> 进程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service php-fpm start</div></pre></td></tr></table></figure></p>
+<p>启动之后，可以使用下面的命令查看 <code>PHP-FPM</code> 进程监听哪个端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -nlpt | grep php-fpm</div></pre></td></tr></table></figure></p>
+<p>把 <code>PHP-FPM</code> 也设置成开机自动启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig php-fpm on</div></pre></td></tr></table></figure></p>
+<p><strong>4. 配置 Nginx 并运行 PHP 程序</strong></p>
+<p><em>配置 <code>Nginx</code></em></p>
+<p>在 <code>/etc/nginx/conf.d</code> 目录中新建一个名为 <code>php.conf</code> 的文件，并配置 <code>Nginx</code> 端口 ，配置示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 8000;</div><div class="line">    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</div><div class="line">    location ~ .php$ &#123;</div><div class="line">        root           /usr/share/php;</div><div class="line">        fastcgi_pass   127.0.0.1:9000;</div><div class="line">        fastcgi_index  index.php;</div><div class="line">        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</div><div class="line">        include        fastcgi_params;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>修改配置完成后，重启 <code>nginx</code> 服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service nginx restart</div></pre></td></tr></table></figure></p>
+<p>这时候，我们就可以在<code>/usr/share/php</code> 目录下新建一个 <code>info.php</code> 文件来检查 php 是否安装成功了，文件内容参考如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;?php phpinfo(); ?&gt;</div></pre></td></tr></table></figure></p>
+<p>此时，访问 <a href="http://yourip:8000/info.php" target="_blank" rel="external">http://yourip:8000/info.php</a> 或 <a href="http://yourdomain.com:8000/info.php" target="_blank" rel="external">http://yourdomain.com:8000/info.php</a> 可浏览到我们刚刚创建的 info.php 页面了</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/17/CentOS搭建LNMP环境/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-CentOS搭建LAMP环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/17/CentOS搭建LAMP环境/">CentOS搭建LAMP环境</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/17/CentOS搭建LAMP环境/" class="archive-article-date">
+  	<time datetime="2017-10-17T15:33:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1. 搭建 MySQL 数据库</strong></p>
+<p><em>安装 MySQL</em></p>
+<p>使用 <code>yum</code> 安装 MySQL：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server -y</div></pre></td></tr></table></figure></p>
+<p>安装完成后，启动 MySQL 服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service mysqld restart</div></pre></td></tr></table></figure></p>
+<p>设置 MySQL 账户 root 密码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/mysqladmin -u root password &apos;NGky9EKq&apos;</div></pre></td></tr></table></figure></p>
+<p><strong>2. 安装 Apache 服务</strong></p>
+<p><em>安装 Apache</em></p>
+<p>使用 <code>yum</code> 安装 Apache<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install httpd -y</div></pre></td></tr></table></figure></p>
+<p>启动 Apache 服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service httpd start</div></pre></td></tr></table></figure></p>
+<p><strong>3. 安装 PHP</strong></p>
+<p><em>安装 <code>PHP</code> 和 <code>PHP-MYSQL</code> 支持工具：</em></p>
+<p>使用 <code>yum</code> 安装 PHP：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php php-mysql -y</div></pre></td></tr></table></figure></p>
+<p><strong>4. 检查安装是否成功</strong></p>
+<p><em>检验 PHP 是否安装成功</em></p>
+<p>我们在 <code>/var/www/html</code> 目录下创建一个<code>info.php</code>文件来检查php是否安装成功，示例代码参考如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;?php phpinfo(); ?&gt;</div></pre></td></tr></table></figure></p>
+<p>此时，访问 <a href="http://yourip/info.php" target="_blank" rel="external">http://yourip/info.php</a> 或 <a href="http://yourdomain.com/info.php" target="_blank" rel="external">http://yourdomain.com/info.php</a> 可浏览到我们刚刚创建的 info.php 页面了</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/17/CentOS搭建LAMP环境/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-基于CentOS搭建Postfix、Dovecot邮件服务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/17/基于CentOS搭建Postfix、Dovecot邮件服务/">基于CentOS搭建Postfix、Dovecot邮件服务</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/17/基于CentOS搭建Postfix、Dovecot邮件服务/" class="archive-article-date">
+  	<time datetime="2017-10-17T15:23:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1. 准备域名</strong></p>
+<ul>
+<li><p>域名注册</p>
+</li>
+<li><p>域名解析</p>
+<p>  域名购买完成后, 需要将域名解析到你的服务器IP</p>
+<p>  完成该实验共需要添加两条记录：</p>
+<ul>
+<li><p>A 记录</p>
+<p>  记录类型：A<br>  主机记录：@<br>  记录值：yourip</p>
+</li>
+<li><p>MX 记录</p>
+<p>  记录类型：MX<br>  主机记录：@<br>记录值：yourdomain.com（替换为自己域名）</p>
+</li>
+</ul>
+</li>
+<li><p>生效检查</p>
+<p>  域名设置解析后需要过一段时间才会生效，通过 ping 命令检查域名是否生效 ，如：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ping yourdomain.com</div></pre></td></tr></table></figure>
+<p>  如果 ping 命令返回的信息中含有你设置的解析的 IP 地址，说明解析成功。（使用 <code>ctrl + c</code> 停止）</p>
+<p>  检查 MX 记录</p>
+<p>  替换下面命令中的 <code>yourdomain.com</code> 为您自己的注册的域名：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nslookup -q=mx yourdomain.com</div></pre></td></tr></table></figure>
+<p>  如果 <code>nslookup</code> 命令返回的信息中含有你设置的域名的记录值，说明解析成功。</p>
+</li>
+</ul>
+<p><strong>2. 实验之前</strong></p>
+<p>配置一个功能完善的邮件服务器并不是一项容易的工作，本实验只是搭建了一个简单的邮件服务器，一些更为强大的功能还需要你去探索。</p>
+<ul>
+<li><p>Postfix、Dovecot 简介</p>
+<p>  <em>Postfix</em></p>
+<p>  Postfix 是一个标准的 MTA「Mail Transfer Agent」服务器，它负责通过 SMTP 协议管理发送到本机的邮件以及由本机发向外界的邮件。</p>
+<p>  <em>Dovecot</em></p>
+<p>  Dovecot 是一个优秀的 IMAP/POP 服务器用以接收外界发送到本机的邮件。</p>
+</li>
+<li><p>Postfix、Dovecot 安装</p>
+<p>  在 CentOS 7 上，我们可以直接使用 <code>yum</code> 进行下载安装：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install postfix dovecot</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>3. Postfix</strong></p>
+<ul>
+<li><p>配置 Postfix</p>
+<p>  有关教程中配置参数的具体含义，请参照 <a href="http://www.postfix.org/documentation.html" target="_blank" rel="external">Postfix 配置文档</a>。</p>
+<p>  <em>配置</em></p>
+<p>  在终端中输入以下命令以修改 <code>Postfix</code> 相关配置：</p>
+<blockquote>
+<p>注意：<strong>记得将 yourdomain.com 替换为你自己的域名</strong></p>
+</blockquote>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">postconf -e &apos;myhostname = server.yourdomain.com&apos;</div><div class="line">postconf -e &apos;mydestination = localhost, localhost.localdomain&apos;</div><div class="line">postconf -e &apos;myorigin = $mydomain&apos;</div><div class="line">postconf -e &apos;mynetworks = 127.0.0.0/8&apos;</div><div class="line">postconf -e &apos;inet_interfaces = all&apos;</div><div class="line">postconf -e &apos;inet_protocols = all&apos;</div><div class="line">postconf -e &apos;mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain&apos;</div><div class="line">postconf -e &apos;home_mailbox = Maildir/&apos;</div><div class="line">postconf -e &apos;smtpd_sasl_type = dovecot&apos;</div><div class="line">postconf -e &apos;smtpd_sasl_path = private/auth&apos;</div><div class="line">postconf -e &apos;smtpd_sasl_auth_enable = yes&apos;</div><div class="line">postconf -e &apos;broken_sasl_auth_clients = yes&apos;</div><div class="line">postconf -e &apos;smtpd_sasl_authenticated_header = yes&apos;</div><div class="line">postconf -e &apos;smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination&apos;</div><div class="line">postconf -e &apos;smtpd_use_tls = yes&apos;</div><div class="line">postconf -e &apos;smtpd_tls_cert_file = /etc/pki/dovecot/certs/dovecot.pem&apos;</div><div class="line">postconf -e &apos;smtpd_tls_key_file = /etc/pki/dovecot/private/dovecot.pem&apos;</div></pre></td></tr></table></figure>
+<p>  配置中 <code>Postfix</code> 使用 <code>sasl</code> 和 <code>tls</code> 来完成身份认证和传输信息加密。</p>
+<p>  试验中使用了 <code>Dovecot</code> 默认的 <code>ssl</code> 证书和私钥，如果你需要修改为自己的，请替换最后两行配置的路径。</p>
+<p>  <em>配置 smtps</em></p>
+<p>  部分邮件客户端依赖于使用 <code>465</code> 端口提供加密连接，所以我们修改配置，允许 <code>Postfix</code> 使用 <code>465</code> 端口发送邮件。</p>
+<p>  打开 <code>/etc/postfix/master.cf</code> 文件，将如下两行前的 <code>#</code> 去除：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">smtps inet n - n - - smtpd</div><div class="line">-o smtpd_tls_wrappermode=yes</div></pre></td></tr></table></figure>
+<p>  （注意： -o 前要保留空格）</p>
+<p>  <em>启动</em></p>
+<p>  使用以下命令，将 <code>Postfix</code> 设为自动启动并首次启动该服务：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl enable postfix.service</div><div class="line">systemctl start  postfix.service</div></pre></td></tr></table></figure>
+</li>
+<li><p>Postfix 日志</p>
+<p>  <code>Postfix</code> 系统的日志文件在系统的这个目录下的 <code>/var/log/maillog</code> 文件，此文件记录了 <code>Postfix</code> 服务器的运行状态信息。</p>
+</li>
+</ul>
+<p><strong>4. Dovecot</strong></p>
+<ul>
+<li><p>配置 Dovecot</p>
+<p>  <em>修改 <code>dovecot.conf</code></em></p>
+<p>  打开 <code>/etc/dovecot/dovecot.conf</code> 文件，在最下方加入以下配置：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ssl_cert = &lt;/etc/pki/dovecot/certs/dovecot.pem</div><div class="line">ssl_key = &lt;/etc/pki/dovecot/private/dovecot.pem</div><div class="line"></div><div class="line">protocols = imap pop3 lmtp</div><div class="line">listen = *</div><div class="line">mail_location = Maildir:~/Maildir</div><div class="line">disable_plaintext_auth = no</div></pre></td></tr></table></figure>
+<p>  如果前面你修改为了自己的 ssl 证书和私钥，请替换开始两行配置的路径。</p>
+<p>  <em>修改 <code>10-master.conf</code></em></p>
+<p>  打开 <code>/etc/dovecot/conf.d/10-master.conf</code> 文件，找到 <code>service auth</code> 部分，将以下行前面的 <code>#</code> 去除：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">unix_listener /var/spool/postfix/private/auth &#123;  </div><div class="line">       mode = 0666  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动 Dovecot</p>
+<p>  使用以下命令，将 <code>Dovecot</code> 设为自动启动并首次启动该服务：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl enable dovecot.service</div><div class="line">systemctl start  dovecot.service</div></pre></td></tr></table></figure>
+<p>  查看 <code>/var/log/maillog</code> 文件，查看服务是否成功启动。</p>
+<p>  如成功启动，日志里应包含如下信息：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Jun 26 12:00:28 localhost postfix/postfix-script[28338]: starting the Postfix mail system</div><div class="line">Jun 26 12:00:29 localhost postfix/master[28340]: daemon started -- version 2.10.1, configuration /etc/postfix</div><div class="line">Jun 26 12:28:40 localhost dovecot: master: Dovecot v2.2.10 starting up for imap, pop3, lmtp (core dumps disabled)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>5. 创建账户</strong></p>
+<p>该配置下邮箱账户依赖于系统用户，所以通过添加系统用户的方式创建邮箱账户。</p>
+<p><em>添加用户</em></p>
+<p>在终端中使用 <code>useradd</code> 命令添加用户：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">useradd test</div></pre></td></tr></table></figure></p>
+<p>使用 <code>passwd</code> 命令设置对应用户密码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">passwd test</div></pre></td></tr></table></figure></p>
+<p><strong>6. 测试</strong></p>
+<p>如测试中遇到异常，请查看 maillog 日志文件中的错误信息。</p>
+<p><em>服务器端发送测试</em></p>
+<p>使用 <code>su</code> 命令切换用户：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">su test</div></pre></td></tr></table></figure></p>
+<p>我们可以使用 <code>mail</code> 命令发送邮件，将 <code>xxxx@xxx.com</code> 替换为你的其他邮箱。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo &quot;Mail Content&quot; | mail -s &quot;Mail Subject&quot; xxxx@xxx.com</div></pre></td></tr></table></figure></p>
+<p>然后可以前往你的接收方邮箱查收。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/17/基于CentOS搭建Postfix、Dovecot邮件服务/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-基于CentOS搭建Docker环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/17/基于CentOS搭建Docker环境/">基于CentOS搭建Docker环境</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/17/基于CentOS搭建Docker环境/" class="archive-article-date">
+  	<time datetime="2017-10-17T14:52:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1. 安装与配置 Docker</strong></p>
+<ul>
+<li><p>安装 Docker</p>
+<p>  <code>Docker</code> 软件包已经包括在默认的 <code>CentOS-Extras</code> 软件源里。因此想要安装 <code>docker</code>，只需要运行下面的 <code>yum</code> 命令：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install docker-io -y</div></pre></td></tr></table></figure>
+<p>  直接<code>yum</code>安装，安装成功后查看版本</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker -v</div></pre></td></tr></table></figure>
+<p>  启动docker</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service docker start</div></pre></td></tr></table></figure>
+<p>  设置开机启动</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig docker on</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>配置 Docker</p>
+<p>  因为国内访问 Docker Hub 较慢, 可以使用腾讯云提供的国内镜像源, 加速访问 Docker Hub</p>
+<p>  依次执行以下命令</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">echo &quot;OPTIONS=&apos;--registry-mirror=https://mirror.ccs.tencentyun.com&apos;&quot; &gt;&gt; /etc/sysconfig/docker</div><div class="line">systemctl daemon-reload</div><div class="line">service docker restart</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>2. Docker 的简单操作</strong></p>
+<ul>
+<li><p>下载镜像</p>
+<p>  下载一个官方的 CentOS 镜像到本地</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull centos</div></pre></td></tr></table></figure>
+<p>  下载好的镜像就会出现在镜像列表里</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker images</div></pre></td></tr></table></figure>
+</li>
+<li><p>运行容器</p>
+<p>  这时我们可以在刚才下载的 CentOS 镜像生成的容器内操作了。</p>
+<p>  生成一个 centos 镜像为模板的容器并使用 <code>bash shell</code></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -it centos /bin/bash</div></pre></td></tr></table></figure>
+<p>  这个时候可以看到命令行的前端已经变成了 [root@(一串 hash Id)] 的形式, 这说明我们已经成功进入了 CentOS 容器。</p>
+<p>  在容器内执行任意命令, 不会影响到宿主机, 如下</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/simple_docker</div></pre></td></tr></table></figure>
+<p>  可以看到 <code>/data</code> 目录下已经创建成功了 <code>simple_docker</code> 文件夹</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls /data</div></pre></td></tr></table></figure>
+<p>  退出容器</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exit</div></pre></td></tr></table></figure>
+<p>  查看宿主机的 <code>/data</code> 目录, 并没有 <code>simple_docker</code> 文件夹, 说明容器内的操作不会影响到宿主机</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls /data</div></pre></td></tr></table></figure>
+</li>
+<li><p>保存容器</p>
+<p>  查看所有的容器信息， 能获取容器的id</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker ps -a</div></pre></td></tr></table></figure>
+<p>  然后执行如下命令，保存镜像：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker commit -m=&quot;备注&quot; [CONTAINER_ID] [IMAGE]</div></pre></td></tr></table></figure>
+</li>
+<li><p>完成</p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/17/基于CentOS搭建Docker环境/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-基于CentOS搭建SVN服务器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/17/基于CentOS搭建SVN服务器/">基于CentOS搭建SVN服务器</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/17/基于CentOS搭建SVN服务器/" class="archive-article-date">
+  	<time datetime="2017-10-17T14:41:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1. 安装 SVN 服务端</strong></p>
+<p>安装 Subversion</p>
+<p>Subversion 是一个版本控制系统，相对于的 RCS 、 CVS ，采用了分支管理系统，它的设计目标就是取代 CVS 。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y subversion</div></pre></td></tr></table></figure></p>
+<p><strong>2. 创建 SVN 版本库</strong></p>
+<p>创建项目版本库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/svn/myproject</div><div class="line">svnadmin create /data/svn/myproject</div></pre></td></tr></table></figure></p>
+<p><strong>3. 配置 SVN 信息</strong></p>
+<ul>
+<li><p>配置文件简介</p>
+<p>  版本库中的配置目录 conf 有三个文件:</p>
+<ul>
+<li><code>authz</code> 是权限控制文件</li>
+<li><code>passwd</code> 是帐号密码文件</li>
+<li><code>svnserve.conf</code> 是SVN服务综合配置文件</li>
+</ul>
+</li>
+<li><p>配置权限配置文件 <code>authz</code></p>
+<p>  编辑 <code>authz</code> ，内容参考如下：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[groups]            </div><div class="line">#用户组</div><div class="line">admin = admin,root,test  </div><div class="line">#用户组所对应的用户</div><div class="line">[/]                 </div><div class="line">#库目录权限</div><div class="line">@admin = rw         </div><div class="line">#用户组权限</div><div class="line">*=r               </div><div class="line">#非用户组权限</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置账号密码文件 <code>passwd</code></p>
+<p>  编辑 <code>passwd</code> ，内容参考如下：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[users]</div><div class="line"># harry = harryssecret</div><div class="line"># sally = sallyssecret</div><div class="line">admin = 123456</div><div class="line">root = 123456</div><div class="line">test = 123456</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置 SVN 服务综合配置文件 <code>svnserve.conf</code></p>
+<p>  编辑 <code>svnserve.conf</code> ，内容参考如下：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">[general]</div><div class="line"># force-username-case = none</div><div class="line"># 匿名访问的权限 可以是read、write，none，默认为read</div><div class="line">anon-access = none</div><div class="line">#使授权用户有写权限</div><div class="line">auth-access = write</div><div class="line">#密码数据库的路径</div><div class="line">password-db = passwd</div><div class="line">#访问控制文件</div><div class="line">authz-db = authz</div><div class="line">#认证命名空间，SVN会在认证提示里显示，并且作为凭证缓存的关键字</div><div class="line">realm = /data/svn/myproject</div><div class="line"></div><div class="line">[sasl]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>4. 启动 SVN 服务</strong></p>
+<ul>
+<li><p>启动 SVN</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">svnserve -d -r /data/svn</div></pre></td></tr></table></figure>
+</li>
+<li><p>checkout SVN项目</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/workspace/myproject</div><div class="line">svn co svn://127.0.0.1/myproject /data/workspace/myproject --username root --password 123456 --force --no-auth-cache</div></pre></td></tr></table></figure>
+</li>
+<li><p>提交文件到 SVN 服务器</p>
+<p>  从本地提交文件到 SVN 服务器，其中 <code>root</code> 密码为 <code>/data/svn/myproject/conf/passwd</code> 文件存储的密码</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd /data/workspace/myproject</div><div class="line">echo test &gt;&gt; test.txt</div><div class="line">svn add test.txt</div><div class="line">svn commit test.txt -m &apos;test&apos;</div></pre></td></tr></table></figure>
+<p>  提交成功后可以通过如下命令从本地项目删除文件</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/workspace/myproject</div><div class="line">rm -rf test.txt</div></pre></td></tr></table></figure>
+<p>  删除后可以通过 SVN 服务器恢复</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/workspace/myproject</div><div class="line">svn update</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>5. 完成</strong></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/17/基于CentOS搭建SVN服务器/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-基于CentOS搭建GIT服务器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/17/基于CentOS搭建GIT服务器/">基于CentOS搭建GIT服务器</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/17/基于CentOS搭建GIT服务器/" class="archive-article-date">
+  	<time datetime="2017-10-17T14:28:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1. 下载安装 git</strong></p>
+<p>Git 是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。</p>
+<p>此教程以 CentOS 7.2 x64 的系统为环境，搭建 git 服务器。</p>
+<ul>
+<li><p>安装依赖库和编译工具</p>
+<p>  为了后续安装能正常进行，我们先来安装一些相关依赖库和编译工具</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel</div></pre></td></tr></table></figure>
+<p>  安装编译工具</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install gcc perl-ExtUtils-MakeMaker</div></pre></td></tr></table></figure>
+</li>
+<li><p>下载 git</p>
+<p>  选一个目录，用来放下载下来的安装包，这里将安装包放在 /usr/local/src 目录里</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/src</div></pre></td></tr></table></figure>
+<p>  到官网找一个新版稳定的源码包下载到 <code>/usr/local/src</code> 文件夹里</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://www.kernel.org/pub/software/scm/git/git-2.10.0.tar.gz</div></pre></td></tr></table></figure>
+</li>
+<li><p>解压和编译</p>
+<p>  解压下载的源码包</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zvxf git-2.10.0.tar.gz</div></pre></td></tr></table></figure>
+<p>  解压后进入 git-2.10.0 文件夹</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd git-2.10.0</div></pre></td></tr></table></figure>
+<p>  执行编译</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make all prefix=/usr/local/git</div></pre></td></tr></table></figure>
+<p>  编译完成后, 安装到 /usr/local/git 目录下</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make install prefix=/usr/local/git</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>2. 配置环境变量</strong></p>
+<p>将 git 目录加入 PATH</p>
+<p>将原来的 PATH 指向目录修改为现在的目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo &apos;export PATH=$PATH:/usr/local/git/bin&apos; &gt;&gt; /etc/bashrc</div></pre></td></tr></table></figure>
+<p>生效环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source /etc/bashrc</div></pre></td></tr></table></figure></p>
+<p>此时我们能查看 git 版本号，说明我们已经安装成功了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git --version</div></pre></td></tr></table></figure></p>
+<p><strong>3. 创建 git 账号密码</strong></p>
+<p>创建 git 账号</p>
+<p>为我们刚刚搭建好的 git 创建一个账号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">useradd -m gituser</div></pre></td></tr></table></figure></p>
+<p>然后为这个账号设置密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">passwd gituser</div></pre></td></tr></table></figure></p>
+<p><strong>4. 初始化 git 仓库并配置用户权限</strong></p>
+<ul>
+<li><p>创建 git 仓库并初始化</p>
+<p>  我们创建 <code>/data/repositories</code> 目录用于存放 git 仓库</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/repositories</div></pre></td></tr></table></figure>
+<p>  创建好后，初始化这个仓库</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /data/repositories/ &amp;&amp; git init --bare test.git</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置用户权限</p>
+<p>  给 git 仓库目录设置用户和用户组并设置权限</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chown -R gituser:gituser /data/repositories</div><div class="line">chmod 755 /data/repositories</div></pre></td></tr></table></figure>
+<p>  查找 <code>git-shell</code> 所在目录 , 编辑 <code>/etc/passwd</code> 文件，将最后一行关于 <code>gituser</code> 的登录 <code>shell</code> 配置改为 <code>git-shell</code> 的目录，如下</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gituser:x:500:500::/home/gituser:/usr/local/git/bin/git-shell</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用搭建好的 Git 服务</p>
+<p>  克隆 test repo 到本地</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd ~ &amp;&amp; git clone gituser@yourip:/data/repositories/test.git #yourip可以你服务器的ip地址或域名</div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/17/基于CentOS搭建GIT服务器/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-基于CentOS搭建个人Leanote云笔记本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/17/基于CentOS搭建个人Leanote云笔记本/">基于CentOS搭建个人Leanote云笔记本</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/17/基于CentOS搭建个人Leanote云笔记本/" class="archive-article-date">
+  	<time datetime="2017-10-17T14:11:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Leanote 依赖 MongoDB 作为数据存储，下面开始安装MongoDB：<br><strong>1. 下载启动 MongoDB</strong></p>
+<ul>
+<li><p>下载 MongoDB</p>
+<p>  进入 /home 目录，并下载 MongoDB：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /home</div></pre></td></tr></table></figure>
+<p>  下载源码：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.1.tgz</div></pre></td></tr></table></figure>
+<p>  解压缩源码包：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -xzvf mongodb-linux-x86_64-3.0.1.tgz</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建用于存储的文件夹目录</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/db</div></pre></td></tr></table></figure>
+<p>  配置 MongoDB 的环境变量：</p>
+<p>  编辑 <code>/etc/profile</code>，在文件末尾追加以下配置：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export PATH=$PATH:/home/mongodb-linux-x86_64-3.0.1/bin</div></pre></td></tr></table></figure>
+<p>  并执行以下命令，使环境变量生效。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source /etc/profile</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>启动 MongoDB（启动需要 3 ~ 5 分钟，耐心等待）：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongod --bind_ip localhost --port 27017 --dbpath /data/db/ --logpath=/var/log/mongod.log --fork</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>2. 安装 Leanote</strong></p>
+<ul>
+<li><p>下载 Leanote</p>
+<p>  先进入 /home 目录</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /home</div></pre></td></tr></table></figure>
+<p>  下载 Leanote 源码</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://iweb.dl.sourceforge.net/project/leanote-bin/2.4/leanote-linux-amd64-v2.4.bin.tar.gz</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>解开压缩包：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zxvf leanote-linux-amd64-v2.4.bin.tar.gz</div></pre></td></tr></table></figure>
+</li>
+<li><p>编辑 Leanote 配置文件</p>
+<p>  编辑文件 <code>app.conf</code>，在文件中找到 <code>app.secret=</code> 项，并修改为如下内容：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.secret=qcloud666</div></pre></td></tr></table></figure>
+</li>
+<li><p>初始化数据库</p>
+<p>  导入初始化数据：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongorestore -h localhost -d leanote --dir /home/leanote/mongodb_backup/leanote_install_data/</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动 Leanote 服务</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup /bin/bash /home/leanote/bin/run.sh &gt;&gt; /var/log/leanote.log 2&gt;&amp;1 &amp;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>3. 访问 Leanote 云笔记本</strong></p>
+<p>通过访问 <a href="http://yourip:9000" target="_blank" rel="external">http://yourip:9000</a> 或 <a href="http://yourdomain.com:9000就可以了使用自己的笔记本。" target="_blank" rel="external">http://yourdomain.com:9000就可以了使用自己的笔记本。</a></p>
+<ul>
+<li><p>初始化账户： admin</p>
+</li>
+<li><p>初始化密码： abc123</p>
+</li>
+</ul>
+<p>请务必修改密码已确保使用安全！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/17/基于CentOS搭建个人Leanote云笔记本/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-基于CentOS搭建个人网盘" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -380,1094 +1243,9 @@
 
 
   
-    <article id="post-基于CentOS搭建搭建FTP文件服务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/16/基于CentOS搭建搭建FTP文件服务/">基于CentOS搭建搭建FTP文件服务</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/16/基于CentOS搭建搭建FTP文件服务/" class="archive-article-date">
-  	<time datetime="2017-10-16T09:24:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. 安装并启动 FTP 服务</strong></p>
-<ul>
-<li><p>安装 VSFTPD</p>
-<p>  使用 <code>yum</code> 安装 <code>vsftpd</code>：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install vsftpd -y</div></pre></td></tr></table></figure>
-</li>
-<li><p>启动 VSFTPD</p>
-<p>  安装完成后，启动 FTP 服务：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service vsftpd start</div></pre></td></tr></table></figure>
-<p>  启动后，可以看到系统已经监听了 21 端口：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -nltp | grep 21</div></pre></td></tr></table></figure>
-<p>  此时，访问 ftp://yourdomain.com 可浏览机器上的 /var/ftp 目录了。</p>
-</li>
-</ul>
-<p><strong>2. 配置 FTP 权限</strong></p>
-<p>目前 FTP 服务登陆允许匿名登陆，也无法区分用户访问，我们需要配置 FTP 访问权限</p>
-<ul>
-<li><p>了解 VSFTP 配置</p>
-<p>  vsftpd 的配置目录为 <code>/etc/vsftpd</code>，包含下列的配置文件：</p>
-<ul>
-<li><code>vsftpd.conf</code> 为主要配置文件</li>
-<li><code>ftpusers</code> 配置禁止访问 FTP 服务器的用户列表</li>
-<li><code>user_list</code> 配置用户访问控制</li>
-</ul>
-</li>
-<li><p>阻止匿名访问和切换根目录</p>
-<p>  匿名访问和切换根目录都会给服务器带来安全风险，我们把这两个功能关闭。</p>
-<p>  编辑 <code>/etc/vsftpd/vsftpd.conf</code>，找到下面两处配置并修改：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 禁用匿名用户</div><div class="line">anonymous_enable=NO</div><div class="line"></div><div class="line"># 禁止切换根目录</div><div class="line">chroot_local_user=YES</div></pre></td></tr></table></figure>
-<p>  重新启动 FTP 服务</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service vsftpd restart</div></pre></td></tr></table></figure>
-</li>
-<li><p>创建 FTP 用户</p>
-<p>  创建一个用户 <code>ftpuser</code> ：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">useradd ftpuser</div></pre></td></tr></table></figure>
-<p>  为用户 <code>ftpuser</code> 设置密码 ：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo &quot;3oEiU5s7&quot; | passwd ftpuser --stdin</div></pre></td></tr></table></figure>
-</li>
-<li><p>限制该用户仅能通过 FTP 访问</p>
-<p>  限制用户 <code>ftpuser</code> 只能通过 FTP 访问服务器，而不能直接登录服务器：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">usermod -s /sbin/nologin ftpuser</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p>为用户分配主目录</p>
-<p>  为用户 <code>ftpuser</code> 创建主目录并约定：</p>
-<p>  <code>/data/ftp</code> 为主目录, 该目录不可上传文件</p>
-<p>  <code>/data/ftp/pub</code> 文件只能上传到该目录下</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/ftp/pub</div></pre></td></tr></table></figure>
-<p>  创建登录欢迎文件 ：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo &quot;Welcome to use FTP service.&quot; &gt; /data/ftp/welcome.txt</div></pre></td></tr></table></figure>
-<p>  设置访问权限：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod a-w /data/ftp &amp;&amp; chmod 777 -R /data/ftp/pub</div></pre></td></tr></table></figure>
-<p>  设置为用户的主目录：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">usermod -d /data/ftp ftpuser</div></pre></td></tr></table></figure>
-</li>
-<li><p>完成</p>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/16/基于CentOS搭建搭建FTP文件服务/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-基于CentOS搭建Discuz" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/16/基于CentOS搭建Discuz/">基于CentOS搭建Discuz</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/16/基于CentOS搭建Discuz/" class="archive-article-date">
-  	<time datetime="2017-10-16T09:21:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. 购买服务器和域名</strong></p>
-<p><strong>2. 准备 LAMP 环境</strong></p>
-<p>LAMP 是 Linux、Apache、MySQL 和 PHP 的缩写，是 Discuz 论坛系统依赖的基础运行环境。我们先来准备 LAMP 环境</p>
-<ul>
-<li><p>安装 MySQL</p>
-<p>  使用 <code>yum</code> 安装 MySQL：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server -y</div></pre></td></tr></table></figure>
-<p>  安装完成后，启动 MySQL 服务：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service mysqld restart</div></pre></td></tr></table></figure>
-<p>  此教程使用 mysql 默认账户名和密码，您也可以设置自己的 MySQL 账户名和密码，参考下面的内容：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/mysqladmin -u root password &apos;NGky9EKq&apos;</div></pre></td></tr></table></figure>
-<p>  将 MySQL 设置为开机自动启动：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig mysqld on</div></pre></td></tr></table></figure>
-</li>
-<li><p>安装 Apache 组件</p>
-<p>  使用 <code>yum</code> 安装 Apache 组件：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install httpd -y</div></pre></td></tr></table></figure>
-<p>  安装之后，启动 httpd 进程：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service httpd start</div></pre></td></tr></table></figure>
-<p>  把 httpd 也设置成开机自动启动：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig httpd on</div></pre></td></tr></table></figure>
-</li>
-<li><p>安装 PHP</p>
-<p>  使用 <code>yum</code> 安装 PHP：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php php-fpm php-mysql -y</div></pre></td></tr></table></figure>
-<p>  安装之后，启动 PHP-FPM 进程：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service php-fpm start</div></pre></td></tr></table></figure>
-<p>  启动之后，可以使用下面的命令查看 PHP-FPM 进程监听哪个端口 </p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -nlpt | grep php-fpm</div></pre></td></tr></table></figure>
-<p>  把 PHP-FPM 也设置成开机自动启动：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig php-fpm on</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>3. 安装并配置 Discuz</strong></p>
-<ul>
-<li><p>安装 Discuz</p>
-<p>  CentOS 6 没有Discuz 的 <code>yum</code> 源，所以我们需要下载一个Discuz 压缩包：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://download.comsenz.com/DiscuzX/3.2/Discuz_X3.2_SC_UTF8.zip</div></pre></td></tr></table></figure>
-<p>  下载完成后，解压这个压缩包</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unzip Discuz_X3.2_SC_UTF8.zip</div></pre></td></tr></table></figure>
-</li>
-<li><p>配置 Discuz</p>
-<p>  由于PHP默认访问 <code>/var/www/html/</code> 文件夹，所以我们需要把upload文件夹里的文件都复制到 <code>/var/www/html/</code> 文件夹</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd Discuz*</div><div class="line">cp -r upload/* /var/www/html/</div></pre></td></tr></table></figure>
-<p>  给 /var/www/html 目录及其子目录赋予权限</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod -R 777 /var/www/html</div></pre></td></tr></table></figure>
-<p>  重启 Apache</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service httpd restart</div></pre></td></tr></table></figure>
-</li>
-<li><p>完成</p>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/16/基于CentOS搭建Discuz/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-搭建微信订阅号后台服务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/16/搭建微信订阅号后台服务/">搭建微信订阅号后台服务</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/16/搭建微信订阅号后台服务/" class="archive-article-date">
-  	<time datetime="2017-10-16T08:59:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. 准备域名和服务器</strong></p>
-<p>微信公众平台需要配置服务器地址 URL 访问，在实验开始之前，我们要准备域名。</p>
-<ul>
-<li><p>购买服务器（<a href="https://cloud.tencent.com/product/cvm" target="_blank" rel="external">腾讯云</a>）</p>
-</li>
-<li><p>域名注册</p>
-</li>
-<li><p>域名解析</p>
-<p>  域名设置解析后需要过一段时间才会生效，通过 ping 命令检查域名是否生效 ，如：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ping www.yourdomain.com</div></pre></td></tr></table></figure>
-<p>  如果 ping 命令返回的信息中含有你设置的解析的 IP 地址，说明解析成功。</p>
-</li>
-</ul>
-<p><strong>2. 申请微信个人订阅号</strong></p>
-<p>在开始搭建我们的订阅号服务器之前，需要先拿到订阅号相关信息。</p>
-<ul>
-<li><p>注册开发者账号</p>
-<p>  如果你还不是微信订阅号开发者，请先在微信公众平台注册：<br><a href="https://mp.weixin.qq.com" target="_blank" rel="external">https://mp.weixin.qq.com</a></p>
-</li>
-<li><p>获取微信订阅号公众平台认证字段信息</p>
-<p>  我们需要获取3个字段：<code>AppID</code> <code>Token</code> <code>EncodingAESKey</code>。</p>
-<p>  登录微信公众平台，依次进入 <code>开发</code> - <code>基本配置</code> 可以拿到 AppID。</p>
-<p>  在<code>基本配置</code> - <code>服务器配置</code> - <code>修改配置</code> 表单中：<br>URL 填第一步申请的域名;</p>
-<p>  Token 用户根据提示填写，用于后面校验服务端合法性;</p>
-<p>  EncodingAESKey 点击 <code>随机生成</code> 按钮来生成。</p>
-<p>  当点击表单 <code>提交</code> 按钮时，微信会通过 Token 来校验 URL 的合法性，这个我们在后面步骤实现，此界面暂时保留不关闭。</p>
-</li>
-</ul>
-<p><strong>3. 搭建 HTTP 服务</strong></p>
-<p>下面的步骤，将带大家在服务器上使用 Node 和 Express 搭建一个 HTTP 服务器</p>
-<ul>
-<li><p>安装 NodeJS 和 NPM</p>
-<p>  使用下面的命令安装 NodeJS 和 NPM</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -</div><div class="line">yum install nodejs -y</div></pre></td></tr></table></figure>
-<p>  安装完成后，使用下面的命令测试安装结果</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node -v</div></pre></td></tr></table></figure>
-</li>
-<li><p>编写 HTTP Server 源码</p>
-<p>  <em>创建工作目录</em></p>
-<p>  使用下面的命令在服务器创建一个工作目录：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/release/weapp</div></pre></td></tr></table></figure>
-<p>  进入此工作目录</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /data/release/weapp</div></pre></td></tr></table></figure>
-<p>  创建 package.json</p>
-<p>  在刚才创建的工作目录创建 <code>package.json</code>，添加我们服务器包的名称和版本号，可参考下面的示例。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;name&quot;: &quot;weapp&quot;,</div><div class="line">    &quot;version&quot;: &quot;1.0.0&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>  <em>添加 Server 源码</em></p>
-<p>  在工作目录创建 <code>app.js</code>，使用 <code>Express.js</code> 来监听 <code>5050</code> 端口，可参考下面的示例代码(注：请将 <code>app.js</code> 文件中的<code>token</code>/<code>appid</code>/<code>encodingAESKey</code>等配置项替换为您的订阅号对应的取值)。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">// 引用 express 来支持 HTTP Server 的实现</div><div class="line">const express = require(&apos;express&apos;);</div><div class="line"></div><div class="line">// 引用微信公共平台自动回复消息接口服务中间件</div><div class="line">var wechat = require(&apos;wechat&apos;);</div><div class="line"></div><div class="line">// 创建一个 express 实例</div><div class="line">const app = express();</div><div class="line"></div><div class="line">// 配置微信公众平台参数，在教程第二步中获取</div><div class="line">var config = &#123;</div><div class="line">    token: &apos;your token&apos;, // 填第二步中获取的 `token`</div><div class="line">    appid: &apos;your appid&apos;, // 填第二步中获取的 `appid`</div><div class="line">    encodingAESKey: &apos;your encodingAESKey&apos;, // 填第二步中获取的 `encodingAESKey`</div><div class="line">    checkSignature: true // 可选，默认为true。由于微信公众平台接口调试工具在明文模式下不发送签名，所以如要使用该测试工具，请将其设置为false </div><div class="line">&#125;;</div><div class="line"></div><div class="line">app.use(express.query());</div><div class="line"></div><div class="line">app.use(&apos;/&apos;, wechat(config, function (req, res, next) &#123;</div><div class="line">    res.reply(&#123;</div><div class="line">        content: &apos;你好，Hello World!&apos;,</div><div class="line">        type: &apos;text&apos;</div><div class="line">    &#125;);</div><div class="line">&#125;));</div><div class="line"></div><div class="line">// 监听端口，等待连接</div><div class="line">const port = 5050;</div><div class="line">app.listen(port);</div><div class="line"></div><div class="line">// 输出服务器启动日志</div><div class="line">console.log(`Server listening at http://127.0.0.1:$&#123;port&#125;`);</div></pre></td></tr></table></figure>
-</li>
-<li><p>运行 HTTP 服务</p>
-<p>  <em>安装 PM2</em></p>
-<p>  在开始之前，我们先来安装 PM2</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install pm2 --global</div></pre></td></tr></table></figure>
-<p>  PM2 安装时间可能稍长，请耐心等候 </p>
-<p>  <em>安装 Express</em></p>
-<p>  我们的服务器源码里使用到了 Express 模块，下面的命令使用 NPM 来安装 Express</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/release/weapp</div><div class="line">npm install express --save</div></pre></td></tr></table></figure>
-<p>  <em>安装 Wechat</em></p>
-<p>  我们的服务器源码里使用到了 Wechat 模块，下面的命令使用 NPM 来安装 Wechat</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/release/weapp</div><div class="line">npm install wechat --save</div></pre></td></tr></table></figure>
-<p>  <em>启动服务</em></p>
-<p>  安装完成后，使用 PM2 来启动 HTTP 服务</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/release/weapp</div><div class="line">pm2 start app.js</div></pre></td></tr></table></figure>
-<p>  现在，您的 HTTP 服务已经在 <a href="http://yourdomain.com:5050" target="_blank" rel="external">http://yourdomain.com:5050</a> 运行要查看服务输出的日志，可以使用下面的命令：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 logs</div></pre></td></tr></table></figure>
-<p>  如果要重启服务，可以使用下面的命令：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 restart app</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>4. 搭建 nginx 对外服务</strong></p>
-<p>NodeJs只是侦听的机器上的 5050 端口，我们使用 nginx 侦听 80 端口提供对外域名服务</p>
-<ul>
-<li><p>安装 Nginx</p>
-<p>  在 CentOS 上，可直接使用 <code>yum</code> 来安装 Nginx</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install nginx -y</div></pre></td></tr></table></figure>
-<p>  安装完成后，使用 <code>nginx</code> 命令启动 Nginx：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nginx</div></pre></td></tr></table></figure>
-<p>  此时，访问 <a href="http://yourdomain.com" target="_blank" rel="external">http://yourdomain.com</a> 可以看到 Nginx 的测试页面</p>
-</li>
-<li><p>配置 HTTP 反向代理</p>
-<p>  外网用户访问服务器的 Web 服务由 Nginx 提供，Nginx 需要配置反向代理才能使得 Web 服务转发到本地的 Node 服务。</p>
-<p>  Nginx 配置目录在 <code>/etc/nginx/conf.d</code>，我们在该目录创建 <code>wechat.conf</code>，参考示例代码如下：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">       listen 80;</div><div class="line">       server_name www.example.com; # 改为第一步申请的域名</div><div class="line">       </div><div class="line">       location / &#123;</div><div class="line">           proxy_pass http://127.0.0.1:5050;</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<p>  重新加载配置</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nginx -s reload</div></pre></td></tr></table></figure>
-<p>  在浏览器通过 http 的方式访问你解析的域名来测试 HTTP 是否成功启动</p>
-</li>
-</ul>
-<p><strong>5. 使用Server端回复微信消息</strong></p>
-<ul>
-<li><p>提交服务端配置</p>
-<p>  我们将第二步微信公众平台中保留的表单提交，同时将 <code>基本配置</code> - <code>服务器配置</code> 启用</p>
-</li>
-<li><p>关注、发送与消息回复</p>
-<p>  首先通过二维码关注微信订阅号</p>
-<p>  在聊天界面向微信公众号发送一条消息</p>
-<p>  最终我们会回到一条 <code>你好，Hello World!</code> 的回复</p>
-</li>
-<li><p>大功搞成</p>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/16/搭建微信订阅号后台服务/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-基于CentOS搭建微信小程序服务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/16/基于CentOS搭建微信小程序服务/">基于CentOS搭建微信小程序服务</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/16/基于CentOS搭建微信小程序服务/" class="archive-article-date">
-  	<time datetime="2017-10-16T07:51:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. 准备域名、证书和服务器</strong></p>
-<p>小程序后台服务需要通过 HTTPS 访问，在实验开始之前，我们要准备域名和 SSL 证书。</p>
-<ul>
-<li><p>购买云服务器（<a href="https://cloud.tencent.com/product/cvm" target="_blank" rel="external">腾讯云</a>）</p>
-</li>
-<li><p>域名解析</p>
-<p>  域名购买完成后, 需要将域名解析到云主机</p>
-<p>  域名设置解析后需要过一段时间才会生效，通过 ping 命令检查域名是否生效 ，如：<code>ping www.yourdomain.com</code>。</p>
-<p>  如果 ping 命令返回的信息中含有你设置的解析的 IP 地址，说明解析成功。</p>
-</li>
-<li><p>申请 SSL 证书</p>
-</li>
-</ul>
-<p><strong>2. 搭建小程序开发环境</strong></p>
-<p>在开始搭建我们的小程序服务器之前，需要先完成客户端小程序开发环境的搭建。</p>
-<ul>
-<li><p>注册开发者账号</p>
-<p>  如果你还不是小程序开发者，请先在微信公众平台并注册：<a href="https://mp.weixin.qq.com" target="_blank" rel="external">https://mp.weixin.qq.com</a></p>
-</li>
-<li><p>配置小程序服务器信息</p>
-<p>  登录微信公众平台后，依次进入 <code>设置</code> - <code>开发设置</code> - <code>服务器域名</code> - <code>修改</code>。</p>
-<p>  扫码完成身份校验后，request 合法域名和 socket 合法域名均填写在上一步准备好的域名地址。</p>
-<p>  配置完成后，点击 <code>保存并提交</code>。</p>
-</li>
-<li><p>运行配套小程序代码</p>
-<p>  要运行本实验配套的小程序代码，请下载下列资源：</p>
-<ul>
-<li><a href="https://codeload.github.com/tencentyun/lab-weapp-client/zip/master" target="_blank" rel="external">实验配套源码</a></li>
-<li><p><a href="https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/download.html" target="_blank" rel="external">微信小程序开发工具</a></p>
-<p>源码下载后，请解压到本地工作目录。</p>
-<p>开发工具下载后，请安装并启动，然后用微信扫码登录。</p>
-<p>登录后，选择 <code>本地小程序项目</code> - <code>添加项目</code>，使用以下配置：</p>
-</li>
-<li><p>AppID：填写小程序的 AppID，请登录<a href="https://mp.weixin.qq.com/" target="_blank" rel="external">公众平台</a>后在 <code>设置</code> - <code>开发设置</code> - <code>开发者 ID</code> 中查看</p>
-</li>
-<li><p>项目名称：填写任意您喜欢的名称</p>
-</li>
-<li><p>项目目录：选择刚才解压的配套源码目录（目录包含 <code>app.js</code>）</p>
-<p>填写完成后，点击 添加项目。</p>
-</li>
-</ul>
-</li>
-<li><p>设置实验域名</p>
-<p>  在开发工具的 <code>编辑</code> 面板中，选中 <code>app.js</code> 进行编辑，需要修改小程序通信域名，请参考下面的配置：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">App(&#123;</div><div class="line">    config: &#123;</div><div class="line">        host: &apos;&apos; // 这个地方填写你的域名</div><div class="line">    &#125;,</div><div class="line">    onLaunch () &#123;</div><div class="line">        console.log(&apos;App.onLaunch()&apos;);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>3. 搭建 HTTP 服务</strong></p>
-<p>下面的步骤，将带大家在服务器上使用 Node 和 Express 搭建一个 HTTP 服务器</p>
-<ul>
-<li><p>安装 NodeJS 和 NPM</p>
-<p>  使用下面的命令安装 NodeJS 和 NPM</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -</div><div class="line">yum install nodejs -y</div></pre></td></tr></table></figure>
-<p>  安装完成后，使用下面的命令测试安装结果</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node -v</div></pre></td></tr></table></figure>
-</li>
-<li><p>编写 HTTP Server 源码</p>
-<p>  <em>创建工作目录</em></p>
-<p>  使用下面的命令在服务器创建一个工作目录：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/release/weapp</div></pre></td></tr></table></figure>
-<p>  <em>进入此工作目录</em></p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /data/release/weapp</div></pre></td></tr></table></figure>
-<p>  <em>创建 package.json</em></p>
-<p>  在刚才创建的工作目录创建 <code>package.json</code>，添加我们服务器包的名称和版本号，可参考下面的示例。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;name&quot;: &quot;weapp&quot;,</div><div class="line">    &quot;version&quot;: &quot;1.0.0&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>  <em>添加 Server 源码</em></p>
-<p>  在工作目录创建 <code>app.js</code>，使用 Express.js 来监听 <code>8765</code> 端口<br>，可参考下面的示例代码。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">// 引用 express 来支持 HTTP Server 的实现</div><div class="line">const express = require(&apos;express&apos;);</div><div class="line"></div><div class="line">// 创建一个 express 实例</div><div class="line">const app = express();</div><div class="line"></div><div class="line">// 实现唯一的一个中间件，对于所有请求，都输出 &quot;Response from express&quot;</div><div class="line">app.use((request, response, next) =&gt; &#123;</div><div class="line">    response.write(&apos;Response from express&apos;);</div><div class="line">    response.end();</div><div class="line">&#125;);</div><div class="line"></div><div class="line">// 监听端口，等待连接</div><div class="line">const port = 8765;</div><div class="line">app.listen(port);</div><div class="line"></div><div class="line">// 输出服务器启动日志</div><div class="line">console.log(`Server listening at http://127.0.0.1:$&#123;port&#125;`);</div></pre></td></tr></table></figure>
-</li>
-<li><p>运行 HTTP 服务</p>
-<p>  <em>安装 PM2</em></p>
-<p>  在开始之前，我们先来安装 PM2</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install pm2 --global</div></pre></td></tr></table></figure>
-<p>  PM2 安装时间可能稍长，请耐心等候 </p>
-<p>  <em>安装 Express</em></p>
-<p>  我们的服务器源码里使用到了 Express 模块，下面的命令使用 NPM 来安装 Express</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/release/weapp</div><div class="line">npm install express --save</div></pre></td></tr></table></figure>
-<p>  <em>启动服务</em></p>
-<p>  安装完成后，使用 PM2 来启动 HTTP 服务</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/release/weapp</div><div class="line">pm2 start app.js</div></pre></td></tr></table></figure>
-<p>  现在，您的 HTTP 服务已经在 <a href="http://yourdomain.com:8765" target="_blank" rel="external">http://yourdomain.com:8765</a> 运行</p>
-<p>  要查看服务输出的日志，可以使用下面的命令：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 logs</div></pre></td></tr></table></figure>
-<p>  如果要重启服务，可以使用下面的命令：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 restart app</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>4. 搭建 HTTPS 服务</strong></p>
-<p>微信小程序要求和服务器的通信都通过 HTTPS 进行</p>
-<ul>
-<li><p>安装 Nginx</p>
-<p>  在 CentOS 上，可直接使用 <code>yum</code> 来安装 Nginx</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install nginx -y</div></pre></td></tr></table></figure>
-<p>  安装完成后，使用 <code>nginx</code> 命令启动 Nginx：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nginx</div></pre></td></tr></table></figure>
-<p>  此时，访问 <a href="http://yourdomain.com" target="_blank" rel="external">http://yourdomain.com</a> 可以看到 Nginx 的测试页面</p>
-</li>
-<li><p>配置 HTTPS 反向代理</p>
-<p>  外网用户访问服务器的 Web 服务由 Nginx 提供，Nginx 需要配置反向代理才能使得 Web 服务转发到本地的 Node 服务。</p>
-<p>  先将之前下载的 SSL 证书(解压后 Nginx 目录分别以 crt 和 key 作为后缀的文件)通过 <code>PuTTy</code>（Windows） 或者 <code>sftp</code>（MacOS 或 Linux） 上传到服务器的 <code>/etc/nginx</code> 目录。</p>
-<blockquote>
-<p>参考：<a href="http://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/putty.html" target="_blank" rel="external">putty教程</a>、<a href="http://blog.csdn.net/qq_26954773/article/details/78199365" target="_blank" rel="external">sftp教程</a></p>
-</blockquote>
-<p>  Nginx 配置目录在 <code>/etc/nginx/conf.d</code>，我们在该目录创建 <code>ssl.conf</code>，内容如下：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">        listen 443;</div><div class="line">        server_name www.example.com; # 改为绑定证书的域名</div><div class="line">        # ssl 配置</div><div class="line">        ssl on;</div><div class="line">        ssl_certificate 1_www.example.com_bundle.crt; # 改为自己申请得到的 crt 文件的名称</div><div class="line">        ssl_certificate_key 2_www.example.com.key; # 改为自己申请得到的 key 文件的名称</div><div class="line">        ssl_session_timeout 5m;</div><div class="line">        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</div><div class="line">        ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;</div><div class="line">        ssl_prefer_server_ciphers on;</div><div class="line"></div><div class="line">        location / &#123;</div><div class="line">            proxy_pass http://127.0.0.1:8765;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>  让 Nginx 重新加载配置使其生效</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nginx -s reload</div></pre></td></tr></table></figure>
-<p>  在浏览器通过 https 的方式访问你解析的域名来测试 HTTPS 是否成功启动</p>
-</li>
-<li><p>在小程序中测试 HTTPS 访问</p>
-<p>  打开配套的小程序，点击 <code>实验一：HTTPS</code>，点击 <code>发送请求</code> 来测试访问结果。</p>
-</li>
-</ul>
-<p><strong>5. 小程序会话</strong></p>
-<p>小程序不支持 Cookie 存储和跟踪，服务器需要自行实现会话层</p>
-<ul>
-<li><p>安装 MongoDB</p>
-<p>  使用 Yum 在机器上安装 MongoDB及其客户端命令行工具：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mongodb-server mongodb -y</div></pre></td></tr></table></figure>
-<p>  安装结束后，可以使用下面的命令查看安装的版本：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mongod --version</div><div class="line">mongo --version</div></pre></td></tr></table></figure>
-</li>
-<li><p>启动 MongoDB</p>
-<p>  创建目录，用于 MongoDB 数据和日志存储：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/mongodb</div><div class="line">mkdir -p /data/logs/mongodb</div></pre></td></tr></table></figure>
-<p>  创建后，使用下面的命令来启动 MongoDB：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongod --fork --dbpath /data/mongodb --logpath /data/logs/mongodb/weapp.log</div></pre></td></tr></table></figure>
-<p>  可以使用下面的命令来检查是否启动成功 </p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -ltp | grep 27017</div></pre></td></tr></table></figure>
-</li>
-<li><p>添加 MongoDB 用户</p>
-<p>  登录本地 MongoDB 服务：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongo</div></pre></td></tr></table></figure>
-<p>  登录后，创建一个用户 <code>weapp</code> ：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">use weapp;</div><div class="line">db.createUser(&#123; user: &apos;weapp&apos;, pwd: &apos;weapp-dev&apos;, roles: [&apos;dbAdmin&apos;, &apos;readWrite&apos;]&#125;);</div></pre></td></tr></table></figure>
-<p>  创建完成后，使用 <code>exit</code> 退出命令行工具。</p>
-</li>
-<li><p>安装 Node 模块</p>
-<p>  实现小程序的会话功能，我们需要安装 <code>connect-mongo</code><br>和 <code>wafer-node-session</code></p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/release/weapp</div><div class="line">npm install connect-mongo wafer-node-session --save</div></pre></td></tr></table></figure>
-</li>
-<li><p>实现小程序会话</p>
-<p>  在工作目录创建配置文件 <code>config.js</code>，用于保存我们服务所用的配置，可参考下面的实现(注：请将参考配置文件中的 <code>YORU_APP_ID</code> 和 <code>YOUR_APP_SECRET</code> 替换为你申请的小程序对应的 AppID 和 AppSecret)：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123; </div><div class="line">    serverPort: &apos;8765&apos;, </div><div class="line"></div><div class="line">    // 小程序 appId 和 appSecret </div><div class="line">    // 请到 https://mp.weixin.qq.com 获取 AppID 和 AppSecret</div><div class="line">    appId: &apos;YORU_APP_ID&apos;, </div><div class="line">    appSecret: &apos;YOUR_APP_SECRET&apos;, </div><div class="line"></div><div class="line">    // mongodb 连接配置，生产环境请使用更复杂的用户名密码</div><div class="line">    mongoHost: &apos;127.0.0.1&apos;, </div><div class="line">    mongoPort: &apos;27017&apos;, </div><div class="line">    mongoUser: &apos;weapp&apos;, </div><div class="line">    mongoPass: &apos;weapp-dev&apos;, </div><div class="line">    mongoDb: &apos;weapp&apos;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>  编辑 <code>app.js</code>，添加会话实现逻辑，可参考下面的代码：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">// 引用 express 来支持 HTTP Server 的实现</div><div class="line">const express = require(&apos;express&apos;);</div><div class="line">// 引用 wafer-session 支持小程序会话</div><div class="line">const waferSession = require(&apos;wafer-node-session&apos;); </div><div class="line">// 使用 MongoDB 作为会话的存储</div><div class="line">const MongoStore = require(&apos;connect-mongo&apos;)(waferSession); </div><div class="line">// 引入配置文件</div><div class="line">const config = require(&apos;./config&apos;); </div><div class="line"></div><div class="line">// 创建一个 express 实例</div><div class="line">const app = express();</div><div class="line"></div><div class="line">// 添加会话中间件，登录地址是 /login</div><div class="line">app.use(waferSession(&#123; </div><div class="line">    appId: config.appId, </div><div class="line">    appSecret: config.appSecret, </div><div class="line">    loginPath: &apos;/login&apos;,</div><div class="line">    store: new MongoStore(&#123; </div><div class="line">	url: `mongodb://$&#123;config.mongoUser&#125;:$&#123;config.mongoPass&#125;@$&#123;config.mongoHost&#125;:$&#123;config.mongoPort&#125;/$&#123;config.mongoDb&#125;` </div><div class="line">    &#125;) </div><div class="line">&#125;)); </div><div class="line"></div><div class="line">// 在路由 /me 下，输出会话里包含的用户信息</div><div class="line">app.use(&apos;/me&apos;, (request, response, next) =&gt; &#123; </div><div class="line">	    response.json(request.session ? request.session.userInfo : &#123; noBody: true &#125;); </div><div class="line">    if (request.session) &#123;</div><div class="line">        console.log(`Wafer session success with openId=$&#123;request.session.userInfo.openId&#125;`);</div><div class="line">    &#125;</div><div class="line">&#125;); </div><div class="line"></div><div class="line">// 实现一个中间件，对于未处理的请求，都输出 &quot;Response from express&quot;</div><div class="line">app.use((request, response, next) =&gt; &#123;</div><div class="line">    response.write(&apos;Response from express&apos;);</div><div class="line">    response.end();</div><div class="line">&#125;);</div><div class="line"></div><div class="line">// 监听端口，等待连接</div><div class="line">app.listen(config.serverPort);</div><div class="line"></div><div class="line">// 输出服务器启动日志</div><div class="line">console.log(`Server listening at http://127.0.0.1:$&#123;config.serverPort&#125;`);</div></pre></td></tr></table></figure>
-<p>  源码编写完成后，重启服务：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 restart app</div></pre></td></tr></table></figure>
-<p>  重启后，使用配套的小程序完成会话测试：打开配套小程序 - 点击 <code>实验二：会话</code> - <code>获取会话</code>，如果您能看到您的微信头像，那就表示会话已经成功获取了。</p>
-</li>
-</ul>
-<p><strong>6. WebSocket 服务</strong></p>
-<ul>
-<li><p>安装 Node 模块</p>
-<p>  本实验使用 <code>ws</code> 模块来在服务器上支持 WebSocket 协议，下面使用 NPM 来安装：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/release/weapp</div><div class="line">npm install ws --save</div></pre></td></tr></table></figure>
-</li>
-<li><p>实现 WebSocket 服务器</p>
-<p>  创建 <code>websocket.js</code>，实现 WebSocket 服务，可参考下面的代码：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">// 引入 ws 支持 WebSocket 的实现</div><div class="line">const ws = require(&apos;ws&apos;);</div><div class="line"></div><div class="line">// 导出处理方法</div><div class="line">exports.listen = listen;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 在 HTTP Server 上处理 WebSocket 请求</div><div class="line"> * @param &#123;http.Server&#125; server</div><div class="line"> * @param &#123;wafer.SessionMiddleware&#125; sessionMiddleware</div><div class="line"> */</div><div class="line">function listen(server, sessionMiddleware) &#123;</div><div class="line">    // 使用 HTTP Server 创建 WebSocket 服务，使用 path 参数指定需要升级为 WebSocket 的路径</div><div class="line">    const wss = new ws.Server(&#123; server, path: &apos;/ws&apos; &#125;);</div><div class="line"></div><div class="line">    // 监听 WebSocket 连接建立</div><div class="line">    wss.on(&apos;connection&apos;, (ws,request) =&gt; &#123;// 要升级到 WebSocket 协议的 HTTP 连接</div><div class="line"></div><div class="line">	    // 被升级到 WebSocket 的请求不会被 express 处理，</div><div class="line">        // 需要使用会话中间节获取会话</div><div class="line">        sessionMiddleware(request, null, () =&gt; &#123;</div><div class="line">            const session = request.session;</div><div class="line">            if (!session) &#123;</div><div class="line">                // 没有获取到会话，强制断开 WebSocket 连接</div><div class="line">                ws.send(JSON.stringify(request.sessionError) || &quot;No session avaliable&quot;);</div><div class="line">                ws.close();</div><div class="line">                return;</div><div class="line">            &#125;</div><div class="line">            // 保留这个日志的输出可让实验室能检查到当前步骤是否完成</div><div class="line">            console.log(`WebSocket client connected with openId=$&#123;session.userInfo.openId&#125;`);</div><div class="line">            serveMessage(ws, session.userInfo);</div><div class="line">        &#125;);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    // 监听 WebSocket 服务的错误</div><div class="line">    wss.on(&apos;error&apos;, (err) =&gt; &#123;</div><div class="line">	        console.log(err);</div><div class="line">	    &#125;);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 进行简单的 WebSocket 服务，对于客户端发来的所有消息都回复回去</div><div class="line"> */</div><div class="line">function serveMessage(ws, userInfo) &#123;</div><div class="line">    // 监听客户端发来的消息</div><div class="line">    ws.on(&apos;message&apos;, (message) =&gt; &#123;</div><div class="line">        console.log(`WebSocket received: $&#123;message&#125;`);</div><div class="line">        ws.send(`Server: Received($&#123;message&#125;)`);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    // 监听关闭事件</div><div class="line">    ws.on(&apos;close&apos;, (code, message) =&gt; &#123;</div><div class="line">        console.log(`WebSocket client closed (code: $&#123;code&#125;, message: $&#123;message || &apos;none&apos;&#125;)`);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    // 连接后马上发送 hello 消息给会话对应的用户</div><div class="line">    ws.send(`Server: 恭喜，$&#123;userInfo.nickName&#125;`);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>  编辑 <code>app.js</code>，调用 WebSocket 服务，可参考下面代码：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">// HTTP 模块同时支持 Express 和 WebSocket</div><div class="line">const http = require(&apos;http&apos;); </div><div class="line">// 引用 express 来支持 HTTP Server 的实现</div><div class="line">const express = require(&apos;express&apos;);</div><div class="line">// 引用 wafer-session 支持小程序会话</div><div class="line">const waferSession = require(&apos;wafer-node-session&apos;); </div><div class="line">// 使用 MongoDB 作为会话的存储</div><div class="line">const MongoStore = require(&apos;connect-mongo&apos;)(waferSession); </div><div class="line">// 引入配置文件</div><div class="line">const config = require(&apos;./config&apos;); </div><div class="line">// 引入 WebSocket 服务实现</div><div class="line">const websocket = require(&apos;./websocket&apos;);</div><div class="line"></div><div class="line">// 创建一个 express 实例</div><div class="line">const app = express();</div><div class="line"></div><div class="line">// 独立出会话中间件给 express 和 ws 使用</div><div class="line">const sessionMiddleware = waferSession(&#123;</div><div class="line">    appId: config.appId,</div><div class="line">    appSecret: config.appSecret,</div><div class="line">    loginPath: &apos;/login&apos;,</div><div class="line">    store: new MongoStore(&#123;</div><div class="line">        url: `mongodb://$&#123;config.mongoUser&#125;:$&#123;config.mongoPass&#125;@$&#123;config.mongoHost&#125;:$&#123;config.mongoPort&#125;/$&#123;config.mongoDb&#125;`</div><div class="line">    &#125;)</div><div class="line">&#125;);</div><div class="line">app.use(sessionMiddleware);</div><div class="line"></div><div class="line">// 在路由 /me 下，输出会话里包含的用户信息</div><div class="line">app.use(&apos;/me&apos;, (request, response, next) =&gt; &#123; </div><div class="line">    response.json(request.session ? request.session.userInfo : &#123; noBody: true &#125;); </div><div class="line">    if (request.session) &#123;</div><div class="line">        console.log(`Wafer session success with openId=$&#123;request.session.userInfo.openId&#125;`);</div><div class="line">    &#125;</div><div class="line">&#125;); </div><div class="line"></div><div class="line">// 实现一个中间件，对于未处理的请求，都输出 &quot;Response from express&quot;</div><div class="line">app.use((request, response, next) =&gt; &#123;</div><div class="line">    response.write(&apos;Response from express&apos;);</div><div class="line">    response.end();</div><div class="line">&#125;);</div><div class="line"></div><div class="line">// 创建 HTTP Server 而不是直接使用 express 监听</div><div class="line">const server = http.createServer(app);</div><div class="line"></div><div class="line">// 让 WebSocket 服务在创建的 HTTP 服务器上监听</div><div class="line">websocket.listen(server, sessionMiddleware);</div><div class="line"></div><div class="line">// 启动 HTTP 服务</div><div class="line">server.listen(config.serverPort);</div><div class="line"></div><div class="line">// 输出服务器启动日志</div><div class="line">console.log(`Server listening at http://127.0.0.1:$&#123;config.serverPort&#125;`);</div></pre></td></tr></table></figure>
-<p>  重启服务</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 restart app</div></pre></td></tr></table></figure>
-</li>
-<li><p>更新 Nginx 代理</p>
-<p>  编辑 Nginx 配置 <code>ssl.conf</code>，添加 WebSocket 支持，可参考下面的配置(注：请将参考配置文件中的 www.example.com 替换为前面步骤申请的域名，将 1_www.example.com.crt 和 2_www.example.com.key 替换为前面步骤申请并上传的 SSL 证书的名称)：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"># WebSocket 配置</div><div class="line">map $http_upgrade $connection_upgrade &#123;</div><div class="line">    default upgrade;</div><div class="line">    &apos;&apos;      close;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">       listen 443;</div><div class="line">       server_name www.example.com; # 改为绑定证书的域名</div><div class="line">       # ssl 配置</div><div class="line">       ssl on;</div><div class="line">       ssl_certificate 1_www.example.com.crt; # 改为自己申请得到的 crt 文件的名称</div><div class="line">       ssl_certificate_key 2_www.example.com.key; # 改为自己申请得到的 key 文件的名称</div><div class="line">       ssl_session_timeout 5m;</div><div class="line">       ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</div><div class="line">       ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;</div><div class="line">       ssl_prefer_server_ciphers on;</div><div class="line"></div><div class="line">       # WebSocket 配置</div><div class="line">       proxy_set_header Upgrade $http_upgrade;</div><div class="line">       proxy_set_header Connection $connection_upgrade;</div><div class="line"></div><div class="line">       location / &#123;</div><div class="line">           proxy_pass http://127.0.0.1:8765;</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<p>  通知 Nginx 进程重新加载配置：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nginx -s reload</div></pre></td></tr></table></figure>
-</li>
-<li><p>测试 WebSocket</p>
-<p>  打开配套的小程序，点击 <code>实验三：WebSocket</code>。进入测试页面后，点击 <code>连接</code> 按钮，如果出现连接成功的提示，表示 WebSocket 服务已经正常运行，可以收发消息。</p>
-</li>
-</ul>
-<p><strong>7. 剪刀石头布小游戏</strong></p>
-<ul>
-<li><p>实现游戏房间逻辑</p>
-<p>  创建 <code>/data/release/weapp/game</code> 目录用于存放剪刀石头布小游戏的代码</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/release/weapp/game</div></pre></td></tr></table></figure>
-<p>  添加 <code>game/Room.js</code> 实现游戏房间逻辑，可参考下面的代码：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">enum GameChoice &#123;</div><div class="line">    // 剪刀</div><div class="line">    Scissors = 1,</div><div class="line">    // 石头</div><div class="line">    Rock = 2,</div><div class="line">    // 布</div><div class="line">    Paper = 3</div><div class="line">&#125;</div><div class="line">*/</div><div class="line">function judge(choice1, choice2) &#123;</div><div class="line">    // 和局</div><div class="line">    if (choice1 == choice2) return 0;</div><div class="line">    // Player 1 没出，Player 2 胜出</div><div class="line">    if (!choice1) return 1;</div><div class="line">    // Player 2 没出，Player 1 胜出</div><div class="line">    if (!choice2) return -1;</div><div class="line">    // 都出了就这么算</div><div class="line">    return (choice1 - choice2 + 3) % 3 == 1 ? -1 : 1;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/** @type &#123;Room[]&#125; */</div><div class="line">const globalRoomList = [];</div><div class="line"></div><div class="line">// 每个房间最多两人</div><div class="line">const MAX_ROOT_MEMBER = 2;</div><div class="line"></div><div class="line">// 游戏时间，单位秒</div><div class="line">const GAME_TIME = 3;</div><div class="line"></div><div class="line">let nextRoomId = 0;</div><div class="line"></div><div class="line">/** 表示一个房间 */</div><div class="line">module.exports = class Room &#123;</div><div class="line"></div><div class="line">    /** 获取所有房间 */</div><div class="line">    static all() &#123;</div><div class="line">        return globalRoomList.slice();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /** 获取有座位的房间 */</div><div class="line">    static findRoomWithSeat() &#123;</div><div class="line">        return globalRoomList.find(x =&gt; !x.isFull());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /** 创建新房间 */</div><div class="line">    static create() &#123;</div><div class="line">        const room = new Room();</div><div class="line">        globalRoomList.unshift(room);</div><div class="line">        return room;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    constructor() &#123;</div><div class="line">        this.id = `room$&#123;nextRoomId++&#125;`;</div><div class="line">        this.players = [];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /** 添加玩家 */</div><div class="line">    addPlayer(player) &#123;</div><div class="line">        const &#123; uid, uname &#125; = player.user;</div><div class="line">        console.log(`Player $&#123;uid&#125;($&#123;uname&#125;) enter $&#123;this.id&#125;`);</div><div class="line">        this.players.push(player);</div><div class="line">        if (this.isFull()) &#123;</div><div class="line">            this.startGame();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /** 删除玩家 */</div><div class="line">    removePlayer(player) &#123;</div><div class="line">        const &#123; uid, uname &#125; = player.user;</div><div class="line">        console.log(`Player $&#123;uid&#125;($&#123;uname&#125;) leave $&#123;this.id&#125;`);</div><div class="line">        const playerIndex = this.players.indexOf(player);</div><div class="line">        if (playerIndex != -1) &#123;</div><div class="line">            this.players.splice(playerIndex, 1);</div><div class="line">        &#125;</div><div class="line">        if (this.players.length === 0) &#123;</div><div class="line">            console.log(`Room $&#123;this.id&#125; is empty now`);</div><div class="line">            const roomIndex = globalRoomList.indexOf(this);</div><div class="line">            if (roomIndex &gt; -1) &#123;</div><div class="line">                globalRoomList.splice(roomIndex, 1);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /** 玩家已满 */</div><div class="line">    isFull() &#123;</div><div class="line">        return this.players.length == MAX_ROOT_MEMBER;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /** 开始游戏 */</div><div class="line">    startGame() &#123;</div><div class="line">        // 保留这行日志输出可以让实验室检查到实验的完成情况</div><div class="line">        console.log(&apos;game started!&apos;);</div><div class="line"></div><div class="line">        // 当局积分清零</div><div class="line">        this.players.forEach(player =&gt; player.gameData.roundScore = 0);</div><div class="line"></div><div class="line">        // 集合玩家用户和游戏数据</div><div class="line">        const players = this.players.map(player =&gt; Object.assign(&#123;&#125;, player.user, player.gameData));</div><div class="line"></div><div class="line">        // 通知所有玩家开始</div><div class="line">        for (let player of this.players) &#123;</div><div class="line">            player.send(&apos;start&apos;, &#123;</div><div class="line">                gameTime: GAME_TIME,</div><div class="line">                players</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        // 计时结束</div><div class="line">        setTimeout(() =&gt; this.finishGame(), GAME_TIME * 1000);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /** 结束游戏 */</div><div class="line">    finishGame() &#123;</div><div class="line">        const players = this.players;</div><div class="line"></div><div class="line">        // 两两对比算分</div><div class="line">        for (let i = 0; i &lt; MAX_ROOT_MEMBER; i++) &#123;</div><div class="line">            let p1 = players[i];</div><div class="line">            if (!p1) break;</div><div class="line">            for (let j = i + 1; j &lt; MAX_ROOT_MEMBER; j++) &#123;</div><div class="line">                let p2 = players[j];</div><div class="line">                const result = judge(p1.gameData.choice, p2.gameData.choice);</div><div class="line">                p1.gameData.roundScore -= result;</div><div class="line">                p2.gameData.roundScore += result;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        // 计算连胜奖励</div><div class="line">        for (let player of players) &#123;</div><div class="line">            const gameData = player.gameData;</div><div class="line">            // 胜局积分</div><div class="line">            if (gameData.roundScore &gt; 0) &#123;</div><div class="line">                gameData.winStreak++;</div><div class="line">                gameData.roundScore *= gameData.winStreak;</div><div class="line">            &#125;</div><div class="line">            // 败局清零</div><div class="line">            else if (gameData.roundScore &lt; 0) &#123;</div><div class="line">                gameData.roundScore = 0;</div><div class="line">                gameData.winStreak = 0;</div><div class="line">            &#125;</div><div class="line">            // 累积总分</div><div class="line">            gameData.totalScore += gameData.roundScore;</div><div class="line">        &#125;</div><div class="line">        // 计算结果</div><div class="line">        const result = players.map(player =&gt; &#123;</div><div class="line">            const &#123; uid &#125; = player.user;</div><div class="line">            const &#123; roundScore, totalScore, winStreak, choice &#125; = player.gameData;</div><div class="line">            return &#123; uid, roundScore, totalScore, winStreak, choice &#125;;</div><div class="line">        &#125;);</div><div class="line">        // 通知所有玩家游戏结果</div><div class="line">        for (let player of players) &#123;</div><div class="line">            player.send(&apos;result&apos;, &#123; result &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>实现玩家逻辑</p>
-<p>  添加 game/Player.js 实现玩家逻辑，可参考下面的代码：<br>const Room = require(“./Room”);</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 表示一个玩家，处理玩家的公共游戏逻辑，消息处理部分需要具体的玩家实现（请参考 ComputerPlayer 和 HumanPlayer）</div><div class="line"> */</div><div class="line">module.exports = class Player &#123;</div><div class="line">    constructor(user) &#123;</div><div class="line">        this.id = user.uid;</div><div class="line">        this.user = user;</div><div class="line">        this.room = null;</div><div class="line">        this.gameData = &#123;</div><div class="line">            // 当前的选择（剪刀/石头/布）</div><div class="line">            choice: null,</div><div class="line">            // 局积分</div><div class="line">            roundScore: 0,</div><div class="line">            // 总积分</div><div class="line">            totalScore: 0,</div><div class="line">            // 连胜次数</div><div class="line">            winStreak: 0</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 上线当前玩家，并且异步返回给玩家分配的房间</div><div class="line">     */</div><div class="line">    online(room) &#123;</div><div class="line">        // 处理玩家 &apos;join&apos; 消息</div><div class="line">        // 为玩家寻找一个可用的房间，并且异步返回</div><div class="line">        this.receive(&apos;join&apos;, () =&gt; &#123;</div><div class="line">            if (this.room) &#123;</div><div class="line">                this.room.removePlayer(this);</div><div class="line">            &#125;</div><div class="line">            room = this.room = room || Room.findRoomWithSeat() || Room.create();</div><div class="line">            room.addPlayer(this);</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        // 处理玩家 &apos;choise&apos; 消息</div><div class="line">        // 需要记录玩家当前的选择，并且通知到房间里的其它玩家</div><div class="line">        this.receive(&apos;choice&apos;, (&#123; choice &#125;) =&gt; &#123;</div><div class="line">            this.gameData.choice = choice;</div><div class="line">            this.broadcast(&apos;movement&apos;, &#123;</div><div class="line">                uid: this.user.uid,</div><div class="line">                movement: &quot;choice&quot;</div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        // 处理玩家 &apos;leave&apos; 消息</div><div class="line">        // 让玩家下线</div><div class="line">        this.receive(&apos;leave&apos;, () =&gt; this.offline);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 下线当前玩家，从房间离开</div><div class="line">     */</div><div class="line">    offline() &#123;</div><div class="line">        if (this.room) &#123;</div><div class="line">            this.room.removePlayer(this);</div><div class="line">            this.room = null;</div><div class="line">        &#125;</div><div class="line">        this.user = null;</div><div class="line">        this.gameData = null;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 发送指定消息给当前玩家，需要具体子类实现</div><div class="line">     * @abstract</div><div class="line">     * @param &#123;string&#125; message 消息类型</div><div class="line">     * @param &#123;*&#125; data 消息数据</div><div class="line">     */</div><div class="line">    send(message, data) &#123;</div><div class="line">        throw new Error(&apos;Not implement: AbstractPlayer.send()&apos;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 处理玩家发送的消息，需要具体子类实现</div><div class="line">     * @abstract</div><div class="line">     * @param &#123;string&#125; message 消息类型</div><div class="line">     * @param &#123;Function&#125; handler</div><div class="line">     */</div><div class="line">    receive(message, handler) &#123;</div><div class="line">        throw new Error(&apos;Not implement: AbstractPlayer.receive()&apos;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 给玩家所在房间里的其它玩家发送消息</div><div class="line">     * @param &#123;string&#125; message 消息类型</div><div class="line">     * @param &#123;any&#125; data 消息数据</div><div class="line">     */</div><div class="line">    broadcast(message, data) &#123;</div><div class="line">        if (!this.room) return;</div><div class="line">        this.others().forEach(neighbor =&gt; neighbor.send(message, data));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 获得玩家所在房间里的其他玩家</div><div class="line">     */</div><div class="line">    others() &#123;</div><div class="line">        return this.room.players.filter(player =&gt; player != this);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>实现电脑玩家</p>
-<p>  在实现人类玩家之前，我们先来创建 <code>ComputerPlayer.js</code> 来实现电脑玩家</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">const EventEmitter = require(&apos;events&apos;);</div><div class="line">const Player = require(&apos;./Player&apos;);</div><div class="line"></div><div class="line">let nextComputerId = 0;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 机器人玩家实现，使用 EventEmitter 接收和发送消息</div><div class="line"> */</div><div class="line">module.exports = class ComputerPlayer extends Player &#123;</div><div class="line">    constructor() &#123;</div><div class="line">        const computerId = `robot-$&#123;++nextComputerId&#125;`;</div><div class="line">        super(&#123;</div><div class="line">            uid: computerId,</div><div class="line">            uname: computerId,</div><div class="line">            uavatar: &apos;http://www.scoutiegirl.com/wp-content/uploads/2015/06/Blue-Robot.png&apos;</div><div class="line">        &#125;);</div><div class="line">        this.emitter = new EventEmitter();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 模拟玩家行为</div><div class="line">     */</div><div class="line">    simulate() &#123;</div><div class="line">        this.receive(&apos;start&apos;, () =&gt; this.play());</div><div class="line">        this.receive(&apos;result&apos;, () =&gt; this.stop());</div><div class="line">        this.send(&apos;join&apos;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 游戏开始后，随机时间后随机选择</div><div class="line">     */</div><div class="line">    play() &#123;</div><div class="line">        this.playing = true;</div><div class="line">        const randomTime = () =&gt; Math.floor(100 + Math.random() * 2000);</div><div class="line">        const randomChoice = () =&gt; &#123;</div><div class="line">            if (!this.playing) return;</div><div class="line">            this.send(&quot;choice&quot;, &#123;</div><div class="line">                choice: Math.floor(Math.random() * 10000) % 3 + 1</div><div class="line">            &#125;);</div><div class="line">            setTimeout(randomChoice, randomTime());</div><div class="line">        &#125;</div><div class="line">        setTimeout(randomChoice, 10);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 游戏结束后，标记起来，阻止继续随机选择</div><div class="line">     */</div><div class="line">    stop() &#123;</div><div class="line">        this.playing = false;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 发送消息给当前玩家，直接转发到 emitter</div><div class="line">     */</div><div class="line">    send(message, data) &#123;</div><div class="line">        this.emitter.emit(message, data);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 从当前的 emitter 处理消息</div><div class="line">     */</div><div class="line">    receive(message, handle) &#123;</div><div class="line">        this.emitter.on(message, handle);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>实现人类玩家</p>
-<p>  人类玩家通过 WebSocket 信道来实现玩家的输入输出<br>，我们需要添加 <code>game/Tunnel.js</code> 和 <code>game/HumanPlayer.js</code> 来实现人类玩家逻辑，可参考下面的代码：</p>
-<p>  Tunnel.js</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">const EventEmitter = require(&apos;events&apos;);</div><div class="line"></div><div class="line">/**</div><div class="line"> * 封装 WebSocket 信道</div><div class="line"> */</div><div class="line">module.exports = class Tunnel &#123;</div><div class="line">    constructor(ws) &#123;</div><div class="line">        this.emitter = new EventEmitter();</div><div class="line">        this.ws = ws;</div><div class="line">        ws.on(&apos;message&apos;, packet =&gt; &#123;</div><div class="line">            try &#123;</div><div class="line">                // 约定每个数据包格式：&#123; message: &apos;type&apos;, data: any &#125;</div><div class="line">                const &#123; message, data &#125; = JSON.parse(packet);</div><div class="line">                this.emitter.emit(message, data);</div><div class="line">            &#125; catch (err) &#123;</div><div class="line">                console.log(&apos;unknown packet: &apos; + packet);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    on(message, handle) &#123;</div><div class="line">        this.emitter.on(message, handle);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    emit(message, data) &#123;</div><div class="line">        this.ws.send(JSON.stringify(&#123; message, data &#125;));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>  HumanPlayer.js</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">const co = require(&apos;co&apos;);</div><div class="line">const Player = require(&apos;./Player&apos;);</div><div class="line">const ComputerPlayer = require(&apos;./ComputerPlayer&apos;);</div><div class="line">const Tunnel = require(&apos;./Tunnel&apos;);</div><div class="line"></div><div class="line">/**</div><div class="line"> * 人类玩家实现，通过 WebSocket 信道接收和发送消息</div><div class="line"> */</div><div class="line">module.exports = class HumanPlayer extends Player &#123;</div><div class="line">    constructor(user, ws) &#123;</div><div class="line">        super(user);</div><div class="line">        this.ws = ws;</div><div class="line">        this.tunnel = new Tunnel(ws);</div><div class="line">        this.send(&apos;id&apos;, user);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 人类玩家上线后，还需要监听信道关闭，让玩家下线</div><div class="line">     */</div><div class="line">    online(room) &#123;</div><div class="line">        super.online(room);</div><div class="line">        this.ws.on(&apos;close&apos;, () =&gt; this.offline());</div><div class="line"></div><div class="line">        // 人类玩家请求电脑玩家</div><div class="line">        this.receive(&apos;requestComputer&apos;, () =&gt; &#123;</div><div class="line">            const room = this.room;</div><div class="line">            while(room &amp;&amp; !room.isFull()) &#123;</div><div class="line">                const computer = new ComputerPlayer();</div><div class="line">                computer.online(room);</div><div class="line">                computer.simulate();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 下线后关闭信道</div><div class="line">     */</div><div class="line">    offline() &#123;</div><div class="line">        super.offline();</div><div class="line">        if (this.ws &amp;&amp; this.ws.readyState == this.ws.OPEN) &#123;</div><div class="line">            this.ws.close();</div><div class="line">        &#125;</div><div class="line">        this.ws = null;</div><div class="line">        this.tunnel = null;</div><div class="line">        if (this.room) &#123;</div><div class="line">            // 清理房间里面的电脑玩家</div><div class="line">            for (let player of this.room.players) &#123;</div><div class="line">                if (player instanceof ComputerPlayer) &#123;</div><div class="line">                    this.room.removePlayer(player);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            this.room = null;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 通过 WebSocket 信道发送消息给玩家</div><div class="line">     */</div><div class="line">    send(message, data) &#123;</div><div class="line">        this.tunnel.emit(message, data);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 从 WebSocket 信道接收玩家的消息</div><div class="line">     */</div><div class="line">    receive(message, callback) &#123;</div><div class="line">        this.tunnel.on(message, callback);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>添加游戏服务入口</p>
-<p>  游戏的实现已经完成了，接下来，编辑 <code>websocket.js</code> 添加服务入口，可参考下面的代码：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div></pre></td><td class="code"><pre><div class="line">// 引入 url 模块用于解析 URL</div><div class="line">const url = require(&apos;url&apos;);</div><div class="line">// 引入 ws 支持 WebSocket 的实现</div><div class="line">const ws = require(&apos;ws&apos;);</div><div class="line">// 引入人类玩家</div><div class="line">const HumanPlayer = require(&apos;./game/HumanPlayer&apos;);</div><div class="line"></div><div class="line">// 导出处理方法</div><div class="line">exports.listen = listen;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 在 HTTP Server 上处理 WebSocket 请求</div><div class="line"> * @param &#123;http.Server&#125; server</div><div class="line"> * @param &#123;wafer.SessionMiddleware&#125; sessionMiddleware</div><div class="line"> */</div><div class="line">function listen(server, sessionMiddleware) &#123;</div><div class="line">    // 使用 HTTP Server 创建 WebSocket 服务，使用 path 参数指定需要升级为 WebSocket 的路径</div><div class="line">    const wss = new ws.Server(&#123; server &#125;);</div><div class="line"></div><div class="line">    // 同时支持 /ws 和 /game 的 WebSocket 连接请求 </div><div class="line">    wss.shouldHandle = (request) =&gt; &#123; </div><div class="line">        const path = url.parse(request.url).pathname; </div><div class="line">        request.path = path; </div><div class="line">        return [&apos;/ws&apos;, &apos;/game&apos;].indexOf(path) &gt; -1; </div><div class="line">    &#125;; </div><div class="line"></div><div class="line">    // 监听 WebSocket 连接建立</div><div class="line">    wss.on(&apos;connection&apos;, (ws, request) =&gt; &#123;</div><div class="line">        // request: 要升级到 WebSocket 协议的 HTTP 连接</div><div class="line"></div><div class="line">        // 被升级到 WebSocket 的请求不会被 express 处理，</div><div class="line">        // 需要使用会话中间节获取会话</div><div class="line">        sessionMiddleware(request, null, () =&gt; &#123;</div><div class="line">            const session = request.session;</div><div class="line">            if (!session) &#123;</div><div class="line">                // 没有获取到会话，强制断开 WebSocket 连接</div><div class="line">                ws.send(JSON.stringify(request.sessionError) || &quot;No session avaliable&quot;);</div><div class="line">                ws.close();</div><div class="line">                return;</div><div class="line">            &#125;</div><div class="line">            console.log(`WebSocket client connected with openId=$&#123;session.userInfo.openId&#125;`);</div><div class="line"></div><div class="line">            // 根据请求的地址进行不同处理 </div><div class="line">            switch (request.path) &#123; </div><div class="line">                case &apos;/ws&apos;: return serveMessage(ws, session.userInfo); </div><div class="line">                case &apos;/game&apos;: return serveGame(ws, session.userInfo); </div><div class="line">                default: return ws.close();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    // 监听 WebSocket 服务的错误</div><div class="line">    wss.on(&apos;error&apos;, (err) =&gt; &#123;</div><div class="line">        console.log(err);</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 进行简单的 WebSocket 服务，对于客户端发来的所有消息都回复回去</div><div class="line"> */</div><div class="line">function serveMessage(ws, userInfo) &#123;</div><div class="line">    // 监听客户端发来的消息</div><div class="line">    ws.on(&apos;message&apos;, (message) =&gt; &#123;</div><div class="line">        console.log(`WebSocket received: $&#123;message&#125;`);</div><div class="line">        ws.send(`Server: Received($&#123;message&#125;)`);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    // 监听关闭事件</div><div class="line">    ws.on(&apos;close&apos;, (code, message) =&gt; &#123;</div><div class="line">        console.log(`WebSocket client closed (code: $&#123;code&#125;, message: $&#123;message || &apos;none&apos;&#125;)`);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    // 连接后马上发送 hello 消息给会话对应的用户</div><div class="line">    ws.send(`Server: 恭喜，$&#123;userInfo.nickName&#125;`);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 使用 WebSocket 进行游戏服务</div><div class="line"> */</div><div class="line">function serveGame(ws, userInfo) &#123;</div><div class="line">    const user = &#123; </div><div class="line">        uid: userInfo.openId, </div><div class="line">        uname: userInfo.nickName, </div><div class="line">        uavatar: userInfo.avatarUrl </div><div class="line">    &#125;; </div><div class="line">    // 创建玩家 </div><div class="line">    const player = new HumanPlayer(user, ws); </div><div class="line">    // 玩家上线</div><div class="line">    player.online();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>安装 co 模块</p>
-<p>  我们的源码中使用到了 <code>co</code> 进行协程管理，启动游戏服务前，需要先安装：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/release/weapp</div><div class="line">npm install co --save</div></pre></td></tr></table></figure>
-</li>
-<li><p>测试游戏服务</p>
-<p>  重启 Node 服务：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 restart app</div></pre></td></tr></table></figure>
-<p>  打开配套的小程序，点击 <code>实验四 - 剪刀石头布小游戏</code>，点击 <code>开始</code> 按钮进行游戏。</p>
-</li>
-<li><p>测试完成</p>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/16/基于CentOS搭建微信小程序服务/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-七牛云——对象存储管理工具介绍" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/15/七牛云——对象存储管理工具介绍/">七牛云——对象存储管理工具介绍</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/15/七牛云——对象存储管理工具介绍/" class="archive-article-date">
-  	<time datetime="2017-10-15T14:43:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>由于我是一个七牛的重度使用者（主要是对象存储），每次上传文件、复制链接、下载文件都必须用浏览器打开网页，而且还要登录，感觉好麻烦啊，干脆就自己开发了一个这样的工具（使用JavaFX编写），打包成可执行的jar包。</strong></p>
-<p><strong>主要功能就是文件的上传下载，获取存储空间中的文件列表，搜索文件（支持正则表达式），复制文件外链，删除文件，移动（或复制）文件，重命名文件名，设置文件的生存时间等。</strong></p>
-<p><strong>功能截图：</strong></p>
-<p><strong>1. 主窗口界面：</strong></p>
-<p><img src="http://img.blog.csdn.net/20171015221834257?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="程序主界面"></p>
-<ul>
-<li><p>设置文件前缀</p>
-<p>  路径前缀可以用来分类文件，例如： <code>image/jpg/</code>your-file-name.jpg</p>
-</li>
-<li><p>添加存储空间</p>
-<p>  添加存储空间，需要同时指定空间名称，空间域名以及所在区域</p>
-<p>  <img src="http://img.blog.csdn.net/20171017122858110?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="添加存储空间"></p>
-</li>
-<li><p>重置密钥</p>
-<p>  如果你修改了Key，可以在此处修改密钥</p>
-<p>  <img src="http://img.blog.csdn.net/20171017123714044?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="重置密钥"></p>
-<blockquote>
-<p>说明：出于安全考虑，建议您周期性地更换密钥。<a href="https://developer.qiniu.com/kodo/kb/1334/the-access-key-secret-key-encryption-key-safe-use-instructions" target="_blank" rel="external">密钥安全使用须知</a></p>
-</blockquote>
-</li>
-<li><p>配置文件</p>
-<p>  Windows使用路径：<code>C:/ProgramData/QiniuTool</code></p>
-<p>  MacOS 或 Linux 使用路径：<code>/tmp/qiniu/tool</code></p>
-<p>  其中 <code>config.json</code> 为配置文件</p>
-</li>
-<li><p>文件上传</p>
-<p>  除了可上传本地文件外，还可抓取网络文件到空间中，如：</p>
-<p>  <img src="http://img.blog.csdn.net/20171017152757227?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="上传网络文件"></p>
-<p>  然后点击开始上传即可</p>
-</li>
-</ul>
-<p><strong>2. 资源管理界面：</strong></p>
-<p><img src="http://img.blog.csdn.net/20171017153112198?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="资源管理界面"></p>
-<ul>
-<li><p>刷新列表</p>
-<p>  刷新当前存储空间的资源列表</p>
-</li>
-<li><p>复制链接</p>
-<p>  复制你选中文件的外链</p>
-</li>
-<li><p>删除文件</p>
-<p>  从存储空间中删除你选中的所有文件</p>
-</li>
-<li><p>移动文件</p>
-<p>  移动（或复制）选中的所有文件到指定的存储空间中（目前好像七牛还不支持跨区域移动文件）</p>
-<p>  <img src="http://img.blog.csdn.net/20171015222512819?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="移动文件界面"></p>
-<blockquote>
-<p>说明：勾选“保存文件副本”时表示当前操作为复制，不勾选时表示移动（会删除本存储空间的文件），默认勾选。</p>
-</blockquote>
-</li>
-<li><p>生存时间</p>
-<p>  设置选中文件的生存时间，到期后七牛会自动删除这些文件</p>
-</li>
-<li><p>更新镜像</p>
-<p>  需要选中文件才能更新，但是这个功能我一直没有测试成功，不知道为什么</p>
-<blockquote>
-<p>官方解释：对于配置了镜像存储的空间，如果镜像源站更新了文件内容，则默认情况下，七牛不会再主动从客户镜像源站同步新的副本，这个时候就需要利用这个prefetch接口来主动地将空间中的文件和更新后的源站副本进行同步。</p>
-</blockquote>
-<p>  或许是我没有配置什么镜像存储吧</p>
-</li>
-<li><p>公有下载</p>
-<p>  直接下载选中的文件（私有的存储空间不可用）</p>
-</li>
-<li><p>私有下载</p>
-<p>  下载选中的私有存储空间的文件</p>
-</li>
-<li><p>打开文件</p>
-<p>  用浏览器打开你选中的文件</p>
-</li>
-<li><p>链接下载</p>
-<p>  由于这两天迅雷抽风了，下载出现BUG，所以提供了这样一个临时的下载方案，打开后直接输入链接即可下载</p>
-</li>
-<li><p>文件刷新</p>
-<p>  从七牛云镜像源刷新你选中的文件，保证用户下载的是最新上传的文件，而不是之前的旧版本（个人感觉和 <code>更新镜像</code> 是一样的）</p>
-</li>
-<li><p>日志下载</p>
-<p>  从七牛下载指定日期的操作日志</p>
-</li>
-</ul>
-<p><strong>说明：操作文件时，需要选中文件才能操作（支持多选）。由于下载私有空间的文件需要临时授权，所以文件的下载分为私有下载（生成临时授权然后下载文件）和公有下载（直接下载文件）。</strong></p>
-<p><strong>3. 其他</strong></p>
-<ul>
-<li><p><a href="http://oq3iwfipo.bkt.clouddn.com/tools/zhazhapan/qiniu.jar?v=3" title="七牛云——对象存储管理工具jar包下载地址" target="_blank" rel="external"><strong>下载可执行的jar包</strong></a></p>
-</li>
-<li><p><a href="https://github.com/zhazhapan/qiniu/releases" target="_blank" rel="external"><strong>历史版本</strong></a> </p>
-</li>
-<li><p><a href="https://github.com/zhazhapan/qiniu" title="七牛云——对象存储管理工具项目源码地址" target="_blank" rel="external"><strong>项目源代码</strong></a></p>
-</li>
-<li><p><a href="https://developer.qiniu.com/kodo/sdk/1239/java" target="_blank" rel="external"><strong>官方JavaSDK文档</strong></a></p>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/15/七牛云——对象存储管理工具介绍/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-JavaFX-Dialog对话框" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/12/JavaFX-Dialog对话框/">JavaFX Dialog对话框</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/12/JavaFX-Dialog对话框/" class="archive-article-date">
-  	<time datetime="2017-10-12T07:41:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-标准对话框"><a href="#1-标准对话框" class="headerlink" title="1. 标准对话框"></a>1. 标准对话框</h2><ul>
-<li><strong>消息对话框</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Alert alert = <span class="keyword">new</span> Alert(AlertType.INFORMATION);</div><div class="line">alert.setTitle(<span class="string">"Information Dialog"</span>);</div><div class="line">alert.setHeaderText(<span class="string">"Look, an Information Dialog"</span>);</div><div class="line">alert.setContentText(<span class="string">"I have a great message for you!"</span>);</div><div class="line"></div><div class="line">alert.showAndWait();</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20171012144601083?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="information dialog"></p>
-<ul>
-<li><strong>没有标题的消息对话框</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Alert alert = <span class="keyword">new</span> Alert(AlertType.INFORMATION);</div><div class="line">alert.setTitle(<span class="string">"Information Dialog"</span>);</div><div class="line">alert.setHeaderText(<span class="keyword">null</span>);</div><div class="line">alert.setContentText(<span class="string">"I have a great message for you!"</span>);</div><div class="line"></div><div class="line">alert.showAndWait();</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20171012144719712?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="information dialog no header"></p>
-<h2 id="2-警告对话框"><a href="#2-警告对话框" class="headerlink" title="2. 警告对话框"></a>2. 警告对话框</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Alert alert = <span class="keyword">new</span> Alert(AlertType.WARNING);</div><div class="line">alert.setTitle(<span class="string">"Warning Dialog"</span>);</div><div class="line">alert.setHeaderText(<span class="string">"Look, a Warning Dialog"</span>);</div><div class="line">alert.setContentText(<span class="string">"Careful with the next step!"</span>);</div><div class="line"></div><div class="line">alert.showAndWait();</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20171012144949166?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="warning dialog"></p>
-<h2 id="3-错误对话框"><a href="#3-错误对话框" class="headerlink" title="3. 错误对话框"></a>3. 错误对话框</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Alert alert = <span class="keyword">new</span> Alert(AlertType.ERROR);</div><div class="line">alert.setTitle(<span class="string">"Error Dialog"</span>);</div><div class="line">alert.setHeaderText(<span class="string">"Look, an Error Dialog"</span>);</div><div class="line">alert.setContentText(<span class="string">"Ooops, there was an error!"</span>);</div><div class="line"></div><div class="line">alert.showAndWait();</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20171012145044099?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="error dialog"></p>
-<h2 id="4-异常对话框"><a href="#4-异常对话框" class="headerlink" title="4. 异常对话框"></a>4. 异常对话框</h2><p>这不是一个完整的异常对话框。但我们可以很容易地将 <code>TextArea</code> 作为可扩展的内容。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">Alert alert = <span class="keyword">new</span> Alert(AlertType.ERROR);</div><div class="line">alert.setTitle(<span class="string">"Exception Dialog"</span>);</div><div class="line">alert.setHeaderText(<span class="string">"Look, an Exception Dialog"</span>);</div><div class="line">alert.setContentText(<span class="string">"Could not find file blabla.txt!"</span>);</div><div class="line"></div><div class="line">Exception ex = <span class="keyword">new</span> FileNotFoundException(<span class="string">"Could not find file blabla.txt"</span>);</div><div class="line"></div><div class="line"><span class="comment">// Create expandable Exception.</span></div><div class="line">StringWriter sw = <span class="keyword">new</span> StringWriter();</div><div class="line">PrintWriter pw = <span class="keyword">new</span> PrintWriter(sw);</div><div class="line">ex.printStackTrace(pw);</div><div class="line">String exceptionText = sw.toString();</div><div class="line"></div><div class="line">Label label = <span class="keyword">new</span> Label(<span class="string">"The exception stacktrace was:"</span>);</div><div class="line"></div><div class="line">TextArea textArea = <span class="keyword">new</span> TextArea(exceptionText);</div><div class="line">textArea.setEditable(<span class="keyword">false</span>);</div><div class="line">textArea.setWrapText(<span class="keyword">true</span>);</div><div class="line"></div><div class="line">textArea.setMaxWidth(Double.MAX_VALUE);</div><div class="line">textArea.setMaxHeight(Double.MAX_VALUE);</div><div class="line">GridPane.setVgrow(textArea, Priority.ALWAYS);</div><div class="line">GridPane.setHgrow(textArea, Priority.ALWAYS);</div><div class="line"></div><div class="line">GridPane expContent = <span class="keyword">new</span> GridPane();</div><div class="line">expContent.setMaxWidth(Double.MAX_VALUE);</div><div class="line">expContent.add(label, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">expContent.add(textArea, <span class="number">0</span>, <span class="number">1</span>);</div><div class="line"></div><div class="line"><span class="comment">// Set expandable Exception into the dialog pane.</span></div><div class="line">alert.getDialogPane().setExpandableContent(expContent);</div><div class="line"></div><div class="line">alert.showAndWait();</div></pre></td></tr></table></figure></p>
-<p><img src="http://img.blog.csdn.net/20171012145457913?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="exception dialog"></p>
-<h2 id="5-确认对话框"><a href="#5-确认对话框" class="headerlink" title="5. 确认对话框"></a>5. 确认对话框</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Alert alert = <span class="keyword">new</span> Alert(AlertType.CONFIRMATION);</div><div class="line">alert.setTitle(<span class="string">"Confirmation Dialog"</span>);</div><div class="line">alert.setHeaderText(<span class="string">"Look, a Confirmation Dialog"</span>);</div><div class="line">alert.setContentText(<span class="string">"Are you ok with this?"</span>);</div><div class="line"></div><div class="line">Optional&lt;ButtonType&gt; result = alert.showAndWait();</div><div class="line"><span class="keyword">if</span> (result.get() == ButtonType.OK)&#123;</div><div class="line">    <span class="comment">// ... user chose OK</span></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">// ... user chose CANCEL or closed the dialog</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20171012145724063?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="confirmation dialog"></p>
-<h2 id="6-自定义确认对话框"><a href="#6-自定义确认对话框" class="headerlink" title="6. 自定义确认对话框"></a>6. 自定义确认对话框</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">Alert alert = <span class="keyword">new</span> Alert(AlertType.CONFIRMATION);</div><div class="line">alert.setTitle(<span class="string">"Confirmation Dialog with Custom Actions"</span>);</div><div class="line">alert.setHeaderText(<span class="string">"Look, a Confirmation Dialog with Custom Actions"</span>);</div><div class="line">alert.setContentText(<span class="string">"Choose your option."</span>);</div><div class="line"></div><div class="line">ButtonType buttonTypeOne = <span class="keyword">new</span> ButtonType(<span class="string">"One"</span>);</div><div class="line">ButtonType buttonTypeTwo = <span class="keyword">new</span> ButtonType(<span class="string">"Two"</span>);</div><div class="line">ButtonType buttonTypeThree = <span class="keyword">new</span> ButtonType(<span class="string">"Three"</span>);</div><div class="line">ButtonType buttonTypeCancel = <span class="keyword">new</span> ButtonType(<span class="string">"Cancel"</span>, ButtonData.CANCEL_CLOSE);</div><div class="line"></div><div class="line">alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeThree, buttonTypeCancel);</div><div class="line"></div><div class="line">Optional&lt;ButtonType&gt; result = alert.showAndWait();</div><div class="line"><span class="keyword">if</span> (result.get() == buttonTypeOne)&#123;</div><div class="line">    <span class="comment">// ... user chose "One"</span></div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (result.get() == buttonTypeTwo) &#123;</div><div class="line">    <span class="comment">// ... user chose "Two"</span></div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (result.get() == buttonTypeThree) &#123;</div><div class="line">    <span class="comment">// ... user chose "Three"</span></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">// ... user chose CANCEL or closed the dialog</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20171012150009401?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="custom action confirmation dialog"></p>
-<h2 id="7-可输入的对话框"><a href="#7-可输入的对话框" class="headerlink" title="7. 可输入的对话框"></a>7. 可输入的对话框</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">TextInputDialog dialog = <span class="keyword">new</span> TextInputDialog(<span class="string">"walter"</span>);</div><div class="line">dialog.setTitle(<span class="string">"Text Input Dialog"</span>);</div><div class="line">dialog.setHeaderText(<span class="string">"Look, a Text Input Dialog"</span>);</div><div class="line">dialog.setContentText(<span class="string">"Please enter your name:"</span>);</div><div class="line"></div><div class="line"><span class="comment">// Traditional way to get the response value.</span></div><div class="line">Optional&lt;String&gt; result = dialog.showAndWait();</div><div class="line"><span class="keyword">if</span> (result.isPresent())&#123;</div><div class="line">    System.out.println(<span class="string">"Your name: "</span> + result.get());</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// The Java 8 way to get the response value (with lambda expression).</span></div><div class="line">result.ifPresent(name -&gt; System.out.println(<span class="string">"Your name: "</span> + name));</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20171012150524109?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="text input dialog"></p>
-<blockquote>
-<p>说明：如果用户点击了取消按钮<code>result.isPresent()</code>将会返回false</p>
-</blockquote>
-<h2 id="8-可选择的对话框"><a href="#8-可选择的对话框" class="headerlink" title="8. 可选择的对话框"></a>8. 可选择的对话框</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">List&lt;String&gt; choices = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">choices.add(<span class="string">"a"</span>);</div><div class="line">choices.add(<span class="string">"b"</span>);</div><div class="line">choices.add(<span class="string">"c"</span>);</div><div class="line"></div><div class="line">ChoiceDialog&lt;String&gt; dialog = <span class="keyword">new</span> ChoiceDialog&lt;&gt;(<span class="string">"b"</span>, choices);</div><div class="line">dialog.setTitle(<span class="string">"Choice Dialog"</span>);</div><div class="line">dialog.setHeaderText(<span class="string">"Look, a Choice Dialog"</span>);</div><div class="line">dialog.setContentText(<span class="string">"Choose your letter:"</span>);</div><div class="line"></div><div class="line"><span class="comment">// Traditional way to get the response value.</span></div><div class="line">Optional&lt;String&gt; result = dialog.showAndWait();</div><div class="line"><span class="keyword">if</span> (result.isPresent())&#123;</div><div class="line">    System.out.println(<span class="string">"Your choice: "</span> + result.get());</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// The Java 8 way to get the response value (with lambda expression).</span></div><div class="line">result.ifPresent(letter -&gt; System.out.println(<span class="string">"Your choice: "</span> + letter));</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20171012150757770?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="choice dialog"></p>
-<blockquote>
-<p>说明：如果用户没有选择或点击了取消，<code>result.isPresent()</code>将会返回false</p>
-</blockquote>
-<h2 id="9-自定义登录框"><a href="#9-自定义登录框" class="headerlink" title="9. 自定义登录框"></a>9. 自定义登录框</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Create the custom dialog.</span></div><div class="line">Dialog&lt;Pair&lt;String, String&gt;&gt; dialog = <span class="keyword">new</span> Dialog&lt;&gt;();</div><div class="line">dialog.setTitle(<span class="string">"Login Dialog"</span>);</div><div class="line">dialog.setHeaderText(<span class="string">"Look, a Custom Login Dialog"</span>);</div><div class="line"></div><div class="line"><span class="comment">// Set the icon (must be included in the project).</span></div><div class="line">dialog.setGraphic(<span class="keyword">new</span> ImageView(<span class="keyword">this</span>.getClass().getResource(<span class="string">"login.png"</span>).toString()));</div><div class="line"></div><div class="line"><span class="comment">// Set the button types.</span></div><div class="line">ButtonType loginButtonType = <span class="keyword">new</span> ButtonType(<span class="string">"Login"</span>, ButtonData.OK_DONE);</div><div class="line">dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);</div><div class="line"></div><div class="line"><span class="comment">// Create the username and password labels and fields.</span></div><div class="line">GridPane grid = <span class="keyword">new</span> GridPane();</div><div class="line">grid.setHgap(<span class="number">10</span>);</div><div class="line">grid.setVgap(<span class="number">10</span>);</div><div class="line">grid.setPadding(<span class="keyword">new</span> Insets(<span class="number">20</span>, <span class="number">150</span>, <span class="number">10</span>, <span class="number">10</span>));</div><div class="line"></div><div class="line">TextField username = <span class="keyword">new</span> TextField();</div><div class="line">username.setPromptText(<span class="string">"Username"</span>);</div><div class="line">PasswordField password = <span class="keyword">new</span> PasswordField();</div><div class="line">password.setPromptText(<span class="string">"Password"</span>);</div><div class="line"></div><div class="line">grid.add(<span class="keyword">new</span> Label(<span class="string">"Username:"</span>), <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">grid.add(username, <span class="number">1</span>, <span class="number">0</span>);</div><div class="line">grid.add(<span class="keyword">new</span> Label(<span class="string">"Password:"</span>), <span class="number">0</span>, <span class="number">1</span>);</div><div class="line">grid.add(password, <span class="number">1</span>, <span class="number">1</span>);</div><div class="line"></div><div class="line"><span class="comment">// Enable/Disable login button depending on whether a username was entered.</span></div><div class="line">Node loginButton = dialog.getDialogPane().lookupButton(loginButtonType);</div><div class="line">loginButton.setDisable(<span class="keyword">true</span>);</div><div class="line"></div><div class="line"><span class="comment">// Do some validation (using the Java 8 lambda syntax).</span></div><div class="line">username.textProperty().addListener((observable, oldValue, newValue) -&gt; &#123;</div><div class="line">    loginButton.setDisable(newValue.trim().isEmpty());</div><div class="line">&#125;);</div><div class="line"></div><div class="line">dialog.getDialogPane().setContent(grid);</div><div class="line"></div><div class="line"><span class="comment">// Request focus on the username field by default.</span></div><div class="line">Platform.runLater(() -&gt; username.requestFocus());</div><div class="line"></div><div class="line"><span class="comment">// Convert the result to a username-password-pair when the login button is clicked.</span></div><div class="line">dialog.setResultConverter(dialogButton -&gt; &#123;</div><div class="line">    <span class="keyword">if</span> (dialogButton == loginButtonType) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Pair&lt;&gt;(username.getText(), password.getText());</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">Optional&lt;Pair&lt;String, String&gt;&gt; result = dialog.showAndWait();</div><div class="line"></div><div class="line">result.ifPresent(usernamePassword -&gt; &#123;</div><div class="line">    System.out.println(<span class="string">"Username="</span> + usernamePassword.getKey() + <span class="string">", Password="</span> + usernamePassword.getValue());</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20171012151145160?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="login dialog"></p>
-<h2 id="10-修改对话框样式"><a href="#10-修改对话框样式" class="headerlink" title="10. 修改对话框样式"></a>10. 修改对话框样式</h2><ul>
-<li><strong>自定义图标</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Get the Stage.</span></div><div class="line">Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();</div><div class="line"></div><div class="line"><span class="comment">// Add a custom icon.</span></div><div class="line">stage.getIcons().add(<span class="keyword">new</span> Image(<span class="keyword">this</span>.getClass().getResource(<span class="string">"login.png"</span>).toString()));</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20171012151651236?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="custom icon"></p>
-<p>说明：根据JavaFX 8u40最终版本的BUG报告，应该使用与它正在运行的应用程序相同的图标。在这种情况下，你还需要设置它的所有者，对话框会得到所有者的图标:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dialog.initOwner(otherStage);</div></pre></td></tr></table></figure></p>
-<ul>
-<li>不使用图标<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dialog.initStyle(StageStyle.UTILITY);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20171012152131364?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="minimal"></p>
-<h2 id="11-其他操作"><a href="#11-其他操作" class="headerlink" title="11. 其他操作"></a>11. 其他操作</h2><ul>
-<li>设置拥有者<br>你可以为每一个对话框指定所有者。如果指定所有者或拥有者为null，那么它是一个顶级的、未拥有的对话框。<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">dialog.initOwner(parentWindow);</div><div class="line">``` </div><div class="line">- 设置模式</div><div class="line">你可以指定对话框的模式，包括`Modality.NONE`、`WINDOW_MODAL`或`Modality.APPLICATION_MODAL`。</div><div class="line">``` java</div><div class="line">dialog.initModality(Modality.NONE);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="12-API-文档"><a href="#12-API-文档" class="headerlink" title="12. API 文档"></a>12. API 文档</h2><p>关于对话框的更多信息，请看JavaFX API官方文档:</p>
-<ul>
-<li><a href="http://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Alert.html" target="_blank" rel="external">Alert</a></li>
-<li><a href="http://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Dialog.html" target="_blank" rel="external">Dialog</a></li>
-<li><a href="http://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/TextInputDialog.html" target="_blank" rel="external">TextInputDialog</a></li>
-<li><a href="http://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ChoiceDialog.html" target="_blank" rel="external">ChoiceDialog</a></li>
-<li><a href="http://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/DialogPane.html" target="_blank" rel="external">DialogPane</a></li>
-</ul>
-<blockquote>
-<p><a href="http://code.makery.ch/blog/javafx-dialogs-official/" target="_blank" rel="external">阅读原文点击这里</a></p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/12/JavaFX-Dialog对话框/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-JavaFX-HelloWord" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/11/JavaFX-HelloWord/">JavaFX HelloWord</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/11/JavaFX-HelloWord/" class="archive-article-date">
-  	<time datetime="2017-10-11T15:08:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. 安装插件，e(fx)clipse</strong></p>
-<p><img src="http://img.blog.csdn.net/20171011225431899?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="e(fx)clipse"></p>
-<p><strong>2. 新建JavaFX项目</strong></p>
-<p><img src="http://img.blog.csdn.net/20171011225544316?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="javafx"></p>
-<p><strong>3. 新建一个测试类，代码如下</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">import javafx.application.Application;</div><div class="line">import javafx.scene.Scene;</div><div class="line">import javafx.scene.control.Label;</div><div class="line">import javafx.scene.layout.GridPane;</div><div class="line">import javafx.stage.Stage;</div><div class="line"></div><div class="line">public class Test extends Application &#123;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public void start(Stage primaryStage) &#123;</div><div class="line">		Label label = new Label(&quot;Hello JavaFX&quot;);</div><div class="line">		GridPane gp = new GridPane();</div><div class="line">		gp.getChildren().add(label);</div><div class="line">		Scene scene = new Scene(gp, 300, 300);</div><div class="line"></div><div class="line">		primaryStage.setTitle(&quot;My First JavaFX&quot;);</div><div class="line">		primaryStage.setScene(scene);</div><div class="line">		primaryStage.show();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		//启动JavaFX应用程序</div><div class="line">		launch(args);</div><div class="line">		//Application.launch(args);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/11/JavaFX-HelloWord/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-使用sftp在Linux（MacOS）之间进行文件传输" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/">使用sftp在Linux（MacOS）之间进行文件传输</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/" class="archive-article-date">
-  	<time datetime="2017-10-10T15:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. 打开终端，连接远程Linux</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sftp user@host</div><div class="line">例如：sftp root@192.168.1.2</div></pre></td></tr></table></figure></p>
-<p><strong>2. 上传文件</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">put local_path remote_path</div><div class="line">例如：put -r /home/share/read.txt /home/root</div></pre></td></tr></table></figure></p>
-<p><strong>3. 上传文件夹以文件夹里的所有内容</strong></p>
-<p>比如上传文件夹 <code>folder</code>，首先需要在远程机上创建这个文件夹，然后使用下面命令 <code>put</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">put -r /home/share/folder/* /home/root/folder</div></pre></td></tr></table></figure></p>
-<p><strong>4. 下载文件</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">get remote_path local_path</div><div class="line">例如：get -r /usr/local/some.zip /home/share</div></pre></td></tr></table></figure></p>
-<p><strong>5. 下载文件夹以文件夹里的所有内容</strong></p>
-<p>比如下载文件夹 <code>folder</code>，首先需要在本机上创建这个文件夹，然后使用下面命令 <code>get</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">get -r /usr/local/folder/* /home/share/folder</div></pre></td></tr></table></figure></p>
-<p><strong>6. 退出</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exit</div></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 

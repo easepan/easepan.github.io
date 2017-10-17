@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://hexo.zhazhapan.com">
-  <title>Archives | 渣渣潘的博客</title>
+  <title>基于CentOS搭建GIT服务器 | 渣渣潘的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="欢迎来到渣渣的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="渣渣潘的博客">
-<meta property="og:url" content="http://hexo.zhazhapan.com/archives/index.html">
+  <meta name="description" content="1. 下载安装 git Git 是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。 此教程以 CentOS 7.2 x64 的系统为环境，搭建 git 服务器。  安装依赖库和编译工具   为了后续安装能正常进行，我们先来安装一些相关依赖库和编译工具   1yum install curl-devel expat-devel gettext-devel openssl-d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于CentOS搭建GIT服务器">
+<meta property="og:url" content="http://hexo.zhazhapan.com/2017/10/17/基于CentOS搭建GIT服务器/index.html">
 <meta property="og:site_name" content="渣渣潘的博客">
-<meta property="og:description" content="欢迎来到渣渣的博客">
+<meta property="og:description" content="1. 下载安装 git Git 是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。 此教程以 CentOS 7.2 x64 的系统为环境，搭建 git 服务器。  安装依赖库和编译工具   为了后续安装能正常进行，我们先来安装一些相关依赖库和编译工具   1yum install curl-devel expat-devel gettext-devel openssl-d">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:updated_time" content="2017-10-17T14:29:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="渣渣潘的博客">
-<meta name="twitter:description" content="欢迎来到渣渣的博客">
+<meta name="twitter:title" content="基于CentOS搭建GIT服务器">
+<meta name="twitter:description" content="1. 下载安装 git Git 是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。 此教程以 CentOS 7.2 x64 的系统为环境，搭建 git 服务器。  安装依赖库和编译工具   为了后续安装能正常进行，我们先来安装一些相关依赖库和编译工具   1yum install curl-devel expat-devel gettext-devel openssl-d">
   
     <link rel="alternative" href="/atom.xml" title="渣渣潘的博客" type="application/atom+xml">
   
@@ -153,565 +154,256 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-基于CentOS搭建GIT服务器" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/18/CentOS搭建ShowDoc文档工具/" class="archive-article-date">
-  	<time datetime="2017-10-17T16:00:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-18</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/18/CentOS搭建ShowDoc文档工具/">CentOS搭建ShowDoc文档工具</a>
+    <h1 class="article-title" itemprop="name">
+      基于CentOS搭建GIT服务器
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/17/CentOS搭建LNMP环境/" class="archive-article-date">
-  	<time datetime="2017-10-17T15:48:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/17/CentOS搭建LNMP环境/">CentOS搭建LNMP环境</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/17/CentOS搭建LAMP环境/" class="archive-article-date">
-  	<time datetime="2017-10-17T15:33:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/17/CentOS搭建LAMP环境/">CentOS搭建LAMP环境</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/17/基于CentOS搭建Postfix、Dovecot邮件服务/" class="archive-article-date">
-  	<time datetime="2017-10-17T15:23:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/17/基于CentOS搭建Postfix、Dovecot邮件服务/">基于CentOS搭建Postfix、Dovecot邮件服务</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/17/基于CentOS搭建Docker环境/" class="archive-article-date">
-  	<time datetime="2017-10-17T14:52:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/17/基于CentOS搭建Docker环境/">基于CentOS搭建Docker环境</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/17/基于CentOS搭建SVN服务器/" class="archive-article-date">
-  	<time datetime="2017-10-17T14:41:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/17/基于CentOS搭建SVN服务器/">基于CentOS搭建SVN服务器</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/17/基于CentOS搭建GIT服务器/" class="archive-article-date">
+        
+        <a href="/2017/10/17/基于CentOS搭建GIT服务器/" class="archive-article-date">
   	<time datetime="2017-10-17T14:28:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/17/基于CentOS搭建GIT服务器/">基于CentOS搭建GIT服务器</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1. 下载安装 git</strong></p>
+<p>Git 是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。</p>
+<p>此教程以 CentOS 7.2 x64 的系统为环境，搭建 git 服务器。</p>
+<ul>
+<li><p>安装依赖库和编译工具</p>
+<p>  为了后续安装能正常进行，我们先来安装一些相关依赖库和编译工具</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel</div></pre></td></tr></table></figure>
+<p>  安装编译工具</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install gcc perl-ExtUtils-MakeMaker</div></pre></td></tr></table></figure>
+</li>
+<li><p>下载 git</p>
+<p>  选一个目录，用来放下载下来的安装包，这里将安装包放在 /usr/local/src 目录里</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/src</div></pre></td></tr></table></figure>
+<p>  到官网找一个新版稳定的源码包下载到 <code>/usr/local/src</code> 文件夹里</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://www.kernel.org/pub/software/scm/git/git-2.10.0.tar.gz</div></pre></td></tr></table></figure>
+</li>
+<li><p>解压和编译</p>
+<p>  解压下载的源码包</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zvxf git-2.10.0.tar.gz</div></pre></td></tr></table></figure>
+<p>  解压后进入 git-2.10.0 文件夹</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd git-2.10.0</div></pre></td></tr></table></figure>
+<p>  执行编译</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make all prefix=/usr/local/git</div></pre></td></tr></table></figure>
+<p>  编译完成后, 安装到 /usr/local/git 目录下</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make install prefix=/usr/local/git</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>2. 配置环境变量</strong></p>
+<p>将 git 目录加入 PATH</p>
+<p>将原来的 PATH 指向目录修改为现在的目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo &apos;export PATH=$PATH:/usr/local/git/bin&apos; &gt;&gt; /etc/bashrc</div></pre></td></tr></table></figure>
+<p>生效环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source /etc/bashrc</div></pre></td></tr></table></figure></p>
+<p>此时我们能查看 git 版本号，说明我们已经安装成功了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git --version</div></pre></td></tr></table></figure></p>
+<p><strong>3. 创建 git 账号密码</strong></p>
+<p>创建 git 账号</p>
+<p>为我们刚刚搭建好的 git 创建一个账号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">useradd -m gituser</div></pre></td></tr></table></figure></p>
+<p>然后为这个账号设置密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">passwd gituser</div></pre></td></tr></table></figure></p>
+<p><strong>4. 初始化 git 仓库并配置用户权限</strong></p>
+<ul>
+<li><p>创建 git 仓库并初始化</p>
+<p>  我们创建 <code>/data/repositories</code> 目录用于存放 git 仓库</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/repositories</div></pre></td></tr></table></figure>
+<p>  创建好后，初始化这个仓库</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /data/repositories/ &amp;&amp; git init --bare test.git</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置用户权限</p>
+<p>  给 git 仓库目录设置用户和用户组并设置权限</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chown -R gituser:gituser /data/repositories</div><div class="line">chmod 755 /data/repositories</div></pre></td></tr></table></figure>
+<p>  查找 <code>git-shell</code> 所在目录 , 编辑 <code>/etc/passwd</code> 文件，将最后一行关于 <code>gituser</code> 的登录 <code>shell</code> 配置改为 <code>git-shell</code> 的目录，如下</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gituser:x:500:500::/home/gituser:/usr/local/git/bin/git-shell</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用搭建好的 Git 服务</p>
+<p>  克隆 test repo 到本地</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd ~ &amp;&amp; git clone gituser@yourip:/data/repositories/test.git #yourip可以你服务器的ip地址或域名</div></pre></td></tr></table></figure>
+</li>
+</ul>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://hexo.zhazhapan.com/2017/10/17/基于CentOS搭建GIT服务器/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/17/基于CentOS搭建个人Leanote云笔记本/" class="archive-article-date">
-  	<time datetime="2017-10-17T14:11:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2017/10/17/基于CentOS搭建SVN服务器/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          基于CentOS搭建SVN服务器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/10/17/基于CentOS搭建个人Leanote云笔记本/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">基于CentOS搭建个人Leanote云笔记本</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/17/基于CentOS搭建个人Leanote云笔记本/">基于CentOS搭建个人Leanote云笔记本</a>
-    </h1>
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://hexo.zhazhapan.com/2017/10/17/基于CentOS搭建GIT服务器/", 
+    sourceId: "基于CentOS搭建GIT服务器",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/16/基于CentOS搭建个人网盘/" class="archive-article-date">
-  	<time datetime="2017-10-16T14:48:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/16/基于CentOS搭建个人网盘/">基于CentOS搭建个人网盘</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
+  
+    <section id="comments">
+      <div id="disqus_thread"></div>
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'true'; // required: replace example with your forum shortname
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/16/基于CentOS搭建WordPress个人博客/" class="archive-article-date">
-  	<time datetime="2017-10-16T10:44:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/16/基于CentOS搭建WordPress个人博客/">基于CentOS搭建WordPress个人博客</a>
-    </h1>
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </section>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/16/基于CentOS搭建搭建FTP文件服务/" class="archive-article-date">
-  	<time datetime="2017-10-16T09:24:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/16/基于CentOS搭建搭建FTP文件服务/">基于CentOS搭建搭建FTP文件服务</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/16/基于CentOS搭建Discuz/" class="archive-article-date">
-  	<time datetime="2017-10-16T09:21:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/16/基于CentOS搭建Discuz/">基于CentOS搭建Discuz</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/16/搭建微信订阅号后台服务/" class="archive-article-date">
-  	<time datetime="2017-10-16T08:59:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/16/搭建微信订阅号后台服务/">搭建微信订阅号后台服务</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/16/基于CentOS搭建微信小程序服务/" class="archive-article-date">
-  	<time datetime="2017-10-16T07:51:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/16/基于CentOS搭建微信小程序服务/">基于CentOS搭建微信小程序服务</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/15/七牛云——对象存储管理工具介绍/" class="archive-article-date">
-  	<time datetime="2017-10-15T14:43:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/15/七牛云——对象存储管理工具介绍/">七牛云——对象存储管理工具介绍</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/12/JavaFX-Dialog对话框/" class="archive-article-date">
-  	<time datetime="2017-10-12T07:41:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/12/JavaFX-Dialog对话框/">JavaFX Dialog对话框</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/11/JavaFX-HelloWord/" class="archive-article-date">
-  	<time datetime="2017-10-11T15:08:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/11/JavaFX-HelloWord/">JavaFX HelloWord</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/" class="archive-article-date">
-  	<time datetime="2017-10-10T15:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/">使用sftp在Linux（MacOS）之间进行文件传输</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/10/代码生成器JHipster入门教程——安装/" class="archive-article-date">
-  	<time datetime="2017-10-10T14:42:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/10/代码生成器JHipster入门教程——安装/">代码生成器JHipster入门教程——安装</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/30/Eclipse插件推荐/" class="archive-article-date">
-  	<time datetime="2017-09-30T10:42:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/30/Eclipse插件推荐/">Eclipse插件推荐</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -735,8 +427,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
