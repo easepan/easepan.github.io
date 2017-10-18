@@ -49,7 +49,7 @@
 			<img src="/favicon.jpg" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="">潘滔</a></h1>
+		  <h1 class="header-author"><a href="">渣渣潘</a></h1>
 		</hgroup>
 		
 		<p class="header-subtitle">Code is lovely</p>
@@ -61,6 +61,8 @@
 				<li><a href="/">主页</a></li>
 	        
 				<li><a href="/archives">归档</a></li>
+	        
+				<li><a href="/tags">分类</a></li>
 	        
 			</ul>
 		</nav>
@@ -107,12 +109,14 @@
 				<img src="/favicon.jpg" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">潘滔</h1>
+			  <h1 class="header-author js-header-author">渣渣潘</h1>
 			</hgroup>
 			
 			<p class="header-subtitle"><i class="icon icon-quo-left"></i>Code is lovely<i class="icon icon-quo-right"></i></p>
 			
 			
+			
+				
 			
 				
 			
@@ -133,12 +137,14 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/archives">归档</a></li>
+					<li style="width: 33.333333333333336%"><a href="/archives">归档</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/tags">分类</a></li>
 		        
 				</ul>
 			</nav>
@@ -154,6 +160,369 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-JavaFX-HelloWord" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/11/JavaFX-HelloWord/">JavaFX HelloWord</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/11/JavaFX-HelloWord/" class="archive-article-date">
+  	<time datetime="2017-10-11T15:08:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1. 安装插件，e(fx)clipse</strong></p>
+<p><img src="http://img.blog.csdn.net/20171011225431899?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="e(fx)clipse"></p>
+<p><strong>2. 新建JavaFX项目</strong></p>
+<p><img src="http://img.blog.csdn.net/20171011225544316?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="javafx"></p>
+<p><strong>3. 新建一个测试类，代码如下</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">import javafx.application.Application;</div><div class="line">import javafx.scene.Scene;</div><div class="line">import javafx.scene.control.Label;</div><div class="line">import javafx.scene.layout.GridPane;</div><div class="line">import javafx.stage.Stage;</div><div class="line"></div><div class="line">public class Test extends Application &#123;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public void start(Stage primaryStage) &#123;</div><div class="line">		Label label = new Label(&quot;Hello JavaFX&quot;);</div><div class="line">		GridPane gp = new GridPane();</div><div class="line">		gp.getChildren().add(label);</div><div class="line">		Scene scene = new Scene(gp, 300, 300);</div><div class="line"></div><div class="line">		primaryStage.setTitle(&quot;My First JavaFX&quot;);</div><div class="line">		primaryStage.setScene(scene);</div><div class="line">		primaryStage.show();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		//启动JavaFX应用程序</div><div class="line">		launch(args);</div><div class="line">		//Application.launch(args);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">java javafx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/11/JavaFX-HelloWord/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-使用sftp在Linux（MacOS）之间进行文件传输" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/">使用sftp在Linux（MacOS）之间进行文件传输</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/" class="archive-article-date">
+  	<time datetime="2017-10-10T15:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1. 打开终端，连接远程Linux</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sftp user@host</div><div class="line">例如：sftp root@192.168.1.2</div></pre></td></tr></table></figure></p>
+<p><strong>2. 上传文件</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">put local_path remote_path</div><div class="line">例如：put -r /home/share/read.txt /home/root</div></pre></td></tr></table></figure></p>
+<p><strong>3. 上传文件夹以文件夹里的所有内容</strong></p>
+<p>比如上传文件夹 <code>folder</code>，首先需要在远程机上创建这个文件夹，然后使用下面命令 <code>put</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">put -r /home/share/folder/* /home/root/folder</div></pre></td></tr></table></figure></p>
+<p><strong>4. 下载文件</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">get remote_path local_path</div><div class="line">例如：get -r /usr/local/some.zip /home/share</div></pre></td></tr></table></figure></p>
+<p><strong>5. 下载文件夹以文件夹里的所有内容</strong></p>
+<p>比如下载文件夹 <code>folder</code>，首先需要在本机上创建这个文件夹，然后使用下面命令 <code>get</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">get -r /usr/local/folder/* /home/share/folder</div></pre></td></tr></table></figure></p>
+<p><strong>6. 退出</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exit</div></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux sftp</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-代码生成器JHipster入门教程——安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/10/代码生成器JHipster入门教程——安装/">代码生成器JHipster入门教程——安装</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/10/代码生成器JHipster入门教程——安装/" class="archive-article-date">
+  	<time datetime="2017-10-10T14:42:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>JHipster是一个代码生成器，可以用来生成基于Spring Boot 和 AngularJS的项目</strong></p>
+<p><strong>1. 安装 Node.js</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install node</div></pre></td></tr></table></figure></p>
+<p><strong>2. 安装Git客户端</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install git</div></pre></td></tr></table></figure></p>
+<p><strong>3. 安装npm包管理器</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install npm</div></pre></td></tr></table></figure></p>
+<p><strong>4. 安装Yeoman generator</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g yo</div></pre></td></tr></table></figure></p>
+<p><strong>5. 安装Bower</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g bower</div></pre></td></tr></table></figure></p>
+<p><strong>6. 安装Grunt</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g grunt-cli</div></pre></td></tr></table></figure></p>
+<p><strong>7. 安装Yarn</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install yarn</div></pre></td></tr></table></figure></p>
+<p><strong>8. 使用JHipster生成项目</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir hello</div><div class="line">cd hello</div><div class="line">yo jhipster</div></pre></td></tr></table></figure></p>
+<p><strong>9. 接下来按照向导进行操作即可</strong></p>
+<p><img src="http://img.blog.csdn.net/20171010220454974?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="jhipster01"></p>
+<blockquote>
+<p>到后面会有多项选择，使用空格选择或取消选择，a和i全选或全不选</p>
+</blockquote>
+<p><img src="http://img.blog.csdn.net/20171010220840244?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="jhipster02"></p>
+<p><img src="http://img.blog.csdn.net/20171010221239500?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="jhipster03"></p>
+<pre><code>接下来等待完成即可。
+</code></pre><p><strong>10. 修改数据库连接信息</strong></p>
+<pre><code>进入目录src/main/resources/config找到配置文件application-dev.yml和application-prod.yml修改以下内容：
+</code></pre><p><img src="http://img.blog.csdn.net/20171010222655034?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="database"></p>
+<p><strong>11. 运行项目</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./mvnw</div></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">java jhipster</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/10/代码生成器JHipster入门教程——安装/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Eclipse插件推荐" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/30/Eclipse插件推荐/">Eclipse插件推荐</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/30/Eclipse插件推荐/" class="archive-article-date">
+  	<time datetime="2017-09-30T10:42:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>打开Eclipse Marketplace搜索插件名即可</p>
+</blockquote>
+<ol>
+<li><p><code>Properties Editor</code>：一个好用的属性编辑器</p>
+</li>
+<li><p><code>Class Decompiler</code>：Java反编译插件</p>
+</li>
+<li><p><code>Color Theme</code>：编辑器主题修改，有很多好看的主题</p>
+</li>
+<li><p><code>Darkest Dask Theme</code>：Eclipse暗黑主题，很好看</p>
+</li>
+<li><p><code>Spring Tools</code>：Spring开发必备工具</p>
+</li>
+<li><p><code>Subversion</code>：版本管理</p>
+</li>
+<li><p><code>JBoss Tools</code>：Hibernate开发必备</p>
+</li>
+<li><p><code>DevUtils</code>：一个好用的开发者工具</p>
+</li>
+<li><p><code>FindBug</code>：代码检查，默认是不触发，需要到设置里设置</p>
+</li>
+<li><p><code>Checkstyle</code>：代码风格检查</p>
+</li>
+<li><p><code>QuickImage</code>：可在Eclipse内查看图片</p>
+</li>
+<li><p><code>UML Designer</code>：UML插件工具</p>
+</li>
+<li><p><code>pmd</code>：代码分析工具</p>
+</li>
+<li><p><code>TestNG</code>：单元测试工具</p>
+</li>
+<li><p><code>Maven Integration for Eclipse</code>：Maven项目管理插件</p>
+</li>
+<li><p><code>DevStyle</code>：美化Eclipse，请你的Eclipse和IntelliJ一样好看</p>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">eclipse</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/30/Eclipse插件推荐/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-Eclipse新建Spring-Boot项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -199,6 +568,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">elipse java spring springboot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -280,6 +660,17 @@ AALYG-20HVE-WHQ13-67MUP-XVMF3
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">vmware</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -321,7 +712,7 @@ AALYG-20HVE-WHQ13-67MUP-XVMF3
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/30/MacOS安装Docker/"> MacOS安装Docker</a>
+      <a class="article-title" href="/2017/09/30/MacOS安装Docker/">MacOS安装Docker</a>
     </h1>
   
 
@@ -368,6 +759,17 @@ AALYG-20HVE-WHQ13-67MUP-XVMF3
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">mac docker</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -487,7 +889,7 @@ AALYG-20HVE-WHQ13-67MUP-XVMF3
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 潘滔
+    		&copy; 2017 渣渣潘
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -589,6 +991,114 @@ MathJax.Hub.Queue(function() {
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux firekylin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">linux java javaweb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">linux apache mysql php</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">linux nginx mysql php</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">linux pyspider</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">linux showdoc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">linux zipkin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">elipse java spring springboot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">java javafx dialog</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">java javafx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mac docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">vmware</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">qiniu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">java jhipster</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux sftp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">linux discuz</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">linux git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">linux postfix dovecot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">linux svn</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">linux leanote</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">linux seafile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">linux weixin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">linux ftp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">weixin linux</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
