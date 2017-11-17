@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://hexo.zhazhapan.com">
-  <title>基于CentOS搭建Postfix、Dovecot邮件服务 | 渣渣潘的博客</title>
+  <title>MarkDown语法 | 渣渣潘的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 准备域名  域名注册  域名解析   域名购买完成后, 需要将域名解析到你的服务器IP   完成该实验共需要添加两条记录：  A 记录   记录类型：A  主机记录：@  记录值：yourip  MX 记录   记录类型：MX  主机记录：@记录值：yourdomain.com（替换为自己域名）    生效检查   域名设置解析后需要过一段时间才会生效，通过 ping 命令检查域名是否生效">
-<meta name="keywords" content="linux postfix dovecot">
+  <meta name="description" content="欢迎使用Markdown编辑器写博客本Markdown编辑器使用StackEdit修改而来，用它写博客，将会带来全新的体验哦：  Markdown和扩展Markdown简洁的语法 代码块高亮 图片链接和图片上传 LaTex数学公式 UML序列图和流程图 离线写博客 导入导出Markdown文件 丰富的快捷键   快捷键 加粗    Ctrl + B  斜体    Ctrl + I  引用    C">
+<meta name="keywords" content="markdown">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于CentOS搭建Postfix、Dovecot邮件服务">
-<meta property="og:url" content="http://hexo.zhazhapan.com/2017/10/17/基于CentOS搭建Postfix、Dovecot邮件服务/index.html">
+<meta property="og:title" content="MarkDown语法">
+<meta property="og:url" content="http://hexo.zhazhapan.com/2017/11/17/MarkDown语法/index.html">
 <meta property="og:site_name" content="渣渣潘的博客">
-<meta property="og:description" content="1. 准备域名  域名注册  域名解析   域名购买完成后, 需要将域名解析到你的服务器IP   完成该实验共需要添加两条记录：  A 记录   记录类型：A  主机记录：@  记录值：yourip  MX 记录   记录类型：MX  主机记录：@记录值：yourdomain.com（替换为自己域名）    生效检查   域名设置解析后需要过一段时间才会生效，通过 ping 命令检查域名是否生效">
+<meta property="og:description" content="欢迎使用Markdown编辑器写博客本Markdown编辑器使用StackEdit修改而来，用它写博客，将会带来全新的体验哦：  Markdown和扩展Markdown简洁的语法 代码块高亮 图片链接和图片上传 LaTex数学公式 UML序列图和流程图 离线写博客 导入导出Markdown文件 丰富的快捷键   快捷键 加粗    Ctrl + B  斜体    Ctrl + I  引用    C">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:updated_time" content="2017-10-18T03:37:11.000Z">
+<meta property="og:updated_time" content="2017-11-17T13:46:22.558Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基于CentOS搭建Postfix、Dovecot邮件服务">
-<meta name="twitter:description" content="1. 准备域名  域名注册  域名解析   域名购买完成后, 需要将域名解析到你的服务器IP   完成该实验共需要添加两条记录：  A 记录   记录类型：A  主机记录：@  记录值：yourip  MX 记录   记录类型：MX  主机记录：@记录值：yourdomain.com（替换为自己域名）    生效检查   域名设置解析后需要过一段时间才会生效，通过 ping 命令检查域名是否生效">
+<meta name="twitter:title" content="MarkDown语法">
+<meta name="twitter:description" content="欢迎使用Markdown编辑器写博客本Markdown编辑器使用StackEdit修改而来，用它写博客，将会带来全新的体验哦：  Markdown和扩展Markdown简洁的语法 代码块高亮 图片链接和图片上传 LaTex数学公式 UML序列图和流程图 离线写博客 导入导出Markdown文件 丰富的快捷键   快捷键 加粗    Ctrl + B  斜体    Ctrl + I  引用    C">
   
     <link rel="alternative" href="/atom.xml" title="渣渣潘的博客" type="application/atom+xml">
   
@@ -161,121 +161,150 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-基于CentOS搭建Postfix、Dovecot邮件服务" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-MarkDown语法" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      基于CentOS搭建Postfix、Dovecot邮件服务
+      MarkDown语法
     </h1>
   
 
         
-        <a href="/2017/10/17/基于CentOS搭建Postfix、Dovecot邮件服务/" class="archive-article-date">
-  	<time datetime="2017-10-17T15:23:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+        <a href="/2017/11/17/MarkDown语法/" class="archive-article-date">
+  	<time datetime="2017-11-17T13:45:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-17</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>1. 准备域名</strong></p>
+        <h1 id="欢迎使用Markdown编辑器写博客"><a href="#欢迎使用Markdown编辑器写博客" class="headerlink" title="欢迎使用Markdown编辑器写博客"></a>欢迎使用Markdown编辑器写博客</h1><p>本Markdown编辑器使用<a href="https://github.com/benweet/stackedit" target="_blank" rel="external">StackEdit</a>修改而来，用它写博客，将会带来全新的体验哦：</p>
 <ul>
-<li><p>域名注册</p>
-</li>
-<li><p>域名解析</p>
-<p>  域名购买完成后, 需要将域名解析到你的服务器IP</p>
-<p>  完成该实验共需要添加两条记录：</p>
-<ul>
-<li><p>A 记录</p>
-<p>  记录类型：A<br>  主机记录：@<br>  记录值：yourip</p>
-</li>
-<li><p>MX 记录</p>
-<p>  记录类型：MX<br>  主机记录：@<br>记录值：yourdomain.com（替换为自己域名）</p>
-</li>
+<li><strong>Markdown和扩展Markdown简洁的语法</strong></li>
+<li><strong>代码块高亮</strong></li>
+<li><strong>图片链接和图片上传</strong></li>
+<li><strong><em>LaTex</em>数学公式</strong></li>
+<li><strong>UML序列图和流程图</strong></li>
+<li><strong>离线写博客</strong></li>
+<li><strong>导入导出Markdown文件</strong></li>
+<li><strong>丰富的快捷键</strong></li>
 </ul>
-</li>
-<li><p>生效检查</p>
-<p>  域名设置解析后需要过一段时间才会生效，通过 ping 命令检查域名是否生效 ，如：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ping yourdomain.com</div></pre></td></tr></table></figure>
-<p>  如果 ping 命令返回的信息中含有你设置的解析的 IP 地址，说明解析成功。（使用 <code>ctrl + c</code> 停止）</p>
-<p>  检查 MX 记录</p>
-<p>  替换下面命令中的 <code>yourdomain.com</code> 为您自己的注册的域名：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nslookup -q=mx yourdomain.com</div></pre></td></tr></table></figure>
-<p>  如果 <code>nslookup</code> 命令返回的信息中含有你设置的域名的记录值，说明解析成功。</p>
-</li>
+<hr>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><ul>
+<li>加粗    <code>Ctrl + B</code> </li>
+<li>斜体    <code>Ctrl + I</code> </li>
+<li>引用    <code>Ctrl + Q</code></li>
+<li>插入链接    <code>Ctrl + L</code></li>
+<li>插入代码    <code>Ctrl + K</code></li>
+<li>插入图片    <code>Ctrl + G</code></li>
+<li>提升标题    <code>Ctrl + H</code></li>
+<li>有序列表    <code>Ctrl + O</code></li>
+<li>无序列表    <code>Ctrl + U</code></li>
+<li>横线    <code>Ctrl + R</code></li>
+<li>撤销    <code>Ctrl + Z</code></li>
+<li>重做    <code>Ctrl + Y</code></li>
 </ul>
-<p><strong>2. 实验之前</strong></p>
-<p>配置一个功能完善的邮件服务器并不是一项容易的工作，本实验只是搭建了一个简单的邮件服务器，一些更为强大的功能还需要你去探索。</p>
-<ul>
-<li><p>Postfix、Dovecot 简介</p>
-<p>  <em>Postfix</em></p>
-<p>  Postfix 是一个标准的 MTA「Mail Transfer Agent」服务器，它负责通过 SMTP 协议管理发送到本机的邮件以及由本机发向外界的邮件。</p>
-<p>  <em>Dovecot</em></p>
-<p>  Dovecot 是一个优秀的 IMAP/POP 服务器用以接收外界发送到本机的邮件。</p>
-</li>
-<li><p>Postfix、Dovecot 安装</p>
-<p>  在 CentOS 7 上，我们可以直接使用 <code>yum</code> 进行下载安装：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install postfix dovecot</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>3. Postfix</strong></p>
-<ul>
-<li><p>配置 Postfix</p>
-<p>  有关教程中配置参数的具体含义，请参照 <a href="http://www.postfix.org/documentation.html" target="_blank" rel="external">Postfix 配置文档</a>。</p>
-<p>  <em>配置</em></p>
-<p>  在终端中输入以下命令以修改 <code>Postfix</code> 相关配置：</p>
-<blockquote>
-<p>注意：<strong>记得将 yourdomain.com 替换为你自己的域名</strong></p>
+<h2 id="Markdown及扩展"><a href="#Markdown及扩展" class="headerlink" title="Markdown及扩展"></a>Markdown及扩展</h2><blockquote>
+<p>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，然后转换成格式丰富的HTML页面。    —— <a href="https://zh.wikipedia.org/wiki/Markdown" target="_blank"> [ 维基百科 ]</a></p>
 </blockquote>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">postconf -e &apos;myhostname = server.yourdomain.com&apos;</div><div class="line">postconf -e &apos;mydestination = localhost, localhost.localdomain&apos;</div><div class="line">postconf -e &apos;myorigin = $mydomain&apos;</div><div class="line">postconf -e &apos;mynetworks = 127.0.0.0/8&apos;</div><div class="line">postconf -e &apos;inet_interfaces = all&apos;</div><div class="line">postconf -e &apos;inet_protocols = all&apos;</div><div class="line">postconf -e &apos;mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain&apos;</div><div class="line">postconf -e &apos;home_mailbox = Maildir/&apos;</div><div class="line">postconf -e &apos;smtpd_sasl_type = dovecot&apos;</div><div class="line">postconf -e &apos;smtpd_sasl_path = private/auth&apos;</div><div class="line">postconf -e &apos;smtpd_sasl_auth_enable = yes&apos;</div><div class="line">postconf -e &apos;broken_sasl_auth_clients = yes&apos;</div><div class="line">postconf -e &apos;smtpd_sasl_authenticated_header = yes&apos;</div><div class="line">postconf -e &apos;smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination&apos;</div><div class="line">postconf -e &apos;smtpd_use_tls = yes&apos;</div><div class="line">postconf -e &apos;smtpd_tls_cert_file = /etc/pki/dovecot/certs/dovecot.pem&apos;</div><div class="line">postconf -e &apos;smtpd_tls_key_file = /etc/pki/dovecot/private/dovecot.pem&apos;</div></pre></td></tr></table></figure>
-<p>  配置中 <code>Postfix</code> 使用 <code>sasl</code> 和 <code>tls</code> 来完成身份认证和传输信息加密。</p>
-<p>  试验中使用了 <code>Dovecot</code> 默认的 <code>ssl</code> 证书和私钥，如果你需要修改为自己的，请替换最后两行配置的路径。</p>
-<p>  <em>配置 smtps</em></p>
-<p>  部分邮件客户端依赖于使用 <code>465</code> 端口提供加密连接，所以我们修改配置，允许 <code>Postfix</code> 使用 <code>465</code> 端口发送邮件。</p>
-<p>  打开 <code>/etc/postfix/master.cf</code> 文件，将如下两行前的 <code>#</code> 去除：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">smtps inet n - n - - smtpd</div><div class="line">-o smtpd_tls_wrappermode=yes</div></pre></td></tr></table></figure>
-<p>  （注意： -o 前要保留空格）</p>
-<p>  <em>启动</em></p>
-<p>  使用以下命令，将 <code>Postfix</code> 设为自动启动并首次启动该服务：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl enable postfix.service</div><div class="line">systemctl start  postfix.service</div></pre></td></tr></table></figure>
-</li>
-<li><p>Postfix 日志</p>
-<p>  <code>Postfix</code> 系统的日志文件在系统的这个目录下的 <code>/var/log/maillog</code> 文件，此文件记录了 <code>Postfix</code> 服务器的运行状态信息。</p>
-</li>
-</ul>
-<p><strong>4. Dovecot</strong></p>
+<p>使用简单的符号标识不同的标题，将某些文字标记为<strong>粗体</strong>或者<em>斜体</em>，创建一个<a href="http://www.csdn.net" target="_blank" rel="external">链接</a>等，详细语法参考帮助？。</p>
+<p>本编辑器支持 <strong>Markdown Extra</strong> , 　扩展了很多好用的功能。具体请参考<a href="https://github.com/jmcmanus/pagedown-extra" title="Pagedown Extra" target="_blank" rel="external">Github</a>.  </p>
+<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p><strong>Markdown　Extra</strong>　表格语法：</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>价格</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Computer</td>
+<td>$1600</td>
+</tr>
+<tr>
+<td>Phone</td>
+<td>$12</td>
+</tr>
+<tr>
+<td>Pipe</td>
+<td>$1</td>
+</tr>
+</tbody>
+</table>
+<p>可以使用冒号来定义对齐方式：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">项目</th>
+<th style="text-align:right">价格</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Computer</td>
+<td style="text-align:right">1600 元</td>
+<td style="text-align:center">5</td>
+</tr>
+<tr>
+<td style="text-align:left">Phone</td>
+<td style="text-align:right">12 元</td>
+<td style="text-align:center">12</td>
+</tr>
+<tr>
+<td style="text-align:left">Pipe</td>
+<td style="text-align:right">1 元</td>
+<td style="text-align:center">234</td>
+</tr>
+</tbody>
+</table>
+<p>###定义列表</p>
+<p><strong>Markdown　Extra</strong>　定义列表语法：<br>项目１<br>项目２<br>:   定义 A<br>:   定义 B</p>
+<p>项目３<br>:   定义 C</p>
+<p>:   定义 D</p>
+<pre><code>&gt; 定义D内容
+</code></pre><h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><p>代码块语法遵循标准markdown代码，例如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@requires_authorization</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">somefunc</span><span class="params">(param1=<span class="string">''</span>, param2=<span class="number">0</span>)</span>:</span></div><div class="line">    <span class="string">'''A docstring'''</span></div><div class="line">    <span class="keyword">if</span> param1 &gt; param2: <span class="comment"># interesting</span></div><div class="line">        <span class="keyword">print</span> <span class="string">'Greater'</span></div><div class="line">    <span class="keyword">return</span> (param2 - param1 + <span class="number">1</span>) <span class="keyword">or</span> <span class="keyword">None</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeClass</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>message = <span class="string">'''interpreter</span></div><div class="line"><span class="string"><span class="meta">... </span>prompt'''</span></div></pre></td></tr></table></figure></p>
+<p>###脚注<br>生成一个脚注[^footnote].<br>  [^footnote]: 这里是 <strong>脚注</strong> 的 <em>内容</em>.</p>
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><p>用 <code>[TOC]</code>来生成目录：</p>
+<p>[TOC]</p>
+<h3 id="数学公式"><a href="#数学公式" class="headerlink" title="数学公式"></a>数学公式</h3><p>使用MathJax渲染<em>LaTex</em> 数学公式，详见<a href="http://math.stackexchange.com/" target="_blank" rel="external">math.stackexchange.com</a>.</p>
 <ul>
-<li><p>配置 Dovecot</p>
-<p>  <em>修改 <code>dovecot.conf</code></em></p>
-<p>  打开 <code>/etc/dovecot/dovecot.conf</code> 文件，在最下方加入以下配置：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ssl_cert = &lt;/etc/pki/dovecot/certs/dovecot.pem</div><div class="line">ssl_key = &lt;/etc/pki/dovecot/private/dovecot.pem</div><div class="line"></div><div class="line">protocols = imap pop3 lmtp</div><div class="line">listen = *</div><div class="line">mail_location = Maildir:~/Maildir</div><div class="line">disable_plaintext_auth = no</div></pre></td></tr></table></figure>
-<p>  如果前面你修改为了自己的 ssl 证书和私钥，请替换开始两行配置的路径。</p>
-<p>  <em>修改 <code>10-master.conf</code></em></p>
-<p>  打开 <code>/etc/dovecot/conf.d/10-master.conf</code> 文件，找到 <code>service auth</code> 部分，将以下行前面的 <code>#</code> 去除：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">unix_listener /var/spool/postfix/private/auth &#123;  </div><div class="line">       mode = 0666  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>启动 Dovecot</p>
-<p>  使用以下命令，将 <code>Dovecot</code> 设为自动启动并首次启动该服务：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl enable dovecot.service</div><div class="line">systemctl start  dovecot.service</div></pre></td></tr></table></figure>
-<p>  查看 <code>/var/log/maillog</code> 文件，查看服务是否成功启动。</p>
-<p>  如成功启动，日志里应包含如下信息：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Jun 26 12:00:28 localhost postfix/postfix-script[28338]: starting the Postfix mail system</div><div class="line">Jun 26 12:00:29 localhost postfix/master[28340]: daemon started -- version 2.10.1, configuration /etc/postfix</div><div class="line">Jun 26 12:28:40 localhost dovecot: master: Dovecot v2.2.10 starting up for imap, pop3, lmtp (core dumps disabled)</div></pre></td></tr></table></figure>
-</li>
+<li>行内公式，数学公式为：$\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$。</li>
+<li>块级公式：</li>
 </ul>
-<p><strong>5. 创建账户</strong></p>
-<p>该配置下邮箱账户依赖于系统用户，所以通过添加系统用户的方式创建邮箱账户。</p>
-<p><em>添加用户</em></p>
-<p>在终端中使用 <code>useradd</code> 命令添加用户：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">useradd test</div></pre></td></tr></table></figure></p>
-<p>使用 <code>passwd</code> 命令设置对应用户密码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">passwd test</div></pre></td></tr></table></figure></p>
-<p><strong>6. 测试</strong></p>
-<p>如测试中遇到异常，请查看 maillog 日志文件中的错误信息。</p>
-<p><em>服务器端发送测试</em></p>
-<p>使用 <code>su</code> 命令切换用户：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">su test</div></pre></td></tr></table></figure></p>
-<p>我们可以使用 <code>mail</code> 命令发送邮件，将 <code>xxxx@xxx.com</code> 替换为你的其他邮箱。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo &quot;Mail Content&quot; | mail -s &quot;Mail Subject&quot; xxxx@xxx.com</div></pre></td></tr></table></figure></p>
-<p>然后可以前往你的接收方邮箱查收。</p>
+<p>$$    x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$</p>
+<p>更多LaTex语法请参考 <a href="http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference" target="_blank" rel="external">这儿</a>.</p>
+<h3 id="UML-图"><a href="#UML-图" class="headerlink" title="UML 图:"></a>UML 图:</h3><p>可以渲染序列图：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">张三-&gt;李四: 嘿，小四儿, 写博客了没?</div><div class="line">Note right of 李四: 李四愣了一下，说：</div><div class="line">李四--&gt;张三: 忙得吐血，哪有时间写。</div></pre></td></tr></table></figure>
+<p>或者流程图：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">st=&gt;start: 开始</div><div class="line">e=&gt;end: 结束</div><div class="line">op=&gt;operation: 我的操作</div><div class="line">cond=&gt;condition: 确认？</div><div class="line"></div><div class="line">st-&gt;op-&gt;cond</div><div class="line">cond(yes)-&gt;e</div><div class="line">cond(no)-&gt;op</div></pre></td></tr></table></figure>
+<ul>
+<li>关于 <strong>序列图</strong> 语法，参考 <a href="http://bramp.github.io/js-sequence-diagrams/" target="_blank" rel="external">这儿</a>,</li>
+<li>关于 <strong>流程图</strong> 语法，参考 <a href="http://adrai.github.io/flowchart.js/" target="_blank" rel="external">这儿</a>.</li>
+</ul>
+<h2 id="离线写博客"><a href="#离线写博客" class="headerlink" title="离线写博客"></a>离线写博客</h2><p>即使用户在没有网络的情况下，也可以通过本编辑器离线写博客（直接在曾经使用过的浏览器中输入<a href="http://write.blog.csdn.net/mdeditor" target="_blank" rel="external">write.blog.csdn.net/mdeditor</a>即可。<strong>Markdown编辑器</strong>使用浏览器离线存储将内容保存在本地。</p>
+<p>用户写博客的过程中，内容实时保存在浏览器缓存中，在用户关闭浏览器或者其它异常情况下，内容不会丢失。用户再次打开浏览器时，会显示上次用户正在编辑的没有发表的内容。</p>
+<p>博客发表后，本地缓存将被删除。　</p>
+<p>用户可以选择 <i class="icon-disk"></i> 把正在写的博客保存到服务器草稿箱，即使换浏览器或者清除缓存，内容也不会丢失。</p>
+<blockquote>
+<p><strong>注意：</strong>虽然浏览器存储大部分时候都比较可靠，但为了您的数据安全，在联网后，<strong>请务必及时发表或者保存到服务器草稿箱</strong>。</p>
+</blockquote>
+<p>##浏览器兼容</p>
+<ol>
+<li>目前，本编辑器对Chrome浏览器支持最为完整。建议大家使用较新版本的Chrome。</li>
+<li>IE９以下不支持</li>
+<li>IE９，１０，１１存在以下问题<ol>
+<li>不支持离线功能</li>
+<li>IE9不支持文件导入导出</li>
+<li>IE10不支持拖拽文件导入</li>
+</ol>
+</li>
+</ol>
+<hr>
 
       
 
@@ -320,7 +349,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">linux postfix dovecot</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">markdown</a>
         		</li>
       		
 		</ul>
@@ -376,7 +405,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://hexo.zhazhapan.com/2017/10/17/基于CentOS搭建Postfix、Dovecot邮件服务/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://hexo.zhazhapan.com/2017/11/17/MarkDown语法/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -390,18 +419,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/10/17/CentOS搭建LAMP环境/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          CentOS搭建LAMP环境
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/10/17/基于CentOS搭建Docker环境/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">基于CentOS搭建Docker环境</div>
+    <a href="/2017/10/18/CentOS安装与使用Maven/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">CentOS安装与使用Maven</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -432,8 +452,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://hexo.zhazhapan.com/2017/10/17/基于CentOS搭建Postfix、Dovecot邮件服务/", 
-    sourceId: "基于CentOS搭建Postfix、Dovecot邮件服务",
+    url: "http://hexo.zhazhapan.com/2017/11/17/MarkDown语法/", 
+    sourceId: "MarkDown语法",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };

@@ -161,6 +161,106 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-CentOS搭建LNMP环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/17/CentOS搭建LNMP环境/">CentOS搭建LNMP环境</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/17/CentOS搭建LNMP环境/" class="archive-article-date">
+  	<time datetime="2017-10-17T15:48:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1. 搭建 Nginx 静态服务器</strong></p>
+<p><em>安装 Nginx</em></p>
+<p>使用 <code>yum</code> 安装 Nginx：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install nginx -y</div></pre></td></tr></table></figure></p>
+<p>修改 <code>/etc/nginx/conf.d/default.conf</code>，去除对 IPv6 地址的监听，可参考下面的代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen       80 default_server;</div><div class="line">    # listen       [::]:80 default_server;</div><div class="line">    server_name  _;</div><div class="line">    root         /usr/share/nginx/html;</div><div class="line"></div><div class="line">    # Load configuration files for the default server block.</div><div class="line">    include /etc/nginx/default.d/*.conf;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    error_page 404 /404.html;</div><div class="line">        location = /40x.html &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    error_page 500 502 503 504 /50x.html;</div><div class="line">        location = /50x.html &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>修改完成后，启动 <code>Nginx</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nginx</div></pre></td></tr></table></figure></p>
+<p>此时，可访问实验机器外网 HTTP 服务（<a href="http://yourip" target="_blank" rel="external">http://yourip</a> 或 <a href="http://yourdomain.com）来确认是否已经安装成功。" target="_blank" rel="external">http://yourdomain.com）来确认是否已经安装成功。</a></p>
+<p>将 Nginx 设置为开机自动启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig nginx on</div></pre></td></tr></table></figure></p>
+<p><strong>2. 安装 MySQL 数据库服务</strong></p>
+<p><em>安装 MySQL</em></p>
+<p>使用 <code>yum</code> 安装 MySQL：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server -y</div></pre></td></tr></table></figure></p>
+<p>安装完成后，启动 MySQL 服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service mysqld restart</div></pre></td></tr></table></figure></p>
+<p>设置 MySQL 账户 root 密码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/mysqladmin -u root password &apos;WyIGmACk&apos;</div></pre></td></tr></table></figure></p>
+<p>将 MySQL 设置为开机自动启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig mysqld on</div></pre></td></tr></table></figure></p>
+<p><strong>3. 搭建 PHP 环境</strong></p>
+<p><em>安装 PHP</em></p>
+<p>使用 <code>yum</code> 安装 PHP：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php php-fpm php-mysql -y</div></pre></td></tr></table></figure></p>
+<p>安装之后，启动 <code>PHP-FPM</code> 进程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service php-fpm start</div></pre></td></tr></table></figure></p>
+<p>启动之后，可以使用下面的命令查看 <code>PHP-FPM</code> 进程监听哪个端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -nlpt | grep php-fpm</div></pre></td></tr></table></figure></p>
+<p>把 <code>PHP-FPM</code> 也设置成开机自动启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig php-fpm on</div></pre></td></tr></table></figure></p>
+<p><strong>4. 配置 Nginx 并运行 PHP 程序</strong></p>
+<p><em>配置 <code>Nginx</code></em></p>
+<p>在 <code>/etc/nginx/conf.d</code> 目录中新建一个名为 <code>php.conf</code> 的文件，并配置 <code>Nginx</code> 端口 ，配置示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 8000;</div><div class="line">    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</div><div class="line">    location ~ .php$ &#123;</div><div class="line">        root           /usr/share/php;</div><div class="line">        fastcgi_pass   127.0.0.1:9000;</div><div class="line">        fastcgi_index  index.php;</div><div class="line">        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</div><div class="line">        include        fastcgi_params;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>修改配置完成后，重启 <code>nginx</code> 服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service nginx restart</div></pre></td></tr></table></figure></p>
+<p>这时候，我们就可以在<code>/usr/share/php</code> 目录下新建一个 <code>info.php</code> 文件来检查 php 是否安装成功了，文件内容参考如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;?php phpinfo(); ?&gt;</div></pre></td></tr></table></figure></p>
+<p>此时，访问 <a href="http://yourip:8000/info.php" target="_blank" rel="external">http://yourip:8000/info.php</a> 或 <a href="http://yourdomain.com:8000/info.php" target="_blank" rel="external">http://yourdomain.com:8000/info.php</a> 可浏览到我们刚刚创建的 info.php 页面了</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">linux nginx mysql php</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/17/CentOS搭建LNMP环境/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-CentOS搭建LAMP环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1299,131 +1399,6 @@
 
 
   
-    <article id="post-基于CentOS搭建Discuz" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/16/基于CentOS搭建Discuz/">基于CentOS搭建Discuz</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/16/基于CentOS搭建Discuz/" class="archive-article-date">
-  	<time datetime="2017-10-16T09:21:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. 购买服务器和域名</strong></p>
-<p><strong>2. 准备 LAMP 环境</strong></p>
-<p>LAMP 是 Linux、Apache、MySQL 和 PHP 的缩写，是 Discuz 论坛系统依赖的基础运行环境。我们先来准备 LAMP 环境</p>
-<ul>
-<li><p>安装 MySQL</p>
-<p>  使用 <code>yum</code> 安装 MySQL：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server -y</div></pre></td></tr></table></figure>
-<p>  安装完成后，启动 MySQL 服务：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service mysqld restart</div></pre></td></tr></table></figure>
-<p>  此教程使用 mysql 默认账户名和密码，您也可以设置自己的 MySQL 账户名和密码，参考下面的内容：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/mysqladmin -u root password &apos;NGky9EKq&apos;</div></pre></td></tr></table></figure>
-<p>  将 MySQL 设置为开机自动启动：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig mysqld on</div></pre></td></tr></table></figure>
-</li>
-<li><p>安装 Apache 组件</p>
-<p>  使用 <code>yum</code> 安装 Apache 组件：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install httpd -y</div></pre></td></tr></table></figure>
-<p>  安装之后，启动 httpd 进程：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service httpd start</div></pre></td></tr></table></figure>
-<p>  把 httpd 也设置成开机自动启动：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig httpd on</div></pre></td></tr></table></figure>
-</li>
-<li><p>安装 PHP</p>
-<p>  使用 <code>yum</code> 安装 PHP：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php php-fpm php-mysql -y</div></pre></td></tr></table></figure>
-<p>  安装之后，启动 PHP-FPM 进程：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service php-fpm start</div></pre></td></tr></table></figure>
-<p>  启动之后，可以使用下面的命令查看 PHP-FPM 进程监听哪个端口 </p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -nlpt | grep php-fpm</div></pre></td></tr></table></figure>
-<p>  把 PHP-FPM 也设置成开机自动启动：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig php-fpm on</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>3. 安装并配置 Discuz</strong></p>
-<ul>
-<li><p>安装 Discuz</p>
-<p>  CentOS 6 没有Discuz 的 <code>yum</code> 源，所以我们需要下载一个Discuz 压缩包：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://download.comsenz.com/DiscuzX/3.2/Discuz_X3.2_SC_UTF8.zip</div></pre></td></tr></table></figure>
-<p>  下载完成后，解压这个压缩包</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unzip Discuz_X3.2_SC_UTF8.zip</div></pre></td></tr></table></figure>
-</li>
-<li><p>配置 Discuz</p>
-<p>  由于PHP默认访问 <code>/var/www/html/</code> 文件夹，所以我们需要把upload文件夹里的文件都复制到 <code>/var/www/html/</code> 文件夹</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd Discuz*</div><div class="line">cp -r upload/* /var/www/html/</div></pre></td></tr></table></figure>
-<p>  给 /var/www/html 目录及其子目录赋予权限</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod -R 777 /var/www/html</div></pre></td></tr></table></figure>
-<p>  重启 Apache</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service httpd restart</div></pre></td></tr></table></figure>
-</li>
-<li><p>完成</p>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">linux discuz</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/16/基于CentOS搭建Discuz/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1546,7 +1521,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux java javaweb</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux firekylin</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1554,15 +1529,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux jenkins</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux firekylin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">linux apache mysql php</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">linux java javaweb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">linux jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1582,11 +1557,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">elipse java spring springboot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mac docker</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1594,19 +1573,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">java javafx dialog</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mac docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vmware</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">qiniu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java jhipster</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1614,11 +1589,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java javafx dialog</a>
+                <a href="javascript:void(0)" class="js-tag color4">java jhipster</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
+                <a href="javascript:void(0)" class="js-tag color1">qiniu</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1630,15 +1605,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">linux postfix dovecot</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">linux svn</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux seafile</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">linux postfix dovecot</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1650,15 +1625,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">linux seafile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">linux ftp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">weixin linux</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux weixin</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux weixin</a>
+                <a href="javascript:void(0)" class="js-tag color3">weixin linux</a>
               </li>
             
             <div class="clearfix"></div>
