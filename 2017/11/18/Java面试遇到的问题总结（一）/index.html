@@ -12,12 +12,12 @@
 <meta name="keywords" content="java interview">
 <meta property="og:type" content="article">
 <meta property="og:title" content="盘点面试遇到的问题（一）">
-<meta property="og:url" content="http://hexo.zhazhapan.com/2017/11/18/盘点面试遇到的问题（一）/index.html">
+<meta property="og:url" content="http://hexo.zhazhapan.com/2017/11/18/Java面试遇到的问题总结（一）/index.html">
 <meta property="og:site_name" content="渣渣潘的博客">
 <meta property="og:description" content="[TOC] Struts2和SpringMVC的区别拦截级别Struts2是类级别的拦截， 一个类对应一个request上下文，SpringMVC是方法级别的拦截，一个方法对应一个request上下文，而方法同时又跟一个url对应,所以说从架构本身上SpringMVC就容易实现restful url,而struts2的架构实现起来要费劲，因为Struts2中Action的一个方法可以对应一个url">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://img.blog.csdn.net/20171118101357717?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-11-18T06:25:53.612Z">
+<meta property="og:updated_time" content="2017-11-18T09:53:35.668Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="盘点面试遇到的问题（一）">
 <meta name="twitter:description" content="[TOC] Struts2和SpringMVC的区别拦截级别Struts2是类级别的拦截， 一个类对应一个request上下文，SpringMVC是方法级别的拦截，一个方法对应一个request上下文，而方法同时又跟一个url对应,所以说从架构本身上SpringMVC就容易实现restful url,而struts2的架构实现起来要费劲，因为Struts2中Action的一个方法可以对应一个url">
@@ -163,7 +163,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-盘点面试遇到的问题（一）" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Java面试遇到的问题总结（一）" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -175,7 +175,7 @@
   
 
         
-        <a href="/2017/11/18/盘点面试遇到的问题（一）/" class="archive-article-date">
+        <a href="/2017/11/18/Java面试遇到的问题总结（一）/" class="archive-article-date">
   	<time datetime="2017-11-18T06:24:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
 </a>
         
@@ -197,8 +197,7 @@
 <h1 id="HashMap和HashTable的区别"><a href="#HashMap和HashTable的区别" class="headerlink" title="HashMap和HashTable的区别"></a>HashMap和HashTable的区别</h1><h2 id="实现的接口"><a href="#实现的接口" class="headerlink" title="实现的接口"></a>实现的接口</h2><p>HashTable是基于陈旧的Dictionary类的，HashMap是Java 1.2引进的Map接口的一个实现，它们都是集合中将数据无序存放的。</p>
 <h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><p>HashTable的方法是同步的，是线程安全的，而HashMap不是同步的，是线程不安全的，所以在多线程场合要手动同步HashMap这个区别就像Vector和ArrayList一样。</p>
 <h2 id="NULL值"><a href="#NULL值" class="headerlink" title="NULL值"></a>NULL值</h2><p>HashTable不允许 null 值(key 和 value 都不可以)，HashMap允许 null 值(key和value都可以)。</p>
-<p>##遍历方式</p>
-<p>两者的遍历方式大同小异，HashTable使用Enumeration，HashMap使用Iterator，HashTable仅仅比HashMap多一个elements方法。</p>
+<h2 id="遍历方式"><a href="#遍历方式" class="headerlink" title="遍历方式"></a>遍历方式</h2><p>两者的遍历方式大同小异，HashTable使用Enumeration，HashMap使用Iterator，HashTable仅仅比HashMap多一个elements方法。</p>
 <h1 id="Ajax的核心对象"><a href="#Ajax的核心对象" class="headerlink" title="Ajax的核心对象"></a>Ajax的核心对象</h1><h2 id="什么是Ajax"><a href="#什么是Ajax" class="headerlink" title="什么是Ajax"></a>什么是Ajax</h2><p>Ajax并不是一门新的技术，而是多种技术的组合（html,js,xml,css）用于快速的创建动态的网页，能够实现无刷新更新数据从而提高了用户体验。</p>
 <h2 id="Ajax的原理"><a href="#Ajax的原理" class="headerlink" title="Ajax的原理"></a>Ajax的原理</h2><p>由客户端请求ajax引擎，在由ajax引擎请求服务器，服务器作出一系列的响应之后将结果返回给ajax引擎，由ajax引擎决定将这个结果写入到客户端的什么位置，从而实现了页面无刷新更新数据。</p>
 <h2 id="核心对象"><a href="#核心对象" class="headerlink" title="核心对象"></a>核心对象</h2><p>XMLHttpRequest</p>
@@ -269,8 +268,7 @@
 <h2 id="PaaS-云服务"><a href="#PaaS-云服务" class="headerlink" title="PaaS 云服务"></a>PaaS 云服务</h2><p>Docker可以支持命令行封装与编程，通过自动加载与服务自发现，可以很方便的将封装于 Docker 镜像中的服务扩展成云服务。类似像 Doc 转换预览这样的服务封装于镜像中，根据业务请求的情况随时增加和减少容器的运行数量，随需应变。</p>
 <h2 id="简化配置"><a href="#简化配置" class="headerlink" title="简化配置"></a>简化配置</h2><p>这是Docker初始目的，虚拟机VM最大的好处是基于你的应用配置能够无缝运行在任何平台上。Docker提供同样类似VM的能力，但是没有任何副作用，它能让你将环境和配置放入代码然后部署，同样的Docker配置能够在各种环境中使用，这实际是将应用环境和底层环境实现了解耦。</p>
 <h2 id="代码管道化管理"><a href="#代码管道化管理" class="headerlink" title="代码管道化管理"></a>代码管道化管理</h2><p>能够对代码以流式pipeline管道化进行管理，从开发者的机器到生产环境机器这个流程中都能有效管理。因为在这个流程中会有各种不同的环境，每个都可能有微小的区别，Docker提供了跨越这些异构环境以一致性的微环境，从开发到部署实现流畅发布。</p>
-<p>##开发人员的生产化 </p>
-<p>在一个开发环境，我们希望我们的开发环境能更加接近于生产环境，我们会让每个服务运行在自己的VM中，这样能模拟生产环境，比如有时我们并不总是需要跨越网络连接，这样我们可以将多个Docker装载一系列服务运行在单机上最大程度模拟生产分布式部署的环境。</p>
+<h2 id="开发人员的生产化"><a href="#开发人员的生产化" class="headerlink" title="开发人员的生产化"></a>开发人员的生产化</h2><p>在一个开发环境，我们希望我们的开发环境能更加接近于生产环境，我们会让每个服务运行在自己的VM中，这样能模拟生产环境，比如有时我们并不总是需要跨越网络连接，这样我们可以将多个Docker装载一系列服务运行在单机上最大程度模拟生产分布式部署的环境。</p>
 <h2 id="应用隔离"><a href="#应用隔离" class="headerlink" title="应用隔离"></a>应用隔离</h2><p>有很多理由你需要在一台机器上运行多个应用，这就需要将原来铁板一块monolithic的应用切分为很多微服务。实现应用之间的解耦，将多个应用服务部署在多个Docker中能轻松达到这个目的。</p>
 <h2 id="服务合并"><a href="#服务合并" class="headerlink" title="服务合并"></a>服务合并</h2><p>使用Docker也能合并多个服务以降低费用，不多的操作系统内存占用，跨实例共享多个空闲的内存，这些技术Docker能以更加紧密资源提供更有效的服务合并。</p>
 <h2 id="多租户"><a href="#多租户" class="headerlink" title="多租户"></a>多租户</h2><p>Docker能够作为云计算的多租户容器，使用Docker能容易为每个租户创建运行应该多个实例，这得益其灵活的快速环境以及有效diff命令。</p>
@@ -544,7 +542,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://hexo.zhazhapan.com/2017/11/18/盘点面试遇到的问题（一）/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://hexo.zhazhapan.com/2017/11/18/Java面试遇到的问题总结（一）/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -591,8 +589,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://hexo.zhazhapan.com/2017/11/18/盘点面试遇到的问题（一）/", 
-    sourceId: "盘点面试遇到的问题（一）",
+    url: "http://hexo.zhazhapan.com/2017/11/18/Java面试遇到的问题总结（一）/", 
+    sourceId: "Java面试遇到的问题总结（一）",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
