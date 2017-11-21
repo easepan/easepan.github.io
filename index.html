@@ -161,6 +161,88 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java面试遇到的问题总结（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/21/Java面试遇到的问题总结（二）/">Java面试遇到的问题总结（二）</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/21/Java面试遇到的问题总结（二）/" class="archive-article-date">
+  	<time datetime="2017-11-21T10:58:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[toc]</p>
+<h1 id="乐观锁和悲观锁"><a href="#乐观锁和悲观锁" class="headerlink" title="乐观锁和悲观锁"></a>乐观锁和悲观锁</h1><h2 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h2><p>顾名思义，就是很乐观，假设不会发生并发冲突，只在提交操作时检查是否违反数据完整性。每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在提交更新的时候会判断一下在此期间别人有没有去更新这个数据。乐观锁适用于读多写少的应用场景，这样可以提高吞吐量。</p>
+<h3 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h3><ul>
+<li><p>使用数据版本（Version）记录机制实现，这是乐观锁最常用的一种实现方式。何谓数据版本？即为数据增加一个版本标识，一般是通过为数据库表增加一个数字类型的 “version” 字段来实现。当读取数据时，将version字段的值一同读出，数据每更新一次，对此version值加一。当我们提交更新的时候，判断数据库表对应记录的当前版本信息与第一次取出来的version值进行比对，如果数据库表当前版本号与第一次取出来的version值相等，则予以更新，否则认为是过期数据。</p>
+</li>
+<li><p>使用时间戳（timestamp）。乐观锁定的第二种实现方式和第一种差不多，同样是在需要乐观锁控制的table中增加一个字段，名称无所谓，字段类型使用时间戳（timestamp）, 和上面的version类似，也是在更新提交的时候检查当前数据库中数据的时间戳和自己更新前取到的时间戳进行对比，如果一致则OK，否则就是版本冲突。</p>
+</li>
+</ul>
+<h2 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h2><p>顾名思义，就是很悲观，假定会发生并发冲突，屏蔽一切可能违反数据完整性的操作。每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会block直到它拿到锁。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java interview</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/21/Java面试遇到的问题总结（二）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java面试遇到的问题总结（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1402,123 +1484,6 @@
 
 
   
-    <article id="post-CentOS搭建PySpider爬虫服务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/18/CentOS搭建PySpider爬虫服务/">CentOS搭建PySpider爬虫服务</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/18/CentOS搭建PySpider爬虫服务/" class="archive-article-date">
-  	<time datetime="2017-10-18T01:01:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. 环境准备</strong></p>
-<p><em>前置环境部署</em></p>
-<p>在开始部署前，我们需要做一些前置准备 。</p>
-<p><code>yum</code> 更新<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum update -y</div></pre></td></tr></table></figure></p>
-<p>安装开发编译工具<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install gcc gcc-c++ -y</div></pre></td></tr></table></figure></p>
-<p>安装依赖库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install python-pip python-devel python-distribute libxml2 libxml2-devel python-lxml libxslt libxslt-devel openssl openssl-devel -y</div></pre></td></tr></table></figure></p>
-<p>升级pip<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install --upgrade pip</div></pre></td></tr></table></figure></p>
-<p><strong>2. 部署 mariadb</strong></p>
-<p>由于 CentOS 7 中 MySQL 数据库已从默认的程序列表中移除，我们使用 mariadb 代替。</p>
-<p><em>安装 <code>mariadb</code></em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mariadb-server mariadb -y</div></pre></td></tr></table></figure></p>
-<p><em>启动 <code>mariadb</code> 服务</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start mariadb</div></pre></td></tr></table></figure></p>
-<p><em>设置 root 密码</em></p>
-<p>默认的root用户密码为空，你可以使用以下命令来创建 root 用户的密码（password 后的 <code>uI7AAS5q</code> 可以改为任何你希望设置的密码）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysqladmin -u root password &quot;uI7AAS5q&quot;</div></pre></td></tr></table></figure></p>
-<p><em>检查是否安装成功</em></p>
-<p>现在你可以尝试通过以下命令来连接到 Mysql 服务器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -u root -p</div></pre></td></tr></table></figure></p>
-<p>然后输入您刚才设置的密码 （ 默认：<code>uI7AAS5q</code> ），如果一切正常，您应该可以在命令行看到以 <code>MariaDB [(none)]&gt;</code> 或 <code>mysql&gt;</code> 开头的提示了，说明连接成功。</p>
-<p>此时输入 <code>SHOW DATABASES;</code> 并回车，应该可以看到类似下面这样的输出，说明一切正常。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">mysql&gt; SHOW DATABASES;</div><div class="line">+----------+</div><div class="line">| Database |</div><div class="line">+----------+</div><div class="line">| mysql    |</div><div class="line">| test     |</div><div class="line">+----------+</div><div class="line">2 rows in set (0.13 sec)</div></pre></td></tr></table></figure></p>
-<p>完成后，可以通过快捷键 <code>Ctrl+C</code> 或命令行键入 <code>exit</code> 来退出，进入下一步。</p>
-<p><strong>3. 部署 redis</strong></p>
-<p><em>下载、解压安装包</em></p>
-<p>下载安装包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://download.redis.io/redis-stable.tar.gz</div></pre></td></tr></table></figure></p>
-<p>解压安装包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -xzvf redis-stable.tar.gz</div></pre></td></tr></table></figure></p>
-<p>移动解压包到 <code>/usr/local</code> 内</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mv redis-stable /usr/local/redis</div></pre></td></tr></table></figure>
-<p>编译安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/redis</div><div class="line">make</div><div class="line">make install</div></pre></td></tr></table></figure></p>
-<p><em>设置 redis 配置</em></p>
-<p>设置配置文件路径<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir -p /etc/redis</div><div class="line">cp /usr/local/redis/redis.conf /etc/redis/redis.conf</div></pre></td></tr></table></figure></p>
-<p>修改 <code>/etc/redis/redis.conf</code> 文件的 <code>daemonize</code> 配置项为如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">daemonize yes</div></pre></td></tr></table></figure></p>
-<p><em>启动 redis 服务</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/bin/redis-server /etc/redis/redis.conf</div></pre></td></tr></table></figure></p>
-<p><strong>4. 部署 pyspider</strong></p>
-<p><em>安装依赖</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pip install --upgrade chardet</div><div class="line">easy_install mysql-connector==2.1.3</div><div class="line">easy_install redis</div></pre></td></tr></table></figure></p>
-<p><em>安装 <code>pyspider</code></em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install pyspider</div></pre></td></tr></table></figure></p>
-<p><em>配置 pyspider</em></p>
-<p>首先创建配置目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir /etc/pyspider</div></pre></td></tr></table></figure></p>
-<p>然后 <code>/etc/pyspider</code> 目录下创建 <code>pyspider.conf.json</code>，参考下面的内容。</p>
-<p>具体配置的说明文档请参考 <a href="http://docs.pyspider.org/en/latest/Deployment/#configjson" target="_blank" rel="external">官方文档</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;taskdb&quot;: &quot;mysql+taskdb://root:uI7AAS5q@127.0.0.1:3306/taskdb&quot;,</div><div class="line">  &quot;projectdb&quot;: &quot;mysql+projectdb://root:uI7AAS5q@127.0.0.1:3306/projectdb&quot;,</div><div class="line">  &quot;resultdb&quot;: &quot;mysql+resultdb://root:uI7AAS5q@127.0.0.1:3306/resultdb&quot;,</div><div class="line">  &quot;message_queue&quot;: &quot;redis://127.0.0.1:6379/db&quot;,</div><div class="line">  &quot;webui&quot;: &#123;</div><div class="line">    &quot;username&quot;: &quot;root&quot;,</div><div class="line">    &quot;password&quot;: &quot;uI7AAS5q&quot;,</div><div class="line">    &quot;need-auth&quot;: true</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>其中 mysql 配置中的 <code>root</code> 为您 mysql 的用户名， <code>root:</code> 后面的 <code>uI7AAS5q</code> 为您刚设置的密码。</p>
-<p><code>webui</code> 配置中的 <code>username</code> 及 <code>password</code> 为您访问 WebUI 时候需要的用户名，你也可以不设置用户名密码，直接将 <code>need-auth</code> 设为 <code>false</code> 即可。</p>
-<p><em>启动服务</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pyspider -c /etc/pyspider/pyspider.conf.json</div></pre></td></tr></table></figure></p>
-<p>如果一切正常，现在访问 <a href="http://yourip:5000" target="_blank" rel="external">http://yourip:5000</a> 或 <a href="http://yourdomain.com:5000，您应该可以看到" target="_blank" rel="external">http://yourdomain.com:5000，您应该可以看到</a> <code>pyspider dashboard</code> 的首页了。</p>
-<p>服务能够正常启动后，我们需要让它能够在后台运行，您可以通过以下命令让服务在后台运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup pyspider -c /etc/pyspider/pyspider.conf.json &amp;</div></pre></td></tr></table></figure></p>
-<p>也可以使用官方推荐的 <a href="http://supervisord.org/" target="_blank" rel="external">Supervisor</a> 来启动，这里就不详细介绍了，具体用法可以参考 Supervisor 的文档</p>
-<p><em>*5 部署完成</em></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">linux pyspider</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/18/CentOS搭建PySpider爬虫服务/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1653,15 +1618,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux jenkins</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">linux apache mysql php</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux pyspider</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1669,11 +1626,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux showdoc</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
+                <a href="javascript:void(0)" class="js-tag color5">linux pyspider</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">linux showdoc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1681,11 +1642,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java javafx dialog</a>
+                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">elipse java spring springboot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java interview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">java javafx dialog</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1697,11 +1666,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color2">vmware</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">vmware</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1741,15 +1710,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux leanote</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux seafile</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java interview</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux leanote</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">linux ftp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1758,10 +1727,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">linux weixin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux ftp</a>
               </li>
             
             <div class="clearfix"></div>
