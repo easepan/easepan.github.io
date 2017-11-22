@@ -161,6 +161,113 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-CentOS搭建FireKylin个人博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/18/CentOS搭建FireKylin个人博客/">CentOS搭建FireKylin个人博客</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/18/CentOS搭建FireKylin个人博客/" class="archive-article-date">
+  	<time datetime="2017-10-18T02:30:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1. 运行环境准备</strong></p>
+<p><em>安装 Node.js</em></p>
+<p>使用 <code>yum</code> 命令安装 Node.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install nodejs -y</div></pre></td></tr></table></figure></p>
+<p><em>使用 NPM 安装 PM2</em></p>
+<p>通过 <code>NPM</code> 安装进程管理模块 <code>PM2</code>。它是 Node.js 的一个进程管理模块，之后我们会使用它来管理我们的个人网站进程。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install pm2 -g</div></pre></td></tr></table></figure></p>
+<p><em>安装 MySQL</em></p>
+<p>使用 yum 安装 MySQL：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm</div><div class="line">rpm -ivh mysql-community-release-el7-5.noarch.rpm</div><div class="line">yum install mysql-community-server -y</div></pre></td></tr></table></figure></p>
+<p>启动 MySQL 服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service mysqld restart</div></pre></td></tr></table></figure></p>
+<p>设置 MySQL 账户 <code>root</code> 密码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/mysqladmin -u root password &apos;4aE5aOii4Firekylin&apos;</div></pre></td></tr></table></figure>
+<p><em>安装 Nginx</em></p>
+<p>在 CentOS 上，可直接使用 <code>yum</code> 来安装 Nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install nginx -y</div></pre></td></tr></table></figure></p>
+<p><strong>2. 安装并配置 Firekylin</strong></p>
+<p><em>安装 Firekylin</em></p>
+<p>在服务器上下载安装包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://firekylin.org/release/latest.tar.gz</div></pre></td></tr></table></figure></p>
+<p>解压安装包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar zvxf latest.tar.gz</div></pre></td></tr></table></figure></p>
+<p>安装程序依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd firekylin</div><div class="line">npm install</div></pre></td></tr></table></figure></p>
+<p>复制项目下的 <code>pm2_default.json</code> 文件生成新文件 <code>pm2.json</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp pm2_default.json pm2.json</div></pre></td></tr></table></figure></p>
+<p>修改 <code>pm2.json</code> 文件中的 <code>cwd</code> 配置值为项目的当前路径 <code>/root/firekylin</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;apps&quot;: [&#123;</div><div class="line">    &quot;name&quot;: &quot;firekylin&quot;,</div><div class="line">    &quot;script&quot;: &quot;www/production.js&quot;,</div><div class="line">    &quot;cwd&quot;: &quot;/root/firekylin&quot;,</div><div class="line">    &quot;exec_mode&quot;: &quot;fork&quot;,</div><div class="line">    &quot;max_memory_restart&quot;: &quot;1G&quot;,</div><div class="line">    &quot;autorestart&quot;: true,</div><div class="line">    &quot;node_args&quot;: [],</div><div class="line">    &quot;args&quot;: [],</div><div class="line">    &quot;env&quot;: &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">  &#125;]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后通过以下命令启动项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 startOrReload pm2.json</div></pre></td></tr></table></figure></p>
+<p>Firekylin 已经启动成功，使用浏览器直接访问 <a href="http://yourip:8360/" target="_blank" rel="external">http://yourip:8360/</a> 或 <a href="http://yourdomain.com:8360即可看到" target="_blank" rel="external">http://yourdomain.com:8360即可看到</a> Firekylin 的配置界面。</p>
+<p><em>配置信息</em></p>
+<p>配置过程输入参数如截图所示，其中数据库信息中的帐号字段设置为 <code>root</code>，密码字段设置为 <code>4aE5aOii4Firekylin</code>，数据库名字段设置为 <code>firekylin</code>，主机字段设置为 <code>127.0.0.1</code>，其他字段使用默认值；后台管理帐号中的帐号字段使用默认值 <code>admin</code>，密码字段设置为 <code>4aE5aOii4Admin</code>：</p>
+<p><img src="https://mc.qcloudimg.com/static/img/2b6b8757d891a5c67581f64b0c75cc42/1.png" alt=""></p>
+<p>配置完成后可以通过后台管理帐号设置的<code>帐号</code>和<code>密码</code>登录博客管理后台，其值分别为 <code>admin</code> 和 <code>4aE5aOii4Admin</code>，截图如下所示：</p>
+<p><img src="https://mc.qcloudimg.com/static/img/d5b5b0b892c165eb6d80e8a699d22657/1.png" alt=""></p>
+<p><em>配置 Nginx</em></p>
+<p>下面我们就配置 Nginx 使用域名访问我们的网站了。<br>复制项目下的 <code>nginx_default.conf</code> 为 <code>nginx.conf</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp nginx_default.conf nginx.conf</div></pre></td></tr></table></figure></p>
+<p>修改 <code>nginx.conf</code> 文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    server_name www.yourdomain.com; #将 www.yourdomain.com 替换为之前注册并解析的域名</div><div class="line">    root /root/firekylin;</div><div class="line">    set $node_port 8360;</div><div class="line"></div><div class="line">    index index.js index.html index.htm;</div><div class="line"></div><div class="line">    location ^~ /.well-known/acme-challenge/ &#123;</div><div class="line">      alias /root/firekylin/ssl/challenges/;</div><div class="line">      try_files $uri = 404;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        proxy_http_version 1.1;</div><div class="line">        proxy_set_header X-Real-IP $remote_addr;</div><div class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="line">        proxy_set_header Host $http_host;</div><div class="line">        proxy_set_header X-NginX-Proxy true;</div><div class="line">        proxy_set_header Upgrade $http_upgrade;</div><div class="line">        proxy_set_header Connection &quot;upgrade&quot;;</div><div class="line">        proxy_pass http://127.0.0.1:$node_port$request_uri;</div><div class="line">        proxy_redirect off;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location = /development.js &#123;</div><div class="line">        deny all;</div><div class="line">    &#125;</div><div class="line">    location = /testing.js &#123;</div><div class="line">        deny all;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location = /production.js &#123;</div><div class="line">        deny all;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>将 <code>nginx.conf</code> 文件软链到 <code>nginx</code> 配置目录下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ln -s /root/firekylin/nginx.conf /etc/nginx/conf.d/firekylin.conf</div></pre></td></tr></table></figure></p>
+<p>重启 <code>Nginx</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service nginx restart</div></pre></td></tr></table></figure></p>
+<p><strong>3. 完成</strong></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux firekylin</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/18/CentOS搭建FireKylin个人博客/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-CentOS搭建PySpider爬虫服务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1229,112 +1336,6 @@
 
 
   
-    <article id="post-基于CentOS搭建个人网盘" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/16/基于CentOS搭建个人网盘/">基于CentOS搭建个人网盘</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/16/基于CentOS搭建个人网盘/" class="archive-article-date">
-  	<time datetime="2017-10-16T14:48:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. 安装 Seafile</strong></p>
-<ul>
-<li><p>安装依赖环境</p>
-<p>  使用 yum 安装 Python 及 MySQL：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install python python-setuptools python-imaging python-ldap python-memcached MySQL-python mariadb mariadb-server</div></pre></td></tr></table></figure>
-<p>  启动 MariaDB 服务：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo systemctl start mariadb.service</div><div class="line">sudo systemctl enable mariadb.service</div></pre></td></tr></table></figure>
-<p>  配置 MySQL：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/mysql_secure_installation</div></pre></td></tr></table></figure>
-<p>  配置过程输入参数如截图所示，其中 <code>New password</code> 和 <code>Re-enter new password</code> 字段都设置为 <code>QcE7gi1g</code>（最好自己定义一个密码），其他字段一路回车使用默认值：</p>
-<p>  <img src="https://mc.qcloudimg.com/static/img/a1f15db10f82310eca74a3b8e32ae608/1.png" alt="图片"></p>
-</li>
-<li><p>安装 Seafile</p>
-<p>  下载 Seafile 安装包：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://mc.qcloudimg.com/static/archive/3d8addbe52be88df4f6139ec7e35b453/seafile-server_5.1.4_x86-64.tar.gz</div></pre></td></tr></table></figure>
-<p>  解压 Seafile 安装包：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zxvf seafile-server_5.1.4_x86-64.tar.gz</div></pre></td></tr></table></figure>
-<p>  安装 Seafile 安装包：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sudo mkdir -p /opt/seafile/installed</div><div class="line">sudo mv seafile-server_5.1.4_x86-64.tar.gz /opt/seafile/installed</div><div class="line">sudo mv seafile-server-5.1.4/ /opt/seafile</div><div class="line">cd /opt/seafile/seafile-server-5.1.4</div><div class="line">sudo ./setup-seafile-mysql.sh</div></pre></td></tr></table></figure>
-<p>  执行过程输入参数如截图所示，<code>[server name]</code> 字段输入 <code>Seafile</code>，<code>[ This server&#39;s ip or domain ]</code> 字段输入你的域名或服务器IP，<code>[ 1 or 2 ]</code> 字段选择 <code>1</code>，mysql 的 <code>[ root password ]</code> 字段输入 <code>QcE7gi1g</code>（这个是上面步骤你设置的密码），其他字段一路回车使用默认值：</p>
-<p>  <img src="https://mc.qcloudimg.com/static/img/de2fb7e13f26794671aec59bcd0c9165/1.png" alt="这里写图片描述"></p>
-</li>
-</ul>
-<p><strong>2. 启动 Seafile 及修改防火墙规则</strong></p>
-<ul>
-<li><p>启动 Seafile</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo ./seafile.sh start</div><div class="line">sudo ./seahub.sh start</div></pre></td></tr></table></figure>
-<p>  执行过程输入参数如截图所示，其中 <code>[ admin email ]</code> 设置为您登录网盘的帐号，如 <code>admin@qcloudlab.wang</code>，<code>[ admin password ]</code> 和 <code>[ admin password again ]</code> 设置为登录网盘的密码，如 <code>admin_QcE7gi1g</code>（最好自己定义一个密码）：</p>
-<p>  <img src="https://mc.qcloudimg.com/static/img/d243d5763695b4d926e9d7fdd0e0e924/1.png" alt="这里写图片描述"></p>
-</li>
-<li><p>修改防火墙规则</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo firewall-cmd --zone=public --permanent --add-port=8082/tcp</div><div class="line">sudo firewall-cmd --zone=public --permanent --add-port=8000/tcp</div><div class="line">sudo firewall-cmd --reload</div></pre></td></tr></table></figure></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">linux seafile</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/16/基于CentOS搭建个人网盘/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1461,6 +1462,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">linux jenkins</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux firekylin</a>
               </li>
              
@@ -1474,10 +1479,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">linux nginx mysql php</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1501,10 +1502,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java interview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">java javafx dialog</a>
               </li>
              
@@ -1517,7 +1514,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">vmware</a>
+                <a href="javascript:void(0)" class="js-tag color5">java interview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1533,15 +1530,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">vmware</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux sftp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux discuz</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux discuz</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1557,15 +1558,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux seafile</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux leanote</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1573,11 +1570,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">weixin linux</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux weixin</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux weixin</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux seafile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">weixin linux</a>
               </li>
             
             <div class="clearfix"></div>
