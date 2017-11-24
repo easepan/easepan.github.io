@@ -161,6 +161,101 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-CentOS搭建JavaWeb开发环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/18/CentOS搭建JavaWeb开发环境/">CentOS搭建JavaWeb开发环境</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/18/CentOS搭建JavaWeb开发环境/" class="archive-article-date">
+  	<time datetime="2017-10-18T02:49:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1. 搭建 Java 开发环境</strong></p>
+<p>此教程教大家如何配置 JDK 、Tomcat 和 Mysql</p>
+<p><em>安装 JDK</em></p>
+<p>JDK 是开发Java程序必须安装的软件，我们查看一下 <code>yum</code> 源里面的 JDK：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum list java*</div></pre></td></tr></table></figure></p>
+<p>选择适合本机的JDK，并安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install java-1.7.0-openjdk* -y</div></pre></td></tr></table></figure></p>
+<p>安装完成后，查看是否安装成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -version</div></pre></td></tr></table></figure></p>
+<p><em>安装 Tomcat</em></p>
+<p>Tomcat 是一个应用服务器，是开发和调试 <code>jsp</code> 程序的首选，可以利用它来响应 HTML 页面的访问请求。</p>
+<p>进入本地文件夹<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /usr/local</div></pre></td></tr></table></figure></p>
+<p>到官网找到 Tomcat 的下载链接，并下载到服务器中, 这里提供了一个快速下载 Tomcat 的地址：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://mc.qcloudimg.com/static/archive/fa66329388f85c08e8d6c12ceb8b2ca3/apache-tomcat-7.0.77.tar.gz</div></pre></td></tr></table></figure></p>
+<p>解压这个文件夹：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zxf apache-tomcat-7.0.77.tar.gz</div></pre></td></tr></table></figure></p>
+<p>重命名这个文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mv apache-tomcat-7.0.77 /usr/local/tomcat7</div></pre></td></tr></table></figure></p>
+<p>进入 bin 文件夹<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/tomcat7/bin</div></pre></td></tr></table></figure></p>
+<p>给这个文件夹下的所有 <code>shell</code> 脚本授予权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod 777 *.sh</div></pre></td></tr></table></figure>
+<p>开启tomcat服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./startup.sh</div></pre></td></tr></table></figure></p>
+<p><em>安装 MySQL</em><br>使用 <code>yum</code> 安装 MySQL：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y mysql-server mysql mysql-devel</div></pre></td></tr></table></figure></p>
+<p>安装完成后，启动 MySQL 服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service mysqld restart</div></pre></td></tr></table></figure></p>
+<p>设置 MySQL 账户 <code>root</code> 密码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/mysqladmin -u root password &apos;NC7eKyAv&apos;</div></pre></td></tr></table></figure></p>
+<p><strong>2. 访问 Tomcat</strong></p>
+<p>访问 Tomcat</p>
+<p>此时，访问 <a href="http://yourip:8080" target="_blank" rel="external">http://yourip:8080</a> 或 <a href="http://yourdomain.com" target="_blank" rel="external">http://yourdomain.com</a> 可访问到刚才启动的 Tomcat 的内置示例页面</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">linux java javaweb</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/18/CentOS搭建JavaWeb开发环境/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-CentOS搭建FireKylin个人博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1206,136 +1301,6 @@
 
 
   
-    <article id="post-基于CentOS搭建个人Leanote云笔记本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/17/基于CentOS搭建个人Leanote云笔记本/">基于CentOS搭建个人Leanote云笔记本</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/17/基于CentOS搭建个人Leanote云笔记本/" class="archive-article-date">
-  	<time datetime="2017-10-17T14:11:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Leanote 依赖 MongoDB 作为数据存储，下面开始安装MongoDB：<br><strong>1. 下载启动 MongoDB</strong></p>
-<ul>
-<li><p>下载 MongoDB</p>
-<p>  进入 /home 目录，并下载 MongoDB：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /home</div></pre></td></tr></table></figure>
-<p>  下载源码：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.1.tgz</div></pre></td></tr></table></figure>
-<p>  解压缩源码包：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -xzvf mongodb-linux-x86_64-3.0.1.tgz</div></pre></td></tr></table></figure>
-</li>
-<li><p>创建用于存储的文件夹目录</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/db</div></pre></td></tr></table></figure>
-<p>  配置 MongoDB 的环境变量：</p>
-<p>  编辑 <code>/etc/profile</code>，在文件末尾追加以下配置：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export PATH=$PATH:/home/mongodb-linux-x86_64-3.0.1/bin</div></pre></td></tr></table></figure>
-<p>  并执行以下命令，使环境变量生效。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source /etc/profile</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li>启动 MongoDB（启动需要 3 ~ 5 分钟，耐心等待）：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongod --bind_ip localhost --port 27017 --dbpath /data/db/ --logpath=/var/log/mongod.log --fork</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>2. 安装 Leanote</strong></p>
-<ul>
-<li><p>下载 Leanote</p>
-<p>  先进入 /home 目录</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /home</div></pre></td></tr></table></figure>
-<p>  下载 Leanote 源码</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://iweb.dl.sourceforge.net/project/leanote-bin/2.4/leanote-linux-amd64-v2.4.bin.tar.gz</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p>解开压缩包：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zxvf leanote-linux-amd64-v2.4.bin.tar.gz</div></pre></td></tr></table></figure>
-</li>
-<li><p>编辑 Leanote 配置文件</p>
-<p>  编辑文件 <code>app.conf</code>，在文件中找到 <code>app.secret=</code> 项，并修改为如下内容：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.secret=qcloud666</div></pre></td></tr></table></figure>
-</li>
-<li><p>初始化数据库</p>
-<p>  导入初始化数据：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongorestore -h localhost -d leanote --dir /home/leanote/mongodb_backup/leanote_install_data/</div></pre></td></tr></table></figure>
-</li>
-<li><p>启动 Leanote 服务</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup /bin/bash /home/leanote/bin/run.sh &gt;&gt; /var/log/leanote.log 2&gt;&amp;1 &amp;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>3. 访问 Leanote 云笔记本</strong></p>
-<p>通过访问 <a href="http://yourip:9000" target="_blank" rel="external">http://yourip:9000</a> 或 <a href="http://yourdomain.com:9000就可以了使用自己的笔记本。" target="_blank" rel="external">http://yourdomain.com:9000就可以了使用自己的笔记本。</a></p>
-<ul>
-<li><p>初始化账户： admin</p>
-</li>
-<li><p>初始化密码： abc123</p>
-</li>
-</ul>
-<p>请务必修改密码已确保使用安全！</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">linux leanote</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/17/基于CentOS搭建个人Leanote云笔记本/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1462,10 +1427,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux jenkins</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux firekylin</a>
               </li>
              
@@ -1474,11 +1435,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux apache mysql php</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux jenkins</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">linux nginx mysql php</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">linux apache mysql php</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1490,11 +1455,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux zipkin</a>
+                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux zipkin</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1510,15 +1475,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mac docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java interview</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mac docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">vmware</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1530,15 +1499,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">vmware</a>
+                <a href="javascript:void(0)" class="js-tag color1">robot</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux sftp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1550,11 +1515,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">linux postfix dovecot</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">linux svn</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">linux postfix dovecot</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1566,7 +1535,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux ftp</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux seafile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">weixin linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1574,11 +1547,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux seafile</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">weixin linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">linux ftp</a>
               </li>
             
             <div class="clearfix"></div>
