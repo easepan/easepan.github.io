@@ -193,6 +193,127 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-CentOS搭建基于ZIPKIN的数据追踪系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/18/CentOS搭建基于ZIPKIN的数据追踪系统/">CentOS搭建基于ZIPKIN的数据追踪系统</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/18/CentOS搭建基于ZIPKIN的数据追踪系统/" class="archive-article-date">
+  	<time datetime="2017-10-18T03:32:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1. 配置 Java 环境</strong></p>
+<p><em>安装 JDK</em></p>
+<p><code>Zipkin</code> 使用 Java8<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install java-1.8.0-openjdk* -y</div></pre></td></tr></table></figure></p>
+<p>安装完成后，查看是否安装成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -version</div></pre></td></tr></table></figure></p>
+<p><strong>2. 安装 Zipkin</strong></p>
+<p>新建目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/release/zipkin &amp;&amp; cd &quot;$_&quot;</div></pre></td></tr></table></figure></p>
+<p>下载 Zipkin<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -O zipkin.jar &apos;https://search.maven.org/remote_content?g=io.zipkin.java&amp;a=zipkin-server&amp;v=LATEST&amp;c=exec&apos;</div></pre></td></tr></table></figure></p>
+<p>启动 Zipkin<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -jar zipkin.jar</div></pre></td></tr></table></figure></p>
+<p>Zipkin 默认监听 9411 端口， 使用浏览器访问 <a href="http://yourip:9411" target="_blank" rel="external">http://yourip:9411</a> 或 <a href="http://yourdomain.com:9411" target="_blank" rel="external">http://yourdomain.com:9411</a> 即可看到 Zipkin 自带的图形化界面</p>
+<p><strong>3. 配置 MySQL 数据持久化方案</strong></p>
+<p>Zipkin 支持的持久化方案很多，如： Cassandra, MySQL, Elasticsearch。本实验使用 MySQL 5.7 作为数据持久化方案。</p>
+<p><em>安装 MySQL 5.7</em></p>
+<p>使用 <code>Ctrl + C</code> 退出上个步骤的 Java 进程并下载 rmp 包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm</div></pre></td></tr></table></figure></p>
+<p>安装 rpm 包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -Uvh mysql57-community-release-el7-9.noarch.rpm</div></pre></td></tr></table></figure></p>
+<p>安装 MySQL<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-community-server -y</div></pre></td></tr></table></figure></p>
+<p>启动 MySQL 服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start mysqld.service</div></pre></td></tr></table></figure></p>
+<p><em>设置 MySQL 密码</em></p>
+<p>获取 <code>root</code> 临时密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep &apos;temporary password&apos; /var/log/mysqld.log | awk &apos;&#123;print $NF&#125;&apos;</div></pre></td></tr></table></figure></p>
+<p>使用上一步的获得的临时密码登入 MySQL<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -uroot -p</div></pre></td></tr></table></figure></p>
+<p>设置 MySQL 账户 <code>root</code> 密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ALTER USER &apos;root&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;Xx$Zipkin2017&apos;;</div></pre></td></tr></table></figure></p>
+<p>退出 MySQL, 回到 Bash shell<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exit;</div></pre></td></tr></table></figure></p>
+<p><em>初始化 Zipkin 数据库</em></p>
+<p>编写初始化脚本</p>
+<p>请在 <code>/data/release/zipkin</code> 目录下创建 <code>zipkin_init.sql</code>，参考下面的内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE IF NOT EXISTS zipkin_spans (</div><div class="line">  `trace_id_high` BIGINT NOT NULL DEFAULT 0 COMMENT &apos;If non zero, this means the trace uses 128 bit traceIds instead of 64 bit&apos;,</div><div class="line">  `trace_id` BIGINT NOT NULL,</div><div class="line">  `id` BIGINT NOT NULL,</div><div class="line">  `name` VARCHAR(255) NOT NULL,</div><div class="line">  `parent_id` BIGINT,</div><div class="line">  `debug` BIT(1),</div><div class="line">  `start_ts` BIGINT COMMENT &apos;Span.timestamp(): epoch micros used for endTs query and to implement TTL&apos;,</div><div class="line">  `duration` BIGINT COMMENT &apos;Span.duration(): micros used for minDuration and maxDuration query&apos;</div><div class="line">) ENGINE=InnoDB ROW_FORMAT=COMPRESSED CHARACTER SET=utf8 COLLATE utf8_general_ci;</div><div class="line"></div><div class="line">ALTER TABLE zipkin_spans ADD UNIQUE KEY(`trace_id_high`, `trace_id`, `id`) COMMENT &apos;ignore insert on duplicate&apos;;</div><div class="line">ALTER TABLE zipkin_spans ADD INDEX(`trace_id_high`, `trace_id`, `id`) COMMENT &apos;for joining with zipkin_annotations&apos;;</div><div class="line">ALTER TABLE zipkin_spans ADD INDEX(`trace_id_high`, `trace_id`) COMMENT &apos;for getTracesByIds&apos;;</div><div class="line">ALTER TABLE zipkin_spans ADD INDEX(`name`) COMMENT &apos;for getTraces and getSpanNames&apos;;</div><div class="line">ALTER TABLE zipkin_spans ADD INDEX(`start_ts`) COMMENT &apos;for getTraces ordering and range&apos;;</div><div class="line"></div><div class="line">CREATE TABLE IF NOT EXISTS zipkin_annotations (</div><div class="line">  `trace_id_high` BIGINT NOT NULL DEFAULT 0 COMMENT &apos;If non zero, this means the trace uses 128 bit traceIds instead of 64 bit&apos;,</div><div class="line">  `trace_id` BIGINT NOT NULL COMMENT &apos;coincides with zipkin_spans.trace_id&apos;,</div><div class="line">  `span_id` BIGINT NOT NULL COMMENT &apos;coincides with zipkin_spans.id&apos;,</div><div class="line">  `a_key` VARCHAR(255) NOT NULL COMMENT &apos;BinaryAnnotation.key or Annotation.value if type == -1&apos;,</div><div class="line">  `a_value` BLOB COMMENT &apos;BinaryAnnotation.value(), which must be smaller than 64KB&apos;,</div><div class="line">  `a_type` INT NOT NULL COMMENT &apos;BinaryAnnotation.type() or -1 if Annotation&apos;,</div><div class="line">  `a_timestamp` BIGINT COMMENT &apos;Used to implement TTL; Annotation.timestamp or zipkin_spans.timestamp&apos;,</div><div class="line">  `endpoint_ipv4` INT COMMENT &apos;Null when Binary/Annotation.endpoint is null&apos;,</div><div class="line">  `endpoint_ipv6` BINARY(16) COMMENT &apos;Null when Binary/Annotation.endpoint is null, or no IPv6 address&apos;,</div><div class="line">  `endpoint_port` SMALLINT COMMENT &apos;Null when Binary/Annotation.endpoint is null&apos;,</div><div class="line">  `endpoint_service_name` VARCHAR(255) COMMENT &apos;Null when Binary/Annotation.endpoint is null&apos;</div><div class="line">) ENGINE=InnoDB ROW_FORMAT=COMPRESSED CHARACTER SET=utf8 COLLATE utf8_general_ci;</div><div class="line"></div><div class="line">ALTER TABLE zipkin_annotations ADD UNIQUE KEY(`trace_id_high`, `trace_id`, `span_id`, `a_key`, `a_timestamp`) COMMENT &apos;Ignore insert on duplicate&apos;;</div><div class="line">ALTER TABLE zipkin_annotations ADD INDEX(`trace_id_high`, `trace_id`, `span_id`) COMMENT &apos;for joining with zipkin_spans&apos;;</div><div class="line">ALTER TABLE zipkin_annotations ADD INDEX(`trace_id_high`, `trace_id`) COMMENT &apos;for getTraces/ByIds&apos;;</div><div class="line">ALTER TABLE zipkin_annotations ADD INDEX(`endpoint_service_name`) COMMENT &apos;for getTraces and getServiceNames&apos;;</div><div class="line">ALTER TABLE zipkin_annotations ADD INDEX(`a_type`) COMMENT &apos;for getTraces&apos;;</div><div class="line">ALTER TABLE zipkin_annotations ADD INDEX(`a_key`) COMMENT &apos;for getTraces&apos;;</div><div class="line">ALTER TABLE zipkin_annotations ADD INDEX(`trace_id`, `span_id`, `a_key`) COMMENT &apos;for dependencies job&apos;;</div><div class="line"></div><div class="line">CREATE TABLE IF NOT EXISTS zipkin_dependencies (</div><div class="line">  `day` DATE NOT NULL,</div><div class="line">  `parent` VARCHAR(255) NOT NULL,</div><div class="line">  `child` VARCHAR(255) NOT NULL,</div><div class="line">  `call_count` BIGINT</div><div class="line">) ENGINE=InnoDB ROW_FORMAT=COMPRESSED CHARACTER SET=utf8 COLLATE utf8_general_ci;</div><div class="line"></div><div class="line">ALTER TABLE zipkin_dependencies ADD UNIQUE KEY(`day`, `parent`, `child`);</div></pre></td></tr></table></figure>
+<p>登录 Mysql<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -u root --password=&apos;Xx$Zipkin2017&apos;</div></pre></td></tr></table></figure></p>
+<p>创建 Zipkin 数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create database zipkin;</div></pre></td></tr></table></figure></p>
+<p>切换数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">use zipkin;</div></pre></td></tr></table></figure></p>
+<p>初始化表及索引<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source /data/release/zipkin/zipkin_init.sql</div></pre></td></tr></table></figure></p>
+<p>执行以下命令会看到<code>zipkin_annotations</code>, <code>zipkin_dependencies</code>, <code>zipkin_spans</code> 三张数据表，说明初始化成功了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">show tables;</div></pre></td></tr></table></figure></p>
+<p>退出 MySQL, 回到 Bash shell<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exit</div></pre></td></tr></table></figure></p>
+<p><em>启动 Zipkin</em></p>
+<p>注： 此处默认使用教程生成的密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /data/release/zipkin</div><div class="line">STORAGE_TYPE=mysql MYSQL_HOST=localhost MYSQL_TCP_PORT=3306 MYSQL_DB=zipkin MYSQL_USER=root MYSQL_PASS=&apos;Xx$Zipkin2017&apos; \</div><div class="line">nohup java -jar zipkin.jar &amp;</div></pre></td></tr></table></figure></p>
+<p><strong>4. 创建具有数据上报能力的Demo</strong></p>
+<p>搭建 NodeJS 环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -</div><div class="line">yum install nodejs -y</div></pre></td></tr></table></figure>
+<p><em>创建Demo目录</em></p>
+<p>创建 <code>/data/release/service_a</code> 目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/release/service_a &amp;&amp; cd &quot;$_&quot;</div></pre></td></tr></table></figure></p>
+<p><em>使用 NPM 安装相关依赖</em></p>
+<p>请在 <code>/data/release/service_a</code> 目录下创建并编辑 <code>package.json</code>，参考下面的内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;name&quot;: &quot;service_a&quot;,</div><div class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</div><div class="line">  &quot;description&quot;: &quot;&quot;,</div><div class="line">  &quot;main&quot;: &quot;index.js&quot;,</div><div class="line">  &quot;scripts&quot;: &#123;&#125;,</div><div class="line">  &quot;author&quot;: &quot;&quot;,</div><div class="line">  &quot;license&quot;: &quot;ISC&quot;,</div><div class="line">  &quot;dependencies&quot;: &#123;</div><div class="line">    &quot;express&quot;: &quot;^4.15.3&quot;,</div><div class="line">    &quot;zipkin&quot;: &quot;^0.7.2&quot;,</div><div class="line">    &quot;zipkin-instrumentation-express&quot;: &quot;^0.7.2&quot;,</div><div class="line">    &quot;zipkin-transport-http&quot;: &quot;^0.7.2&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>安装相关依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install</div></pre></td></tr></table></figure></p>
+<p><em>创建并编辑 <code>app.js</code></em></p>
+<p>请在 <code>/data/release/service_a</code> 目录下创建 <code>app.js</code>，参考下面的内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">const express = require(&apos;express&apos;);</div><div class="line">const &#123;Tracer, ExplicitContext, BatchRecorder&#125; = require(&apos;zipkin&apos;);</div><div class="line">const &#123;HttpLogger&#125; = require(&apos;zipkin-transport-http&apos;);</div><div class="line">const zipkinMiddleware = require(&apos;zipkin-instrumentation-express&apos;).expressMiddleware;</div><div class="line"></div><div class="line">const ctxImpl = new ExplicitContext();</div><div class="line">const recorder = new BatchRecorder(&#123;</div><div class="line">    logger: new HttpLogger( &#123;</div><div class="line">        endpoint: &apos;http://127.0.0.1:9411/api/v1/spans&apos;</div><div class="line">    &#125;)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">const tracer = new Tracer(&#123;ctxImpl, recorder&#125;);</div><div class="line"></div><div class="line">const app = express();</div><div class="line"></div><div class="line">app.use(zipkinMiddleware(&#123;</div><div class="line">  tracer,</div><div class="line">  serviceName: &apos;service-a&apos;</div><div class="line">&#125;));</div><div class="line"></div><div class="line">app.use(&apos;/&apos;, (req, res, next) =&gt; &#123;</div><div class="line">    res.send(&apos;hello world&apos;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">app.listen(3000, () =&gt; &#123;</div><div class="line">  console.log(&apos;service-a listening on port 3000!&apos;)</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><em>启动服务</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node app.js</div></pre></td></tr></table></figure></p>
+<p>该服务监听 <code>3000</code> 端口， 使用浏览器访问 <a href="http://yourip:3000" target="_blank" rel="external">http://yourip:3000</a> 或 <a href="http://yourdomain.com:3000" target="_blank" rel="external">http://yourdomain.com:3000</a> 后，看到“hello world” 的文本字样说明服务已经正常工作</p>
+<p><strong>5. 部署完成</strong></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">linux zipkin</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/18/CentOS搭建基于ZIPKIN的数据追踪系统/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-CentOS搭建JavaWeb开发环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1204,135 +1325,6 @@
 
 
   
-    <article id="post-基于CentOS搭建GIT服务器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/17/基于CentOS搭建GIT服务器/">基于CentOS搭建GIT服务器</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/17/基于CentOS搭建GIT服务器/" class="archive-article-date">
-  	<time datetime="2017-10-17T14:28:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. 下载安装 git</strong></p>
-<p>Git 是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。</p>
-<p>此教程以 CentOS 7.2 x64 的系统为环境，搭建 git 服务器。</p>
-<ul>
-<li><p>安装依赖库和编译工具</p>
-<p>  为了后续安装能正常进行，我们先来安装一些相关依赖库和编译工具</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel</div></pre></td></tr></table></figure>
-<p>  安装编译工具</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install gcc perl-ExtUtils-MakeMaker</div></pre></td></tr></table></figure>
-</li>
-<li><p>下载 git</p>
-<p>  选一个目录，用来放下载下来的安装包，这里将安装包放在 /usr/local/src 目录里</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/src</div></pre></td></tr></table></figure>
-<p>  到官网找一个新版稳定的源码包下载到 <code>/usr/local/src</code> 文件夹里</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://www.kernel.org/pub/software/scm/git/git-2.10.0.tar.gz</div></pre></td></tr></table></figure>
-</li>
-<li><p>解压和编译</p>
-<p>  解压下载的源码包</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zvxf git-2.10.0.tar.gz</div></pre></td></tr></table></figure>
-<p>  解压后进入 git-2.10.0 文件夹</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd git-2.10.0</div></pre></td></tr></table></figure>
-<p>  执行编译</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make all prefix=/usr/local/git</div></pre></td></tr></table></figure>
-<p>  编译完成后, 安装到 /usr/local/git 目录下</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make install prefix=/usr/local/git</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>2. 配置环境变量</strong></p>
-<p>将 git 目录加入 PATH</p>
-<p>将原来的 PATH 指向目录修改为现在的目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo &apos;export PATH=$PATH:/usr/local/git/bin&apos; &gt;&gt; /etc/bashrc</div></pre></td></tr></table></figure>
-<p>生效环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source /etc/bashrc</div></pre></td></tr></table></figure></p>
-<p>此时我们能查看 git 版本号，说明我们已经安装成功了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git --version</div></pre></td></tr></table></figure></p>
-<p><strong>3. 创建 git 账号密码</strong></p>
-<p>创建 git 账号</p>
-<p>为我们刚刚搭建好的 git 创建一个账号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">useradd -m gituser</div></pre></td></tr></table></figure></p>
-<p>然后为这个账号设置密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">passwd gituser</div></pre></td></tr></table></figure></p>
-<p><strong>4. 初始化 git 仓库并配置用户权限</strong></p>
-<ul>
-<li><p>创建 git 仓库并初始化</p>
-<p>  我们创建 <code>/data/repositories</code> 目录用于存放 git 仓库</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/repositories</div></pre></td></tr></table></figure>
-<p>  创建好后，初始化这个仓库</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /data/repositories/ &amp;&amp; git init --bare test.git</div></pre></td></tr></table></figure>
-</li>
-<li><p>配置用户权限</p>
-<p>  给 git 仓库目录设置用户和用户组并设置权限</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chown -R gituser:gituser /data/repositories</div><div class="line">chmod 755 /data/repositories</div></pre></td></tr></table></figure>
-<p>  查找 <code>git-shell</code> 所在目录 , 编辑 <code>/etc/passwd</code> 文件，将最后一行关于 <code>gituser</code> 的登录 <code>shell</code> 配置改为 <code>git-shell</code> 的目录，如下</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gituser:x:500:500::/home/gituser:/usr/local/git/bin/git-shell</div></pre></td></tr></table></figure>
-</li>
-<li><p>使用搭建好的 Git 服务</p>
-<p>  克隆 test repo 到本地</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd ~ &amp;&amp; git clone gituser@yourip:/data/repositories/test.git #yourip可以你服务器的ip地址或域名</div></pre></td></tr></table></figure>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">linux git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/17/基于CentOS搭建GIT服务器/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1451,15 +1443,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux firekylin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">linux maven</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux firekylin</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1471,15 +1463,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">linux nginx mysql php</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">linux apache mysql php</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">linux nginx mysql php</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">linux pyspider</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">linux zipkin</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1491,15 +1487,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux zipkin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">elipse java spring springboot</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java javafx dialog</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1507,15 +1495,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">java javafx dialog</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java interview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color1">mac docker</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mac docker</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1527,7 +1519,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java jhipster</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1539,15 +1531,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">java jhipster</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">linux discuz</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux git</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
+                <a href="javascript:void(0)" class="js-tag color5">linux git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1559,11 +1555,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux leanote</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux leanote</a>
               </li>
              
               <li class="article-tag-list-item">

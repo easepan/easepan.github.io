@@ -193,6 +193,365 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-个人封装的Java工具包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/30/个人封装的Java工具包/">个人封装的Java工具包</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/30/个人封装的Java工具包/" class="archive-article-date">
+  	<time datetime="2017-11-30T07:16:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>封装一些常用的功能（JDK至少需要1.8），持续更新</p>
+<p><strong>使用Maven</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.zhazhapan<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>util<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>或手动导入：</strong>    <a href="http://oq3iwfipo.bkt.clouddn.com/tools/zhazhapan/util.jar" target="_blank" rel="external">点我下载</a></p>
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p><strong>1. JSON快速解析，基于fastjson</strong></p>
+<p><em>使用</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1. 导包</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.config.JsonParser;</div><div class="line"></div><div class="line">String json = <span class="string">"&#123;key1:test,key2:&#123;child1:node1,child2:node2&#125;,key3:[&#123;fast:json1&#125;,&#123;fast:json2&#125;],key4:[arr1,arr2]&#125;"</span>;</div><div class="line"></div><div class="line"><span class="comment">// 2. 新建一个解析对象</span></div><div class="line"></div><div class="line"><span class="comment">// 2.1 使用json字符串</span></div><div class="line">JsonParser jsonParser = <span class="keyword">new</span> JsonParser(json, <span class="keyword">false</span>);</div><div class="line"><span class="comment">// 2.2 或使用文件路径（可能抛出IO异常）</span></div><div class="line">JsonParser jsonParser = <span class="keyword">new</span> JsonParser(<span class="string">"/Users/pantao/Desktop/test.json"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 3. 愉快的使用</span></div><div class="line">String str = jsonParser.getString(<span class="string">"key3[1].fast"</span>);</div><div class="line">String str1 = jsonParser.getString(<span class="string">"key4[1]"</span>);</div><div class="line">JSONObject jsonObject = jsonParser.getObject(<span class="string">"key3[0]"</span>);</div><div class="line">JSONArray jsonArray = jsonParser.getArray(<span class="string">"key4"</span>);</div></pre></td></tr></table></figure>
+<p><strong>2. 简单计算器</strong></p>
+<p><em>使用</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1. 导包</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.Calculator;</div><div class="line"></div><div class="line"><span class="comment">// 2. 设置（如果没有设置将使用默认的精度）计算精度（即保存多少位小数）</span></div><div class="line">Calculator.setPrecision(<span class="number">5</span>);</div><div class="line"></div><div class="line"><span class="comment">// 3. 计算（有可能抛出计算式不合法的异常）</span></div><div class="line">String formula = <span class="string">"(23-9*7)/22+2(35-45+56/(12-9+4*(22/10-2)))"</span>;</div><div class="line">BigDecimal bd = Calculator.calculate(formula);</div><div class="line"><span class="keyword">double</span> res = db.doubleValue();</div></pre></td></tr></table></figure>
+<p><strong>3. 网络文件下载</strong></p>
+<p><em>使用</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1. 导包</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.Downloader;</div><div class="line"></div><div class="line"><span class="comment">// 2. 下载</span></div><div class="line">String storagePath = <span class="string">"/Users/pantao/Desktop"</span></div><div class="line">Downloader.download(storagePath, <span class="string">"http://oq3iwfipo.bkt.clouddn.com/tools/zhazhapan/util.jar"</span>);</div></pre></td></tr></table></figure>
+<p><strong>4. 简单的读写文件</strong></p>
+<p><em>使用</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1. 导包</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.FileExecutor;</div><div class="line"></div><div class="line"><span class="comment">// 2. 创建对象</span></div><div class="line">FileExecutor executor = <span class="keyword">new</span> FileExecutor();</div><div class="line"></div><div class="line"><span class="comment">// 3. 写文件（可能抛出IO异常）</span></div><div class="line">String write = <span class="string">"write something"</span>;</div><div class="line">executor.saveFile(<span class="string">"/Users/pantao/Desktop/test.txt"</span>, write, <span class="keyword">false</span>);</div><div class="line"></div><div class="line"><span class="comment">// 4. 读文件（可能抛出IO异常）</span></div><div class="line">String read = executor.readFile(<span class="string">"/Users/pantao/Desktop/test.txt"</span>);</div></pre></td></tr></table></figure>
+<p><strong>5. 简单的线程池</strong></p>
+<p><em>使用</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1. 导包</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.ThreadPool;</div><div class="line"></div><div class="line"><span class="comment">// 2. 初始化线程池</span></div><div class="line"><span class="comment">// 2.1 方式一</span></div><div class="line">ThreadPool.setCorePoolSize(<span class="number">1</span>);</div><div class="line">ThreadPool.setMaximumPoolSize(<span class="number">5</span>);</div><div class="line">ThreadPool.setKeepAliveTime(<span class="number">100</span>);</div><div class="line">ThreadPool.setTimeUnit(TimeUnit.MILLISECONDS);</div><div class="line">ThreadPool.init();</div><div class="line"><span class="comment">// 2.2 方式二</span></div><div class="line">ThreadPool.init(<span class="number">1</span>, <span class="number">5</span>, <span class="number">100</span>, TimeUnit.MILLISECONDS);</div><div class="line"></div><div class="line"><span class="comment">// 3. 使用线程池</span></div><div class="line">ThreadPool.executor.submit(() -&gt; &#123;</div><div class="line">	<span class="comment">//do somthing here</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 4. 或者新建线程池</span></div><div class="line">ThreadPool threadPool = <span class="keyword">new</span> ThreadPool(<span class="number">1</span>, <span class="number">5</span>, <span class="number">100</span>, TimeUnit.MILLISECONDS);</div><div class="line"></div><div class="line"><span class="comment">// 4.1 使用新建的线程池</span></div><div class="line">threadPool.newExecutor.submit(() -&gt; &#123;</div><div class="line">	<span class="comment">//do somthing here</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><strong>6. 简单的加密与解密</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 提供一些Java常用的加密（包括md5，base64,sha等加密）</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.decryption.JavaEncrypt;</div><div class="line"></div><div class="line"><span class="comment">// 如何使用</span></div><div class="line">String code = JavaEncrypt.md5(<span class="string">"this is a md5 encrypt method"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 提供一些Java常用的解密（包括md5，base64,sha等解密）</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.decryption.JavaDecrypt;</div><div class="line"></div><div class="line"><span class="comment">// 异或加密和ascii加密</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.decryption.SimpleEncryt;</div><div class="line"></div><div class="line"><span class="comment">// 如何使用</span></div><div class="line">String code = SimpleEncryt.ascii(<span class="string">"simple encrypt"</span>, <span class="string">"key"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 异或解密和ascii解密</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.decryption.SimpleDecrypt;</div></pre></td></tr></table></figure>
+<p><strong>7. 弹窗（使用JavaFX，JDK最低要求1.8）</strong></p>
+<p><em>使用</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1. 导入</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.dialog.Alerts;</div><div class="line"></div><div class="line"><span class="comment">// 2. 弹窗并接收返回的信息</span></div><div class="line">Optional&lt;ButtonType&gt; result = Alerts.showConfirmation(<span class="string">"title"</span>, <span class="string">"some information"</span>);</div><div class="line"><span class="keyword">if</span> (result.get() == ButtonType.OK) &#123;</div><div class="line">	<span class="comment">// do something here</span></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">	<span class="comment">// do something here</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 3. 其他类型的弹窗基本上跟上面的操作一样</span></div><div class="line"></div><div class="line"><span class="comment">// 4. 弹出输入框</span></div><div class="line"><span class="comment">// 4.1 导包</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.dialog.Dialogs;</div><div class="line"><span class="comment">// 4.2 弹出并接收返回的内容（如何用户点击取消将返回null）</span></div><div class="line">String msg = Dialogs.showInputDialog(<span class="string">"title"</span>, <span class="string">"header"</span>, <span class="string">"content"</span>, <span class="string">"default value"</span>);</div></pre></td></tr></table></figure>
+<p><strong>8. <code>com.zhazhapan.util.Checker</code>类</strong></p>
+<p><em>所有参数均不用考虑为null的情况，Checker会处理</em></p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>简要说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>isSorted</td>
+<td>检查数组是否是升序或降序</td>
+</tr>
+<tr>
+<td>isDate</td>
+<td>是否是日期格式</td>
+</tr>
+<tr>
+<td>replace</td>
+<td>替换字符串</td>
+</tr>
+<tr>
+<td>isEmail</td>
+<td>是否是邮箱格式</td>
+</tr>
+<tr>
+<td>isDecimal</td>
+<td>是否是数字（包括小数）格式</td>
+</tr>
+<tr>
+<td>isNumber</td>
+<td>是否是整数</td>
+</tr>
+<tr>
+<td>isNull</td>
+<td>对象是否为null</td>
+</tr>
+<tr>
+<td>isNotNull</td>
+<td>对象是否不为null</td>
+</tr>
+<tr>
+<td>isNullOrEmpty</td>
+<td>字符串是否为null或空</td>
+</tr>
+<tr>
+<td>isNotEmpty</td>
+<td>是否不为null且不为空</td>
+</tr>
+<tr>
+<td>checkNull</td>
+<td>检测字符串是否为null，如果是，返回空字符串，否则返回原字符串</td>
+</tr>
+<tr>
+<td>isEmpty</td>
+<td>列表或集合是否为空</td>
+</tr>
+<tr>
+<td>isHyperLink</td>
+<td>是否是超链接（URL）</td>
+</tr>
+<tr>
+<td>checkDate</td>
+<td>检测日期是否为null，如果是，返回当前日期，否则返回原日期</td>
+</tr>
+</tbody>
+</table>
+<p><br><br><strong>9. <code>com.zhazhapan.util.Formatter</code>类</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>简要说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stringToInt</td>
+<td>将字符串转换为Integer</td>
+</tr>
+<tr>
+<td>formatSize</td>
+<td>格式化文件大小为KB、MB、GB、TB格式</td>
+</tr>
+<tr>
+<td>sizeToLong</td>
+<td>将格式化后的文件大小转换为单位为B（字节）的long型</td>
+</tr>
+<tr>
+<td>stringToDouble</td>
+<td>字符串转换为Double</td>
+</tr>
+<tr>
+<td>stringToLong</td>
+<td>字符串转换为Long</td>
+</tr>
+<tr>
+<td>customFormatDecimal</td>
+<td>将Double转换为自定义格式的字符串</td>
+</tr>
+<tr>
+<td>formatDecimal</td>
+<td>将Double转换为默认格式（#0.00）的字符串</td>
+</tr>
+<tr>
+<td>timeStampToString</td>
+<td>将时间戳转换为“yyyy-MM-dd HH:mm:ss”格式的字符串</td>
+</tr>
+<tr>
+<td>formatJson</td>
+<td>将json文本转换为标准格式的json</td>
+</tr>
+<tr>
+<td>dateToString</td>
+<td>将日期转换为“yyyy-MM-dd”格式的字符串</td>
+</tr>
+<tr>
+<td>datetimeToString</td>
+<td>将日期转换为“yyyy-MM-dd HH:mm:ss”格式的字符串</td>
+</tr>
+<tr>
+<td>getFileName</td>
+<td>从路径（包括网络路径）中获取文件名</td>
+</tr>
+<tr>
+<td>stringToFloat</td>
+<td>将字符串转换为Float</td>
+</tr>
+<tr>
+<td>stringToInteger</td>
+<td>同stringToInt</td>
+</tr>
+<tr>
+<td>stringToDate</td>
+<td>将字符串转换为“yyyy-MM-dd”格式的日期</td>
+</tr>
+<tr>
+<td>stringToLongTime</td>
+<td>将字符串转换为“HH:mm:ss”格式的日期</td>
+</tr>
+<tr>
+<td>stringToShortTime</td>
+<td>将字符串转换为“HH:mm”格式的日期</td>
+</tr>
+<tr>
+<td>stringToCustomDateTime</td>
+<td>将字符串转换为自定义格式的日期</td>
+</tr>
+<tr>
+<td>stringToDatetime</td>
+<td>将字符串转换为“yyyy-MM-dd HH:mm:ss”格式的日期</td>
+</tr>
+<tr>
+<td>toLocalDate</td>
+<td>将日期转换为“yyyy年MM月dd日”格式的字符串</td>
+</tr>
+<tr>
+<td>longTimeToString</td>
+<td>将日期转换为“HH:mm:ss”格式的字符串</td>
+</tr>
+<tr>
+<td>shortTimeToString</td>
+<td>将日期转换为“HH:mm”格式的字符串</td>
+</tr>
+<tr>
+<td>datetimeToCustomString</td>
+<td>将日期转换为自定义格式的字符串</td>
+</tr>
+<tr>
+<td>numberFormat</td>
+<td>将数字格式化为指定长度的字符串（不足用0补齐）</td>
+</tr>
+<tr>
+<td>localDateToDate</td>
+<td>将java.time.LocalDate转换为java.util.Date</td>
+</tr>
+<tr>
+<td>dateToLocalDate</td>
+<td>将java.util.Date转换为java.time.LocalDate</td>
+</tr>
+</tbody>
+</table>
+<p><br><br><strong>10. <code>com.zhazhapan.util.Utils</code>类</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>简要说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>extractDouble</td>
+<td>从字符串中提取数字并转换为Double</td>
+</tr>
+<tr>
+<td>extractFloat</td>
+<td>从字符串中提取数字并转换为Float</td>
+</tr>
+<tr>
+<td>extractShort</td>
+<td>从字符串中提取数字并转换为Short</td>
+</tr>
+<tr>
+<td>extractLong</td>
+<td>从字符串中提取数字并转换为Long</td>
+</tr>
+<tr>
+<td>extractInt</td>
+<td>从字符串中提取数字并转换为Integer</td>
+</tr>
+<tr>
+<td>extractDigit</td>
+<td>从字符串中提取出数字，包括最后一个“.”号</td>
+</tr>
+<tr>
+<td>maxLengthString</td>
+<td>返回多个字符串中长度最长的字符串</td>
+</tr>
+<tr>
+<td>concatArrays</td>
+<td>合并多个数组</td>
+</tr>
+<tr>
+<td>getCurrentMonth()</td>
+<td>获取当前月份</td>
+</tr>
+<tr>
+<td>copyToClipboard</td>
+<td>复制字符串至系统剪贴板</td>
+</tr>
+<tr>
+<td>openLink</td>
+<td>使用系统默认的浏览器打开超链接</td>
+</tr>
+<tr>
+<td>openFile</td>
+<td>使用系统默认的方式打开文件</td>
+</tr>
+<tr>
+<td>getDay</td>
+<td>获取日期</td>
+</tr>
+<tr>
+<td>getMonth</td>
+<td>获取月份</td>
+</tr>
+<tr>
+<td>getYear</td>
+<td>获取年份</td>
+</tr>
+<tr>
+<td>getMaxValue</td>
+<td>从多个数字中获取最大值</td>
+</tr>
+<tr>
+<td>mergeSortedArrays</td>
+<td>将两个已经排好序（同序）的数组合并一个有序数组</td>
+</tr>
+</tbody>
+</table>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/30/个人封装的Java工具包/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-你知道哪些聊天机器人" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1407,127 +1766,6 @@
 
 
   
-    <article id="post-CentOS搭建基于ZIPKIN的数据追踪系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/18/CentOS搭建基于ZIPKIN的数据追踪系统/">CentOS搭建基于ZIPKIN的数据追踪系统</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/18/CentOS搭建基于ZIPKIN的数据追踪系统/" class="archive-article-date">
-  	<time datetime="2017-10-18T03:32:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. 配置 Java 环境</strong></p>
-<p><em>安装 JDK</em></p>
-<p><code>Zipkin</code> 使用 Java8<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install java-1.8.0-openjdk* -y</div></pre></td></tr></table></figure></p>
-<p>安装完成后，查看是否安装成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -version</div></pre></td></tr></table></figure></p>
-<p><strong>2. 安装 Zipkin</strong></p>
-<p>新建目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/release/zipkin &amp;&amp; cd &quot;$_&quot;</div></pre></td></tr></table></figure></p>
-<p>下载 Zipkin<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -O zipkin.jar &apos;https://search.maven.org/remote_content?g=io.zipkin.java&amp;a=zipkin-server&amp;v=LATEST&amp;c=exec&apos;</div></pre></td></tr></table></figure></p>
-<p>启动 Zipkin<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -jar zipkin.jar</div></pre></td></tr></table></figure></p>
-<p>Zipkin 默认监听 9411 端口， 使用浏览器访问 <a href="http://yourip:9411" target="_blank" rel="external">http://yourip:9411</a> 或 <a href="http://yourdomain.com:9411" target="_blank" rel="external">http://yourdomain.com:9411</a> 即可看到 Zipkin 自带的图形化界面</p>
-<p><strong>3. 配置 MySQL 数据持久化方案</strong></p>
-<p>Zipkin 支持的持久化方案很多，如： Cassandra, MySQL, Elasticsearch。本实验使用 MySQL 5.7 作为数据持久化方案。</p>
-<p><em>安装 MySQL 5.7</em></p>
-<p>使用 <code>Ctrl + C</code> 退出上个步骤的 Java 进程并下载 rmp 包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm</div></pre></td></tr></table></figure></p>
-<p>安装 rpm 包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -Uvh mysql57-community-release-el7-9.noarch.rpm</div></pre></td></tr></table></figure></p>
-<p>安装 MySQL<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-community-server -y</div></pre></td></tr></table></figure></p>
-<p>启动 MySQL 服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start mysqld.service</div></pre></td></tr></table></figure></p>
-<p><em>设置 MySQL 密码</em></p>
-<p>获取 <code>root</code> 临时密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep &apos;temporary password&apos; /var/log/mysqld.log | awk &apos;&#123;print $NF&#125;&apos;</div></pre></td></tr></table></figure></p>
-<p>使用上一步的获得的临时密码登入 MySQL<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -uroot -p</div></pre></td></tr></table></figure></p>
-<p>设置 MySQL 账户 <code>root</code> 密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ALTER USER &apos;root&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;Xx$Zipkin2017&apos;;</div></pre></td></tr></table></figure></p>
-<p>退出 MySQL, 回到 Bash shell<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exit;</div></pre></td></tr></table></figure></p>
-<p><em>初始化 Zipkin 数据库</em></p>
-<p>编写初始化脚本</p>
-<p>请在 <code>/data/release/zipkin</code> 目录下创建 <code>zipkin_init.sql</code>，参考下面的内容。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE IF NOT EXISTS zipkin_spans (</div><div class="line">  `trace_id_high` BIGINT NOT NULL DEFAULT 0 COMMENT &apos;If non zero, this means the trace uses 128 bit traceIds instead of 64 bit&apos;,</div><div class="line">  `trace_id` BIGINT NOT NULL,</div><div class="line">  `id` BIGINT NOT NULL,</div><div class="line">  `name` VARCHAR(255) NOT NULL,</div><div class="line">  `parent_id` BIGINT,</div><div class="line">  `debug` BIT(1),</div><div class="line">  `start_ts` BIGINT COMMENT &apos;Span.timestamp(): epoch micros used for endTs query and to implement TTL&apos;,</div><div class="line">  `duration` BIGINT COMMENT &apos;Span.duration(): micros used for minDuration and maxDuration query&apos;</div><div class="line">) ENGINE=InnoDB ROW_FORMAT=COMPRESSED CHARACTER SET=utf8 COLLATE utf8_general_ci;</div><div class="line"></div><div class="line">ALTER TABLE zipkin_spans ADD UNIQUE KEY(`trace_id_high`, `trace_id`, `id`) COMMENT &apos;ignore insert on duplicate&apos;;</div><div class="line">ALTER TABLE zipkin_spans ADD INDEX(`trace_id_high`, `trace_id`, `id`) COMMENT &apos;for joining with zipkin_annotations&apos;;</div><div class="line">ALTER TABLE zipkin_spans ADD INDEX(`trace_id_high`, `trace_id`) COMMENT &apos;for getTracesByIds&apos;;</div><div class="line">ALTER TABLE zipkin_spans ADD INDEX(`name`) COMMENT &apos;for getTraces and getSpanNames&apos;;</div><div class="line">ALTER TABLE zipkin_spans ADD INDEX(`start_ts`) COMMENT &apos;for getTraces ordering and range&apos;;</div><div class="line"></div><div class="line">CREATE TABLE IF NOT EXISTS zipkin_annotations (</div><div class="line">  `trace_id_high` BIGINT NOT NULL DEFAULT 0 COMMENT &apos;If non zero, this means the trace uses 128 bit traceIds instead of 64 bit&apos;,</div><div class="line">  `trace_id` BIGINT NOT NULL COMMENT &apos;coincides with zipkin_spans.trace_id&apos;,</div><div class="line">  `span_id` BIGINT NOT NULL COMMENT &apos;coincides with zipkin_spans.id&apos;,</div><div class="line">  `a_key` VARCHAR(255) NOT NULL COMMENT &apos;BinaryAnnotation.key or Annotation.value if type == -1&apos;,</div><div class="line">  `a_value` BLOB COMMENT &apos;BinaryAnnotation.value(), which must be smaller than 64KB&apos;,</div><div class="line">  `a_type` INT NOT NULL COMMENT &apos;BinaryAnnotation.type() or -1 if Annotation&apos;,</div><div class="line">  `a_timestamp` BIGINT COMMENT &apos;Used to implement TTL; Annotation.timestamp or zipkin_spans.timestamp&apos;,</div><div class="line">  `endpoint_ipv4` INT COMMENT &apos;Null when Binary/Annotation.endpoint is null&apos;,</div><div class="line">  `endpoint_ipv6` BINARY(16) COMMENT &apos;Null when Binary/Annotation.endpoint is null, or no IPv6 address&apos;,</div><div class="line">  `endpoint_port` SMALLINT COMMENT &apos;Null when Binary/Annotation.endpoint is null&apos;,</div><div class="line">  `endpoint_service_name` VARCHAR(255) COMMENT &apos;Null when Binary/Annotation.endpoint is null&apos;</div><div class="line">) ENGINE=InnoDB ROW_FORMAT=COMPRESSED CHARACTER SET=utf8 COLLATE utf8_general_ci;</div><div class="line"></div><div class="line">ALTER TABLE zipkin_annotations ADD UNIQUE KEY(`trace_id_high`, `trace_id`, `span_id`, `a_key`, `a_timestamp`) COMMENT &apos;Ignore insert on duplicate&apos;;</div><div class="line">ALTER TABLE zipkin_annotations ADD INDEX(`trace_id_high`, `trace_id`, `span_id`) COMMENT &apos;for joining with zipkin_spans&apos;;</div><div class="line">ALTER TABLE zipkin_annotations ADD INDEX(`trace_id_high`, `trace_id`) COMMENT &apos;for getTraces/ByIds&apos;;</div><div class="line">ALTER TABLE zipkin_annotations ADD INDEX(`endpoint_service_name`) COMMENT &apos;for getTraces and getServiceNames&apos;;</div><div class="line">ALTER TABLE zipkin_annotations ADD INDEX(`a_type`) COMMENT &apos;for getTraces&apos;;</div><div class="line">ALTER TABLE zipkin_annotations ADD INDEX(`a_key`) COMMENT &apos;for getTraces&apos;;</div><div class="line">ALTER TABLE zipkin_annotations ADD INDEX(`trace_id`, `span_id`, `a_key`) COMMENT &apos;for dependencies job&apos;;</div><div class="line"></div><div class="line">CREATE TABLE IF NOT EXISTS zipkin_dependencies (</div><div class="line">  `day` DATE NOT NULL,</div><div class="line">  `parent` VARCHAR(255) NOT NULL,</div><div class="line">  `child` VARCHAR(255) NOT NULL,</div><div class="line">  `call_count` BIGINT</div><div class="line">) ENGINE=InnoDB ROW_FORMAT=COMPRESSED CHARACTER SET=utf8 COLLATE utf8_general_ci;</div><div class="line"></div><div class="line">ALTER TABLE zipkin_dependencies ADD UNIQUE KEY(`day`, `parent`, `child`);</div></pre></td></tr></table></figure>
-<p>登录 Mysql<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -u root --password=&apos;Xx$Zipkin2017&apos;</div></pre></td></tr></table></figure></p>
-<p>创建 Zipkin 数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create database zipkin;</div></pre></td></tr></table></figure></p>
-<p>切换数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">use zipkin;</div></pre></td></tr></table></figure></p>
-<p>初始化表及索引<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source /data/release/zipkin/zipkin_init.sql</div></pre></td></tr></table></figure></p>
-<p>执行以下命令会看到<code>zipkin_annotations</code>, <code>zipkin_dependencies</code>, <code>zipkin_spans</code> 三张数据表，说明初始化成功了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">show tables;</div></pre></td></tr></table></figure></p>
-<p>退出 MySQL, 回到 Bash shell<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exit</div></pre></td></tr></table></figure></p>
-<p><em>启动 Zipkin</em></p>
-<p>注： 此处默认使用教程生成的密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /data/release/zipkin</div><div class="line">STORAGE_TYPE=mysql MYSQL_HOST=localhost MYSQL_TCP_PORT=3306 MYSQL_DB=zipkin MYSQL_USER=root MYSQL_PASS=&apos;Xx$Zipkin2017&apos; \</div><div class="line">nohup java -jar zipkin.jar &amp;</div></pre></td></tr></table></figure></p>
-<p><strong>4. 创建具有数据上报能力的Demo</strong></p>
-<p>搭建 NodeJS 环境</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -</div><div class="line">yum install nodejs -y</div></pre></td></tr></table></figure>
-<p><em>创建Demo目录</em></p>
-<p>创建 <code>/data/release/service_a</code> 目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/release/service_a &amp;&amp; cd &quot;$_&quot;</div></pre></td></tr></table></figure></p>
-<p><em>使用 NPM 安装相关依赖</em></p>
-<p>请在 <code>/data/release/service_a</code> 目录下创建并编辑 <code>package.json</code>，参考下面的内容。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;name&quot;: &quot;service_a&quot;,</div><div class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</div><div class="line">  &quot;description&quot;: &quot;&quot;,</div><div class="line">  &quot;main&quot;: &quot;index.js&quot;,</div><div class="line">  &quot;scripts&quot;: &#123;&#125;,</div><div class="line">  &quot;author&quot;: &quot;&quot;,</div><div class="line">  &quot;license&quot;: &quot;ISC&quot;,</div><div class="line">  &quot;dependencies&quot;: &#123;</div><div class="line">    &quot;express&quot;: &quot;^4.15.3&quot;,</div><div class="line">    &quot;zipkin&quot;: &quot;^0.7.2&quot;,</div><div class="line">    &quot;zipkin-instrumentation-express&quot;: &quot;^0.7.2&quot;,</div><div class="line">    &quot;zipkin-transport-http&quot;: &quot;^0.7.2&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>安装相关依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install</div></pre></td></tr></table></figure></p>
-<p><em>创建并编辑 <code>app.js</code></em></p>
-<p>请在 <code>/data/release/service_a</code> 目录下创建 <code>app.js</code>，参考下面的内容。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">const express = require(&apos;express&apos;);</div><div class="line">const &#123;Tracer, ExplicitContext, BatchRecorder&#125; = require(&apos;zipkin&apos;);</div><div class="line">const &#123;HttpLogger&#125; = require(&apos;zipkin-transport-http&apos;);</div><div class="line">const zipkinMiddleware = require(&apos;zipkin-instrumentation-express&apos;).expressMiddleware;</div><div class="line"></div><div class="line">const ctxImpl = new ExplicitContext();</div><div class="line">const recorder = new BatchRecorder(&#123;</div><div class="line">    logger: new HttpLogger( &#123;</div><div class="line">        endpoint: &apos;http://127.0.0.1:9411/api/v1/spans&apos;</div><div class="line">    &#125;)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">const tracer = new Tracer(&#123;ctxImpl, recorder&#125;);</div><div class="line"></div><div class="line">const app = express();</div><div class="line"></div><div class="line">app.use(zipkinMiddleware(&#123;</div><div class="line">  tracer,</div><div class="line">  serviceName: &apos;service-a&apos;</div><div class="line">&#125;));</div><div class="line"></div><div class="line">app.use(&apos;/&apos;, (req, res, next) =&gt; &#123;</div><div class="line">    res.send(&apos;hello world&apos;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">app.listen(3000, () =&gt; &#123;</div><div class="line">  console.log(&apos;service-a listening on port 3000!&apos;)</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p><em>启动服务</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node app.js</div></pre></td></tr></table></figure></p>
-<p>该服务监听 <code>3000</code> 端口， 使用浏览器访问 <a href="http://yourip:3000" target="_blank" rel="external">http://yourip:3000</a> 或 <a href="http://yourdomain.com:3000" target="_blank" rel="external">http://yourdomain.com:3000</a> 后，看到“hello world” 的文本字样说明服务已经正常工作</p>
-<p><strong>5. 部署完成</strong></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">linux zipkin</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/18/CentOS搭建基于ZIPKIN的数据追踪系统/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1646,15 +1884,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux firekylin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">linux maven</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux firekylin</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1666,15 +1904,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">linux nginx mysql php</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">linux apache mysql php</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">linux nginx mysql php</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">linux pyspider</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">linux zipkin</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1686,15 +1928,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux zipkin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">elipse java spring springboot</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java javafx dialog</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1702,15 +1936,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">java javafx dialog</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java interview</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color1">mac docker</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mac docker</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1722,7 +1960,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java jhipster</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1734,15 +1972,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">java jhipster</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">linux discuz</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux git</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
+                <a href="javascript:void(0)" class="js-tag color5">linux git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1754,11 +1996,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux leanote</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux leanote</a>
               </li>
              
               <li class="article-tag-list-item">
