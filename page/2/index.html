@@ -193,6 +193,103 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-CentOS搭建-NET-Core开发环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/18/CentOS搭建-NET-Core开发环境/">CentOS搭建.NET Core开发环境</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/18/CentOS搭建-NET-Core开发环境/" class="archive-article-date">
+  	<time datetime="2017-10-18T04:53:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1. 安装 .Net Core 执行代码</strong></p>
+<p>.NET Core 的官方文档很详细，本实验带你建立一个.NET Core 1.1的Web运行环境，更多内容可以可以查阅 <a href="https://docs.microsoft.com/zh-cn/dotnet/core/get-started" target="_blank" rel="external">微软官方文档</a>。</p>
+<p><em>安装 .Net Core</em></p>
+<p>执行命令安装 <code>.Net Core</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo yum -y install libunwind libicu</div><div class="line">curl -SL -o dotnet.tar.gz https://go.microsoft.com/fwlink/?linkid=848821</div><div class="line">sudo mkdir -p /usr/local/dotnet &amp;&amp; sudo tar zxf dotnet.tar.gz -C /usr/local/dotnet</div><div class="line">sudo ln -s /usr/local/dotnet/dotnet /usr/local/bin</div></pre></td></tr></table></figure></p>
+<p><em>创建 Hello World 控制台程序</em></p>
+<p>创建并运行 Console 项目 <code>hwapp</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dotnet new console -o hwapp</div><div class="line">cd hwapp</div><div class="line">dotnet restore</div><div class="line">dotnet run</div></pre></td></tr></table></figure></p>
+<p><em>创建并运行 ASP.NET Core Web 应用</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cd /home</div><div class="line">mkdir aspnetcoreapp</div><div class="line">cd aspnetcoreapp</div><div class="line">dotnet new web</div><div class="line">dotnet restore</div><div class="line">dotnet run</div></pre></td></tr></table></figure></p>
+<p><strong>2. 安装 Jexus</strong></p>
+<p>通常情况下，对外提供的 Web 服务都在 <code>80</code>或者<code>443</code> 端口，而我们的 Web 应用程序默认运行在5000端口，在 Windows 上可以使用 IIS 来宿主 ASP.NET Core，在 Linux 下可以用 Nginx，Apache，Jexus 等来作为宿主。本教程向大家推荐使用国内社区自行开发的 <a href="http://www.linuxdot.net/" target="_blank" rel="external">Jexus</a>。</p>
+<p><em>安装独立版 Jexus</em></p>
+<p>执行命令安装独立版的 <code>Jexus</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl https://jexus.org/release/x64/install.sh|sh</div></pre></td></tr></table></figure></p>
+<p>配置 Jexus</p>
+<p>执行命令将 asp.net core 应用部署到 Jexus<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir -p /var/www/aspnetcore</div><div class="line">dotnet publish -o /var/www/aspnetcore</div></pre></td></tr></table></figure></p>
+<p>执行命令启动服务监听端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dotnet /var/www/aspnetcore/aspnetcoreapp.dll</div></pre></td></tr></table></figure></p>
+<p><em>配置 jexus 网站：</em></p>
+<p>创建 <code>aspnetcore</code> 配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /usr/jexus/siteconf</div><div class="line">cp default aspnetcore</div></pre></td></tr></table></figure></p>
+<p>修改 <code>aspnetcore</code> 配置文件为如下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">port=80</div><div class="line">root=/ /var/www/aspnetcore</div><div class="line">hosts= *    #OR your.com,*.your.com</div><div class="line"></div><div class="line">AppHost=&#123;</div><div class="line">    cmd=dotnet /var/www/aspnetcore/aspnetcoreapp.dll;</div><div class="line">    root=/var/www/aspnetcore;</div><div class="line">    port=0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><em>启动 Jexus</em></p>
+<p>执行命令删除原有默认配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm -rf /usr/jexus/siteconf/default</div></pre></td></tr></table></figure></p>
+<p>执行命令启动 Jexus<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sh /usr/jexus/jws restart</div><div class="line">sh /usr/jexus/jws start</div></pre></td></tr></table></figure></p>
+<ol>
+<li>完成</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/18/CentOS搭建-NET-Core开发环境/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-CentOS搭建基于ZIPKIN的数据追踪系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1206,125 +1303,6 @@
 
 
   
-    <article id="post-基于CentOS搭建SVN服务器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/17/基于CentOS搭建SVN服务器/">基于CentOS搭建SVN服务器</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/17/基于CentOS搭建SVN服务器/" class="archive-article-date">
-  	<time datetime="2017-10-17T14:41:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. 安装 SVN 服务端</strong></p>
-<p>安装 Subversion</p>
-<p>Subversion 是一个版本控制系统，相对于的 RCS 、 CVS ，采用了分支管理系统，它的设计目标就是取代 CVS 。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y subversion</div></pre></td></tr></table></figure></p>
-<p><strong>2. 创建 SVN 版本库</strong></p>
-<p>创建项目版本库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/svn/myproject</div><div class="line">svnadmin create /data/svn/myproject</div></pre></td></tr></table></figure></p>
-<p><strong>3. 配置 SVN 信息</strong></p>
-<ul>
-<li><p>配置文件简介</p>
-<p>  版本库中的配置目录 conf 有三个文件:</p>
-<ul>
-<li><code>authz</code> 是权限控制文件</li>
-<li><code>passwd</code> 是帐号密码文件</li>
-<li><code>svnserve.conf</code> 是SVN服务综合配置文件</li>
-</ul>
-</li>
-<li><p>配置权限配置文件 <code>authz</code></p>
-<p>  编辑 <code>authz</code> ，内容参考如下：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[groups]            </div><div class="line">#用户组</div><div class="line">admin = admin,root,test  </div><div class="line">#用户组所对应的用户</div><div class="line">[/]                 </div><div class="line">#库目录权限</div><div class="line">@admin = rw         </div><div class="line">#用户组权限</div><div class="line">*=r               </div><div class="line">#非用户组权限</div></pre></td></tr></table></figure>
-</li>
-<li><p>配置账号密码文件 <code>passwd</code></p>
-<p>  编辑 <code>passwd</code> ，内容参考如下：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[users]</div><div class="line"># harry = harryssecret</div><div class="line"># sally = sallyssecret</div><div class="line">admin = 123456</div><div class="line">root = 123456</div><div class="line">test = 123456</div></pre></td></tr></table></figure>
-</li>
-<li><p>配置 SVN 服务综合配置文件 <code>svnserve.conf</code></p>
-<p>  编辑 <code>svnserve.conf</code> ，内容参考如下：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">[general]</div><div class="line"># force-username-case = none</div><div class="line"># 匿名访问的权限 可以是read、write，none，默认为read</div><div class="line">anon-access = none</div><div class="line">#使授权用户有写权限</div><div class="line">auth-access = write</div><div class="line">#密码数据库的路径</div><div class="line">password-db = passwd</div><div class="line">#访问控制文件</div><div class="line">authz-db = authz</div><div class="line">#认证命名空间，SVN会在认证提示里显示，并且作为凭证缓存的关键字</div><div class="line">realm = /data/svn/myproject</div><div class="line"></div><div class="line">[sasl]</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>4. 启动 SVN 服务</strong></p>
-<ul>
-<li><p>启动 SVN</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">svnserve -d -r /data/svn</div></pre></td></tr></table></figure>
-</li>
-<li><p>checkout SVN项目</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/workspace/myproject</div><div class="line">svn co svn://127.0.0.1/myproject /data/workspace/myproject --username root --password 123456 --force --no-auth-cache</div></pre></td></tr></table></figure>
-</li>
-<li><p>提交文件到 SVN 服务器</p>
-<p>  从本地提交文件到 SVN 服务器，其中 <code>root</code> 密码为 <code>/data/svn/myproject/conf/passwd</code> 文件存储的密码</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd /data/workspace/myproject</div><div class="line">echo test &gt;&gt; test.txt</div><div class="line">svn add test.txt</div><div class="line">svn commit test.txt -m &apos;test&apos;</div></pre></td></tr></table></figure>
-<p>  提交成功后可以通过如下命令从本地项目删除文件</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/workspace/myproject</div><div class="line">rm -rf test.txt</div></pre></td></tr></table></figure>
-<p>  删除后可以通过 SVN 服务器恢复</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/workspace/myproject</div><div class="line">svn update</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>5. 完成</strong></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">linux svn</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/17/基于CentOS搭建SVN服务器/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1443,15 +1421,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux firekylin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">linux maven</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux firekylin</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1475,11 +1453,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux zipkin</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux showdoc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux showdoc</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux zipkin</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1491,11 +1469,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">java javafx</a>
+                <a href="javascript:void(0)" class="js-tag color4">java javafx dialog</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java javafx dialog</a>
+                <a href="javascript:void(0)" class="js-tag color2">java javafx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1527,11 +1505,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux sftp</a>
+                <a href="javascript:void(0)" class="js-tag color4">java jhipster</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java jhipster</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux sftp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1547,11 +1525,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux svn</a>
+                <a href="javascript:void(0)" class="js-tag color2">linux postfix dovecot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">linux postfix dovecot</a>
+                <a href="javascript:void(0)" class="js-tag color5">linux svn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1567,7 +1545,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">weixin linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">linux ftp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">pyspider</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1575,7 +1557,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux ftp</a>
+                <a href="javascript:void(0)" class="js-tag color3">weixin linux</a>
               </li>
             
             <div class="clearfix"></div>
