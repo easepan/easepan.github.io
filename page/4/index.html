@@ -204,6 +204,176 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-七牛云——对象存储管理工具介绍" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/15/七牛云——对象存储管理工具介绍/">七牛云——对象存储管理工具介绍</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/15/七牛云——对象存储管理工具介绍/" class="archive-article-date">
+  	<time datetime="2017-10-15T14:43:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>由于我是一个七牛的重度使用者（主要是对象存储），每次上传文件、复制链接、下载文件都必须用浏览器打开网页，而且还要登录，感觉好麻烦啊，干脆就自己开发了一个这样的工具（使用JavaFX编写），打包成可执行的jar包。</strong></p>
+<p><strong>主要功能就是文件的上传下载，获取存储空间中的文件列表，搜索文件（支持正则表达式），复制文件外链，删除文件，移动（或复制）文件，重命名文件名，设置文件的生存时间等。</strong></p>
+<p><strong>功能截图：</strong></p>
+<p><strong>1. 主窗口界面：</strong></p>
+<p><img src="http://img.blog.csdn.net/20171019104749116?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="程序主界面"></p>
+<ul>
+<li><p>设置文件前缀</p>
+<p>  路径前缀可以用来分类文件，例如： <code>image/jpg/</code>your-file-name.jpg</p>
+</li>
+<li><p>添加存储空间</p>
+<p>  添加存储空间，需要同时指定空间名称，空间域名以及所在区域</p>
+<p>  <img src="http://img.blog.csdn.net/20171017122858110?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="添加存储空间"></p>
+</li>
+<li><p>重置密钥</p>
+<p>  如果你修改了Key，可以在此处修改密钥</p>
+<p>  <img src="http://img.blog.csdn.net/20171017123714044?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="重置密钥"></p>
+<blockquote>
+<p>说明：出于安全考虑，建议您周期性地更换密钥。<a href="https://portal.qiniu.com/user/key" target="_blank" rel="external">查看我的密钥</a> <a href="https://developer.qiniu.com/kodo/kb/1334/the-access-key-secret-key-encryption-key-safe-use-instructions" target="_blank" rel="external">密钥安全使用须知</a></p>
+</blockquote>
+</li>
+<li><p>配置文件</p>
+<p>  Windows使用路径：<code>C:/ProgramData/QiniuTool</code></p>
+<p>  MacOS 或 Linux 使用路径：<code>$user.home/tool</code></p>
+<p>  其中 <code>config.json</code> 为配置文件</p>
+</li>
+<li><p>文件上传</p>
+<p>  除了可（支持断点和覆盖）上传本地文件外，还可抓取网络文件到空间中，如：</p>
+<p>  <img src="http://img.blog.csdn.net/20171019105056517?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="上传网络文件"></p>
+<p>  然后点击 <code>开始上传</code> 即可</p>
+</li>
+</ul>
+<p><strong>2. 资源管理界面：</strong></p>
+<p><img src="http://img.blog.csdn.net/20171019105225191?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="资源管理界面"></p>
+<ul>
+<li><p>刷新列表</p>
+<p>  刷新当前存储空间的资源列表</p>
+</li>
+<li><p>复制链接</p>
+<p>  复制你选中文件的外链</p>
+</li>
+<li><p>删除文件</p>
+<p>  从存储空间中删除你选中的所有文件</p>
+</li>
+<li><p>移动文件</p>
+<p>  移动（或复制）选中的所有文件到指定的存储空间中（目前好像七牛还不支持跨区域移动文件）</p>
+<p>  <img src="http://img.blog.csdn.net/20171015222512819?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="移动文件界面"></p>
+<blockquote>
+<p>说明：勾选“保存文件副本”时表示当前操作为复制，不勾选时表示移动（会删除本存储空间的文件），默认勾选。</p>
+</blockquote>
+</li>
+<li><p>生存时间</p>
+<p>  设置选中文件的生存时间，到期后七牛会自动删除这些文件</p>
+</li>
+<li><p>更新镜像</p>
+<p>  此功能首先需要你配置了镜像存储</p>
+<blockquote>
+<p>官方解释：对于配置了镜像存储的空间，如果镜像源站更新了文件内容，则默认情况下，七牛不会再主动从客户镜像源站同步新的副本，这个时候就需要利用这个prefetch接口来主动地将空间中的文件和更新后的源站副本进行同步。</p>
+</blockquote>
+</li>
+<li><p>公有下载</p>
+<p>  直接下载选中的文件（私有的存储空间不可用）</p>
+</li>
+<li><p>私有下载</p>
+<p>  下载选中的私有存储空间的文件</p>
+</li>
+<li><p>打开文件</p>
+<p>  用浏览器打开你选中的文件</p>
+</li>
+<li><p>链接下载</p>
+<p>  由于这两天迅雷抽风了，下载出现BUG，所以提供了这样一个临时的下载方案，打开后直接输入链接即可下载</p>
+</li>
+<li><p>文件刷新</p>
+<p>  从七牛云镜像源刷新你选中的文件，保证用户下载的是最新上传的文件，而不是之前的旧版本（个人感觉和 <code>更新镜像</code> 是一样的）</p>
+</li>
+<li><p>日志下载</p>
+<p>  从七牛下载指定日期的操作日志</p>
+</li>
+</ul>
+<blockquote>
+<p>说明：操作文件时，需要选中文件才能操作（支持多选）。由于下载私有空间的文件需要临时授权，所以文件的下载分为私有下载（生成临时授权然后下载文件）和公有下载（直接下载文件）。</p>
+</blockquote>
+<p><strong>3. 数据统计界面</strong></p>
+<p><img src="http://img.blog.csdn.net/20171019105531070?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="数据统计界面"></p>
+<blockquote>
+<p>说明：时间范围不超过31天，否则无法获取数据，这是七牛官方规定的。</p>
+</blockquote>
+<p><strong>4. 其他</strong></p>
+<ul>
+<li><p><a href="http://oq3iwfipo.bkt.clouddn.com/tools/zhazhapan/qiniu.jar" title="七牛云——对象存储管理工具jar包下载地址" target="_blank" rel="external"><strong>下载可执行的jar包</strong></a></p>
+</li>
+<li><p><a href="https://github.com/zhazhapan/qiniu/releases" target="_blank" rel="external"><strong>历史版本</strong></a> </p>
+</li>
+<li><p><a href="https://github.com/zhazhapan/qiniu" title="七牛云——对象存储管理工具项目源码地址" target="_blank" rel="external"><strong>项目源代码</strong></a></p>
+</li>
+<li><p><a href="https://developer.qiniu.com/kodo/sdk/1239/java" target="_blank" rel="external"><strong>官方JavaSDK文档</strong></a></p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">qiniu</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/15/七牛云——对象存储管理工具介绍/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-JavaFX-Dialog对话框" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1167,15 +1337,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">linux maven</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux firekylin</a>
+                <a href="javascript:void(0)" class="js-tag color2">linux maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1187,11 +1353,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux apache mysql php</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux firekylin</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">linux nginx mysql php</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">linux apache mysql php</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1203,15 +1373,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux zipkin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">elipse java spring springboot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">linux zipkin</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1247,11 +1417,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">robot</a>
+                <a href="javascript:void(0)" class="js-tag color4">java jhipster</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java jhipster</a>
+                <a href="javascript:void(0)" class="js-tag color1">robot</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1259,11 +1429,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux discuz</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux discuz</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1275,11 +1445,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux svn</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
+                <a href="javascript:void(0)" class="js-tag color5">linux svn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1295,7 +1465,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">pyspider</a>
+                <a href="javascript:void(0)" class="js-tag color3">weixin linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1303,7 +1473,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">weixin linux</a>
+                <a href="javascript:void(0)" class="js-tag color4">pyspider</a>
               </li>
             
             <div class="clearfix"></div>
