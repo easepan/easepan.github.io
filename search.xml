@@ -13,15 +13,15 @@
 <li><p>双击运行（或运行命令<code>java -jar lombok.jar</code>）</p>
 </li>
 <li><p>安装（安装后需要重启IDE）</p>
-<p>  <img src="http://img.blog.csdn.net/20171215095845601?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="我是图片"></p>
+<p><img src="http://img.blog.csdn.net/20171215095845601?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="我是图片"></p>
 </li>
 </ul>
 <h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
 <li><p>添加Maven依赖</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;dependencies&gt;</div><div class="line">    &lt;dependency&gt;</div><div class="line">        &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</div><div class="line">        &lt;artifactId&gt;lombok&lt;/artifactId&gt;</div><div class="line">        &lt;version&gt;$&#123;version&#125;&lt;/version&gt;</div><div class="line">    &lt;/dependency&gt;</div><div class="line">&lt;/dependencies&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;dependencies&gt;</div><div class="line">    &lt;dependency&gt;</div><div class="line">        &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</div><div class="line">        &lt;artifactId&gt;lombok&lt;/artifactId&gt;</div><div class="line">        &lt;version&gt;$&#123;version&#125;&lt;/version&gt;</div><div class="line">    &lt;/dependency&gt;</div><div class="line">&lt;/dependencies&gt;</div></pre></td></tr></table></figure>
 </li>
 <li><p>官方视频</p>
-  <iframe src="https://projectlombok.org/videos/lombok.mp4" width="100%" height="400px"></iframe>
+<iframe src="https://projectlombok.org/videos/lombok.mp4" width="100%" height="400px" frameborder="0"></iframe>
 </li>
 <li><p><a href="http://jnb.ociweb.com/jnb/jnbJan2010.html" target="_blank" rel="external">官网教程</a></p>
 </li>
