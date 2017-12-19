@@ -204,91 +204,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-CentOS搭建Mono开发环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/18/CentOS搭建Mono开发环境/">CentOS搭建Mono开发环境</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/18/CentOS搭建Mono开发环境/" class="archive-article-date">
-  	<time datetime="2017-10-18T05:18:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. 安装 Mono</strong></p>
-<p><em>安装前的准备</em></p>
-<p>执行命令安装 <code>yum-utils</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install yum-utils</div></pre></td></tr></table></figure></p>
-<p>执行命令添加安装包仓库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm --import &quot;http://keyserver.ubuntu.com/pks/lookup?op=get&amp;search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF&quot;</div></pre></td></tr></table></figure></p>
-<p>设置配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum-config-manager --add-repo http://download.mono-project.com/repo/centos7/</div></pre></td></tr></table></figure></p>
-<p><em>安装 Mono</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install mono-complete</div></pre></td></tr></table></figure></p>
-<p><strong>2. 创建并运行 Mono 程序</strong></p>
-<p><em>创建 Mono 程序</em></p>
-<p>执行命令创建程序文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd /home</div><div class="line">mkdir monohello</div><div class="line">cd monohello/</div><div class="line">touch HelloWorld.cs</div></pre></td></tr></table></figure></p>
-<p>修改 <code>HelloWorld.cs</code> 文件为如下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">using System;</div><div class="line">public class HelloWorld</div><div class="line">&#123;</div><div class="line">  public static void Main()</div><div class="line">    &#123;</div><div class="line">        Console.WriteLine(&quot;Hello Mono World&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><em>运行 Mono 程序</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mcs HelloWorld.cs</div><div class="line">mono HelloWorld.exe</div></pre></td></tr></table></figure></p>
-<p><strong>3. 完成</strong></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/18/CentOS搭建Mono开发环境/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-CentOS搭建-NET-Core开发环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1246,6 +1161,130 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/10/17/基于CentOS搭建Postfix、Dovecot邮件服务/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-基于CentOS搭建Docker环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/17/基于CentOS搭建Docker环境/">基于CentOS搭建Docker环境</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/17/基于CentOS搭建Docker环境/" class="archive-article-date">
+  	<time datetime="2017-10-17T14:52:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1. 安装与配置 Docker</strong></p>
+<ul>
+<li><p>安装 Docker</p>
+<p>  <code>Docker</code> 软件包已经包括在默认的 <code>CentOS-Extras</code> 软件源里。因此想要安装 <code>docker</code>，只需要运行下面的 <code>yum</code> 命令：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install docker-io -y</div></pre></td></tr></table></figure>
+<p>  直接<code>yum</code>安装，安装成功后查看版本</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker -v</div></pre></td></tr></table></figure>
+<p>  启动docker</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service docker start</div></pre></td></tr></table></figure>
+<p>  设置开机启动</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig docker on</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>配置 Docker</p>
+<p>  因为国内访问 Docker Hub 较慢, 可以使用腾讯云提供的国内镜像源, 加速访问 Docker Hub</p>
+<p>  依次执行以下命令</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">echo &quot;OPTIONS=&apos;--registry-mirror=https://mirror.ccs.tencentyun.com&apos;&quot; &gt;&gt; /etc/sysconfig/docker</div><div class="line">systemctl daemon-reload</div><div class="line">service docker restart</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>2. Docker 的简单操作</strong></p>
+<ul>
+<li><p>下载镜像</p>
+<p>  下载一个官方的 CentOS 镜像到本地</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull centos</div></pre></td></tr></table></figure>
+<p>  下载好的镜像就会出现在镜像列表里</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker images</div></pre></td></tr></table></figure>
+</li>
+<li><p>运行容器</p>
+<p>  这时我们可以在刚才下载的 CentOS 镜像生成的容器内操作了。</p>
+<p>  生成一个 centos 镜像为模板的容器并使用 <code>bash shell</code></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -it centos /bin/bash</div></pre></td></tr></table></figure>
+<p>  这个时候可以看到命令行的前端已经变成了 [root@(一串 hash Id)] 的形式, 这说明我们已经成功进入了 CentOS 容器。</p>
+<p>  在容器内执行任意命令, 不会影响到宿主机, 如下</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/simple_docker</div></pre></td></tr></table></figure>
+<p>  可以看到 <code>/data</code> 目录下已经创建成功了 <code>simple_docker</code> 文件夹</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls /data</div></pre></td></tr></table></figure>
+<p>  退出容器</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exit</div></pre></td></tr></table></figure>
+<p>  查看宿主机的 <code>/data</code> 目录, 并没有 <code>simple_docker</code> 文件夹, 说明容器内的操作不会影响到宿主机</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls /data</div></pre></td></tr></table></figure>
+</li>
+<li><p>保存容器</p>
+<p>  查看所有的容器信息， 能获取容器的id</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker ps -a</div></pre></td></tr></table></figure>
+<p>  然后执行如下命令，保存镜像：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker commit -m=&quot;备注&quot; [CONTAINER_ID] [IMAGE]</div></pre></td></tr></table></figure>
+</li>
+<li><p>完成</p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">linux docker</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/17/基于CentOS搭建Docker环境/">展开全文 >></a>
         </p>
       
 
