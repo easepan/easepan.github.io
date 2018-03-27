@@ -3,6 +3,30 @@
   
     
     <entry>
+      <title><![CDATA[部署Python自动备份MySQL数据库脚本]]></title>
+      <url>/2018/03/27/%E9%83%A8%E7%BD%B2Python%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BDMySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E8%84%9A%E6%9C%AC/</url>
+      <content type="html"><![CDATA[<h4 id="1-安装扩展源EPEL"><a href="#1-安装扩展源EPEL" class="headerlink" title="1. 安装扩展源EPEL"></a>1. 安装扩展源EPEL</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install epel-release</div></pre></td></tr></table></figure>
+<h4 id="2-安装PIP"><a href="#2-安装PIP" class="headerlink" title="2. 安装PIP"></a>2. 安装PIP</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install python-pip</div></pre></td></tr></table></figure>
+<h4 id="3-安装Python第三方扩展库"><a href="#3-安装Python第三方扩展库" class="headerlink" title="3. 安装Python第三方扩展库"></a>3. 安装Python第三方扩展库</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install apscheduler</div></pre></td></tr></table></figure>
+<h4 id="4-上传脚本"><a href="#4-上传脚本" class="headerlink" title="4. 上传脚本"></a>4. 上传脚本</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">pscp local_dir user@ip:/remote_dir</div><div class="line"><span class="meta">#</span><span class="bash"> 例：</span></div><div class="line">pscp C:\Users\pantao\Documents\Projects\python\auto_backup\mysql.py root@192.168.1.1:/root/auto_backup</div><div class="line">pscp C:\Users\pantao\Documents\Projects\python\auto_backup\config.json root@192.168.1.1:/root/auto_backup</div></pre></td></tr></table></figure>
+<blockquote>
+<p><a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html" target="_blank" rel="external">Putty下载地址（pscp命令）</a><br><a href="https://github.com/zhazhapan/auto_backup" target="_blank" rel="external">Python自动化脚本项目地址</a></p>
+</blockquote>
+<h4 id="5-修改配置文件-config-json"><a href="#5-修改配置文件-config-json" class="headerlink" title="5. 修改配置文件 config.json"></a>5. 修改配置文件 <code>config.json</code></h4><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"mysql"</span>: &#123;</div><div class="line">        <span class="attr">"user"</span>: <span class="string">"root"</span>,</div><div class="line">        <span class="attr">"password"</span>: <span class="string">"root"</span>,</div><div class="line">        <span class="attr">"host"</span>: <span class="string">"127.0.0.1"</span>,</div><div class="line">        <span class="attr">"database"</span>: <span class="string">"sego"</span>,</div><div class="line">        <span class="attr">"path"</span>: <span class="string">"/root/auto_backup/dumps"</span>,</div><div class="line">        <span class="attr">"dateFormat"</span>: <span class="string">"%Y-%m-%d-%H-%M-%S"</span>,</div><div class="line">        <span class="attr">"expired"</span>: <span class="string">"60*60*24*7"</span>,</div><div class="line">        <span class="attr">"schedulerParams"</span>: &#123;</div><div class="line">            <span class="attr">"cron"</span>: <span class="literal">true</span>,</div><div class="line">            <span class="attr">"dayOfWeek"</span>: <span class="string">"0-6"</span>,</div><div class="line">            <span class="attr">"hour"</span>: <span class="number">0</span>,</div><div class="line">            <span class="attr">"minute"</span>: <span class="number">0</span>,</div><div class="line">            <span class="attr">"seconds"</span>: <span class="number">10</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="6-启动脚本，使脚本在后台运行（不受终端影响）"><a href="#6-启动脚本，使脚本在后台运行（不受终端影响）" class="headerlink" title="6. 启动脚本，使脚本在后台运行（不受终端影响）"></a>6. 启动脚本，使脚本在后台运行（不受终端影响）</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd /root/auto_backup</div><div class="line">setsid python mysql.py</div><div class="line"><span class="meta">#</span><span class="bash"> 或者</span></div><div class="line">nohup python mysql.py &amp;</div></pre></td></tr></table></figure>
+<h4 id="7-检测脚本是否运行"><a href="#7-检测脚本是否运行" class="headerlink" title="7. 检测脚本是否运行"></a>7. 检测脚本是否运行</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ps -ef | grep mysql.py</div></pre></td></tr></table></figure>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> python linux mysql </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Centos搭建Node.js环境]]></title>
       <url>/2018/01/12/Centos%E6%90%AD%E5%BB%BANode-js%E7%8E%AF%E5%A2%83/</url>
       <content type="html"><![CDATA[<p>[toc]</p>
