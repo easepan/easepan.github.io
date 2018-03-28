@@ -95,6 +95,9 @@
       <title><![CDATA[个人封装的Java工具包]]></title>
       <url>/2017/11/30/%E4%B8%AA%E4%BA%BA%E5%B0%81%E8%A3%85%E7%9A%84Java%E5%B7%A5%E5%85%B7%E5%8C%85/</url>
       <content type="html"><![CDATA[<p>封装一些常用的功能（JDK至少需要1.8），持续更新</p>
+<blockquote>
+<p><a href="https://github.zhazhapan.com/util-docs/index.html" target="_blank" rel="external"><strong>API文档</strong></a></p>
+</blockquote>
 <p><strong>使用Maven</strong></p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.zhazhapan<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>util<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
 <p><strong>或手动导入：</strong>    <a href="http://oq3iwfipo.bkt.clouddn.com/tools/zhazhapan/util-1.0.5.jar" target="_blank" rel="external">点我下载</a></p>
@@ -103,7 +106,7 @@
 </blockquote>
 <h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p><strong>1. JSON快速解析，基于fastjson</strong></p>
 <p><em>使用</em></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1. 导包</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.config.JsonParser;</div><div class="line"></div><div class="line">String json = <span class="string">"&#123;key1:test,key2:&#123;child1:node1,child2:node2&#125;,key3:[&#123;fast:json1&#125;,&#123;fast:json2&#125;],key4:[arr1,arr2]&#125;"</span>;</div><div class="line"></div><div class="line"><span class="comment">// 2. 新建一个解析对象</span></div><div class="line"></div><div class="line"><span class="comment">// 2.1 使用json字符串</span></div><div class="line">JsonParser jsonParser = <span class="keyword">new</span> JsonParser(json, <span class="keyword">false</span>);</div><div class="line"><span class="comment">// 2.2 或使用文件路径（可能抛出IO异常）</span></div><div class="line">JsonParser jsonParser = <span class="keyword">new</span> JsonParser(<span class="string">"/Users/pantao/Desktop/test.json"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 3. 愉快的使用</span></div><div class="line">String str = jsonParser.getString(<span class="string">"key3[1].fast"</span>);</div><div class="line">String str1 = jsonParser.getString(<span class="string">"key4[1]"</span>);</div><div class="line">JSONObject jsonObject = jsonParser.getObject(<span class="string">"key3[0]"</span>);</div><div class="line">JSONArray jsonArray = jsonParser.getArray(<span class="string">"key4"</span>);</div><div class="line"><span class="comment">// 或使用JSONPath路径语法</span></div><div class="line">Object object = jsonParser.eval(<span class="string">"$.key2.child1"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 4. 修改指定路径值</span></div><div class="line">jsonParser.set(<span class="string">"key1"</span>, <span class="string">"test_set_value"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 5. 删除指定路径值</span></div><div class="line">jsonParser.remove(<span class="string">"key1"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 6. 指定路径是否包含某个值</span></div><div class="line"><span class="keyword">boolean</span> b = jsonParser.containsValue(<span class="string">"key1"</span>, <span class="string">"test"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1. 导包</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.config.JsonParser;</div><div class="line"></div><div class="line">String json = <span class="string">"&#123;key1:test,key2:&#123;child1:node1,child2:node2&#125;,key3:[&#123;fast:json1&#125;,&#123;fast:json2&#125;],key4:[arr1,arr2]&#125;"</span>;</div><div class="line"></div><div class="line"><span class="comment">// 2. 新建一个解析对象</span></div><div class="line"></div><div class="line"><span class="comment">// 2.1 使用json字符串</span></div><div class="line">JsonParser jsonParser = <span class="keyword">new</span> JsonParser(json, <span class="keyword">false</span>);</div><div class="line"><span class="comment">// 2.2 或使用文件路径（可能抛出IO异常）</span></div><div class="line">JsonParser jsonParser = <span class="keyword">new</span> JsonParser(<span class="string">"/Users/pantao/Desktop/test.json"</span>);</div><div class="line"><span class="comment">// 2.3 或使用URL对象</span></div><div class="line">JsonParser jsonParser = <span class="keyword">new</span> JsonParser(<span class="keyword">new</span> URL(<span class="string">"http://somehost.com/sometext.json"</span>));</div><div class="line"></div><div class="line"><span class="comment">// 3. 愉快的使用</span></div><div class="line">String str = jsonParser.getString(<span class="string">"key3[1].fast"</span>);</div><div class="line">String str1 = jsonParser.getString(<span class="string">"key4[1]"</span>);</div><div class="line">JSONObject jsonObject = jsonParser.getObject(<span class="string">"key3[0]"</span>);</div><div class="line">JSONArray jsonArray = jsonParser.getArray(<span class="string">"key4"</span>);</div><div class="line"><span class="comment">// 或使用JSONPath路径语法</span></div><div class="line">Object object = jsonParser.eval(<span class="string">"$.key2.child1"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 4. 修改指定路径值</span></div><div class="line">jsonParser.set(<span class="string">"key1"</span>, <span class="string">"test_set_value"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 5. 删除指定路径值</span></div><div class="line">jsonParser.remove(<span class="string">"key1"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 6. 指定路径是否包含某个值</span></div><div class="line"><span class="keyword">boolean</span> b = jsonParser.containsValue(<span class="string">"key1"</span>, <span class="string">"test"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 7. 返回并格式化JSON</span></div><div class="line">jsonParser.toString();</div></pre></td></tr></table></figure>
 <p>备注：<a href="https://github.com/alibaba/fastjson/wiki/JSONPath" target="_blank" rel="external">fastjson jsonpath路径语法</a></p>
 <p><strong>2. 简单计算器</strong></p>
 <p><em>使用</em></p>
@@ -113,12 +116,12 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1. 导包</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.Downloader;</div><div class="line"></div><div class="line"><span class="comment">// 2. 下载</span></div><div class="line">String storagePath = <span class="string">"/Users/pantao/Desktop"</span>;</div><div class="line">Downloader.download(storagePath, <span class="string">"http://oq3iwfipo.bkt.clouddn.com/tools/zhazhapan/util.jar"</span>);</div></pre></td></tr></table></figure>
 <p><strong>4. 简单的读写文件</strong></p>
 <p><em>使用</em></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1. 导包</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.FileExecutor;</div><div class="line"></div><div class="line"><span class="comment">// 2. 写文件（可能抛出IO异常）</span></div><div class="line">String write = <span class="string">"write something"</span>;</div><div class="line">FileExecutor.saveFile(<span class="string">"/Users/pantao/Desktop/test.txt"</span>, write, <span class="keyword">false</span>);</div><div class="line"></div><div class="line"><span class="comment">// 3. 读文件（可能抛出IO异常）</span></div><div class="line">String read = FileExecutor.readFile(<span class="string">"/Users/pantao/Desktop/test.txt"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 4. 批量复制文件夹</span></div><div class="line">FileExecutor.copyDirectories(<span class="keyword">new</span> String[] &#123; <span class="string">"/Users/pantao/Desktop/test"</span> &#125;, <span class="string">"/Users/pantao/Desktop/new"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 5. 批量复制文件</span></div><div class="line">FileExecutor.copyFiles(<span class="keyword">new</span> String[] &#123; <span class="string">"/Users/pantao/Desktop/qiniu.jar"</span> &#125;, <span class="string">"/Users/pantao/Desktop/test"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 6. 批量重命名文件</span></div><div class="line">String[] files = <span class="keyword">new</span> String[] &#123; <span class="string">"/Users/pantao/Desktop/test/Dump20171220_3.sql"</span>, <span class="string">"/Users/pantao/Desktop/test/Dump20171220_4.sql"</span> &#125;;</div><div class="line">FileExecutor.renameFiles(files, <span class="keyword">new</span> String[] &#123; <span class="string">"test_rename_1"</span>, <span class="string">"test_rename_2.txt"</span> &#125;);</div><div class="line"></div><div class="line"><span class="comment">// 7. 拆分文件，通过拆分点拆分</span></div><div class="line">FileExecutor.splitFile(<span class="string">"/Users/pantao/Desktop/test/Dump20171220.sql"</span>, <span class="keyword">new</span> <span class="keyword">long</span>[] &#123; <span class="number">1000</span>, <span class="number">2000</span>, <span class="number">3000</span> &#125;);</div><div class="line"></div><div class="line"><span class="comment">// 8. 合并文件</span></div><div class="line">String[] files = <span class="keyword">new</span> String[] &#123; <span class="string">"/Users/pantao/Desktop/test/Dump20171220_1.sql"</span>, <span class="string">"/Users/pantao/Desktop/test/Dump20171220_2.sql"</span> &#125;;</div><div class="line">FileExecutor.mergeFiles(files, <span class="string">"/Users/pantao/Desktop/test/test_merge.sql"</span>, <span class="string">""</span>);</div><div class="line"></div><div class="line"><span class="comment">// 9. 创建文件（如果存在则删除）</span></div><div class="line">FileExecutor.createNewFile(<span class="string">"test.txt"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 10. 删除文件或文件夹（递归删除）</span></div><div class="line">FileExecutor.deleteFile(<span class="string">"/Users/pantao/Desktop/test/test_merge.sql"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1. 导包</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.FileExecutor;</div><div class="line"></div><div class="line"><span class="comment">// 2. 写文件（可能抛出IO异常）</span></div><div class="line">String write = <span class="string">"write something"</span>;</div><div class="line">FileExecutor.saveFile(<span class="string">"/Users/pantao/Desktop/test.txt"</span>, write, <span class="keyword">false</span>);</div><div class="line"></div><div class="line"><span class="comment">// 3. 读文件（可能抛出IO异常）</span></div><div class="line">String read = FileExecutor.readFile(<span class="string">"/Users/pantao/Desktop/test.txt"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 4. 批量复制文件夹</span></div><div class="line">FileExecutor.copyDirectories(<span class="keyword">new</span> String[] &#123; <span class="string">"/Users/pantao/Desktop/test"</span> &#125;, <span class="string">"/Users/pantao/Desktop/new"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 5. 批量复制文件</span></div><div class="line">FileExecutor.copyFiles(<span class="keyword">new</span> String[] &#123; <span class="string">"/Users/pantao/Desktop/qiniu.jar"</span> &#125;, <span class="string">"/Users/pantao/Desktop/test"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 6. 批量重命名文件</span></div><div class="line">String[] files = <span class="keyword">new</span> String[] &#123; <span class="string">"/Users/pantao/Desktop/test/Dump20171220_3.sql"</span>, <span class="string">"/Users/pantao/Desktop/test/Dump20171220_4.sql"</span> &#125;;</div><div class="line">FileExecutor.renameFiles(files, <span class="keyword">new</span> String[] &#123; <span class="string">"test_rename_1"</span>, <span class="string">"test_rename_2.txt"</span> &#125;);</div><div class="line"></div><div class="line"><span class="comment">// 7. 拆分文件，通过拆分点拆分</span></div><div class="line">FileExecutor.splitFile(<span class="string">"/Users/pantao/Desktop/test/Dump20171220.sql"</span>, <span class="keyword">new</span> <span class="keyword">long</span>[] &#123; <span class="number">1000</span>, <span class="number">2000</span>, <span class="number">3000</span> &#125;);</div><div class="line"></div><div class="line"><span class="comment">// 8. 合并文件</span></div><div class="line">String[] files = <span class="keyword">new</span> String[] &#123; <span class="string">"/Users/pantao/Desktop/test/Dump20171220_1.sql"</span>, <span class="string">"/Users/pantao/Desktop/test/Dump20171220_2.sql"</span> &#125;;</div><div class="line">FileExecutor.mergeFiles(files, <span class="string">"/Users/pantao/Desktop/test/test_merge.sql"</span>, <span class="string">""</span>);</div><div class="line"></div><div class="line"><span class="comment">// 9. 创建文件（如果存在则删除）</span></div><div class="line">FileExecutor.createNewFile(<span class="string">"test.txt"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 10. 删除文件或文件夹（递归删除）</span></div><div class="line">FileExecutor.deleteFile(<span class="string">"/Users/pantao/Desktop/test/test_merge.sql"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 11. 扫描文件夹下面所有的文件（返回一个文件列表）</span></div><div class="line">FileExecutor.scanFolder(<span class="string">"/Users/Pantao/Desktop"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 12. 创建文件，如果文件不存在的话</span></div><div class="line">FileExecutor.createFile(<span class="string">"test.txt"</span>);</div></pre></td></tr></table></figure>
 <p><strong>5. 简单的线程池</strong></p>
 <p><em>使用</em></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1. 导包</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.ThreadPool;</div><div class="line"></div><div class="line"><span class="comment">// 2. 初始化线程池</span></div><div class="line"><span class="comment">// 2.1 方式一</span></div><div class="line">ThreadPool.setCorePoolSize(<span class="number">1</span>);</div><div class="line">ThreadPool.setMaximumPoolSize(<span class="number">5</span>);</div><div class="line">ThreadPool.setKeepAliveTime(<span class="number">100</span>);</div><div class="line">ThreadPool.setTimeUnit(TimeUnit.MILLISECONDS);</div><div class="line">ThreadPool.init();</div><div class="line"><span class="comment">// 2.2 方式二</span></div><div class="line">ThreadPool.init(<span class="number">1</span>, <span class="number">5</span>, <span class="number">100</span>, TimeUnit.MILLISECONDS);</div><div class="line"></div><div class="line"><span class="comment">// 3. 使用线程池</span></div><div class="line">ThreadPool.executor.submit(() -&gt; &#123;</div><div class="line">	<span class="comment">//do somthing here</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 4. 或者新建线程池</span></div><div class="line">ThreadPool threadPool = <span class="keyword">new</span> ThreadPool(<span class="number">1</span>, <span class="number">5</span>, <span class="number">100</span>, TimeUnit.MILLISECONDS);</div><div class="line"></div><div class="line"><span class="comment">// 4.1 使用新建的线程池</span></div><div class="line">threadPool.newExecutor.submit(() -&gt; &#123;</div><div class="line">	<span class="comment">//do somthing here</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p><strong>6. 简单的加密与解密</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 提供一些Java常用的加密（包括md5，base64,sha等加密）</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.decryption.JavaEncrypt;</div><div class="line"></div><div class="line"><span class="comment">// 如何使用</span></div><div class="line">String code = JavaEncrypt.md5(<span class="string">"this is a md5 encrypt method"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 主要是base64解密</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.decryption.JavaDecrypt;</div><div class="line"></div><div class="line"><span class="comment">// 异或加密和ascii加密</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.decryption.SimpleEncryt;</div><div class="line"></div><div class="line"><span class="comment">// 如何使用</span></div><div class="line">String code = SimpleEncryt.ascii(<span class="string">"simple encrypt"</span>, <span class="string">"key"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 异或解密和ascii解密</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.decryption.SimpleDecrypt;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 提供一些Java常用的加密（包括md5，base64,sha等加密）</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.decryption.JavaEncrypt;</div><div class="line"></div><div class="line"><span class="comment">// 如何使用</span></div><div class="line">String code = JavaEncrypt.md5(<span class="string">"this is a md5 encrypt method"</span>);</div><div class="line"></div><div class="line">String sha256 = JavaEncrypt.sha256(<span class="string">"123456"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 主要是base64解密</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.decryption.JavaDecrypt;</div><div class="line"></div><div class="line"><span class="comment">// 异或加密和ascii加密</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.decryption.SimpleEncryt;</div><div class="line"></div><div class="line"><span class="comment">// 如何使用</span></div><div class="line">String code = SimpleEncryt.ascii(<span class="string">"simple encrypt"</span>, <span class="string">"key"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 异或解密和ascii解密</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.decryption.SimpleDecrypt;</div></pre></td></tr></table></figure>
 <p><strong>7. 弹窗（使用JavaFX，JDK最低要求1.8）</strong></p>
 <p><em>使用</em></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1. 导入</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.dialog.Alerts;</div><div class="line"></div><div class="line"><span class="comment">// 2. 弹窗并接收返回的信息</span></div><div class="line">Optional&lt;ButtonType&gt; result = Alerts.showConfirmation(<span class="string">"title"</span>, <span class="string">"some information"</span>);</div><div class="line"><span class="keyword">if</span> (result.get() == ButtonType.OK) &#123;</div><div class="line">	<span class="comment">// do something here</span></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">	<span class="comment">// do something here</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 3. 其他类型的弹窗基本上跟上面的操作一样</span></div><div class="line"></div><div class="line"><span class="comment">// 4. 弹出输入框</span></div><div class="line"><span class="comment">// 4.1 导包</span></div><div class="line"><span class="keyword">import</span> com.zhazhapan.util.dialog.Dialogs;</div><div class="line"><span class="comment">// 4.2 弹出并接收返回的内容（如果用户点击取消将返回null）</span></div><div class="line">String msg = Dialogs.showInputDialog(<span class="string">"title"</span>, <span class="string">"header"</span>, <span class="string">"content"</span>, <span class="string">"default value"</span>);</div></pre></td></tr></table></figure>
@@ -187,6 +190,26 @@
 <tr>
 <td>checkDate</td>
 <td>检测日期是否为null，如果是，返回当前日期，否则返回原日期</td>
+</tr>
+<tr>
+<td>isWindows</td>
+<td>判断当前系统是否是Windows</td>
+</tr>
+<tr>
+<td>isMacOS</td>
+<td>判断当前系统是否是Mac</td>
+</tr>
+<tr>
+<td>isLinux</td>
+<td>判断当前系统是否是Linux</td>
+</tr>
+<tr>
+<td>isLimited</td>
+<td>判断字符串的长度是否在某个范围</td>
+</tr>
+<tr>
+<td>isImage</td>
+<td>判断文件是否是图片</td>
 </tr>
 </tbody>
 </table>
@@ -303,6 +326,14 @@
 <td>dateToLocalDate</td>
 <td>将java.util.Date转换为java.time.LocalDate</td>
 </tr>
+<tr>
+<td>listToJson</td>
+<td>将List转换为JSON</td>
+</tr>
+<tr>
+<td>mapToJson</td>
+<td>将Map转换为JSON</td>
+</tr>
 </tbody>
 </table>
 <p><strong>10. <code>com.zhazhapan.util.Utils</code>类</strong></p>
@@ -381,6 +412,10 @@
 <tr>
 <td>mergeSortedArrays</td>
 <td>将两个已经排好序（同序）的数组合并一个有序数组</td>
+</tr>
+<tr>
+<td>getCurrentOS()</td>
+<td>获取当前系统名称</td>
 </tr>
 </tbody>
 </table>
@@ -486,8 +521,117 @@
 <td>获取一个随机的整型</td>
 </tr>
 <tr>
+<td>getRandomIntegerIgnoreRange</td>
+<td>获取一个可以忽略某个区间的随机整型</td>
+</tr>
+<tr>
 <td>getRandomColor</td>
 <td>获取一个随机的颜色</td>
+</tr>
+<tr>
+<td>getRandomEmail</td>
+<td>获取一个随机邮箱</td>
+</tr>
+<tr>
+<td>getRandomString</td>
+<td>获取一个随机字符串</td>
+</tr>
+<tr>
+<td>getRandomStringWithoutSymbol</td>
+<td>获取一个只有数字和字母的随机字符串</td>
+</tr>
+<tr>
+<td>getRandomStringOnlyLetter</td>
+<td>获取一个只有字母的随机字符串</td>
+</tr>
+<tr>
+<td>getRandomStringOnlyLowerCase</td>
+<td>获取一个只有小写字母的随机字符串</td>
+</tr>
+<tr>
+<td>getRandomStringOnlyUpperCase</td>
+<td>获取一个只有大写字母的随机字符串</td>
+</tr>
+<tr>
+<td>getRandomTextIgnoreRange</td>
+<td>获取一个可以忽略某个范围字符的随机字符串</td>
+</tr>
+<tr>
+<td>getRandomText</td>
+<td>获取一个字符串</td>
+</tr>
+</tbody>
+</table>
+<p><strong>15. JSON与Bean互相转换</strong></p>
+<p><em>Bean转JSON</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 一个Bean类</span></div><div class="line"><span class="comment">// 也可以不用注解</span></div><div class="line"><span class="meta">@ToJsonString</span>(type = JsonType.PRETTY, modifier = FieldModifier.PRIVATE, method = JsonMethod.HANDLE)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> id;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="keyword">private</span> Date birth;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">(<span class="keyword">int</span> id, String name, Date birth)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.id = id;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">        <span class="keyword">this</span>.birth = birth;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">// 1. 不使用注解</span></div><div class="line">            <span class="keyword">return</span> BeanUtils.toJsonString(<span class="keyword">this</span>);</div><div class="line">            <span class="comment">// 2. 使用注解</span></div><div class="line">            <span class="keyword">return</span> BeanUtils.toJsonStringByAnnotation(<span class="keyword">this</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</div><div class="line">            <span class="keyword">return</span> e.getMessage();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 外部类调用</span></div><div class="line">User user = <span class="keyword">new</span> User(<span class="number">1</span>, <span class="string">"test"</span>, <span class="keyword">new</span> Date());</div><div class="line">System.out.println(user.toString());</div><div class="line"></div><div class="line"><span class="comment">// 不使用注解的输出</span></div><div class="line">&#123;<span class="string">"name"</span>:<span class="string">"test"</span>,<span class="string">"birth"</span>:<span class="number">1516429105846</span>,<span class="string">"id"</span>:<span class="number">1</span>&#125;</div><div class="line"></div><div class="line"><span class="comment">// 使用注解的输出</span></div><div class="line">&#123;</div><div class="line">  <span class="string">"name"</span>: <span class="string">"test"</span>,</div><div class="line">  <span class="string">"birth"</span>: <span class="string">"Sat Jan 20 14:18:25 CST 2018"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><em>JSON转Bean</em><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">BeanUtils.jsonPutIn(jsonObject, bean);</div></pre></td></tr></table></figure></p>
+<p><strong>16. <code>com.zhazhapan.util.NetUtils</code>类</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>简要说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>getDataOfUrl</td>
+<td>获取URL对应的网页内容</td>
+</tr>
+<tr>
+<td>getInputStreamOfUrl</td>
+<td>获取URL对应的InputStream对象</td>
+</tr>
+<tr>
+<td>getInputStreamOfConnection</td>
+<td>获取HttpURLConnection对应的InputStream对象</td>
+</tr>
+</tbody>
+</table>
+<p><strong>17. <code>com.zhazhapan.util.ReflectUtils</code>类</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>简要说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>scanPackage</td>
+<td>扫描包下面所有的类</td>
+</tr>
+<tr>
+<td>invokeMethod</td>
+<td>通过反射调用方法</td>
+</tr>
+<tr>
+<td>getTypes</td>
+<td>获取对象集的所有类型</td>
+</tr>
+<tr>
+<td>getBasicTypes</td>
+<td>获取所有对象的基本类型</td>
+</tr>
+<tr>
+<td>invokeMethodUseBasicType</td>
+<td>使用基本类型调用方法</td>
+</tr>
+</tbody>
+</table>
+<p><strong>18. <code>com.zhazhapan.util.HttpUtils</code>类</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>简要说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>getCookie</td>
+<td>通过名称获取Cookie</td>
 </tr>
 </tbody>
 </table>
