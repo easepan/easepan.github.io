@@ -22,15 +22,17 @@
 <p> <em>更换工作路径</em></p>
  <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd src</div></pre></td></tr></table></figure>
 <p> <em>查看当前工作路径（并复制）</em></p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pwd</div><div class="line"><span class="meta">#</span><span class="bash"> 示例输出：/root/redis-4.0.9/src</span></div></pre></td></tr></table></figure>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pwd</div><div class="line"><span class="meta">#</span> 示例输出：/root/redis-4.0.9/src</div></pre></td></tr></table></figure>
 <p> <em>添加到环境变量</em></p>
  <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/profile</div></pre></td></tr></table></figure>
 <p> <em>添加如下内容</em></p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">PATH=$PATH:redis-home</div><div class="line">export PATH</div><div class="line"># 替换redis-home为你的redis工作路径，比如我的：/root/redis-4.0.9/src</div></pre></td></tr></table></figure>
+<p> <em>刷新</em></p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source /etc/profile</div></pre></td></tr></table></figure>
 </li>
 <li><p>启动redis服务（保持后台运行），并连接至redis</p>
 <p> <em>启动</em></p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">redis-server &amp;</div><div class="line"><span class="meta">#</span><span class="bash"> 永远驻留到后台（不受当前bash窗口影响）</span></div><div class="line"><span class="meta">#</span><span class="bash"> setsid redis-server &amp;</span></div></pre></td></tr></table></figure>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">redis-server &amp;</div><div class="line"><span class="meta">#</span> 永远驻留到后台（不受当前bash窗口影响）</div><div class="line"><span class="meta">#</span> setsid redis-server &amp;</div></pre></td></tr></table></figure>
 <p> <em>连接</em></p>
  <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">redis-cli</div></pre></td></tr></table></figure>
 </li>
