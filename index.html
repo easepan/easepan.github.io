@@ -5,21 +5,21 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="http://hexo.zhazhapan.com">
-  <title>渣渣潘的博客</title>
+  <link rel="dns-prefetch" href="http://github.zhazhapan.com">
+  <title>FuckTheCode的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="欢迎来到渣渣的博客">
+  <meta name="description" content="欢迎来到FuckTheCode的博客">
 <meta property="og:type" content="website">
-<meta property="og:title" content="渣渣潘的博客">
-<meta property="og:url" content="http://hexo.zhazhapan.com/index.html">
-<meta property="og:site_name" content="渣渣潘的博客">
-<meta property="og:description" content="欢迎来到渣渣的博客">
+<meta property="og:title" content="FuckTheCode的博客">
+<meta property="og:url" content="http://github.zhazhapan.com/index.html">
+<meta property="og:site_name" content="FuckTheCode的博客">
+<meta property="og:description" content="欢迎来到FuckTheCode的博客">
 <meta property="og:locale" content="zh_CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="渣渣潘的博客">
-<meta name="twitter:description" content="欢迎来到渣渣的博客">
+<meta name="twitter:title" content="FuckTheCode的博客">
+<meta name="twitter:description" content="欢迎来到FuckTheCode的博客">
   
-    <link rel="alternative" href="/atom.xml" title="渣渣潘的博客" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="FuckTheCode的博客" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -56,7 +56,7 @@
 			<img src="/favicon.png" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="">渣渣潘</a></h1>
+		  <h1 class="header-author"><a href="">FuckTheCode</a></h1>
 		</hgroup>
 		
 		<p class="header-subtitle">Code is lovely</p>
@@ -128,7 +128,7 @@
 				<img src="/favicon.png" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">渣渣潘</h1>
+			  <h1 class="header-author js-header-author">FuckTheCode</h1>
 			</hgroup>
 			
 			<p class="header-subtitle"><i class="icon icon-quo-left"></i>Code is lovely<i class="icon icon-quo-right"></i></p>
@@ -198,6 +198,109 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Linux安装Redis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/09/Linux安装Redis/">Linux安装Redis</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/09/Linux安装Redis/" class="archive-article-date">
+  	<time datetime="2018-05-09T11:51:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p>安装开发者工具包</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum groupinstall 'Development Tools'</div></pre></td></tr></table></figure>
+</li>
+<li><p>从 <a href="https://redis.io/download" target="_blank" rel="external"><strong>官网</strong></a> 下载Redis</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://download.redis.io/releases/redis-4.0.9.tar.gz</div></pre></td></tr></table></figure>
+</li>
+<li><p>解压</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar xzf redis-*.tar.gz</div></pre></td></tr></table></figure>
+</li>
+<li><p>编译</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd redis-*</div><div class="line">make</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加到环境变量</p>
+<p> <em>更换工作路径</em></p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd src</div></pre></td></tr></table></figure>
+<p> <em>查看当前工作路径（并复制）</em></p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pwd</div><div class="line"><span class="meta">#</span><span class="bash"> 示例输出：/root/redis-4.0.9/src</span></div></pre></td></tr></table></figure>
+<p> <em>添加到环境变量</em></p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/profile</div></pre></td></tr></table></figure>
+<p> <em>添加如下内容</em></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">PATH=$PATH:redis-home</div><div class="line">export PATH</div><div class="line"># 替换redis-home为你的redis工作路径，比如我的：/root/redis-4.0.9/src</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动redis服务（保持后台运行），并连接至redis</p>
+<p> <em>启动</em></p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">redis-server &amp;</div><div class="line"><span class="meta">#</span><span class="bash"> 永远驻留到后台（不受当前bash窗口影响）</span></div><div class="line"><span class="meta">#</span><span class="bash"> setsid redis-server &amp;</span></div></pre></td></tr></table></figure>
+<p> <em>连接</em></p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">redis-cli</div></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">linux redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/09/Linux安装Redis/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-部署Python自动备份MySQL数据库脚本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -221,7 +324,7 @@
         <h4 id="1-安装扩展源EPEL"><a href="#1-安装扩展源EPEL" class="headerlink" title="1. 安装扩展源EPEL"></a>1. 安装扩展源EPEL</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install epel-release</div></pre></td></tr></table></figure>
 <h4 id="2-安装PIP"><a href="#2-安装PIP" class="headerlink" title="2. 安装PIP"></a>2. 安装PIP</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install python-pip</div></pre></td></tr></table></figure>
 <h4 id="3-安装Python第三方扩展库"><a href="#3-安装Python第三方扩展库" class="headerlink" title="3. 安装Python第三方扩展库"></a>3. 安装Python第三方扩展库</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install apscheduler</div></pre></td></tr></table></figure>
-<h4 id="4-上传脚本"><a href="#4-上传脚本" class="headerlink" title="4. 上传脚本"></a>4. 上传脚本</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">pscp local_dir user@ip:/remote_dir</div><div class="line"><span class="meta">#</span> 例：</div><div class="line">pscp C:\Users\pantao\Documents\Projects\python\auto_backup\mysql_auto_backup.py root@180.97.80.83:/root/auto_backup</div><div class="line">pscp C:\Users\pantao\Documents\Projects\python\auto_backup\config.json root@180.97.80.83:/root/auto_backup</div></pre></td></tr></table></figure>
+<h4 id="4-上传脚本"><a href="#4-上传脚本" class="headerlink" title="4. 上传脚本"></a>4. 上传脚本</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">pscp local_dir user@ip:/remote_dir</div><div class="line"><span class="meta">#</span><span class="bash"> 例：</span></div><div class="line">pscp C:\Users\pantao\Documents\Projects\python\auto_backup\mysql_auto_backup.py root@180.97.80.83:/root/auto_backup</div><div class="line">pscp C:\Users\pantao\Documents\Projects\python\auto_backup\config.json root@180.97.80.83:/root/auto_backup</div></pre></td></tr></table></figure>
 <blockquote>
 <p><a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html" target="_blank" rel="external">Putty下载地址（pscp命令）</a><br><a href="https://github.com/zhazhapan/auto_backup" target="_blank" rel="external">项目地址</a></p>
 </blockquote>
@@ -229,7 +332,7 @@
 <blockquote>
 <p>说明：如果 <code>mysqldump</code> 已添加到环境变量（可直接执行 <code>mysqldump</code> 命令），则设置配置文件中的 <code>mysqldump</code> 值为空；<br>否则请将 <code>mysqldump</code> 值设置 <code>mysqldump</code> 所在的路径（并在结尾添加一个文件分隔符），比如 <code>/usr/local/mysql-5.7.17-macos10.12-x86_64/bin/</code></p>
 </blockquote>
-<h4 id="6-启动脚本，使脚本在后台运行（不受终端影响）"><a href="#6-启动脚本，使脚本在后台运行（不受终端影响）" class="headerlink" title="6. 启动脚本，使脚本在后台运行（不受终端影响）"></a>6. 启动脚本，使脚本在后台运行（不受终端影响）</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd /root/auto_backup</div><div class="line">setsid python mysql_auto_backup.py</div><div class="line"><span class="meta">#</span> 或者</div><div class="line">nohup python mysql_auto_backup.py &amp;</div></pre></td></tr></table></figure>
+<h4 id="6-启动脚本，使脚本在后台运行（不受终端影响）"><a href="#6-启动脚本，使脚本在后台运行（不受终端影响）" class="headerlink" title="6. 启动脚本，使脚本在后台运行（不受终端影响）"></a>6. 启动脚本，使脚本在后台运行（不受终端影响）</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd /root/auto_backup</div><div class="line">setsid python mysql_auto_backup.py</div><div class="line"><span class="meta">#</span><span class="bash"> 或者</span></div><div class="line">nohup python mysql_auto_backup.py &amp;</div></pre></td></tr></table></figure>
 <h4 id="7-检测脚本是否运行"><a href="#7-检测脚本是否运行" class="headerlink" title="7. 检测脚本是否运行"></a>7. 检测脚本是否运行</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ps -ef | grep mysql_auto_backup.py</div></pre></td></tr></table></figure>
 <h4 id="8-设置开机自启"><a href="#8-设置开机自启" class="headerlink" title="8. 设置开机自启"></a>8. 设置开机自启</h4><ol>
 <li><p>新建自启脚本</p>
@@ -238,7 +341,7 @@
 </ol>
 <ol>
 <li><p>添加内容</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/usr/bin/env bash</div><div class="line">cd /root/auto_backup</div><div class="line">setsid python mysql_auto_backup.py</div></pre></td></tr></table></figure>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">!/usr/bin/env bash</span></div><div class="line">cd /root/auto_backup</div><div class="line">setsid python mysql_auto_backup.py</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <ol>
@@ -1925,125 +2028,6 @@
 
 
   
-    <article id="post-CentOS安装与使用Maven" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/18/CentOS安装与使用Maven/">CentOS安装与使用Maven</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/18/CentOS安装与使用Maven/" class="archive-article-date">
-  	<time datetime="2017-10-18T05:51:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. 安装 Maven</strong></p>
-<p><em>Maven 简介</em></p>
-<p>Apache Maven 是一个软件项目管理及自动构建工具，由 Apache 软件基金会所提供。基于项目对象模型（缩写：POM）概念，Maven 利用一小段描述信息能管理一个项目的构建、报告和文档等步骤。</p>
-<p><em>Java 安装</em></p>
-<p>首先我们需要准备 Java 开发环境，使用下面命令来安装 Java：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install java-1.8.0-openjdk-devel</div></pre></td></tr></table></figure></p>
-<p><em>Maven 下载</em></p>
-<p>我们可以从官网下载页获取最新的下载链接（Binary tar.gz archive）。</p>
-<p>然后我们使用 <code>wget</code> 命令将其下载：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /home</div><div class="line">wget http://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz</div></pre></td></tr></table></figure></p>
-<p>解压压缩包：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar xzvf apache-maven-3.5.0-bin.tar.gz</div></pre></td></tr></table></figure></p>
-<p>将文件夹移动至 <code>/usr/local/</code> 目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mv apache-maven-3.5.0  /usr/local/apache-maven</div></pre></td></tr></table></figure></p>
-<p><em>配置环境变量</em></p>
-<p>编辑 <code>/etc/profile</code>，在最下方添加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">MAVEN_HOME=/usr/local/apache-maven</div><div class="line">export MAVEN_HOME</div><div class="line">export PATH=$&#123;PATH&#125;:$&#123;MAVEN_HOME&#125;/bin</div></pre></td></tr></table></figure></p>
-<p>运行如下命令使环境变量生效：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source /etc/profile</div></pre></td></tr></table></figure></p>
-<p>检查 Maven 是否成功安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn -version</div></pre></td></tr></table></figure></p>
-<p><strong>2. Maven 简单使用</strong></p>
-<p><em>构建</em></p>
-<p>我们可以通过 <code>archetype:generate</code> 命令快速构建出项目骨架。</p>
-<p><em>Hello World</em></p>
-<p>我们使用该命令创建一个 helloworld 项目。过程中可一路回车键选择默认值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /home</div><div class="line">mvn archetype:generate -DgroupId=helloworld -DartifactId=helloworld</div></pre></td></tr></table></figure></p>
-<p><code>mvn</code> 指令首次执行时，会从远程“中央仓库”下载一些必需的文件，请耐心等待。</p>
-<p><em>项目结构</em></p>
-<p>可到 <code>/home/helloworld</code> 查看项目结构。</p>
-<ul>
-<li><p><code>/pom.xml</code> 为项目对象模型（Maven 项目配置）</p>
-</li>
-<li><p><code>/src/main/java</code> 用于存放源代码</p>
-</li>
-<li><p><code>/src/test/java</code> 用于存放单元测试代码</p>
-</li>
-<li><p><code>/src/target</code> 用于存放编译、打包后的输出文件</p>
-</li>
-</ul>
-<p><em>编译</em></p>
-<p>进入项目目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /home/helloworld</div></pre></td></tr></table></figure></p>
-<p>执行编译：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn compile</div></pre></td></tr></table></figure></p>
-<p>重新开启 <code>helloworld</code> 项目文件夹，可以看到生成 <code>target</code> 目录。</p>
-<p><em>运行</em></p>
-<p>你可以使用 <code>mvn</code> 指明 <code>mainClass</code> 来运行项目：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn exec:java -Dexec.mainClass=&quot;helloworld.App&quot;</div></pre></td></tr></table></figure></p>
-<p>完成后可看到终端输出了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hello World!</div></pre></td></tr></table></figure></p>
-<p><em>测试</em></p>
-<p>我们可以通过 <em>test</em> 指令来运行单元测试代码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn test</div></pre></td></tr></table></figure></p>
-<p>完成后可看到终端输出测试结果。</p>
-<p><em>打包</em></p>
-<p>通过 <code>package</code> 指令来执行打包。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn package</div></pre></td></tr></table></figure></p>
-<p>重新开启 <code>target</code> 目录，可看到生成了 <code>.jar</code> 文件。</p>
-<p>从输出的日志可以看到，执行 <code>package</code> 前，会先执行 <code>compile</code> 及 <code>test</code>，最后执行了打包。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">linux maven</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/18/CentOS安装与使用Maven/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -2058,7 +2042,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 渣渣潘
+    		&copy; 2018 FuckTheCode
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -2162,11 +2146,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">linux maven</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+                <a href="javascript:void(0)" class="js-tag color2">linux maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2182,15 +2166,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux apache mysql php</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">linux nginx mysql php</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux pyspider</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux apache mysql php</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2202,11 +2182,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux zipkin</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux zipkin</a>
+                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2214,11 +2194,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">java javafx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">java javafx dialog</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">java javafx</a>
+                <a href="javascript:void(0)" class="js-tag color1">mac docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2226,7 +2210,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mac docker</a>
+                <a href="javascript:void(0)" class="js-tag color5">linux pyspider</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">linux redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2242,23 +2230,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java jhipster</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">robot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux sftp</a>
+                <a href="javascript:void(0)" class="js-tag color4">java jhipster</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">linux discuz</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux sftp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2270,7 +2254,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">linux postfix dovecot</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2278,11 +2266,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux leanote</a>
+                <a href="javascript:void(0)" class="js-tag color2">linux postfix dovecot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux leanote</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2294,15 +2282,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">python linux mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">linux weixin</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">weixin linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">python linux mysql</a>
               </li>
             
             <div class="clearfix"></div>
@@ -2485,7 +2473,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">热爱编程，崇尚开源，喜欢折腾，Linux 爱好者，追求编写极致优雅的代码。</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">热爱编程，&lt;br/&gt;崇尚开源，&lt;br/&gt;喜欢折腾，Linux爱好者，&lt;br/&gt;追求编写极致优雅的代码。</div>
   	  	
     	</section>
     

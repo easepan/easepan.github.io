@@ -5,15 +5,15 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="http://hexo.zhazhapan.com">
-  <title>部署Python自动备份MySQL数据库脚本 | 渣渣潘的博客</title>
+  <link rel="dns-prefetch" href="http://github.zhazhapan.com">
+  <title>部署Python自动备份MySQL数据库脚本 | FuckTheCode的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1. 安装扩展源EPEL1yum -y install epel-release 2. 安装PIP1yum -y install python-pip 3. 安装Python第三方扩展库1pip install apscheduler 4. 上传脚本1234pscp local_dir user@ip:/remote_dir# 例：pscp C:\Users\pantao\Documents\Pr">
 <meta name="keywords" content="python linux mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="部署Python自动备份MySQL数据库脚本">
-<meta property="og:url" content="http://hexo.zhazhapan.com/2018/03/27/部署Python自动备份MySQL数据库脚本/index.html">
-<meta property="og:site_name" content="渣渣潘的博客">
+<meta property="og:url" content="http://github.zhazhapan.com/2018/03/27/部署Python自动备份MySQL数据库脚本/index.html">
+<meta property="og:site_name" content="FuckTheCode的博客">
 <meta property="og:description" content="1. 安装扩展源EPEL1yum -y install epel-release 2. 安装PIP1yum -y install python-pip 3. 安装Python第三方扩展库1pip install apscheduler 4. 上传脚本1234pscp local_dir user@ip:/remote_dir# 例：pscp C:\Users\pantao\Documents\Pr">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:updated_time" content="2018-03-30T16:41:49.164Z">
@@ -21,7 +21,7 @@
 <meta name="twitter:title" content="部署Python自动备份MySQL数据库脚本">
 <meta name="twitter:description" content="1. 安装扩展源EPEL1yum -y install epel-release 2. 安装PIP1yum -y install python-pip 3. 安装Python第三方扩展库1pip install apscheduler 4. 上传脚本1234pscp local_dir user@ip:/remote_dir# 例：pscp C:\Users\pantao\Documents\Pr">
   
-    <link rel="alternative" href="/atom.xml" title="渣渣潘的博客" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="FuckTheCode的博客" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -58,7 +58,7 @@
 			<img src="/favicon.png" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="">渣渣潘</a></h1>
+		  <h1 class="header-author"><a href="">FuckTheCode</a></h1>
 		</hgroup>
 		
 		<p class="header-subtitle">Code is lovely</p>
@@ -130,7 +130,7 @@
 				<img src="/favicon.png" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">渣渣潘</h1>
+			  <h1 class="header-author js-header-author">FuckTheCode</h1>
 			</hgroup>
 			
 			<p class="header-subtitle"><i class="icon icon-quo-left"></i>Code is lovely<i class="icon icon-quo-right"></i></p>
@@ -221,7 +221,7 @@
         <h4 id="1-安装扩展源EPEL"><a href="#1-安装扩展源EPEL" class="headerlink" title="1. 安装扩展源EPEL"></a>1. 安装扩展源EPEL</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install epel-release</div></pre></td></tr></table></figure>
 <h4 id="2-安装PIP"><a href="#2-安装PIP" class="headerlink" title="2. 安装PIP"></a>2. 安装PIP</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install python-pip</div></pre></td></tr></table></figure>
 <h4 id="3-安装Python第三方扩展库"><a href="#3-安装Python第三方扩展库" class="headerlink" title="3. 安装Python第三方扩展库"></a>3. 安装Python第三方扩展库</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install apscheduler</div></pre></td></tr></table></figure>
-<h4 id="4-上传脚本"><a href="#4-上传脚本" class="headerlink" title="4. 上传脚本"></a>4. 上传脚本</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">pscp local_dir user@ip:/remote_dir</div><div class="line"><span class="meta">#</span> 例：</div><div class="line">pscp C:\Users\pantao\Documents\Projects\python\auto_backup\mysql_auto_backup.py root@180.97.80.83:/root/auto_backup</div><div class="line">pscp C:\Users\pantao\Documents\Projects\python\auto_backup\config.json root@180.97.80.83:/root/auto_backup</div></pre></td></tr></table></figure>
+<h4 id="4-上传脚本"><a href="#4-上传脚本" class="headerlink" title="4. 上传脚本"></a>4. 上传脚本</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">pscp local_dir user@ip:/remote_dir</div><div class="line"><span class="meta">#</span><span class="bash"> 例：</span></div><div class="line">pscp C:\Users\pantao\Documents\Projects\python\auto_backup\mysql_auto_backup.py root@180.97.80.83:/root/auto_backup</div><div class="line">pscp C:\Users\pantao\Documents\Projects\python\auto_backup\config.json root@180.97.80.83:/root/auto_backup</div></pre></td></tr></table></figure>
 <blockquote>
 <p><a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html" target="_blank" rel="external">Putty下载地址（pscp命令）</a><br><a href="https://github.com/zhazhapan/auto_backup" target="_blank" rel="external">项目地址</a></p>
 </blockquote>
@@ -229,7 +229,7 @@
 <blockquote>
 <p>说明：如果 <code>mysqldump</code> 已添加到环境变量（可直接执行 <code>mysqldump</code> 命令），则设置配置文件中的 <code>mysqldump</code> 值为空；<br>否则请将 <code>mysqldump</code> 值设置 <code>mysqldump</code> 所在的路径（并在结尾添加一个文件分隔符），比如 <code>/usr/local/mysql-5.7.17-macos10.12-x86_64/bin/</code></p>
 </blockquote>
-<h4 id="6-启动脚本，使脚本在后台运行（不受终端影响）"><a href="#6-启动脚本，使脚本在后台运行（不受终端影响）" class="headerlink" title="6. 启动脚本，使脚本在后台运行（不受终端影响）"></a>6. 启动脚本，使脚本在后台运行（不受终端影响）</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd /root/auto_backup</div><div class="line">setsid python mysql_auto_backup.py</div><div class="line"><span class="meta">#</span> 或者</div><div class="line">nohup python mysql_auto_backup.py &amp;</div></pre></td></tr></table></figure>
+<h4 id="6-启动脚本，使脚本在后台运行（不受终端影响）"><a href="#6-启动脚本，使脚本在后台运行（不受终端影响）" class="headerlink" title="6. 启动脚本，使脚本在后台运行（不受终端影响）"></a>6. 启动脚本，使脚本在后台运行（不受终端影响）</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd /root/auto_backup</div><div class="line">setsid python mysql_auto_backup.py</div><div class="line"><span class="meta">#</span><span class="bash"> 或者</span></div><div class="line">nohup python mysql_auto_backup.py &amp;</div></pre></td></tr></table></figure>
 <h4 id="7-检测脚本是否运行"><a href="#7-检测脚本是否运行" class="headerlink" title="7. 检测脚本是否运行"></a>7. 检测脚本是否运行</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ps -ef | grep mysql_auto_backup.py</div></pre></td></tr></table></figure>
 <h4 id="8-设置开机自启"><a href="#8-设置开机自启" class="headerlink" title="8. 设置开机自启"></a>8. 设置开机自启</h4><ol>
 <li><p>新建自启脚本</p>
@@ -238,7 +238,7 @@
 </ol>
 <ol>
 <li><p>添加内容</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/usr/bin/env bash</div><div class="line">cd /root/auto_backup</div><div class="line">setsid python mysql_auto_backup.py</div></pre></td></tr></table></figure>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">!/usr/bin/env bash</span></div><div class="line">cd /root/auto_backup</div><div class="line">setsid python mysql_auto_backup.py</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <ol>
@@ -345,7 +345,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://hexo.zhazhapan.com/2018/03/27/部署Python自动备份MySQL数据库脚本/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://github.zhazhapan.com/2018/03/27/部署Python自动备份MySQL数据库脚本/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -358,6 +358,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2018/05/09/Linux安装Redis/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Linux安装Redis
+        
+      </div>
+    </a>
   
   
     <a href="/2018/01/12/Centos搭建Node-js环境/" id="article-nav-older" class="article-nav-link-wrap">
@@ -392,7 +401,7 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://hexo.zhazhapan.com/2018/03/27/部署Python自动备份MySQL数据库脚本/", 
+    url: "http://github.zhazhapan.com/2018/03/27/部署Python自动备份MySQL数据库脚本/", 
     sourceId: "部署Python自动备份MySQL数据库脚本",
     productKey: "true",
     target: "cloud-tie-wrapper"
@@ -431,7 +440,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 渣渣潘
+    		&copy; 2018 FuckTheCode
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -535,11 +544,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">linux maven</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+                <a href="javascript:void(0)" class="js-tag color2">linux maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -555,15 +564,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux apache mysql php</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">linux nginx mysql php</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux pyspider</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux apache mysql php</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -575,11 +580,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux zipkin</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux zipkin</a>
+                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -587,11 +592,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">java javafx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">java javafx dialog</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">java javafx</a>
+                <a href="javascript:void(0)" class="js-tag color1">mac docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -599,7 +608,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mac docker</a>
+                <a href="javascript:void(0)" class="js-tag color5">linux pyspider</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">linux redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -615,23 +628,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java jhipster</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">robot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux sftp</a>
+                <a href="javascript:void(0)" class="js-tag color4">java jhipster</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">linux discuz</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux sftp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -643,7 +652,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">linux postfix dovecot</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -651,11 +664,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux leanote</a>
+                <a href="javascript:void(0)" class="js-tag color2">linux postfix dovecot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux leanote</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -667,15 +680,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">python linux mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">linux weixin</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">weixin linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">python linux mysql</a>
               </li>
             
             <div class="clearfix"></div>
@@ -858,7 +871,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">热爱编程，崇尚开源，喜欢折腾，Linux 爱好者，追求编写极致优雅的代码。</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">热爱编程，&lt;br/&gt;崇尚开源，&lt;br/&gt;喜欢折腾，Linux爱好者，&lt;br/&gt;追求编写极致优雅的代码。</div>
   	  	
     	</section>
     

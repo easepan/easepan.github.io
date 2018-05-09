@@ -5,21 +5,21 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="http://hexo.zhazhapan.com">
-  <title>渣渣潘的博客</title>
+  <link rel="dns-prefetch" href="http://github.zhazhapan.com">
+  <title>FuckTheCode的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="欢迎来到渣渣的博客">
+  <meta name="description" content="欢迎来到FuckTheCode的博客">
 <meta property="og:type" content="website">
-<meta property="og:title" content="渣渣潘的博客">
-<meta property="og:url" content="http://hexo.zhazhapan.com/page/3/index.html">
-<meta property="og:site_name" content="渣渣潘的博客">
-<meta property="og:description" content="欢迎来到渣渣的博客">
+<meta property="og:title" content="FuckTheCode的博客">
+<meta property="og:url" content="http://github.zhazhapan.com/page/3/index.html">
+<meta property="og:site_name" content="FuckTheCode的博客">
+<meta property="og:description" content="欢迎来到FuckTheCode的博客">
 <meta property="og:locale" content="zh_CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="渣渣潘的博客">
-<meta name="twitter:description" content="欢迎来到渣渣的博客">
+<meta name="twitter:title" content="FuckTheCode的博客">
+<meta name="twitter:description" content="欢迎来到FuckTheCode的博客">
   
-    <link rel="alternative" href="/atom.xml" title="渣渣潘的博客" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="FuckTheCode的博客" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -56,7 +56,7 @@
 			<img src="/favicon.png" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="">渣渣潘</a></h1>
+		  <h1 class="header-author"><a href="">FuckTheCode</a></h1>
 		</hgroup>
 		
 		<p class="header-subtitle">Code is lovely</p>
@@ -128,7 +128,7 @@
 				<img src="/favicon.png" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">渣渣潘</h1>
+			  <h1 class="header-author js-header-author">FuckTheCode</h1>
 			</hgroup>
 			
 			<p class="header-subtitle"><i class="icon icon-quo-left"></i>Code is lovely<i class="icon icon-quo-right"></i></p>
@@ -197,6 +197,95 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-CentOS搭建LAMP环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/17/CentOS搭建LAMP环境/">CentOS搭建LAMP环境</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/17/CentOS搭建LAMP环境/" class="archive-article-date">
+  	<time datetime="2017-10-17T15:33:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1. 搭建 MySQL 数据库</strong></p>
+<p><em>安装 MySQL</em></p>
+<p>使用 <code>yum</code> 安装 MySQL：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server -y</div></pre></td></tr></table></figure></p>
+<p>安装完成后，启动 MySQL 服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service mysqld restart</div></pre></td></tr></table></figure></p>
+<p>设置 MySQL 账户 root 密码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/mysqladmin -u root password &apos;NGky9EKq&apos;</div></pre></td></tr></table></figure></p>
+<p><strong>2. 安装 Apache 服务</strong></p>
+<p><em>安装 Apache</em></p>
+<p>使用 <code>yum</code> 安装 Apache<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install httpd -y</div></pre></td></tr></table></figure></p>
+<p>启动 Apache 服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service httpd start</div></pre></td></tr></table></figure></p>
+<p><strong>3. 安装 PHP</strong></p>
+<p><em>安装 <code>PHP</code> 和 <code>PHP-MYSQL</code> 支持工具：</em></p>
+<p>使用 <code>yum</code> 安装 PHP：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php php-mysql -y</div></pre></td></tr></table></figure></p>
+<p><strong>4. 检查安装是否成功</strong></p>
+<p><em>检验 PHP 是否安装成功</em></p>
+<p>我们在 <code>/var/www/html</code> 目录下创建一个<code>info.php</code>文件来检查php是否安装成功，示例代码参考如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;?php phpinfo(); ?&gt;</div></pre></td></tr></table></figure></p>
+<p>此时，访问 <a href="http://yourip/info.php" target="_blank" rel="external">http://yourip/info.php</a> 或 <a href="http://yourdomain.com/info.php" target="_blank" rel="external">http://yourdomain.com/info.php</a> 可浏览到我们刚刚创建的 info.php 页面了</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">linux apache mysql php</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/17/CentOS搭建LAMP环境/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-基于CentOS搭建Postfix、Dovecot邮件服务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -1372,181 +1461,6 @@
 
 
   
-    <article id="post-搭建微信订阅号后台服务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/16/搭建微信订阅号后台服务/">搭建微信订阅号后台服务</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/16/搭建微信订阅号后台服务/" class="archive-article-date">
-  	<time datetime="2017-10-16T08:59:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. 准备域名和服务器</strong></p>
-<p>微信公众平台需要配置服务器地址 URL 访问，在实验开始之前，我们要准备域名。</p>
-<ul>
-<li><p>购买服务器（<a href="https://cloud.tencent.com/product/cvm" target="_blank" rel="external">腾讯云</a>）</p>
-</li>
-<li><p>域名注册</p>
-</li>
-<li><p>域名解析</p>
-<p>  域名设置解析后需要过一段时间才会生效，通过 ping 命令检查域名是否生效 ，如：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ping www.yourdomain.com</div></pre></td></tr></table></figure>
-<p>  如果 ping 命令返回的信息中含有你设置的解析的 IP 地址，说明解析成功。</p>
-</li>
-</ul>
-<p><strong>2. 申请微信个人订阅号</strong></p>
-<p>在开始搭建我们的订阅号服务器之前，需要先拿到订阅号相关信息。</p>
-<ul>
-<li><p>注册开发者账号</p>
-<p>  如果你还不是微信订阅号开发者，请先在微信公众平台注册：<br><a href="https://mp.weixin.qq.com" target="_blank" rel="external">https://mp.weixin.qq.com</a></p>
-</li>
-<li><p>获取微信订阅号公众平台认证字段信息</p>
-<p>  我们需要获取3个字段：<code>AppID</code> <code>Token</code> <code>EncodingAESKey</code>。</p>
-<p>  登录微信公众平台，依次进入 <code>开发</code> - <code>基本配置</code> 可以拿到 AppID。</p>
-<p>  在<code>基本配置</code> - <code>服务器配置</code> - <code>修改配置</code> 表单中：<br>URL 填第一步申请的域名;</p>
-<p>  Token 用户根据提示填写，用于后面校验服务端合法性;</p>
-<p>  EncodingAESKey 点击 <code>随机生成</code> 按钮来生成。</p>
-<p>  当点击表单 <code>提交</code> 按钮时，微信会通过 Token 来校验 URL 的合法性，这个我们在后面步骤实现，此界面暂时保留不关闭。</p>
-</li>
-</ul>
-<p><strong>3. 搭建 HTTP 服务</strong></p>
-<p>下面的步骤，将带大家在服务器上使用 Node 和 Express 搭建一个 HTTP 服务器</p>
-<ul>
-<li><p>安装 NodeJS 和 NPM</p>
-<p>  使用下面的命令安装 NodeJS 和 NPM</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -</div><div class="line">yum install nodejs -y</div></pre></td></tr></table></figure>
-<p>  安装完成后，使用下面的命令测试安装结果</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node -v</div></pre></td></tr></table></figure>
-</li>
-<li><p>编写 HTTP Server 源码</p>
-<p>  <em>创建工作目录</em></p>
-<p>  使用下面的命令在服务器创建一个工作目录：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/release/weapp</div></pre></td></tr></table></figure>
-<p>  进入此工作目录</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /data/release/weapp</div></pre></td></tr></table></figure>
-<p>  创建 package.json</p>
-<p>  在刚才创建的工作目录创建 <code>package.json</code>，添加我们服务器包的名称和版本号，可参考下面的示例。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;name&quot;: &quot;weapp&quot;,</div><div class="line">    &quot;version&quot;: &quot;1.0.0&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>  <em>添加 Server 源码</em></p>
-<p>  在工作目录创建 <code>app.js</code>，使用 <code>Express.js</code> 来监听 <code>5050</code> 端口，可参考下面的示例代码(注：请将 <code>app.js</code> 文件中的<code>token</code>/<code>appid</code>/<code>encodingAESKey</code>等配置项替换为您的订阅号对应的取值)。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">// 引用 express 来支持 HTTP Server 的实现</div><div class="line">const express = require(&apos;express&apos;);</div><div class="line"></div><div class="line">// 引用微信公共平台自动回复消息接口服务中间件</div><div class="line">var wechat = require(&apos;wechat&apos;);</div><div class="line"></div><div class="line">// 创建一个 express 实例</div><div class="line">const app = express();</div><div class="line"></div><div class="line">// 配置微信公众平台参数，在教程第二步中获取</div><div class="line">var config = &#123;</div><div class="line">    token: &apos;your token&apos;, // 填第二步中获取的 `token`</div><div class="line">    appid: &apos;your appid&apos;, // 填第二步中获取的 `appid`</div><div class="line">    encodingAESKey: &apos;your encodingAESKey&apos;, // 填第二步中获取的 `encodingAESKey`</div><div class="line">    checkSignature: true // 可选，默认为true。由于微信公众平台接口调试工具在明文模式下不发送签名，所以如要使用该测试工具，请将其设置为false </div><div class="line">&#125;;</div><div class="line"></div><div class="line">app.use(express.query());</div><div class="line"></div><div class="line">app.use(&apos;/&apos;, wechat(config, function (req, res, next) &#123;</div><div class="line">    res.reply(&#123;</div><div class="line">        content: &apos;你好，Hello World!&apos;,</div><div class="line">        type: &apos;text&apos;</div><div class="line">    &#125;);</div><div class="line">&#125;));</div><div class="line"></div><div class="line">// 监听端口，等待连接</div><div class="line">const port = 5050;</div><div class="line">app.listen(port);</div><div class="line"></div><div class="line">// 输出服务器启动日志</div><div class="line">console.log(`Server listening at http://127.0.0.1:$&#123;port&#125;`);</div></pre></td></tr></table></figure>
-</li>
-<li><p>运行 HTTP 服务</p>
-<p>  <em>安装 PM2</em></p>
-<p>  在开始之前，我们先来安装 PM2</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install pm2 --global</div></pre></td></tr></table></figure>
-<p>  PM2 安装时间可能稍长，请耐心等候 </p>
-<p>  <em>安装 Express</em></p>
-<p>  我们的服务器源码里使用到了 Express 模块，下面的命令使用 NPM 来安装 Express</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/release/weapp</div><div class="line">npm install express --save</div></pre></td></tr></table></figure>
-<p>  <em>安装 Wechat</em></p>
-<p>  我们的服务器源码里使用到了 Wechat 模块，下面的命令使用 NPM 来安装 Wechat</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/release/weapp</div><div class="line">npm install wechat --save</div></pre></td></tr></table></figure>
-<p>  <em>启动服务</em></p>
-<p>  安装完成后，使用 PM2 来启动 HTTP 服务</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/release/weapp</div><div class="line">pm2 start app.js</div></pre></td></tr></table></figure>
-<p>  现在，您的 HTTP 服务已经在 <a href="http://yourdomain.com:5050" target="_blank" rel="external">http://yourdomain.com:5050</a> 运行要查看服务输出的日志，可以使用下面的命令：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 logs</div></pre></td></tr></table></figure>
-<p>  如果要重启服务，可以使用下面的命令：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 restart app</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>4. 搭建 nginx 对外服务</strong></p>
-<p>NodeJs只是侦听的机器上的 5050 端口，我们使用 nginx 侦听 80 端口提供对外域名服务</p>
-<ul>
-<li><p>安装 Nginx</p>
-<p>  在 CentOS 上，可直接使用 <code>yum</code> 来安装 Nginx</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install nginx -y</div></pre></td></tr></table></figure>
-<p>  安装完成后，使用 <code>nginx</code> 命令启动 Nginx：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nginx</div></pre></td></tr></table></figure>
-<p>  此时，访问 <a href="http://yourdomain.com" target="_blank" rel="external">http://yourdomain.com</a> 可以看到 Nginx 的测试页面</p>
-</li>
-<li><p>配置 HTTP 反向代理</p>
-<p>  外网用户访问服务器的 Web 服务由 Nginx 提供，Nginx 需要配置反向代理才能使得 Web 服务转发到本地的 Node 服务。</p>
-<p>  Nginx 配置目录在 <code>/etc/nginx/conf.d</code>，我们在该目录创建 <code>wechat.conf</code>，参考示例代码如下：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">       listen 80;</div><div class="line">       server_name www.example.com; # 改为第一步申请的域名</div><div class="line">       </div><div class="line">       location / &#123;</div><div class="line">           proxy_pass http://127.0.0.1:5050;</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<p>  重新加载配置</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nginx -s reload</div></pre></td></tr></table></figure>
-<p>  在浏览器通过 http 的方式访问你解析的域名来测试 HTTP 是否成功启动</p>
-</li>
-</ul>
-<p><strong>5. 使用Server端回复微信消息</strong></p>
-<ul>
-<li><p>提交服务端配置</p>
-<p>  我们将第二步微信公众平台中保留的表单提交，同时将 <code>基本配置</code> - <code>服务器配置</code> 启用</p>
-</li>
-<li><p>关注、发送与消息回复</p>
-<p>  首先通过二维码关注微信订阅号</p>
-<p>  在聊天界面向微信公众号发送一条消息</p>
-<p>  最终我们会回到一条 <code>你好，Hello World!</code> 的回复</p>
-</li>
-<li><p>大功搞成</p>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">weixin linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/16/搭建微信订阅号后台服务/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -1561,7 +1475,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 渣渣潘
+    		&copy; 2018 FuckTheCode
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1665,11 +1579,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">linux maven</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+                <a href="javascript:void(0)" class="js-tag color2">linux maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1685,15 +1599,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux apache mysql php</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">linux nginx mysql php</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux pyspider</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux apache mysql php</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1705,11 +1615,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux zipkin</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux zipkin</a>
+                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1717,11 +1627,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">java javafx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">java javafx dialog</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">java javafx</a>
+                <a href="javascript:void(0)" class="js-tag color1">mac docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1729,7 +1643,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mac docker</a>
+                <a href="javascript:void(0)" class="js-tag color5">linux pyspider</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">linux redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1745,23 +1663,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java jhipster</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">robot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux sftp</a>
+                <a href="javascript:void(0)" class="js-tag color4">java jhipster</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">linux discuz</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux sftp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1773,7 +1687,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">linux postfix dovecot</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1781,11 +1699,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux leanote</a>
+                <a href="javascript:void(0)" class="js-tag color2">linux postfix dovecot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux leanote</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1797,15 +1715,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">python linux mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">linux weixin</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">weixin linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">python linux mysql</a>
               </li>
             
             <div class="clearfix"></div>
@@ -1988,7 +1906,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">热爱编程，崇尚开源，喜欢折腾，Linux 爱好者，追求编写极致优雅的代码。</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">热爱编程，&lt;br/&gt;崇尚开源，&lt;br/&gt;喜欢折腾，Linux爱好者，&lt;br/&gt;追求编写极致优雅的代码。</div>
   	  	
     	</section>
     

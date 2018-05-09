@@ -3,12 +3,56 @@
   
     
     <entry>
+      <title><![CDATA[Linux安装Redis]]></title>
+      <url>/2018/05/09/Linux%E5%AE%89%E8%A3%85Redis/</url>
+      <content type="html"><![CDATA[<ol>
+<li><p>安装开发者工具包</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum groupinstall 'Development Tools'</div></pre></td></tr></table></figure>
+</li>
+<li><p>从 <a href="https://redis.io/download" target="_blank" rel="external"><strong>官网</strong></a> 下载Redis</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://download.redis.io/releases/redis-4.0.9.tar.gz</div></pre></td></tr></table></figure>
+</li>
+<li><p>解压</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar xzf redis-*.tar.gz</div></pre></td></tr></table></figure>
+</li>
+<li><p>编译</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd redis-*</div><div class="line">make</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加到环境变量</p>
+<p> <em>更换工作路径</em></p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd src</div></pre></td></tr></table></figure>
+<p> <em>查看当前工作路径（并复制）</em></p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pwd</div><div class="line"><span class="meta">#</span><span class="bash"> 示例输出：/root/redis-4.0.9/src</span></div></pre></td></tr></table></figure>
+<p> <em>添加到环境变量</em></p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/profile</div></pre></td></tr></table></figure>
+<p> <em>添加如下内容</em></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">PATH=$PATH:redis-home</div><div class="line">export PATH</div><div class="line"># 替换redis-home为你的redis工作路径，比如我的：/root/redis-4.0.9/src</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动redis服务（保持后台运行），并连接至redis</p>
+<p> <em>启动</em></p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">redis-server &amp;</div><div class="line"><span class="meta">#</span><span class="bash"> 永远驻留到后台（不受当前bash窗口影响）</span></div><div class="line"><span class="meta">#</span><span class="bash"> setsid redis-server &amp;</span></div></pre></td></tr></table></figure>
+<p> <em>连接</em></p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">redis-cli</div></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> linux redis </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[部署Python自动备份MySQL数据库脚本]]></title>
       <url>/2018/03/27/%E9%83%A8%E7%BD%B2Python%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BDMySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E8%84%9A%E6%9C%AC/</url>
       <content type="html"><![CDATA[<h4 id="1-安装扩展源EPEL"><a href="#1-安装扩展源EPEL" class="headerlink" title="1. 安装扩展源EPEL"></a>1. 安装扩展源EPEL</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install epel-release</div></pre></td></tr></table></figure>
 <h4 id="2-安装PIP"><a href="#2-安装PIP" class="headerlink" title="2. 安装PIP"></a>2. 安装PIP</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install python-pip</div></pre></td></tr></table></figure>
 <h4 id="3-安装Python第三方扩展库"><a href="#3-安装Python第三方扩展库" class="headerlink" title="3. 安装Python第三方扩展库"></a>3. 安装Python第三方扩展库</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install apscheduler</div></pre></td></tr></table></figure>
-<h4 id="4-上传脚本"><a href="#4-上传脚本" class="headerlink" title="4. 上传脚本"></a>4. 上传脚本</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">pscp local_dir user@ip:/remote_dir</div><div class="line"><span class="meta">#</span> 例：</div><div class="line">pscp C:\Users\pantao\Documents\Projects\python\auto_backup\mysql_auto_backup.py root@180.97.80.83:/root/auto_backup</div><div class="line">pscp C:\Users\pantao\Documents\Projects\python\auto_backup\config.json root@180.97.80.83:/root/auto_backup</div></pre></td></tr></table></figure>
+<h4 id="4-上传脚本"><a href="#4-上传脚本" class="headerlink" title="4. 上传脚本"></a>4. 上传脚本</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">pscp local_dir user@ip:/remote_dir</div><div class="line"><span class="meta">#</span><span class="bash"> 例：</span></div><div class="line">pscp C:\Users\pantao\Documents\Projects\python\auto_backup\mysql_auto_backup.py root@180.97.80.83:/root/auto_backup</div><div class="line">pscp C:\Users\pantao\Documents\Projects\python\auto_backup\config.json root@180.97.80.83:/root/auto_backup</div></pre></td></tr></table></figure>
 <blockquote>
 <p><a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html" target="_blank" rel="external">Putty下载地址（pscp命令）</a><br><a href="https://github.com/zhazhapan/auto_backup" target="_blank" rel="external">项目地址</a></p>
 </blockquote>
@@ -16,7 +60,7 @@
 <blockquote>
 <p>说明：如果 <code>mysqldump</code> 已添加到环境变量（可直接执行 <code>mysqldump</code> 命令），则设置配置文件中的 <code>mysqldump</code> 值为空；<br>否则请将 <code>mysqldump</code> 值设置 <code>mysqldump</code> 所在的路径（并在结尾添加一个文件分隔符），比如 <code>/usr/local/mysql-5.7.17-macos10.12-x86_64/bin/</code></p>
 </blockquote>
-<h4 id="6-启动脚本，使脚本在后台运行（不受终端影响）"><a href="#6-启动脚本，使脚本在后台运行（不受终端影响）" class="headerlink" title="6. 启动脚本，使脚本在后台运行（不受终端影响）"></a>6. 启动脚本，使脚本在后台运行（不受终端影响）</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd /root/auto_backup</div><div class="line">setsid python mysql_auto_backup.py</div><div class="line"><span class="meta">#</span> 或者</div><div class="line">nohup python mysql_auto_backup.py &amp;</div></pre></td></tr></table></figure>
+<h4 id="6-启动脚本，使脚本在后台运行（不受终端影响）"><a href="#6-启动脚本，使脚本在后台运行（不受终端影响）" class="headerlink" title="6. 启动脚本，使脚本在后台运行（不受终端影响）"></a>6. 启动脚本，使脚本在后台运行（不受终端影响）</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd /root/auto_backup</div><div class="line">setsid python mysql_auto_backup.py</div><div class="line"><span class="meta">#</span><span class="bash"> 或者</span></div><div class="line">nohup python mysql_auto_backup.py &amp;</div></pre></td></tr></table></figure>
 <h4 id="7-检测脚本是否运行"><a href="#7-检测脚本是否运行" class="headerlink" title="7. 检测脚本是否运行"></a>7. 检测脚本是否运行</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ps -ef | grep mysql_auto_backup.py</div></pre></td></tr></table></figure>
 <h4 id="8-设置开机自启"><a href="#8-设置开机自启" class="headerlink" title="8. 设置开机自启"></a>8. 设置开机自启</h4><ol>
 <li><p>新建自启脚本</p>
@@ -25,7 +69,7 @@
 </ol>
 <ol>
 <li><p>添加内容</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/usr/bin/env bash</div><div class="line">cd /root/auto_backup</div><div class="line">setsid python mysql_auto_backup.py</div></pre></td></tr></table></figure>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">!/usr/bin/env bash</span></div><div class="line">cd /root/auto_backup</div><div class="line">setsid python mysql_auto_backup.py</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <ol>
