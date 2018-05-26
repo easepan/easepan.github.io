@@ -198,6 +198,210 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-代码生成器JHipster入门教程——安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/10/代码生成器JHipster入门教程——安装/">代码生成器JHipster入门教程——安装</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/10/代码生成器JHipster入门教程——安装/" class="archive-article-date">
+  	<time datetime="2017-10-10T14:42:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>JHipster是一个代码生成器，可以用来生成基于Spring Boot 和 AngularJS的项目</strong></p>
+<p><strong>1. 安装 Node.js</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install node</div></pre></td></tr></table></figure></p>
+<p><strong>2. 安装Git客户端</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install git</div></pre></td></tr></table></figure></p>
+<p><strong>3. 安装npm包管理器</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install npm</div></pre></td></tr></table></figure></p>
+<p><strong>4. 安装Yeoman generator</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g yo</div></pre></td></tr></table></figure></p>
+<p><strong>5. 安装Bower</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g bower</div></pre></td></tr></table></figure></p>
+<p><strong>6. 安装Grunt</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g grunt-cli</div></pre></td></tr></table></figure></p>
+<p><strong>7. 安装Yarn</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install yarn</div></pre></td></tr></table></figure></p>
+<p><strong>8. 使用JHipster生成项目</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir hello</div><div class="line">cd hello</div><div class="line">yo jhipster</div></pre></td></tr></table></figure></p>
+<p><strong>9. 接下来按照向导进行操作即可</strong></p>
+<p><img src="http://img.blog.csdn.net/20171010220454974?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="jhipster01"></p>
+<blockquote>
+<p>到后面会有多项选择，使用空格选择或取消选择，a和i全选或全不选</p>
+</blockquote>
+<p><img src="http://img.blog.csdn.net/20171010220840244?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="jhipster02"></p>
+<p><img src="http://img.blog.csdn.net/20171010221239500?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="jhipster03"></p>
+<pre><code>接下来等待完成即可。
+</code></pre><p><strong>10. 修改数据库连接信息</strong></p>
+<pre><code>进入目录src/main/resources/config找到配置文件application-dev.yml和application-prod.yml修改以下内容：
+</code></pre><p><img src="http://img.blog.csdn.net/20171010222655034?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="database"></p>
+<p><strong>11. 运行项目</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./mvnw</div></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">java jhipster</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/10/代码生成器JHipster入门教程——安装/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Eclipse插件推荐" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/30/Eclipse插件推荐/">Eclipse插件推荐</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/30/Eclipse插件推荐/" class="archive-article-date">
+  	<time datetime="2017-09-30T10:42:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>打开Eclipse Marketplace搜索插件名即可</p>
+</blockquote>
+<ol>
+<li><p><code>Properties Editor</code>：一个好用的属性编辑器</p>
+</li>
+<li><p><code>Class Decompiler</code>：Java反编译插件</p>
+</li>
+<li><p><code>Color Theme</code>：编辑器主题修改，有很多好看的主题</p>
+</li>
+<li><p><code>Darkest Dask Theme</code>：Eclipse暗黑主题，很好看</p>
+</li>
+<li><p><code>Spring Tools</code>：Spring开发必备工具</p>
+</li>
+<li><p><code>Subversion</code>：版本管理</p>
+</li>
+<li><p><code>JBoss Tools</code>：Hibernate开发必备</p>
+</li>
+<li><p><code>DevUtils</code>：一个好用的开发者工具</p>
+</li>
+<li><p><code>FindBug</code>：代码检查，默认是不触发，需要到设置里设置</p>
+</li>
+<li><p><code>Checkstyle</code>：代码风格检查</p>
+</li>
+<li><p><code>QuickImage</code>：可在Eclipse内查看图片</p>
+</li>
+<li><p><code>UML Designer</code>：UML插件工具</p>
+</li>
+<li><p><code>pmd</code>：代码分析工具</p>
+</li>
+<li><p><code>TestNG</code>：单元测试工具</p>
+</li>
+<li><p><code>Maven Integration for Eclipse</code>：Maven项目管理插件</p>
+</li>
+<li><p><code>DevStyle</code>：美化Eclipse，请你的Eclipse和IntelliJ一样好看</p>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">eclipse</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/30/Eclipse插件推荐/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Eclipse新建Spring-Boot项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -671,15 +875,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux firekylin</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux java javaweb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -695,11 +899,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux pyspider</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux showdoc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux showdoc</a>
+                <a href="javascript:void(0)" class="js-tag color5">linux pyspider</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -707,11 +911,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
+                <a href="javascript:void(0)" class="js-tag color4">centos nodejs</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">centos nodejs</a>
+                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -719,11 +923,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java javafx dialog</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">java javafx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">java javafx dialog</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -747,11 +955,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">qiniu</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color1">qiniu</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -767,11 +975,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux discuz</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux discuz</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -779,7 +987,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color5">linux svn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -787,27 +995,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux svn</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux leanote</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux seafile</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">weixin linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">python linux mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -816,6 +1012,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">linux weixin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">weixin linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">idea</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">python linux mysql</a>
               </li>
             
             <div class="clearfix"></div>

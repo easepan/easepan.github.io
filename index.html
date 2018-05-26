@@ -198,6 +198,188 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-自定义IDEA快捷键" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/26/自定义IDEA快捷键/">自定义IDEA快捷键</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/26/自定义IDEA快捷键/" class="archive-article-date">
+  	<time datetime="2018-05-26T05:25:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>为了达到纯键盘操作 <code>IDEA</code>，我们有时需要自己定义一些常用功能的快捷键</p>
+<ol>
+<li><p>首先需要先复制一份快捷键（打开设置，找到 <code>keymap</code>）</p>
+<p> <img src="https://img-blog.csdn.net/20180526110533219?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2OTU0Nzcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="p1"></p>
+</li>
+<li><p>我的快捷键设置如下：</p>
+<p> |快捷键|描述|<br> |–|–|<br> |Ctrl + Shift + T|显示/隐藏工具栏（<code>Toolbar</code>）|<br> |Ctrl + Shift + O|显示/隐藏工具按钮（<code>Tool Buttons</code>）|<br> |Ctrl + Shift + S|显示/隐藏状态栏（<code>Status Bar</code>）|<br> |Ctrl + Shift + N|显示/隐藏导航栏（<code>Navigation Bar</code>）|</p>
+</li>
+</ol>
+<pre><code>&gt; 自定义快捷键，真心不好设置啊，好多都被占用了，唉……
+&gt; 先写到这里吧，以后再补充……
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">idea</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/26/自定义IDEA快捷键/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Error-Lambda-expressions-are-allowed-only-at-source-level-1-8-or-above" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/26/Error-Lambda-expressions-are-allowed-only-at-source-level-1-8-or-above/">Error: Lambda expressions are allowed only at source level 1.8 or above</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/26/Error-Lambda-expressions-are-allowed-only-at-source-level-1-8-or-above/" class="archive-article-date">
+  	<time datetime="2018-05-26T05:24:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这个问题也是奇葩，前几天还好好的，突然打开 <code>idea</code> 运行项目就报这个错误，真是无语了，网上搜了一波，终于解决了</p>
+<ul>
+<li><p>检查 <code>pom</code> 文件的 <code>target</code> 和 <code>source</code></p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<pre><code>或
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">               <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">               <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">               <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.7.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">               <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">encoding</span>&gt;</span></div><div class="line">               <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">           <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">build</span>&gt;</span></div></pre></td></tr></table></figure>
+</code></pre><ul>
+<li><p>检查项目的编译环境</p>
+<p>  <img src="https://img-blog.csdn.net/20180525114150464?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2OTU0Nzcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="p1"></p>
+<p>  <img src="https://img-blog.csdn.net/20180525114215317?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2OTU0Nzcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="p2"></p>
+<p>  <img src="https://img-blog.csdn.net/20180525114231295?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2OTU0Nzcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="p3"></p>
+<p>  <img src="https://img-blog.csdn.net/2018052511424960?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2OTU0Nzcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="p4"></p>
+<p>  <em>打开  <code>idea</code> 设置</em></p>
+<p>  <img src="https://img-blog.csdn.net/2018052511430192?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2OTU0Nzcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="p5"></p>
+</li>
+<li><p>检查项目下的 <code>.settings/org.eclipse.jdt.core.prefs</code> 文件</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">eclipse.preferences.version=1</div><div class="line">org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled</div><div class="line">org.eclipse.jdt.core.compiler.codegen.methodParameters=do not generate</div><div class="line">org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.8</div><div class="line">org.eclipse.jdt.core.compiler.codegen.unusedLocal=preserve</div><div class="line">org.eclipse.jdt.core.compiler.compliance=1.8</div><div class="line">org.eclipse.jdt.core.compiler.debug.lineNumber=generate</div><div class="line">org.eclipse.jdt.core.compiler.debug.localVariable=generate</div><div class="line">org.eclipse.jdt.core.compiler.debug.sourceFile=generate</div><div class="line">org.eclipse.jdt.core.compiler.problem.assertIdentifier=error</div><div class="line">org.eclipse.jdt.core.compiler.problem.enumIdentifier=error</div><div class="line">org.eclipse.jdt.core.compiler.problem.forbiddenReference=warning</div><div class="line">org.eclipse.jdt.core.compiler.source=1.8</div></pre></td></tr></table></figure>
+</li>
+<li><p>clean 一下 maven 项目，重新运行，终于搞定了</p>
+<p>  <img src="https://img-blog.csdn.net/20180525115538908?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2OTU0Nzcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="p6"></p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/26/Error-Lambda-expressions-are-allowed-only-at-source-level-1-8-or-above/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java面试总结（三）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1554,176 +1736,6 @@
 
 
   
-    <article id="post-七牛云使用教程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/22/七牛云使用教程/">七牛云使用教程</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/22/七牛云使用教程/" class="archive-article-date">
-  	<time datetime="2017-11-22T12:46:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>0. <a href="https://portal.qiniu.com/signup?code=3lcz13k5pwv2q" target="_blank" rel="external">注册</a></strong></p>
-<p><strong>1. <a href="https://portal.qiniu.com/signin" target="_blank" rel="external">登录</a></strong></p>
-<p><img src="http://oq3iwfipo.bkt.clouddn.com/tutorial/qiniu/1.png" alt="登录七牛云"></p>
-<p><strong>2. <a href="https://portal.qiniu.com/bucket/create" target="_blank" rel="external">创建对象存储</a></strong></p>
-<p><img src="http://oq3iwfipo.bkt.clouddn.com/tutorial/qiniu/2.png" alt="创建对象存储"></p>
-<p><img src="http://oq3iwfipo.bkt.clouddn.com/tutorial/qiniu/3.png" alt="创建对象存储"></p>
-<p><strong>3. <a href="https://portal.qiniu.com/bucket" target="_blank" rel="external">查看创建好的空间</a></strong></p>
-<p><img src="http://oq3iwfipo.bkt.clouddn.com/tutorial/qiniu/4.png" alt="查看创建好的空间"></p>
-<p><strong>4. 文件上传，复制文件链接</strong></p>
-<p><img src="http://oq3iwfipo.bkt.clouddn.com/tutorial/qiniu/5.png" alt="文件上传，复制文件链接"></p>
-<p><img src="http://oq3iwfipo.bkt.clouddn.com/tutorial/qiniu/6.png" alt="文件上传，复制文件链接"></p>
-<p><strong>5. 七牛云对象管理工具（<a href="http://blog.csdn.net/qq_26954773/article/details/78245100" target="_blank" rel="external">使用教程</a>）</strong></p>
-<ul>
-<li><a href="http://oq3iwfipo.bkt.clouddn.com/tools/zhazhapan/qiniu.jar" target="_blank" rel="external">下载jar包</a>（需要安装java环境）</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">qiniu</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/22/七牛云使用教程/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java面试遇到的问题总结（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/21/Java面试遇到的问题总结（二）/">Java面试遇到的问题总结（二）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/21/Java面试遇到的问题总结（二）/" class="archive-article-date">
-  	<time datetime="2017-11-21T10:58:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[toc]</p>
-<h1 id="乐观锁和悲观锁"><a href="#乐观锁和悲观锁" class="headerlink" title="乐观锁和悲观锁"></a>乐观锁和悲观锁</h1><h2 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h2><p>顾名思义，就是很乐观，假设不会发生并发冲突，只在提交操作时检查是否违反数据完整性。每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在提交更新的时候会判断一下在此期间别人有没有去更新这个数据。乐观锁适用于读多写少的应用场景，这样可以提高吞吐量。</p>
-<h3 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h3><ul>
-<li><p>使用数据版本（Version）记录机制实现，这是乐观锁最常用的一种实现方式。何谓数据版本？即为数据增加一个版本标识，一般是通过为数据库表增加一个数字类型的 “version” 字段来实现。当读取数据时，将version字段的值一同读出，数据每更新一次，对此version值加一。当我们提交更新的时候，判断数据库表对应记录的当前版本信息与第一次取出来的version值进行比对，如果数据库表当前版本号与第一次取出来的version值相等，则予以更新，否则认为是过期数据。</p>
-</li>
-<li><p>使用时间戳（timestamp）。乐观锁定的第二种实现方式和第一种差不多，同样是在需要乐观锁控制的table中增加一个字段，名称无所谓，字段类型使用时间戳（timestamp）, 和上面的version类似，也是在更新提交的时候检查当前数据库中数据的时间戳和自己更新前取到的时间戳进行对比，如果一致则OK，否则就是版本冲突。</p>
-</li>
-</ul>
-<h2 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h2><p>顾名思义，就是很悲观，假定会发生并发冲突，屏蔽一切可能违反数据完整性的操作。每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会block直到它拿到锁。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java interview</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/21/Java面试遇到的问题总结（二）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1846,15 +1858,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux firekylin</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux java javaweb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1870,11 +1882,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux pyspider</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux showdoc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux showdoc</a>
+                <a href="javascript:void(0)" class="js-tag color5">linux pyspider</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1882,11 +1894,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
+                <a href="javascript:void(0)" class="js-tag color4">centos nodejs</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">centos nodejs</a>
+                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1894,11 +1906,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java javafx dialog</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">java javafx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">java javafx dialog</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1922,11 +1938,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">qiniu</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color1">qiniu</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1942,11 +1958,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux discuz</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux discuz</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1954,7 +1970,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color5">linux svn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1962,27 +1978,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux svn</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux leanote</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux seafile</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">weixin linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">python linux mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1991,6 +1995,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">linux weixin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">weixin linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">idea</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">python linux mysql</a>
               </li>
             
             <div class="clearfix"></div>

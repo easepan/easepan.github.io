@@ -3,6 +3,70 @@
   
     
     <entry>
+      <title><![CDATA[自定义IDEA快捷键]]></title>
+      <url>/2018/05/26/%E8%87%AA%E5%AE%9A%E4%B9%89IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
+      <content type="html"><![CDATA[<p>为了达到纯键盘操作 <code>IDEA</code>，我们有时需要自己定义一些常用功能的快捷键</p>
+<ol>
+<li><p>首先需要先复制一份快捷键（打开设置，找到 <code>keymap</code>）</p>
+<p> <img src="https://img-blog.csdn.net/20180526110533219?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2OTU0Nzcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="p1"></p>
+</li>
+<li><p>我的快捷键设置如下：</p>
+<p> |快捷键|描述|<br> |–|–|<br> |Ctrl + Shift + T|显示/隐藏工具栏（<code>Toolbar</code>）|<br> |Ctrl + Shift + O|显示/隐藏工具按钮（<code>Tool Buttons</code>）|<br> |Ctrl + Shift + S|显示/隐藏状态栏（<code>Status Bar</code>）|<br> |Ctrl + Shift + N|显示/隐藏导航栏（<code>Navigation Bar</code>）|</p>
+</li>
+</ol>
+<pre><code>&gt; 自定义快捷键，真心不好设置啊，好多都被占用了，唉……
+&gt; 先写到这里吧，以后再补充……
+</code></pre>]]></content>
+      
+        
+        <tags>
+            
+            <tag> idea </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Error: Lambda expressions are allowed only at source level 1.8 or above]]></title>
+      <url>/2018/05/26/Error-Lambda-expressions-are-allowed-only-at-source-level-1-8-or-above/</url>
+      <content type="html"><![CDATA[<p>这个问题也是奇葩，前几天还好好的，突然打开 <code>idea</code> 运行项目就报这个错误，真是无语了，网上搜了一波，终于解决了</p>
+<ul>
+<li><p>检查 <code>pom</code> 文件的 <code>target</code> 和 <code>source</code></p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<pre><code>或
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">               <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">               <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">               <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.7.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">               <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">encoding</span>&gt;</span></div><div class="line">               <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line">           <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">build</span>&gt;</span></div></pre></td></tr></table></figure>
+</code></pre><ul>
+<li><p>检查项目的编译环境</p>
+<p>  <img src="https://img-blog.csdn.net/20180525114150464?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2OTU0Nzcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="p1"></p>
+<p>  <img src="https://img-blog.csdn.net/20180525114215317?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2OTU0Nzcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="p2"></p>
+<p>  <img src="https://img-blog.csdn.net/20180525114231295?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2OTU0Nzcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="p3"></p>
+<p>  <img src="https://img-blog.csdn.net/2018052511424960?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2OTU0Nzcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="p4"></p>
+<p>  <em>打开  <code>idea</code> 设置</em></p>
+<p>  <img src="https://img-blog.csdn.net/2018052511430192?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2OTU0Nzcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="p5"></p>
+</li>
+<li><p>检查项目下的 <code>.settings/org.eclipse.jdt.core.prefs</code> 文件</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">eclipse.preferences.version=1</div><div class="line">org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled</div><div class="line">org.eclipse.jdt.core.compiler.codegen.methodParameters=do not generate</div><div class="line">org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.8</div><div class="line">org.eclipse.jdt.core.compiler.codegen.unusedLocal=preserve</div><div class="line">org.eclipse.jdt.core.compiler.compliance=1.8</div><div class="line">org.eclipse.jdt.core.compiler.debug.lineNumber=generate</div><div class="line">org.eclipse.jdt.core.compiler.debug.localVariable=generate</div><div class="line">org.eclipse.jdt.core.compiler.debug.sourceFile=generate</div><div class="line">org.eclipse.jdt.core.compiler.problem.assertIdentifier=error</div><div class="line">org.eclipse.jdt.core.compiler.problem.enumIdentifier=error</div><div class="line">org.eclipse.jdt.core.compiler.problem.forbiddenReference=warning</div><div class="line">org.eclipse.jdt.core.compiler.source=1.8</div></pre></td></tr></table></figure>
+</li>
+<li><p>clean 一下 maven 项目，重新运行，终于搞定了</p>
+<p>  <img src="https://img-blog.csdn.net/20180525115538908?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2OTU0Nzcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="p6"></p>
+</li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> java </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Java面试总结（三）]]></title>
       <url>/2018/05/19/Java%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%89%EF%BC%89/</url>
       <content type="html"><![CDATA[<p>[toc]</p>
