@@ -198,61 +198,30 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-CentOS搭建FireKylin个人博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-值传递和引用传递" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/18/CentOS搭建FireKylin个人博客/">CentOS搭建FireKylin个人博客</a>
+      <a class="article-title" href="/2018/05/28/值传递和引用传递/">值传递和引用传递</a>
     </h1>
   
 
         
-        <a href="/2017/10/18/CentOS搭建FireKylin个人博客/" class="archive-article-date">
-  	<time datetime="2017-10-18T02:30:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-18</time>
+        <a href="/2018/05/28/值传递和引用传递/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:34:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>1. 运行环境准备</strong></p>
-<p><em>安装 Node.js</em></p>
-<p>使用 <code>yum</code> 命令安装 Node.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install nodejs -y</div></pre></td></tr></table></figure></p>
-<p><em>使用 NPM 安装 PM2</em></p>
-<p>通过 <code>NPM</code> 安装进程管理模块 <code>PM2</code>。它是 Node.js 的一个进程管理模块，之后我们会使用它来管理我们的个人网站进程。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install pm2 -g</div></pre></td></tr></table></figure></p>
-<p><em>安装 MySQL</em></p>
-<p>使用 yum 安装 MySQL：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm</div><div class="line">rpm -ivh mysql-community-release-el7-5.noarch.rpm</div><div class="line">yum install mysql-community-server -y</div></pre></td></tr></table></figure></p>
-<p>启动 MySQL 服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service mysqld restart</div></pre></td></tr></table></figure></p>
-<p>设置 MySQL 账户 <code>root</code> 密码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/mysqladmin -u root password &apos;4aE5aOii4Firekylin&apos;</div></pre></td></tr></table></figure>
-<p><em>安装 Nginx</em></p>
-<p>在 CentOS 上，可直接使用 <code>yum</code> 来安装 Nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install nginx -y</div></pre></td></tr></table></figure></p>
-<p><strong>2. 安装并配置 Firekylin</strong></p>
-<p><em>安装 Firekylin</em></p>
-<p>在服务器上下载安装包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://firekylin.org/release/latest.tar.gz</div></pre></td></tr></table></figure></p>
-<p>解压安装包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar zvxf latest.tar.gz</div></pre></td></tr></table></figure></p>
-<p>安装程序依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd firekylin</div><div class="line">npm install</div></pre></td></tr></table></figure></p>
-<p>复制项目下的 <code>pm2_default.json</code> 文件生成新文件 <code>pm2.json</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp pm2_default.json pm2.json</div></pre></td></tr></table></figure></p>
-<p>修改 <code>pm2.json</code> 文件中的 <code>cwd</code> 配置值为项目的当前路径 <code>/root/firekylin</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;apps&quot;: [&#123;</div><div class="line">    &quot;name&quot;: &quot;firekylin&quot;,</div><div class="line">    &quot;script&quot;: &quot;www/production.js&quot;,</div><div class="line">    &quot;cwd&quot;: &quot;/root/firekylin&quot;,</div><div class="line">    &quot;exec_mode&quot;: &quot;fork&quot;,</div><div class="line">    &quot;max_memory_restart&quot;: &quot;1G&quot;,</div><div class="line">    &quot;autorestart&quot;: true,</div><div class="line">    &quot;node_args&quot;: [],</div><div class="line">    &quot;args&quot;: [],</div><div class="line">    &quot;env&quot;: &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">  &#125;]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>然后通过以下命令启动项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm2 startOrReload pm2.json</div></pre></td></tr></table></figure></p>
-<p>Firekylin 已经启动成功，使用浏览器直接访问 <a href="http://yourip:8360/" target="_blank" rel="external">http://yourip:8360/</a> 或 <a href="http://yourdomain.com:8360即可看到" target="_blank" rel="external">http://yourdomain.com:8360即可看到</a> Firekylin 的配置界面。</p>
-<p><em>配置信息</em></p>
-<p>配置过程输入参数如截图所示，其中数据库信息中的帐号字段设置为 <code>root</code>，密码字段设置为 <code>4aE5aOii4Firekylin</code>，数据库名字段设置为 <code>firekylin</code>，主机字段设置为 <code>127.0.0.1</code>，其他字段使用默认值；后台管理帐号中的帐号字段使用默认值 <code>admin</code>，密码字段设置为 <code>4aE5aOii4Admin</code>：</p>
-<p><img src="https://mc.qcloudimg.com/static/img/2b6b8757d891a5c67581f64b0c75cc42/1.png" alt=""></p>
-<p>配置完成后可以通过后台管理帐号设置的<code>帐号</code>和<code>密码</code>登录博客管理后台，其值分别为 <code>admin</code> 和 <code>4aE5aOii4Admin</code>，截图如下所示：</p>
-<p><img src="https://mc.qcloudimg.com/static/img/d5b5b0b892c165eb6d80e8a699d22657/1.png" alt=""></p>
-<p><em>配置 Nginx</em></p>
-<p>下面我们就配置 Nginx 使用域名访问我们的网站了。<br>复制项目下的 <code>nginx_default.conf</code> 为 <code>nginx.conf</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp nginx_default.conf nginx.conf</div></pre></td></tr></table></figure></p>
-<p>修改 <code>nginx.conf</code> 文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    server_name www.yourdomain.com; #将 www.yourdomain.com 替换为之前注册并解析的域名</div><div class="line">    root /root/firekylin;</div><div class="line">    set $node_port 8360;</div><div class="line"></div><div class="line">    index index.js index.html index.htm;</div><div class="line"></div><div class="line">    location ^~ /.well-known/acme-challenge/ &#123;</div><div class="line">      alias /root/firekylin/ssl/challenges/;</div><div class="line">      try_files $uri = 404;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        proxy_http_version 1.1;</div><div class="line">        proxy_set_header X-Real-IP $remote_addr;</div><div class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="line">        proxy_set_header Host $http_host;</div><div class="line">        proxy_set_header X-NginX-Proxy true;</div><div class="line">        proxy_set_header Upgrade $http_upgrade;</div><div class="line">        proxy_set_header Connection &quot;upgrade&quot;;</div><div class="line">        proxy_pass http://127.0.0.1:$node_port$request_uri;</div><div class="line">        proxy_redirect off;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location = /development.js &#123;</div><div class="line">        deny all;</div><div class="line">    &#125;</div><div class="line">    location = /testing.js &#123;</div><div class="line">        deny all;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location = /production.js &#123;</div><div class="line">        deny all;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>将 <code>nginx.conf</code> 文件软链到 <code>nginx</code> 配置目录下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ln -s /root/firekylin/nginx.conf /etc/nginx/conf.d/firekylin.conf</div></pre></td></tr></table></figure></p>
-<p>重启 <code>Nginx</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service nginx restart</div></pre></td></tr></table></figure></p>
-<p><strong>3. 完成</strong></p>
-
+        <p><strong>样例 1:</strong><br>下列程序的输出结果？  </p>
+<p><pre><code>public class Test {<br>    public static void test(StringBuffer str1, String str2) {<br>        str1.append(“, World!”);<br>        str2 = “World”;<br>    }<br>    public static void main(String[] args) {<br>        StringBuffer string1 = new StringBuffer(“Hello”);<br>        String string2 = “Hello”;<br>        test(string1, string2);<br>        System.out.println(“string1: “ + string1);<br>        System.our.println(“string2: “ + string2);<br>    }<br>}<br>//output:<br>//string1: Hello, World!<br>//string2: Hello<br></code></pre><br><strong>样例 2:</strong><br>下列程序的输出结果？</p>
+<p><pre><code>class Value {<br>    public int i = 15;<br>}<br>public class Test {<br>    public static void main(String[] args) {<br>        Test t = new Test();<br>        t.first();<br>    }<br>    public void first() {<br>        int i = 5;<br>        Value v = new Value;<br>        v.i = 25;<br>        second(v, i);<br>        System.out.println(v.i);<br>    }<br>    public void second(Value v, int i) {<br>        i = 0;<br>        v.i = 20;<br>        Value val = new Value();<br>        v = val;<br>        System.out.println(v.i + “ “ + i);<br>    }<br>}<br>//output:<br>//15 0<br>//20<br></code></pre><br><strong>PS:</strong></p>
+<blockquote>Java不管是值传递还是引用传递，传递的都是副本</blockquote>
       
 
       
@@ -265,7 +234,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux firekylin</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -275,7 +244,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/18/CentOS搭建FireKylin个人博客/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/28/值传递和引用传递/">展开全文 >></a>
         </p>
       
 
@@ -305,70 +274,59 @@
 
 
   
-    <article id="post-CentOS搭建PySpider爬虫服务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Add-Two-Numbers" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/18/CentOS搭建PySpider爬虫服务/">CentOS搭建PySpider爬虫服务</a>
+      <a class="article-title" href="/2018/05/28/Add-Two-Numbers/">Add Two Numbers</a>
     </h1>
   
 
         
-        <a href="/2017/10/18/CentOS搭建PySpider爬虫服务/" class="archive-article-date">
-  	<time datetime="2017-10-18T01:01:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-18</time>
+        <a href="/2018/05/28/Add-Two-Numbers/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:33:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>1. 环境准备</strong></p>
-<p><em>前置环境部署</em></p>
-<p>在开始部署前，我们需要做一些前置准备 。</p>
-<p><code>yum</code> 更新<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum update -y</div></pre></td></tr></table></figure></p>
-<p>安装开发编译工具<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install gcc gcc-c++ -y</div></pre></td></tr></table></figure></p>
-<p>安装依赖库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install python-pip python-devel python-distribute libxml2 libxml2-devel python-lxml libxslt libxslt-devel openssl openssl-devel -y</div></pre></td></tr></table></figure></p>
-<p>升级pip<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install --upgrade pip</div></pre></td></tr></table></figure></p>
-<p><strong>2. 部署 mariadb</strong></p>
-<p>由于 CentOS 7 中 MySQL 数据库已从默认的程序列表中移除，我们使用 mariadb 代替。</p>
-<p><em>安装 <code>mariadb</code></em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mariadb-server mariadb -y</div></pre></td></tr></table></figure></p>
-<p><em>启动 <code>mariadb</code> 服务</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start mariadb</div></pre></td></tr></table></figure></p>
-<p><em>设置 root 密码</em></p>
-<p>默认的root用户密码为空，你可以使用以下命令来创建 root 用户的密码（password 后的 <code>uI7AAS5q</code> 可以改为任何你希望设置的密码）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysqladmin -u root password &quot;uI7AAS5q&quot;</div></pre></td></tr></table></figure></p>
-<p><em>检查是否安装成功</em></p>
-<p>现在你可以尝试通过以下命令来连接到 Mysql 服务器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -u root -p</div></pre></td></tr></table></figure></p>
-<p>然后输入您刚才设置的密码 （ 默认：<code>uI7AAS5q</code> ），如果一切正常，您应该可以在命令行看到以 <code>MariaDB [(none)]&gt;</code> 或 <code>mysql&gt;</code> 开头的提示了，说明连接成功。</p>
-<p>此时输入 <code>SHOW DATABASES;</code> 并回车，应该可以看到类似下面这样的输出，说明一切正常。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">mysql&gt; SHOW DATABASES;</div><div class="line">+----------+</div><div class="line">| Database |</div><div class="line">+----------+</div><div class="line">| mysql    |</div><div class="line">| test     |</div><div class="line">+----------+</div><div class="line">2 rows in set (0.13 sec)</div></pre></td></tr></table></figure></p>
-<p>完成后，可以通过快捷键 <code>Ctrl+C</code> 或命令行键入 <code>exit</code> 来退出，进入下一步。</p>
-<p><strong>3. 部署 redis</strong></p>
-<p><em>下载、解压安装包</em></p>
-<p>下载安装包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://download.redis.io/redis-stable.tar.gz</div></pre></td></tr></table></figure></p>
-<p>解压安装包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -xzvf redis-stable.tar.gz</div></pre></td></tr></table></figure></p>
-<p>移动解压包到 <code>/usr/local</code> 内</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mv redis-stable /usr/local/redis</div></pre></td></tr></table></figure>
-<p>编译安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/redis</div><div class="line">make</div><div class="line">make install</div></pre></td></tr></table></figure></p>
-<p><em>设置 redis 配置</em></p>
-<p>设置配置文件路径<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir -p /etc/redis</div><div class="line">cp /usr/local/redis/redis.conf /etc/redis/redis.conf</div></pre></td></tr></table></figure></p>
-<p>修改 <code>/etc/redis/redis.conf</code> 文件的 <code>daemonize</code> 配置项为如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">daemonize yes</div></pre></td></tr></table></figure></p>
-<p><em>启动 redis 服务</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/bin/redis-server /etc/redis/redis.conf</div></pre></td></tr></table></figure></p>
-<p><strong>4. 部署 pyspider</strong></p>
-<p><em>安装依赖</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pip install --upgrade chardet</div><div class="line">easy_install mysql-connector==2.1.3</div><div class="line">easy_install redis</div></pre></td></tr></table></figure></p>
-<p><em>安装 <code>pyspider</code></em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install pyspider</div></pre></td></tr></table></figure></p>
-<p><em>配置 pyspider</em></p>
-<p>首先创建配置目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir /etc/pyspider</div></pre></td></tr></table></figure></p>
-<p>然后 <code>/etc/pyspider</code> 目录下创建 <code>pyspider.conf.json</code>，参考下面的内容。</p>
-<p>具体配置的说明文档请参考 <a href="http://docs.pyspider.org/en/latest/Deployment/#configjson" target="_blank" rel="external">官方文档</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;taskdb&quot;: &quot;mysql+taskdb://root:uI7AAS5q@127.0.0.1:3306/taskdb&quot;,</div><div class="line">  &quot;projectdb&quot;: &quot;mysql+projectdb://root:uI7AAS5q@127.0.0.1:3306/projectdb&quot;,</div><div class="line">  &quot;resultdb&quot;: &quot;mysql+resultdb://root:uI7AAS5q@127.0.0.1:3306/resultdb&quot;,</div><div class="line">  &quot;message_queue&quot;: &quot;redis://127.0.0.1:6379/db&quot;,</div><div class="line">  &quot;webui&quot;: &#123;</div><div class="line">    &quot;username&quot;: &quot;root&quot;,</div><div class="line">    &quot;password&quot;: &quot;uI7AAS5q&quot;,</div><div class="line">    &quot;need-auth&quot;: true</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>其中 mysql 配置中的 <code>root</code> 为您 mysql 的用户名， <code>root:</code> 后面的 <code>uI7AAS5q</code> 为您刚设置的密码。</p>
-<p><code>webui</code> 配置中的 <code>username</code> 及 <code>password</code> 为您访问 WebUI 时候需要的用户名，你也可以不设置用户名密码，直接将 <code>need-auth</code> 设为 <code>false</code> 即可。</p>
-<p><em>启动服务</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pyspider -c /etc/pyspider/pyspider.conf.json</div></pre></td></tr></table></figure></p>
-<p>如果一切正常，现在访问 <a href="http://yourip:5000" target="_blank" rel="external">http://yourip:5000</a> 或 <a href="http://yourdomain.com:5000，您应该可以看到" target="_blank" rel="external">http://yourdomain.com:5000，您应该可以看到</a> <code>pyspider dashboard</code> 的首页了。</p>
-<p>服务能够正常启动后，我们需要让它能够在后台运行，您可以通过以下命令让服务在后台运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup pyspider -c /etc/pyspider/pyspider.conf.json &amp;</div></pre></td></tr></table></figure></p>
-<p>也可以使用官方推荐的 <a href="http://supervisord.org/" target="_blank" rel="external">Supervisor</a> 来启动，这里就不详细介绍了，具体用法可以参考 Supervisor 的文档</p>
-<p><em>*5 部署完成</em></p>
+        <p>You are given two <strong>non-empty</strong> linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.</p>
+
+<p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
+
+<p><strong>Input:</strong> (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br><br><strong>Output:</strong> 7 -&gt; 0 -&gt; 8<br><br><br><strong><span style="color: blue;">Here is my answer, if you have a better solution, please comment below.</span></strong></p>
+
+<pre><code>/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode head = new ListNode(0);
+        int add=0;
+        //int i = 0;
+        ListNode result = head;
+        while(l1 != null || l2 != null || add != 0){
+            int sum = (l1 == null ? 0 : l1.val ) + (l2 == null ? 0 : l2.val) + add;
+            add = sum / 10;
+            sum %= 10;
+            head.next = new ListNode(sum);
+            head = head.next; 
+            l1 = l1 == null ? null : l1.next ;
+            l2 = l2 == null ? null : l2.next;
+        }
+        return result.next;
+    }
+}
+</code></pre>
 
       
 
@@ -382,7 +340,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">linux pyspider</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -392,7 +350,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/18/CentOS搭建PySpider爬虫服务/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/28/Add-Two-Numbers/">展开全文 >></a>
         </p>
       
 
@@ -422,45 +380,54 @@
 
 
   
-    <article id="post-CentOS搭建ShowDoc文档工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-两个数的和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/18/CentOS搭建ShowDoc文档工具/">CentOS搭建ShowDoc文档工具</a>
+      <a class="article-title" href="/2018/05/28/两个数的和/">两个数的和</a>
     </h1>
   
 
         
-        <a href="/2017/10/18/CentOS搭建ShowDoc文档工具/" class="archive-article-date">
-  	<time datetime="2017-10-17T16:00:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-18</time>
+        <a href="/2018/05/28/两个数的和/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:32:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>1. 准备 <code>Nginx</code> + <code>PHP</code> 环境</strong></p>
-<p><em>安装 Nginx</em></p>
-<p>使用 <code>yum</code> 安装 <code>Nginx</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install nginx</div></pre></td></tr></table></figure></p>
-<p>修改 <code>/etc/nginx/nginx.conf</code> 文件为如下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">user nginx;</div><div class="line">worker_processes auto;</div><div class="line">error_log /var/log/nginx/error.log;</div><div class="line">pid /run/nginx.pid;</div><div class="line"></div><div class="line">include /usr/share/nginx/modules/*.conf;</div><div class="line"></div><div class="line">events &#123;</div><div class="line">    worker_connections 1024;</div><div class="line">&#125;</div><div class="line"></div><div class="line">http &#123;</div><div class="line">    log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;</div><div class="line">                      &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;</div><div class="line">                      &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;</div><div class="line"></div><div class="line">    access_log  /var/log/nginx/access.log  main;</div><div class="line"></div><div class="line">    sendfile            on;</div><div class="line">    tcp_nopush          on;</div><div class="line">    tcp_nodelay         on;</div><div class="line">    keepalive_timeout   65;</div><div class="line">    types_hash_max_size 2048;</div><div class="line"></div><div class="line">    include             /etc/nginx/mime.types;</div><div class="line">    default_type        application/octet-stream;</div><div class="line">    include /etc/nginx/conf.d/*.conf;</div><div class="line"></div><div class="line">    server &#123;</div><div class="line">        listen       80;</div><div class="line">        server_name  127.0.0.1;</div><div class="line">        root         /var/www/html;</div><div class="line">        index index.php index.html</div><div class="line">        error_page  404              /404.html;</div><div class="line">        location = /40x.html &#123;</div><div class="line">        &#125;</div><div class="line">        error_page   500 502 503 504  /50x.html;</div><div class="line">        location = /50x.html &#123;</div><div class="line">        &#125;</div><div class="line">        location ~ .php$ &#123;</div><div class="line">            root           /var/www/html;</div><div class="line">            fastcgi_pass   127.0.0.1:9000;</div><div class="line">            fastcgi_index  index.php;</div><div class="line">            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</div><div class="line">            include        fastcgi_params;</div><div class="line">        &#125;</div><div class="line">        location ~ /.ht &#123;</div><div class="line">            deny  all;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>启动 Nginx 并设置为开机启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">service nginx start</div><div class="line">chkconfig nginx on</div></pre></td></tr></table></figure></p>
-<p><em>安装 PHP</em></p>
-<p>使用 <code>yum</code> 安装 <code>php-fpm</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php php-gd php-fpm php-mcrypt php-mbstring php-mysql php-pdo</div></pre></td></tr></table></figure></p>
-<p>启动 <code>php-fpm</code> 并设置为开机启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">service php-fpm start</div><div class="line">chkconfig php-fpm on</div></pre></td></tr></table></figure></p>
-<p><strong>2. 创建项目</strong></p>
-<p><em>下载安装 Composer</em></p>
-<p><code>Composer</code> 是 PHP 的一个依赖管理工具，推荐使用 Composer 创建 ShowDoc 项目。</p>
-<p>执行如下命令安装 <code>Composer</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl -sS https://getcomposer.org/installer | php</div><div class="line">mv composer.phar /usr/local/bin/composer</div></pre></td></tr></table></figure></p>
-<p><em>设置 Composer 使用国内镜像</em></p>
-<p>执行命令设置 <code>Composer</code> 使用国内镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">composer config -g repo.packagist composer https://packagist.phpcomposer.com</div></pre></td></tr></table></figure></p>
-<p><em>使用 Composer 创建项目</em></p>
-<p>执行命令创建项目：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /var/www/html/ &amp;&amp; composer create-project  showdoc/showdoc</div></pre></td></tr></table></figure></p>
-<p><em>设置 showdoc 目录写权限</em></p>
-<p>执行命令赋予 <code>showdoc</code> 下部分目录的写权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">chmod a+w showdoc/install</div><div class="line">chmod a+w showdoc/Sqlite</div><div class="line">chmod a+w showdoc/Sqlite/showdoc.db.php</div><div class="line">chmod a+w showdoc/Public/Uploads/</div><div class="line">chmod a+w showdoc/Application/Runtime</div><div class="line">chmod a+w showdoc/server/Application/Runtime</div><div class="line">chmod a+w showdoc/Application/Common/Conf/config.php</div><div class="line">chmod a+w showdoc/Application/Home/Conf/config.php</div></pre></td></tr></table></figure></p>
-<p>创建完毕，您现在可以通过浏览器访问 <a href="http://yourip/showdoc/install/" target="_blank" rel="external">http://yourip/showdoc/install/</a> 或 <a href="http://yourdomain.com/showdoc/install/" target="_blank" rel="external">http://yourdomain.com/showdoc/install/</a> ，进行语言的选择以后即可通过 <a href="http://yourip/showdoc" target="_blank" rel="external">http://yourip/showdoc</a> 或 <a href="http://yourdomain/showdoc" target="_blank" rel="external">http://yourdomain/showdoc</a> 查看站点效果。</p>
+        <p>Given an array of integers, return <b>indices</b> of the two numbers such that they add up to a specific target.</p>
+
+<p>You may assume that each input would have <b><i>exactly</i></b> one solution, and you may not use the <i>same</i> element twice.</p>
+
+<p><b>Example:</b></p>
+
+<pre>Given nums = [2, 7, 11, 15], target = 9,
+
+Because nums[<b>0</b>] + nums[<b>1</b>] = 2 + 7 = 9,
+return [<b>0</b>, <b>1</b>].</pre>
+
+<p><strong><span style="color: blue">Here is my answer, if you have a better solution, please comment below.</span></strong></p>
+
+<pre><code>public class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int[] temp = {};
+        for (int i = 0; i &lt; nums.length - 1; i++) {
+            for (int j = i + 1; j &lt; nums.length; j++) {
+                if (nums[i] + nums[j] == target) {
+                    temp = new int[] { i, j };
+                    return temp;
+                }
+            }
+        }
+        return temp;
+    }
+}
+</code></pre>
 
       
 
@@ -474,7 +441,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">linux showdoc</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -484,7 +451,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/18/CentOS搭建ShowDoc文档工具/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/28/两个数的和/">展开全文 >></a>
         </p>
       
 
@@ -514,54 +481,49 @@
 
 
   
-    <article id="post-CentOS搭建LNMP环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-反转整数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/17/CentOS搭建LNMP环境/">CentOS搭建LNMP环境</a>
+      <a class="article-title" href="/2018/05/28/反转整数/">反转整数</a>
     </h1>
   
 
         
-        <a href="/2017/10/17/CentOS搭建LNMP环境/" class="archive-article-date">
-  	<time datetime="2017-10-17T15:48:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+        <a href="/2018/05/28/反转整数/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:31:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>1. 搭建 Nginx 静态服务器</strong></p>
-<p><em>安装 Nginx</em></p>
-<p>使用 <code>yum</code> 安装 Nginx：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install nginx -y</div></pre></td></tr></table></figure></p>
-<p>修改 <code>/etc/nginx/conf.d/default.conf</code>，去除对 IPv6 地址的监听，可参考下面的代码示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen       80 default_server;</div><div class="line">    # listen       [::]:80 default_server;</div><div class="line">    server_name  _;</div><div class="line">    root         /usr/share/nginx/html;</div><div class="line"></div><div class="line">    # Load configuration files for the default server block.</div><div class="line">    include /etc/nginx/default.d/*.conf;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    error_page 404 /404.html;</div><div class="line">        location = /40x.html &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    error_page 500 502 503 504 /50x.html;</div><div class="line">        location = /50x.html &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>修改完成后，启动 <code>Nginx</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nginx</div></pre></td></tr></table></figure></p>
-<p>此时，可访问实验机器外网 HTTP 服务（<a href="http://yourip" target="_blank" rel="external">http://yourip</a> 或 <a href="http://yourdomain.com）来确认是否已经安装成功。" target="_blank" rel="external">http://yourdomain.com）来确认是否已经安装成功。</a></p>
-<p>将 Nginx 设置为开机自动启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig nginx on</div></pre></td></tr></table></figure></p>
-<p><strong>2. 安装 MySQL 数据库服务</strong></p>
-<p><em>安装 MySQL</em></p>
-<p>使用 <code>yum</code> 安装 MySQL：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server -y</div></pre></td></tr></table></figure></p>
-<p>安装完成后，启动 MySQL 服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service mysqld restart</div></pre></td></tr></table></figure></p>
-<p>设置 MySQL 账户 root 密码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/mysqladmin -u root password &apos;WyIGmACk&apos;</div></pre></td></tr></table></figure></p>
-<p>将 MySQL 设置为开机自动启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig mysqld on</div></pre></td></tr></table></figure></p>
-<p><strong>3. 搭建 PHP 环境</strong></p>
-<p><em>安装 PHP</em></p>
-<p>使用 <code>yum</code> 安装 PHP：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php php-fpm php-mysql -y</div></pre></td></tr></table></figure></p>
-<p>安装之后，启动 <code>PHP-FPM</code> 进程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service php-fpm start</div></pre></td></tr></table></figure></p>
-<p>启动之后，可以使用下面的命令查看 <code>PHP-FPM</code> 进程监听哪个端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -nlpt | grep php-fpm</div></pre></td></tr></table></figure></p>
-<p>把 <code>PHP-FPM</code> 也设置成开机自动启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig php-fpm on</div></pre></td></tr></table></figure></p>
-<p><strong>4. 配置 Nginx 并运行 PHP 程序</strong></p>
-<p><em>配置 <code>Nginx</code></em></p>
-<p>在 <code>/etc/nginx/conf.d</code> 目录中新建一个名为 <code>php.conf</code> 的文件，并配置 <code>Nginx</code> 端口 ，配置示例如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 8000;</div><div class="line">    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</div><div class="line">    location ~ .php$ &#123;</div><div class="line">        root           /usr/share/php;</div><div class="line">        fastcgi_pass   127.0.0.1:9000;</div><div class="line">        fastcgi_index  index.php;</div><div class="line">        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</div><div class="line">        include        fastcgi_params;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>修改配置完成后，重启 <code>nginx</code> 服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service nginx restart</div></pre></td></tr></table></figure></p>
-<p>这时候，我们就可以在<code>/usr/share/php</code> 目录下新建一个 <code>info.php</code> 文件来检查 php 是否安装成功了，文件内容参考如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;?php phpinfo(); ?&gt;</div></pre></td></tr></table></figure></p>
-<p>此时，访问 <a href="http://yourip:8000/info.php" target="_blank" rel="external">http://yourip:8000/info.php</a> 或 <a href="http://yourdomain.com:8000/info.php" target="_blank" rel="external">http://yourdomain.com:8000/info.php</a> 可浏览到我们刚刚创建的 info.php 页面了</p>
-
+        <p>反转一个整数的数字.</p>
+<p><b>例1:</b> x = 123, 返回 321<br><b>例2:</b> x = -123, 返回 -321<br><b><span style="color: red;">注意:</span></b><br>假如输出一个带符号的32位的整数。当你反转后的整数溢出时你需要<b>返回 0</b>.</p>
+<p><strong><span style="color: blue;">下面是我的答案，如果你更好的解决方案，请在下面评论哦，大家一起讨论交流。</span></strong></p>
+<pre>import java.util.*;
+public class Solution {
+    public int reverse(int x) {
+        long re=0;
+        boolean negative = false;
+        if(x &lt; 0) {
+             x = Math.abs(x);
+             negative = true;
+         }
+         while(x &gt; 0) {
+             re *= 10;
+             re += x % 10;
+             x /= 10;
+         }
+         if(re &gt; Integer.MAX_VALUE) {
+             re = 0;
+         }
+         return negative ? -(int)re : (int)re;
+     }
+}</pre>
       
 
       
@@ -574,7 +536,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">linux nginx mysql php</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -584,7 +546,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/17/CentOS搭建LNMP环境/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/28/反转整数/">展开全文 >></a>
         </p>
       
 
@@ -614,42 +576,45 @@
 
 
   
-    <article id="post-CentOS搭建LAMP环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java之类型的转换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/17/CentOS搭建LAMP环境/">CentOS搭建LAMP环境</a>
+      <a class="article-title" href="/2018/05/28/Java之类型的转换/">Java之类型的转换</a>
     </h1>
   
 
         
-        <a href="/2017/10/17/CentOS搭建LAMP环境/" class="archive-article-date">
-  	<time datetime="2017-10-17T15:33:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+        <a href="/2018/05/28/Java之类型的转换/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:31:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>1. 搭建 MySQL 数据库</strong></p>
-<p><em>安装 MySQL</em></p>
-<p>使用 <code>yum</code> 安装 MySQL：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server -y</div></pre></td></tr></table></figure></p>
-<p>安装完成后，启动 MySQL 服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service mysqld restart</div></pre></td></tr></table></figure></p>
-<p>设置 MySQL 账户 root 密码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/mysqladmin -u root password &apos;NGky9EKq&apos;</div></pre></td></tr></table></figure></p>
-<p><strong>2. 安装 Apache 服务</strong></p>
-<p><em>安装 Apache</em></p>
-<p>使用 <code>yum</code> 安装 Apache<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install httpd -y</div></pre></td></tr></table></figure></p>
-<p>启动 Apache 服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service httpd start</div></pre></td></tr></table></figure></p>
-<p><strong>3. 安装 PHP</strong></p>
-<p><em>安装 <code>PHP</code> 和 <code>PHP-MYSQL</code> 支持工具：</em></p>
-<p>使用 <code>yum</code> 安装 PHP：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php php-mysql -y</div></pre></td></tr></table></figure></p>
-<p><strong>4. 检查安装是否成功</strong></p>
-<p><em>检验 PHP 是否安装成功</em></p>
-<p>我们在 <code>/var/www/html</code> 目录下创建一个<code>info.php</code>文件来检查php是否安装成功，示例代码参考如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;?php phpinfo(); ?&gt;</div></pre></td></tr></table></figure></p>
-<p>此时，访问 <a href="http://yourip/info.php" target="_blank" rel="external">http://yourip/info.php</a> 或 <a href="http://yourdomain.com/info.php" target="_blank" rel="external">http://yourdomain.com/info.php</a> 可浏览到我们刚刚创建的 info.php 页面了</p>
+        <p><strong>面试例题1：</strong></p>
+
+<pre>下列哪个选项能编译正确？<br>  A. Short myshort = 99S;       C. float z = 1.0;
+  B. int t = "abc".length();    D. char c = 17c;<br><br>    <strong>解析：</strong>Short myshort=99S;这句要执行自动装箱，调用shortValue方法，显然99S无法得到值。将float z=1.0;改为float z=1.0f;就行了，系统默认的浮点数是double型。在Java中，length是属性，一般用来说明数组的长度；length()是方法，用来求数组中某个元素的字符串长度。<br>    <strong>答案：B</strong></pre>
+
+<p><strong>面试例题2：</strong></p>
+
+<pre>下面代码的输出结果是？<code>int i = 012;
+int j = 034;
+int k = (int)056L;
+int l = 078;
+System.out.println(i);
+System.out.println(j);
+System.out.println(k);
+</code>  A. 输出12，34，56  B. int k=(int)056L;行编译错误  C. 输出10，28，46  D. int l=078;行编译错误<br><br>    <strong>解析：</strong>int l = 078;行编译错误，因为078是八进制，只能选0~7的数字。<br>    <strong>答案：D</strong></pre>
+
+<p><strong>面试例题3：</strong></p>
+
+<pre>以下程序错误的是：<br>  A. short s = 1; s = s + 1;  B. short s = 1; s += 1;<br><br><strong>  解析：</strong>s+1为int，不能直接赋值给short，但是s+=1会自动进行类型转换。<br><strong>  答案：A</strong></pre>
 
       
 
@@ -663,7 +628,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">linux apache mysql php</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -673,7 +638,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/17/CentOS搭建LAMP环境/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/28/Java之类型的转换/">展开全文 >></a>
         </p>
       
 
@@ -703,121 +668,31 @@
 
 
   
-    <article id="post-基于CentOS搭建Postfix、Dovecot邮件服务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java之ClassLoader基础知识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/17/基于CentOS搭建Postfix、Dovecot邮件服务/">基于CentOS搭建Postfix、Dovecot邮件服务</a>
+      <a class="article-title" href="/2018/05/28/Java之ClassLoader基础知识/">Java之ClassLoader基础知识</a>
     </h1>
   
 
         
-        <a href="/2017/10/17/基于CentOS搭建Postfix、Dovecot邮件服务/" class="archive-article-date">
-  	<time datetime="2017-10-17T15:23:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+        <a href="/2018/05/28/Java之ClassLoader基础知识/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:30:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>1. 准备域名</strong></p>
-<ul>
-<li><p>域名注册</p>
-</li>
-<li><p>域名解析</p>
-<p>  域名购买完成后, 需要将域名解析到你的服务器IP</p>
-<p>  完成该实验共需要添加两条记录：</p>
-<ul>
-<li><p>A 记录</p>
-<p>  记录类型：A<br>  主机记录：@<br>  记录值：yourip</p>
-</li>
-<li><p>MX 记录</p>
-<p>  记录类型：MX<br>  主机记录：@<br>记录值：yourdomain.com（替换为自己域名）</p>
-</li>
-</ul>
-</li>
-<li><p>生效检查</p>
-<p>  域名设置解析后需要过一段时间才会生效，通过 ping 命令检查域名是否生效 ，如：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ping yourdomain.com</div></pre></td></tr></table></figure>
-<p>  如果 ping 命令返回的信息中含有你设置的解析的 IP 地址，说明解析成功。（使用 <code>ctrl + c</code> 停止）</p>
-<p>  检查 MX 记录</p>
-<p>  替换下面命令中的 <code>yourdomain.com</code> 为您自己的注册的域名：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nslookup -q=mx yourdomain.com</div></pre></td></tr></table></figure>
-<p>  如果 <code>nslookup</code> 命令返回的信息中含有你设置的域名的记录值，说明解析成功。</p>
-</li>
-</ul>
-<p><strong>2. 实验之前</strong></p>
-<p>配置一个功能完善的邮件服务器并不是一项容易的工作，本实验只是搭建了一个简单的邮件服务器，一些更为强大的功能还需要你去探索。</p>
-<ul>
-<li><p>Postfix、Dovecot 简介</p>
-<p>  <em>Postfix</em></p>
-<p>  Postfix 是一个标准的 MTA「Mail Transfer Agent」服务器，它负责通过 SMTP 协议管理发送到本机的邮件以及由本机发向外界的邮件。</p>
-<p>  <em>Dovecot</em></p>
-<p>  Dovecot 是一个优秀的 IMAP/POP 服务器用以接收外界发送到本机的邮件。</p>
-</li>
-<li><p>Postfix、Dovecot 安装</p>
-<p>  在 CentOS 7 上，我们可以直接使用 <code>yum</code> 进行下载安装：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install postfix dovecot</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>3. Postfix</strong></p>
-<ul>
-<li><p>配置 Postfix</p>
-<p>  有关教程中配置参数的具体含义，请参照 <a href="http://www.postfix.org/documentation.html" target="_blank" rel="external">Postfix 配置文档</a>。</p>
-<p>  <em>配置</em></p>
-<p>  在终端中输入以下命令以修改 <code>Postfix</code> 相关配置：</p>
-<blockquote>
-<p>注意：<strong>记得将 yourdomain.com 替换为你自己的域名</strong></p>
-</blockquote>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">postconf -e &apos;myhostname = server.yourdomain.com&apos;</div><div class="line">postconf -e &apos;mydestination = localhost, localhost.localdomain&apos;</div><div class="line">postconf -e &apos;myorigin = $mydomain&apos;</div><div class="line">postconf -e &apos;mynetworks = 127.0.0.0/8&apos;</div><div class="line">postconf -e &apos;inet_interfaces = all&apos;</div><div class="line">postconf -e &apos;inet_protocols = all&apos;</div><div class="line">postconf -e &apos;mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain&apos;</div><div class="line">postconf -e &apos;home_mailbox = Maildir/&apos;</div><div class="line">postconf -e &apos;smtpd_sasl_type = dovecot&apos;</div><div class="line">postconf -e &apos;smtpd_sasl_path = private/auth&apos;</div><div class="line">postconf -e &apos;smtpd_sasl_auth_enable = yes&apos;</div><div class="line">postconf -e &apos;broken_sasl_auth_clients = yes&apos;</div><div class="line">postconf -e &apos;smtpd_sasl_authenticated_header = yes&apos;</div><div class="line">postconf -e &apos;smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination&apos;</div><div class="line">postconf -e &apos;smtpd_use_tls = yes&apos;</div><div class="line">postconf -e &apos;smtpd_tls_cert_file = /etc/pki/dovecot/certs/dovecot.pem&apos;</div><div class="line">postconf -e &apos;smtpd_tls_key_file = /etc/pki/dovecot/private/dovecot.pem&apos;</div></pre></td></tr></table></figure>
-<p>  配置中 <code>Postfix</code> 使用 <code>sasl</code> 和 <code>tls</code> 来完成身份认证和传输信息加密。</p>
-<p>  试验中使用了 <code>Dovecot</code> 默认的 <code>ssl</code> 证书和私钥，如果你需要修改为自己的，请替换最后两行配置的路径。</p>
-<p>  <em>配置 smtps</em></p>
-<p>  部分邮件客户端依赖于使用 <code>465</code> 端口提供加密连接，所以我们修改配置，允许 <code>Postfix</code> 使用 <code>465</code> 端口发送邮件。</p>
-<p>  打开 <code>/etc/postfix/master.cf</code> 文件，将如下两行前的 <code>#</code> 去除：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">smtps inet n - n - - smtpd</div><div class="line">-o smtpd_tls_wrappermode=yes</div></pre></td></tr></table></figure>
-<p>  （注意： -o 前要保留空格）</p>
-<p>  <em>启动</em></p>
-<p>  使用以下命令，将 <code>Postfix</code> 设为自动启动并首次启动该服务：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl enable postfix.service</div><div class="line">systemctl start  postfix.service</div></pre></td></tr></table></figure>
-</li>
-<li><p>Postfix 日志</p>
-<p>  <code>Postfix</code> 系统的日志文件在系统的这个目录下的 <code>/var/log/maillog</code> 文件，此文件记录了 <code>Postfix</code> 服务器的运行状态信息。</p>
-</li>
-</ul>
-<p><strong>4. Dovecot</strong></p>
-<ul>
-<li><p>配置 Dovecot</p>
-<p>  <em>修改 <code>dovecot.conf</code></em></p>
-<p>  打开 <code>/etc/dovecot/dovecot.conf</code> 文件，在最下方加入以下配置：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ssl_cert = &lt;/etc/pki/dovecot/certs/dovecot.pem</div><div class="line">ssl_key = &lt;/etc/pki/dovecot/private/dovecot.pem</div><div class="line"></div><div class="line">protocols = imap pop3 lmtp</div><div class="line">listen = *</div><div class="line">mail_location = Maildir:~/Maildir</div><div class="line">disable_plaintext_auth = no</div></pre></td></tr></table></figure>
-<p>  如果前面你修改为了自己的 ssl 证书和私钥，请替换开始两行配置的路径。</p>
-<p>  <em>修改 <code>10-master.conf</code></em></p>
-<p>  打开 <code>/etc/dovecot/conf.d/10-master.conf</code> 文件，找到 <code>service auth</code> 部分，将以下行前面的 <code>#</code> 去除：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">unix_listener /var/spool/postfix/private/auth &#123;  </div><div class="line">       mode = 0666  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>启动 Dovecot</p>
-<p>  使用以下命令，将 <code>Dovecot</code> 设为自动启动并首次启动该服务：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl enable dovecot.service</div><div class="line">systemctl start  dovecot.service</div></pre></td></tr></table></figure>
-<p>  查看 <code>/var/log/maillog</code> 文件，查看服务是否成功启动。</p>
-<p>  如成功启动，日志里应包含如下信息：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Jun 26 12:00:28 localhost postfix/postfix-script[28338]: starting the Postfix mail system</div><div class="line">Jun 26 12:00:29 localhost postfix/master[28340]: daemon started -- version 2.10.1, configuration /etc/postfix</div><div class="line">Jun 26 12:28:40 localhost dovecot: master: Dovecot v2.2.10 starting up for imap, pop3, lmtp (core dumps disabled)</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>5. 创建账户</strong></p>
-<p>该配置下邮箱账户依赖于系统用户，所以通过添加系统用户的方式创建邮箱账户。</p>
-<p><em>添加用户</em></p>
-<p>在终端中使用 <code>useradd</code> 命令添加用户：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">useradd test</div></pre></td></tr></table></figure></p>
-<p>使用 <code>passwd</code> 命令设置对应用户密码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">passwd test</div></pre></td></tr></table></figure></p>
-<p><strong>6. 测试</strong></p>
-<p>如测试中遇到异常，请查看 maillog 日志文件中的错误信息。</p>
-<p><em>服务器端发送测试</em></p>
-<p>使用 <code>su</code> 命令切换用户：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">su test</div></pre></td></tr></table></figure></p>
-<p>我们可以使用 <code>mail</code> 命令发送邮件，将 <code>xxxx@xxx.com</code> 替换为你的其他邮箱。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo &quot;Mail Content&quot; | mail -s &quot;Mail Subject&quot; xxxx@xxx.com</div></pre></td></tr></table></figure></p>
-<p>然后可以前往你的接收方邮箱查收。</p>
+        <ol><br><li><strong>ClassLoader基本概念</strong><br><br>Java程序并不是一个可执行文件，而是由许多独立的类文件组成的，每一个文件对应一个Java类。这些类文件并非全部装入内存，而是根据程序需要逐渐载入。并且ClassLoader是JVM实现的一部分。</li><br><li><strong>ClassLoader加载流程</strong><br><br>当运行一个程序的时候，JVM启动，运行bootstrap classloader，该ClassLoader加载Java核心API，然后调用ExtClassLoader加载扩展API，最后AppClassLoader加载CLASSPATH目录下定义的Class。 </li><br></ol>
+
+<pre>另：类加载的过程使用了一种父类委托模式，主要原因是避免重复加载，还有出于安全因素的考虑。</pre>
+
+<ol><br><li><p><strong>一些重要的方法</strong></p><br><br><ul><br><li>loadClass方法，是ClassLoader的入口点 </li><br></ul><br><br><pre>class loadClass(String name, boolean resolve)</pre><br><br><ul><br><li><p>defineClass方法，接受由原始字节组成的数组，并把它转换成Class对象</p></li><br><li><p>findSystemClass方法，从本地文件系统装入文件</p></li><br><li>resolveClass方法，可以不完全装入类，也可以不完全装入类</li><br><li>findLoadedClass方法，允当一个缓存：</li><br></ul><br><br><pre>当请求loadClass装入类时，它调用该方法来查看ClassLoader是否已装入这个类，这样可以避免重新装入已存在类所造成的麻烦</pre><br><br><ul><br><li>findClass方法，从本地文件系统使用实现的类装载器装载一个类</li><br><li>getSystemClassLoader方法</li><br><li>forName方法，Class类的一个静态方法</li><br></ul><br><br><pre>Class.forName()调用Class.forName(name, initialize, loader);<br>也就是说Class.forName(“something”);等同于Class.forName(“something”, true, CALLCLASS.class.getClassLoader());</pre></li><br></ol>
 
       
 
@@ -831,7 +706,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">linux postfix dovecot</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -841,7 +716,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/17/基于CentOS搭建Postfix、Dovecot邮件服务/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/28/Java之ClassLoader基础知识/">展开全文 >></a>
         </p>
       
 
@@ -871,77 +746,29 @@
 
 
   
-    <article id="post-基于CentOS搭建Docker环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-教你用WordPress搭建个人博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/17/基于CentOS搭建Docker环境/">基于CentOS搭建Docker环境</a>
+      <a class="article-title" href="/2018/05/28/教你用WordPress搭建个人博客/">教你用WordPress搭建个人博客</a>
     </h1>
   
 
         
-        <a href="/2017/10/17/基于CentOS搭建Docker环境/" class="archive-article-date">
-  	<time datetime="2017-10-17T14:52:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+        <a href="/2018/05/28/教你用WordPress搭建个人博客/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:29:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>1. 安装与配置 Docker</strong></p>
-<ul>
-<li><p>安装 Docker</p>
-<p>  <code>Docker</code> 软件包已经包括在默认的 <code>CentOS-Extras</code> 软件源里。因此想要安装 <code>docker</code>，只需要运行下面的 <code>yum</code> 命令：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install docker-io -y</div></pre></td></tr></table></figure>
-<p>  直接<code>yum</code>安装，安装成功后查看版本</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker -v</div></pre></td></tr></table></figure>
-<p>  启动docker</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service docker start</div></pre></td></tr></table></figure>
-<p>  设置开机启动</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig docker on</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p>配置 Docker</p>
-<p>  因为国内访问 Docker Hub 较慢, 可以使用腾讯云提供的国内镜像源, 加速访问 Docker Hub</p>
-<p>  依次执行以下命令</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">echo &quot;OPTIONS=&apos;--registry-mirror=https://mirror.ccs.tencentyun.com&apos;&quot; &gt;&gt; /etc/sysconfig/docker</div><div class="line">systemctl daemon-reload</div><div class="line">service docker restart</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>2. Docker 的简单操作</strong></p>
-<ul>
-<li><p>下载镜像</p>
-<p>  下载一个官方的 CentOS 镜像到本地</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull centos</div></pre></td></tr></table></figure>
-<p>  下载好的镜像就会出现在镜像列表里</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker images</div></pre></td></tr></table></figure>
-</li>
-<li><p>运行容器</p>
-<p>  这时我们可以在刚才下载的 CentOS 镜像生成的容器内操作了。</p>
-<p>  生成一个 centos 镜像为模板的容器并使用 <code>bash shell</code></p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -it centos /bin/bash</div></pre></td></tr></table></figure>
-<p>  这个时候可以看到命令行的前端已经变成了 [root@(一串 hash Id)] 的形式, 这说明我们已经成功进入了 CentOS 容器。</p>
-<p>  在容器内执行任意命令, 不会影响到宿主机, 如下</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/simple_docker</div></pre></td></tr></table></figure>
-<p>  可以看到 <code>/data</code> 目录下已经创建成功了 <code>simple_docker</code> 文件夹</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls /data</div></pre></td></tr></table></figure>
-<p>  退出容器</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exit</div></pre></td></tr></table></figure>
-<p>  查看宿主机的 <code>/data</code> 目录, 并没有 <code>simple_docker</code> 文件夹, 说明容器内的操作不会影响到宿主机</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls /data</div></pre></td></tr></table></figure>
-</li>
-<li><p>保存容器</p>
-<p>  查看所有的容器信息， 能获取容器的id</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker ps -a</div></pre></td></tr></table></figure>
-<p>  然后执行如下命令，保存镜像：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker commit -m=&quot;备注&quot; [CONTAINER_ID] [IMAGE]</div></pre></td></tr></table></figure>
-</li>
-<li><p>完成</p>
-</li>
-</ul>
+        <p><strong>1. 购买VPS，推荐几个供应商：<pre>    国外的有：<a href="https://bwh1.net/index.php" target="_blank">搬瓦工</a>  <a href="https://billing.virmach.com" target="_blank">VirMach</a>  <a href="https://www.vps.net" target="_blank">vps.net</a>  <a href="https://my.vultr.com" target="_blank">vultr.com</a>  等等<br>    国内的有：<a href="https://www.aliyun.com/product/ecs?spm=5176.8142029.418687.1.14x064" target="_blank">阿里云</a>  <a href="https://buy.qcloud.com/cvm" target="_blank">腾讯云</a>  等等</pre></strong><br><strong>2. 注册域名：</strong><a href="https://wanwang.aliyun.com/" target="_blank">阿里云</a>  <a href="https://dnspod.qcloud.com/?from=qcloudHome" tartget="_blank" target="_blank" rel="external">腾讯云</a><br><br><strong>3. 下载安装<a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html" target="_blank">PuTTy</a>（用来远程连接Linux服务器）</strong><br><br><strong>4. 打开PuTTy，连接你的VPS</strong></p>
+<p><pre>    安装apache：<font color="darkred">yum install httpd</font><br>    安装php：<font color="darkred">yum install php</font><br>    安装MySQL：<font color="darkred">yum install -y mysql-server mysql mysql-devel</font><br>    启动MySQL：<font color="darkred">service mysqld start</font><br>    修改root密码：<font color="darkred">/usr/bin/mysqladmin -u root password ‘your password’</font></pre><br><strong>5. 进入mysql，创建数据库wordpress所需数据库</strong></p>
+<p><pre>    进入mysql:<font color="darkred">mysql -uroot -p</font><br>    创建数据库（数据库可以自定义你自己的）：<font color="darkred">create database wordpress;</font><br>    退出mysql：<font color="darkred">exit;</font><br></pre><br><strong>6. 下载WordPress：</strong><code>wget <a href="https://cn.wordpress.org/wordpress-4.7.3-zh_CN.tar.gz" target="_blank" rel="external">https://cn.wordpress.org/wordpress-4.7.3-zh_CN.tar.gz</a></code><br><br><strong>7. 解压：</strong><code>tar xvf wordpress-4.7.3-zh_CN.tar.gz</code><br><br><strong>8. 删除/var/www/html目录：</strong><code>rm -rf /var/www/html</code><br><br><strong>9. 将wordpress移动到/var/www目录下，并重命令为html：</strong><code>mv wordpress /var/www/html</code><br><br><strong>10. 接下来打开YourdomainOrIp/readme.html根据官网教程一步一步走即可（<a href="http://blog.csdn.net/qq_26954773/article/details/60139826" target="_blank">了解vim的使用</a>  <a href="https://cn.wordpress.org/" target="_blank">WordPress中国官网</a>）</strong><code></code><br></p>
 
       
 
@@ -955,7 +782,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">linux docker</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">wordpress</a>
         		</li>
       		
 		</ul>
@@ -965,7 +792,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/17/基于CentOS搭建Docker环境/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/28/教你用WordPress搭建个人博客/">展开全文 >></a>
         </p>
       
 
@@ -995,72 +822,30 @@
 
 
   
-    <article id="post-基于CentOS搭建SVN服务器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-如何手动安装WordPress主题和插件（Linux）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/17/基于CentOS搭建SVN服务器/">基于CentOS搭建SVN服务器</a>
+      <a class="article-title" href="/2018/05/28/如何手动安装WordPress主题和插件（Linux）/">如何手动安装WordPress主题和插件（Linux）</a>
     </h1>
   
 
         
-        <a href="/2017/10/17/基于CentOS搭建SVN服务器/" class="archive-article-date">
-  	<time datetime="2017-10-17T14:41:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+        <a href="/2018/05/28/如何手动安装WordPress主题和插件（Linux）/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:28:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>1. 安装 SVN 服务端</strong></p>
-<p>安装 Subversion</p>
-<p>Subversion 是一个版本控制系统，相对于的 RCS 、 CVS ，采用了分支管理系统，它的设计目标就是取代 CVS 。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y subversion</div></pre></td></tr></table></figure></p>
-<p><strong>2. 创建 SVN 版本库</strong></p>
-<p>创建项目版本库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/svn/myproject</div><div class="line">svnadmin create /data/svn/myproject</div></pre></td></tr></table></figure></p>
-<p><strong>3. 配置 SVN 信息</strong></p>
-<ul>
-<li><p>配置文件简介</p>
-<p>  版本库中的配置目录 conf 有三个文件:</p>
-<ul>
-<li><code>authz</code> 是权限控制文件</li>
-<li><code>passwd</code> 是帐号密码文件</li>
-<li><code>svnserve.conf</code> 是SVN服务综合配置文件</li>
-</ul>
-</li>
-<li><p>配置权限配置文件 <code>authz</code></p>
-<p>  编辑 <code>authz</code> ，内容参考如下：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[groups]            </div><div class="line">#用户组</div><div class="line">admin = admin,root,test  </div><div class="line">#用户组所对应的用户</div><div class="line">[/]                 </div><div class="line">#库目录权限</div><div class="line">@admin = rw         </div><div class="line">#用户组权限</div><div class="line">*=r               </div><div class="line">#非用户组权限</div></pre></td></tr></table></figure>
-</li>
-<li><p>配置账号密码文件 <code>passwd</code></p>
-<p>  编辑 <code>passwd</code> ，内容参考如下：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[users]</div><div class="line"># harry = harryssecret</div><div class="line"># sally = sallyssecret</div><div class="line">admin = 123456</div><div class="line">root = 123456</div><div class="line">test = 123456</div></pre></td></tr></table></figure>
-</li>
-<li><p>配置 SVN 服务综合配置文件 <code>svnserve.conf</code></p>
-<p>  编辑 <code>svnserve.conf</code> ，内容参考如下：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">[general]</div><div class="line"># force-username-case = none</div><div class="line"># 匿名访问的权限 可以是read、write，none，默认为read</div><div class="line">anon-access = none</div><div class="line">#使授权用户有写权限</div><div class="line">auth-access = write</div><div class="line">#密码数据库的路径</div><div class="line">password-db = passwd</div><div class="line">#访问控制文件</div><div class="line">authz-db = authz</div><div class="line">#认证命名空间，SVN会在认证提示里显示，并且作为凭证缓存的关键字</div><div class="line">realm = /data/svn/myproject</div><div class="line"></div><div class="line">[sasl]</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>4. 启动 SVN 服务</strong></p>
-<ul>
-<li><p>启动 SVN</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">svnserve -d -r /data/svn</div></pre></td></tr></table></figure>
-</li>
-<li><p>checkout SVN项目</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/workspace/myproject</div><div class="line">svn co svn://127.0.0.1/myproject /data/workspace/myproject --username root --password 123456 --force --no-auth-cache</div></pre></td></tr></table></figure>
-</li>
-<li><p>提交文件到 SVN 服务器</p>
-<p>  从本地提交文件到 SVN 服务器，其中 <code>root</code> 密码为 <code>/data/svn/myproject/conf/passwd</code> 文件存储的密码</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd /data/workspace/myproject</div><div class="line">echo test &gt;&gt; test.txt</div><div class="line">svn add test.txt</div><div class="line">svn commit test.txt -m &apos;test&apos;</div></pre></td></tr></table></figure>
-<p>  提交成功后可以通过如下命令从本地项目删除文件</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/workspace/myproject</div><div class="line">rm -rf test.txt</div></pre></td></tr></table></figure>
-<p>  删除后可以通过 SVN 服务器恢复</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /data/workspace/myproject</div><div class="line">svn update</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>5. 完成</strong></p>
+        <p><strong>1. 去<a href="https://wordpress.org/" target="_blank">官网</a>找到你想使用的插件或主题，并复制下载地址</strong><br><br><strong>2. cd到WordPress网站目录下的插件或主题目录下</strong></p>
+<p><pre>    这里以我的为例：<br>    安装插件：<font color="orange">cd /var/www/html/wp-content/plugins</font><br>    安装主题：<font color="orange">cd /var/www/html/wp-content/themes</font></pre><br><strong>3. 用wget命令下载刚才复制的地址，以主题为例：</strong></p>
+<p><pre>    <font color="orange">wget <a href="https://downloads.wordpress.org/theme/olesya-lite.1.0.41.zip" target="_blank" rel="external">https://downloads.wordpress.org/theme/olesya-lite.1.0.41.zip</a></font></pre><br><strong>4. 解压下载的压缩包：</strong><code><font color="orange">unzip olesya-lite.1.0.41.zip</font></code></p>
+<p><pre>    删除压缩包（可选）：<font color="orange">rm olesya-lite.1.0.41.zip</font></pre><br><strong>5. 完成，刷新WordPress网页即可</strong></p>
 
       
 
@@ -1074,7 +859,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">linux svn</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">wordpress</a>
         		</li>
       		
 		</ul>
@@ -1084,7 +869,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/17/基于CentOS搭建SVN服务器/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/28/如何手动安装WordPress主题和插件（Linux）/">展开全文 >></a>
         </p>
       
 
@@ -1114,82 +899,33 @@
 
 
   
-    <article id="post-基于CentOS搭建GIT服务器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Struts2-5入门之环境设置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/17/基于CentOS搭建GIT服务器/">基于CentOS搭建GIT服务器</a>
+      <a class="article-title" href="/2018/05/28/Struts2-5入门之环境设置/">Struts2.5入门之环境设置</a>
     </h1>
   
 
         
-        <a href="/2017/10/17/基于CentOS搭建GIT服务器/" class="archive-article-date">
-  	<time datetime="2017-10-17T14:28:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+        <a href="/2018/05/28/Struts2-5入门之环境设置/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:27:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>1. 下载安装 git</strong></p>
-<p>Git 是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。</p>
-<p>此教程以 CentOS 7.2 x64 的系统为环境，搭建 git 服务器。</p>
-<ul>
-<li><p>安装依赖库和编译工具</p>
-<p>  为了后续安装能正常进行，我们先来安装一些相关依赖库和编译工具</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel</div></pre></td></tr></table></figure>
-<p>  安装编译工具</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install gcc perl-ExtUtils-MakeMaker</div></pre></td></tr></table></figure>
-</li>
-<li><p>下载 git</p>
-<p>  选一个目录，用来放下载下来的安装包，这里将安装包放在 /usr/local/src 目录里</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/src</div></pre></td></tr></table></figure>
-<p>  到官网找一个新版稳定的源码包下载到 <code>/usr/local/src</code> 文件夹里</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://www.kernel.org/pub/software/scm/git/git-2.10.0.tar.gz</div></pre></td></tr></table></figure>
-</li>
-<li><p>解压和编译</p>
-<p>  解压下载的源码包</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zvxf git-2.10.0.tar.gz</div></pre></td></tr></table></figure>
-<p>  解压后进入 git-2.10.0 文件夹</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd git-2.10.0</div></pre></td></tr></table></figure>
-<p>  执行编译</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make all prefix=/usr/local/git</div></pre></td></tr></table></figure>
-<p>  编译完成后, 安装到 /usr/local/git 目录下</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make install prefix=/usr/local/git</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>2. 配置环境变量</strong></p>
-<p>将 git 目录加入 PATH</p>
-<p>将原来的 PATH 指向目录修改为现在的目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo &apos;export PATH=$PATH:/usr/local/git/bin&apos; &gt;&gt; /etc/bashrc</div></pre></td></tr></table></figure>
-<p>生效环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source /etc/bashrc</div></pre></td></tr></table></figure></p>
-<p>此时我们能查看 git 版本号，说明我们已经安装成功了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git --version</div></pre></td></tr></table></figure></p>
-<p><strong>3. 创建 git 账号密码</strong></p>
-<p>创建 git 账号</p>
-<p>为我们刚刚搭建好的 git 创建一个账号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">useradd -m gituser</div></pre></td></tr></table></figure></p>
-<p>然后为这个账号设置密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">passwd gituser</div></pre></td></tr></table></figure></p>
-<p><strong>4. 初始化 git 仓库并配置用户权限</strong></p>
-<ul>
-<li><p>创建 git 仓库并初始化</p>
-<p>  我们创建 <code>/data/repositories</code> 目录用于存放 git 仓库</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/repositories</div></pre></td></tr></table></figure>
-<p>  创建好后，初始化这个仓库</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /data/repositories/ &amp;&amp; git init --bare test.git</div></pre></td></tr></table></figure>
-</li>
-<li><p>配置用户权限</p>
-<p>  给 git 仓库目录设置用户和用户组并设置权限</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chown -R gituser:gituser /data/repositories</div><div class="line">chmod 755 /data/repositories</div></pre></td></tr></table></figure>
-<p>  查找 <code>git-shell</code> 所在目录 , 编辑 <code>/etc/passwd</code> 文件，将最后一行关于 <code>gituser</code> 的登录 <code>shell</code> 配置改为 <code>git-shell</code> 的目录，如下</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gituser:x:500:500::/home/gituser:/usr/local/git/bin/git-shell</div></pre></td></tr></table></figure>
-</li>
-<li><p>使用搭建好的 Git 服务</p>
-<p>  克隆 test repo 到本地</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd ~ &amp;&amp; git clone gituser@yourip:/data/repositories/test.git #yourip可以你服务器的ip地址或域名</div></pre></td></tr></table></figure>
-</li>
-</ul>
+        <p><strong>1. 下载Struts2.5，<a href="http://struts.apache.org/" target="_blank" rel="external">下载地址</a></strong><br><br><strong>2. 新建项目struts2</strong><br><br><strong>3. 解压后将struts\lib下的下列jar包复制到WEB-INF/lib文件夹下</strong><br><br><img src="http://img.blog.csdn.net/20170515163600488?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="Jar包"><br><br><strong>4. 修改web.xml配置文件，添加如下内容：</strong><br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;filter&gt;</div><div class="line">       &lt;filter-name&gt;action2&lt;/filter-name&gt;</div><div class="line">       &lt;filter-class&gt;org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter&lt;/filter-class&gt;</div><div class="line">   &lt;/filter&gt;</div><div class="line">   &lt;!-- END SNIPPET: filter --&gt;</div><div class="line">   &lt;filter-mapping&gt;</div><div class="line">       &lt;filter-name&gt;action2&lt;/filter-name&gt;</div><div class="line">       &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</div><div class="line">   &lt;/filter-mapping&gt;</div></pre></td></tr></table></figure></p>
+<p><strong>5. 新建struts包，新建Test类，代码如下：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">package struts;</div><div class="line"></div><div class="line">import com.opensymphony.xwork2.ActionSupport;</div><div class="line"></div><div class="line">public class Test extends ActionSupport &#123;</div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * </div><div class="line">	 */</div><div class="line">	private static final long serialVersionUID = -7708815731271838841L;</div><div class="line"></div><div class="line">	public String index() &#123;</div><div class="line">		System.out.println(&quot;struts2 is working&quot;);</div><div class="line">		return &quot;success&quot;;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>6. 新建success.jsp，代码片段 <code>&lt;body&gt;success&lt;/body&gt;</code></strong><br><br><strong>7. 在src文件夹下新建struts.xml，内容如下：</strong><br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</div><div class="line">&lt;!DOCTYPE struts PUBLIC</div><div class="line">        &quot;-//Apache Software Foundation//DTD Struts Configuration 2.5//EN&quot;</div><div class="line">        &quot;http://struts.apache.org/dtds/struts-2.5.dtd&quot;&gt;</div><div class="line">&lt;struts&gt;</div><div class="line">    &lt;package name=&quot;default&quot; extends=&quot;rest-default&quot;&gt;</div><div class="line">    	&lt;global-allowed-methods&gt;hello&lt;/global-allowed-methods&gt;</div><div class="line">        &lt;action name=&quot;hello&quot; class=&quot;struts.Test&quot;&gt;</div><div class="line">        	&lt;result name=&quot;success&quot;&gt;/success.jsp&lt;/result&gt;</div><div class="line">        &lt;/action&gt;</div><div class="line">    &lt;/package&gt;</div><div class="line">&lt;/struts&gt;</div></pre></td></tr></table></figure></p>
+<p><strong>8. 在浏览器地址输入<code>http://localhost:8080/struts2/hello</code></strong></p>
+<p><pre>     结果<code><font color="green">   success </font></code></pre></p>
+<font color="red">参考自Struts官方示例项目（在apps目录下）</font>
 
       
 
@@ -1203,7 +939,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">linux git</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">java struts</a>
         		</li>
       		
 		</ul>
@@ -1213,7 +949,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/17/基于CentOS搭建GIT服务器/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/28/Struts2-5入门之环境设置/">展开全文 >></a>
         </p>
       
 
@@ -1243,83 +979,29 @@
 
 
   
-    <article id="post-基于CentOS搭建个人Leanote云笔记本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-JSP简单标签的开发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/17/基于CentOS搭建个人Leanote云笔记本/">基于CentOS搭建个人Leanote云笔记本</a>
+      <a class="article-title" href="/2018/05/28/JSP简单标签的开发/">JSP简单标签的开发</a>
     </h1>
   
 
         
-        <a href="/2017/10/17/基于CentOS搭建个人Leanote云笔记本/" class="archive-article-date">
-  	<time datetime="2017-10-17T14:11:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+        <a href="/2018/05/28/JSP简单标签的开发/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:26:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Leanote 依赖 MongoDB 作为数据存储，下面开始安装MongoDB：<br><strong>1. 下载启动 MongoDB</strong></p>
-<ul>
-<li><p>下载 MongoDB</p>
-<p>  进入 /home 目录，并下载 MongoDB：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /home</div></pre></td></tr></table></figure>
-<p>  下载源码：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.1.tgz</div></pre></td></tr></table></figure>
-<p>  解压缩源码包：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -xzvf mongodb-linux-x86_64-3.0.1.tgz</div></pre></td></tr></table></figure>
-</li>
-<li><p>创建用于存储的文件夹目录</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/db</div></pre></td></tr></table></figure>
-<p>  配置 MongoDB 的环境变量：</p>
-<p>  编辑 <code>/etc/profile</code>，在文件末尾追加以下配置：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export PATH=$PATH:/home/mongodb-linux-x86_64-3.0.1/bin</div></pre></td></tr></table></figure>
-<p>  并执行以下命令，使环境变量生效。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source /etc/profile</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li>启动 MongoDB（启动需要 3 ~ 5 分钟，耐心等待）：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongod --bind_ip localhost --port 27017 --dbpath /data/db/ --logpath=/var/log/mongod.log --fork</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>2. 安装 Leanote</strong></p>
-<ul>
-<li><p>下载 Leanote</p>
-<p>  先进入 /home 目录</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /home</div></pre></td></tr></table></figure>
-<p>  下载 Leanote 源码</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://iweb.dl.sourceforge.net/project/leanote-bin/2.4/leanote-linux-amd64-v2.4.bin.tar.gz</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p>解开压缩包：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zxvf leanote-linux-amd64-v2.4.bin.tar.gz</div></pre></td></tr></table></figure>
-</li>
-<li><p>编辑 Leanote 配置文件</p>
-<p>  编辑文件 <code>app.conf</code>，在文件中找到 <code>app.secret=</code> 项，并修改为如下内容：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.secret=qcloud666</div></pre></td></tr></table></figure>
-</li>
-<li><p>初始化数据库</p>
-<p>  导入初始化数据：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongorestore -h localhost -d leanote --dir /home/leanote/mongodb_backup/leanote_install_data/</div></pre></td></tr></table></figure>
-</li>
-<li><p>启动 Leanote 服务</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup /bin/bash /home/leanote/bin/run.sh &gt;&gt; /var/log/leanote.log 2&gt;&amp;1 &amp;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>3. 访问 Leanote 云笔记本</strong></p>
-<p>通过访问 <a href="http://yourip:9000" target="_blank" rel="external">http://yourip:9000</a> 或 <a href="http://yourdomain.com:9000就可以了使用自己的笔记本。" target="_blank" rel="external">http://yourdomain.com:9000就可以了使用自己的笔记本。</a></p>
-<ul>
-<li><p>初始化账户： admin</p>
-</li>
-<li><p>初始化密码： abc123</p>
-</li>
-</ul>
-<p>请务必修改密码已确保使用安全！</p>
+        <p><strong>1. 新建RepeatSampleTag类，代码如下：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">package bid.zhazhapan.fims.tag;</div><div class="line"></div><div class="line">import java.io.IOException;</div><div class="line">import java.io.StringWriter;</div><div class="line">import javax.servlet.jsp.JspContext;</div><div class="line">import javax.servlet.jsp.JspException;</div><div class="line">import javax.servlet.jsp.tagext.JspFragment;</div><div class="line">import javax.servlet.jsp.tagext.SimpleTagSupport;</div><div class="line"></div><div class="line">public class RepeatSampleTag extends SimpleTagSupport &#123;</div><div class="line">	private int num;// 定义属性</div><div class="line"></div><div class="line">	public void setNum(int num) &#123;</div><div class="line">		this.num = num;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	// 覆盖方法，标签的逻辑、迭代</div><div class="line">	public void doTag() throws JspException, IOException &#123;</div><div class="line">		// 获得页面上下文对象</div><div class="line">		JspContext ctx = this.getJspContext();</div><div class="line">		// 获得封闭标签体对象</div><div class="line">		JspFragment fragment = this.getJspBody();</div><div class="line">		if (num &gt; 0) &#123;</div><div class="line">			// 定义一个字符流，用来接收标签体的内容</div><div class="line">			StringWriter writer = new StringWriter();</div><div class="line">			// 将标签体的内容输出到字符流中</div><div class="line">			fragment.invoke(writer);</div><div class="line">			// 从字符流中获得数据</div><div class="line">			String string = writer.getBuffer().toString();</div><div class="line">			for (int i = 1; i &lt; num + 1; i++) &#123;</div><div class="line">				ctx.getOut().write(i + &quot;.&quot; + string.toUpperCase() + &quot;&lt;br/&gt;&quot;);</div><div class="line">			&#125;</div><div class="line">		&#125; else &#123;</div><div class="line">			// invoke()方法传入null值，采用默认的输出流</div><div class="line">			fragment.invoke(null);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>2. 配置xml文件（<a href="http://blog.csdn.net/qq_26954773/article/details/60332169" target="_blank" rel="external">如何配置xml</a>），部分代码如下：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;javaee:tag&gt;</div><div class="line">  	&lt;javaee:name&gt;repeat&lt;/javaee:name&gt;</div><div class="line">  	&lt;javaee:tag-class&gt;bid.zhazhapan.fims.tag.RepeatSampleTag&lt;/javaee:tag-class&gt;</div><div class="line">  	&lt;javaee:body-content&gt;scriptless&lt;/javaee:body-content&gt;</div><div class="line">  	&lt;javaee:attribute&gt;</div><div class="line">  		&lt;javaee:name&gt;num&lt;/javaee:name&gt;</div><div class="line">  		&lt;javaee:required&gt;true&lt;/javaee:required&gt;</div><div class="line">  		&lt;javaee:rtexprvalue&gt;true&lt;/javaee:rtexprvalue&gt;</div><div class="line">  	&lt;/javaee:attribute&gt;</div><div class="line">  &lt;/javaee:tag&gt;</div></pre></td></tr></table></figure></p>
+<p><strong>3. 调用标签，部分代码如下：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;mytag:repeat num=&quot;5&quot;&gt;</div><div class="line">hello world</div><div class="line">&lt;/mytag:repeat&gt;</div></pre></td></tr></table></figure></p>
 
       
 
@@ -1333,7 +1015,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">linux leanote</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -1343,7 +1025,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/17/基于CentOS搭建个人Leanote云笔记本/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/28/JSP简单标签的开发/">展开全文 >></a>
         </p>
       
 
@@ -1375,7 +1057,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 
@@ -1491,7 +1173,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">linux maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1503,10 +1193,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux jenkins</a>
               </li>
              
@@ -1515,7 +1201,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">linux nginx mysql php</a>
+                <a href="javascript:void(0)" class="js-tag color5">linux pyspider</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1523,7 +1209,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux pyspider</a>
+                <a href="javascript:void(0)" class="js-tag color2">linux nginx mysql php</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1540,10 +1226,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">elipse java spring springboot</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1571,11 +1253,51 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mac</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">java maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">svn</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">java spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">java struts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vmware</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c# wpf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1595,15 +1317,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">linux discuz</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux git</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1611,7 +1329,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">linux git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">linux postfix dovecot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">linux seafile</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1623,15 +1349,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux seafile</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux ftp</a>
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">linux weixin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">wordpress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">linux ftp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1643,7 +1373,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">java servlet</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">python linux mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">tcp/ip</a>
               </li>
             
             <div class="clearfix"></div>

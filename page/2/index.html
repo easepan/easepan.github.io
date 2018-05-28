@@ -198,455 +198,35 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-七牛云使用教程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-JavaWeb项目配置Hibernate" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/22/七牛云使用教程/">七牛云使用教程</a>
+      <a class="article-title" href="/2018/05/28/JavaWeb项目配置Hibernate/">JavaWeb项目配置Hibernate</a>
     </h1>
   
 
         
-        <a href="/2017/11/22/七牛云使用教程/" class="archive-article-date">
-  	<time datetime="2017-11-22T12:46:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-22</time>
+        <a href="/2018/05/28/JavaWeb项目配置Hibernate/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:46:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>0. <a href="https://portal.qiniu.com/signup?code=3lcz13k5pwv2q" target="_blank" rel="external">注册</a></strong></p>
-<p><strong>1. <a href="https://portal.qiniu.com/signin" target="_blank" rel="external">登录</a></strong></p>
-<p><img src="http://oq3iwfipo.bkt.clouddn.com/tutorial/qiniu/1.png" alt="登录七牛云"></p>
-<p><strong>2. <a href="https://portal.qiniu.com/bucket/create" target="_blank" rel="external">创建对象存储</a></strong></p>
-<p><img src="http://oq3iwfipo.bkt.clouddn.com/tutorial/qiniu/2.png" alt="创建对象存储"></p>
-<p><img src="http://oq3iwfipo.bkt.clouddn.com/tutorial/qiniu/3.png" alt="创建对象存储"></p>
-<p><strong>3. <a href="https://portal.qiniu.com/bucket" target="_blank" rel="external">查看创建好的空间</a></strong></p>
-<p><img src="http://oq3iwfipo.bkt.clouddn.com/tutorial/qiniu/4.png" alt="查看创建好的空间"></p>
-<p><strong>4. 文件上传，复制文件链接</strong></p>
-<p><img src="http://oq3iwfipo.bkt.clouddn.com/tutorial/qiniu/5.png" alt="文件上传，复制文件链接"></p>
-<p><img src="http://oq3iwfipo.bkt.clouddn.com/tutorial/qiniu/6.png" alt="文件上传，复制文件链接"></p>
-<p><strong>5. 七牛云对象管理工具（<a href="http://blog.csdn.net/qq_26954773/article/details/78245100" target="_blank" rel="external">使用教程</a>）</strong></p>
-<ul>
-<li><a href="http://oq3iwfipo.bkt.clouddn.com/tools/zhazhapan/qiniu.jar" target="_blank" rel="external">下载jar包</a>（需要安装java环境）</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">qiniu</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/22/七牛云使用教程/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java面试遇到的问题总结（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/21/Java面试遇到的问题总结（二）/">Java面试遇到的问题总结（二）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/21/Java面试遇到的问题总结（二）/" class="archive-article-date">
-  	<time datetime="2017-11-21T10:58:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[toc]</p>
-<h1 id="乐观锁和悲观锁"><a href="#乐观锁和悲观锁" class="headerlink" title="乐观锁和悲观锁"></a>乐观锁和悲观锁</h1><h2 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h2><p>顾名思义，就是很乐观，假设不会发生并发冲突，只在提交操作时检查是否违反数据完整性。每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在提交更新的时候会判断一下在此期间别人有没有去更新这个数据。乐观锁适用于读多写少的应用场景，这样可以提高吞吐量。</p>
-<h3 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h3><ul>
-<li><p>使用数据版本（Version）记录机制实现，这是乐观锁最常用的一种实现方式。何谓数据版本？即为数据增加一个版本标识，一般是通过为数据库表增加一个数字类型的 “version” 字段来实现。当读取数据时，将version字段的值一同读出，数据每更新一次，对此version值加一。当我们提交更新的时候，判断数据库表对应记录的当前版本信息与第一次取出来的version值进行比对，如果数据库表当前版本号与第一次取出来的version值相等，则予以更新，否则认为是过期数据。</p>
-</li>
-<li><p>使用时间戳（timestamp）。乐观锁定的第二种实现方式和第一种差不多，同样是在需要乐观锁控制的table中增加一个字段，名称无所谓，字段类型使用时间戳（timestamp）, 和上面的version类似，也是在更新提交的时候检查当前数据库中数据的时间戳和自己更新前取到的时间戳进行对比，如果一致则OK，否则就是版本冲突。</p>
-</li>
-</ul>
-<h2 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h2><p>顾名思义，就是很悲观，假定会发生并发冲突，屏蔽一切可能违反数据完整性的操作。每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会block直到它拿到锁。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java interview</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/21/Java面试遇到的问题总结（二）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java面试遇到的问题总结（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/18/Java面试遇到的问题总结（一）/">Java面试遇到的问题总结（一）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/18/Java面试遇到的问题总结（一）/" class="archive-article-date">
-  	<time datetime="2017-11-18T06:24:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[TOC]</p>
-<h1 id="Struts2和SpringMVC的区别"><a href="#Struts2和SpringMVC的区别" class="headerlink" title="Struts2和SpringMVC的区别"></a>Struts2和SpringMVC的区别</h1><h2 id="拦截级别"><a href="#拦截级别" class="headerlink" title="拦截级别"></a>拦截级别</h2><p>Struts2是类级别的拦截， 一个类对应一个request上下文，SpringMVC是方法级别的拦截，一个方法对应一个request上下文，而方法同时又跟一个url对应,所以说从架构本身上SpringMVC就容易实现restful url,而struts2的架构实现起来要费劲，因为Struts2中Action的一个方法可以对应一个url，而其类属性却被所有方法共享，这也就无法用注解或其他方式标识其所属方法了。</p>
-<h2 id="数据独立性"><a href="#数据独立性" class="headerlink" title="数据独立性"></a>数据独立性</h2><p>由上边原因，SpringMVC的方法之间基本上独立的，独享request response数据，请求数据通过参数获取，处理结果通过ModelMap交回给框架，方法之间不共享变量，而Struts2搞的就比较乱，虽然方法之间也是独立的，但其所有Action变量是共享的，这不会影响程序运行，却给我们编码读程序时带来麻烦，每次来了请求就创建一个Action，一个Action对象对应一个request上下文。</p>
-<h2 id="内存损耗"><a href="#内存损耗" class="headerlink" title="内存损耗"></a>内存损耗</h2><p>由于Struts2需要针对每个request进行封装，把request，session等servlet生命周期的变量封装成一个一个Map，供给每个Action使用，并保证线程安全，所以在原则上，是比较耗费内存的。</p>
-<h2 id="拦截器机制"><a href="#拦截器机制" class="headerlink" title="拦截器机制"></a>拦截器机制</h2><p>拦截器实现机制上，Struts2有以自己的interceptor机制，SpringMVC用的是独立的AOP方式，这样导致Struts2的配置文件量还是比SpringMVC大。</p>
-<h2 id="入口的不同"><a href="#入口的不同" class="headerlink" title="入口的不同"></a>入口的不同</h2><p>SpringMVC的入口是servlet，而Struts2是filter（这里要指出，filter和servlet是不同的。以前认为filter是servlet的一种特殊实现），这就导致了二者的机制不同，这里就牵涉到servlet和filter的区别了。</p>
-<h2 id="对Ajax的支持"><a href="#对Ajax的支持" class="headerlink" title="对Ajax的支持"></a>对Ajax的支持</h2><p>SpringMVC集成了Ajax，使用非常方便，只需一个注解@ResponseBody就可以实现，然后直接返回响应文本即可(只支持异步调用)，而Struts2拦截器集成了Ajax，在Action中处理时一般必须安装插件或者自己写代码集成进去，使用起来也相对不方便。</p>
-<h2 id="验证机制"><a href="#验证机制" class="headerlink" title="验证机制"></a>验证机制</h2><p>SpringMVC验证支持JSR303，处理起来相对更加灵活方便，而Struts2验证比较繁琐，感觉太烦乱。</p>
-<h2 id="和Spring的关系"><a href="#和Spring的关系" class="headerlink" title="和Spring的关系"></a>和Spring的关系</h2><p>SpringMVC和Spring是无缝的。从这个项目的管理和安全上也比Struts2高（当然Struts2也可以通过不同的目录结构和相关配置做到SpringMVC一样的效果，但是需要xml配置的地方不少）。</p>
-<h2 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h2><p>Struts2更加符合OOP的编程思想， SpringMVC就比较谨慎，在Servlet上扩展。</p>
-<h2 id="开发效率和性能"><a href="#开发效率和性能" class="headerlink" title="开发效率和性能"></a>开发效率和性能</h2><p>SpringMVC开发效率和性能高于Struts2。</p>
-<h1 id="HashMap和HashTable的区别"><a href="#HashMap和HashTable的区别" class="headerlink" title="HashMap和HashTable的区别"></a>HashMap和HashTable的区别</h1><h2 id="实现的接口"><a href="#实现的接口" class="headerlink" title="实现的接口"></a>实现的接口</h2><p>HashTable是基于陈旧的Dictionary类的，HashMap是Java 1.2引进的Map接口的一个实现，它们都是集合中将数据无序存放的。</p>
-<h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><p>HashTable的方法是同步的，是线程安全的，而HashMap不是同步的，是线程不安全的，所以在多线程场合要手动同步HashMap这个区别就像Vector和ArrayList一样。</p>
-<h2 id="NULL值"><a href="#NULL值" class="headerlink" title="NULL值"></a>NULL值</h2><p>HashTable不允许 null 值(key 和 value 都不可以)，HashMap允许 null 值(key和value都可以)。</p>
-<h2 id="遍历方式"><a href="#遍历方式" class="headerlink" title="遍历方式"></a>遍历方式</h2><p>两者的遍历方式大同小异，HashTable使用Enumeration，HashMap使用Iterator，HashTable仅仅比HashMap多一个elements方法。</p>
-<h1 id="Ajax的核心对象"><a href="#Ajax的核心对象" class="headerlink" title="Ajax的核心对象"></a>Ajax的核心对象</h1><h2 id="什么是Ajax"><a href="#什么是Ajax" class="headerlink" title="什么是Ajax"></a>什么是Ajax</h2><p>Ajax并不是一门新的技术，而是多种技术的组合（html,js,xml,css）用于快速的创建动态的网页，能够实现无刷新更新数据从而提高了用户体验。</p>
-<h2 id="Ajax的原理"><a href="#Ajax的原理" class="headerlink" title="Ajax的原理"></a>Ajax的原理</h2><p>由客户端请求ajax引擎，在由ajax引擎请求服务器，服务器作出一系列的响应之后将结果返回给ajax引擎，由ajax引擎决定将这个结果写入到客户端的什么位置，从而实现了页面无刷新更新数据。</p>
-<h2 id="核心对象"><a href="#核心对象" class="headerlink" title="核心对象"></a>核心对象</h2><p>XMLHttpRequest</p>
-<h1 id="Struts2的工作流程"><a href="#Struts2的工作流程" class="headerlink" title="Struts2的工作流程"></a>Struts2的工作流程</h1><h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><ol>
-<li><p>客户端初始化一个指向Servlet容器（例如Tomcat）的请求 </p>
-</li>
-<li><p>这个请求经过一系列的过滤器（Filter）（这些过滤器中有一个叫做ActionContextCleanUp的可选过滤器，这个过滤器对于Struts2和其他框架的集成很有帮助，例如：SiteMesh Plugin） </p>
-</li>
-<li><p>接着FilterDispatcher被调用，FilterDispatcher询问ActionMapper来决定这个请是否需要调用某个Action </p>
-</li>
-<li><p>如果ActionMapper决定需要调用某个Action，FilterDispatcher把请求的处理交给ActionProxy </p>
-</li>
-<li><p>ActionProxy通过ConfigurationManager询问框架的配置文件，找到需要调用的Action类 </p>
-</li>
-<li><p>ActionProxy创建一个ActionInvocation的实例。 </p>
-</li>
-<li><p>ActionInvocation实例使用命名模式来调用，在调用Action的过程前后，涉及到相关拦截器（Intercepter）的调用。 </p>
-</li>
-<li><p>一旦Action执行完毕，ActionInvocation负责根据struts.xml中的配置找到对应的返回结果。返回结果通常是（但不总是，也可能是另外的一个Action链）一个需要被表示的JSP或者FreeMarker的模版。在表示的过程中可以使用Struts2 框架中继承的标签。在这个过程中需要涉及到ActionMapper </p>
-</li>
-</ol>
-<h2 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h2><ol>
-<li><p>客户端浏览器发出HTTP请求.</p>
-</li>
-<li><p>根据web.xml配置，该请求被FilterDispatcher接收</p>
-</li>
-<li><p>根据struts.xml配置，找到需要调用的Action类和方法， 并通过IoC方式，将值注入给Aciton</p>
-</li>
-<li><p>Action调用业务逻辑组件处理业务逻辑，这一步包含表单验证。</p>
-</li>
-<li><p>Action执行完毕，根据struts.xml中的配置找到对应的返回结果result，并跳转到相应页面</p>
-</li>
-<li><p>返回HTTP响应到客户端浏览器</p>
-</li>
-</ol>
-<h1 id="CSS盒子模型"><a href="#CSS盒子模型" class="headerlink" title="CSS盒子模型"></a>CSS盒子模型</h1><p><img src="http://img.blog.csdn.net/20171118101357717?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="CSS盒子模型"></p>
-<h1 id="什么是线程"><a href="#什么是线程" class="headerlink" title="什么是线程"></a>什么是线程</h1><h2 id="什么是线程-1"><a href="#什么是线程-1" class="headerlink" title="什么是线程"></a>什么是线程</h2><p>线程是指程序在执行过程中，能够执行程序代码最小的一个执行单元，在Java语言中，线程有四种状态：运行，就绪，挂起，结束。</p>
-<h2 id="线程与进程的区别"><a href="#线程与进程的区别" class="headerlink" title="线程与进程的区别"></a>线程与进程的区别</h2><p>进程是一段正在运行的程序，而线程有时也被称为轻量级进程，它是进程的执行单元，一个进程可以拥有多个线程，各个线程之间共享程序的内存空间，但是，各个线程拥有自己的栈空间。</p>
-<h2 id="为什么使用多线程"><a href="#为什么使用多线程" class="headerlink" title="为什么使用多线程"></a>为什么使用多线程</h2><ol>
-<li><p>使用多线程可以减少程序的响应时间。单线程如果遇到等待或阻塞，将会导致程序不响应鼠标键盘等操作，使用多线程可以解决此问题，增强程序的交互性。</p>
-</li>
-<li><p>与进程相比，线程的创建和切换开销更小，因为线程共享代码段、数据段等内存空间。</p>
-</li>
-<li><p>多核CPU，多核计算机本身就具有执行多线程的能力，如果使用单个线程，将无法重复利用计算资源，造成资源的巨大浪费。</p>
-</li>
-<li><p>多线程可以简化程序的结构，使程序便于维护，一个非常复杂的进程可以分为多个线程执行。</p>
-</li>
-</ol>
-<h1 id="Servlet的生命周期"><a href="#Servlet的生命周期" class="headerlink" title="Servlet的生命周期"></a>Servlet的生命周期</h1><h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>调用init()方法，在Servlet的生命周期中，仅执行一次。它是在服务器装入Servlet时执行的，负责初始化Servlet对象。</p>
-<p>可以配置服务器，以在启动服务器或客户机首次访问Servlet时装入Servlet。无论有多少客户机访问Servlet，都不会重复执行。</p>
-<h3 id="响应客户端请求"><a href="#响应客户端请求" class="headerlink" title="响应客户端请求"></a>响应客户端请求</h3><p>调用service()方法，它是Servlet的核心，负责响应客户的请求。</p>
-<p>每当一个客户请求一个HttpServlet对象，该对象的Service()方法就要调用，而且传递给这个方法一个“请求”（ServletRequest）对象和一个“响应”（ServletResponse）对象作为参数。在HttpServlet中已存在Service()方法。默认的服务功能是调用与HTTP请求的方法相应的do功能。</p>
-<h3 id="终止"><a href="#终止" class="headerlink" title="终止"></a>终止</h3><p>调用destroy()方法，仅执行一次，在服务器端停止且卸载Servlet时执行该方法。当Servlet对象退出生命周期时，负责释放占用的资源。</p>
-<p>一个Servlet在运行service()方法时可能会产生其他的线程，因此需要确认在调用destroy()方法时，这些线程已经终止或完成。</p>
-<h2 id="工作原理-1"><a href="#工作原理-1" class="headerlink" title="工作原理"></a>工作原理</h2><p>对于用户到达Servlet的请求，Servlet容器会创建特定于这个请求的ServletRequest对象和ServletResponse对象，然后调用Servlet的service方法。service方法从ServletRequest对象获得客户请求信息，处理该请求，并将请求ServletRequest、ServletResponse 强转为HttpRequest和HttpResponse，然后返回给客户。</p>
-<h1 id="JSP与Servlet的关系"><a href="#JSP与Servlet的关系" class="headerlink" title="JSP与Servlet的关系"></a>JSP与Servlet的关系</h1><ol>
-<li><p>Jsp经编译后就变成了Servlet(JSP的本质就是Servlet，JVM只能识别java的类，不能识别JSP的代码,Web容器将JSP的代码编译成JVM能够识别的java类)。</p>
-</li>
-<li><p>Jsp更擅长表现于页面显示，Servlet更擅长于逻辑控制。</p>
-</li>
-<li><p>Servlet中没有内置对象，Jsp中的内置对象都是必须通过HttpServletRequest对象，HttpServletResponse对象以及HttpServlet对象得到。</p>
-</li>
-</ol>
-<p>Jsp是Servlet的一种简化，使用Jsp只需要完成程序员需要输出到客户端的内容，Jsp中的Java脚本如何镶嵌到一个类中，由Jsp容器完成。而Servlet则是个完整的Java类，这个类的Service方法用于生成对客户端的响应。</p>
-<h1 id="Docker的主要作用"><a href="#Docker的主要作用" class="headerlink" title="Docker的主要作用"></a>Docker的主要作用</h1><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>Docker很适合用于测试发布，将Docker封装后可以直接提供给测试人员进行运行，不再需要测试人员与运维、开发进行配合，进行环境搭建与部署。</p>
-<h2 id="测试数据分离"><a href="#测试数据分离" class="headerlink" title="测试数据分离"></a>测试数据分离</h2><p>在测试中，经常由于测试场景变换，需要修改依赖的数据库数据或者清空变动memcache、Redis中的缓存数据。Docker相较于传统的虚拟机，更轻量与方便。可以很容易的将这些数据分离到不同的镜像中，根据不同需要随时进行切换。</p>
-<h2 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h2><p>开发人员共同使用同一个Docker镜像，同时修改的源代码都被挂载到本地磁盘。不再因为环境的不同而造成的不同程序行为而伤透脑筋，同时新人到岗时也能迅速建立开发、编译环境。</p>
-<h2 id="PaaS-云服务"><a href="#PaaS-云服务" class="headerlink" title="PaaS 云服务"></a>PaaS 云服务</h2><p>Docker可以支持命令行封装与编程，通过自动加载与服务自发现，可以很方便的将封装于 Docker 镜像中的服务扩展成云服务。类似像 Doc 转换预览这样的服务封装于镜像中，根据业务请求的情况随时增加和减少容器的运行数量，随需应变。</p>
-<h2 id="简化配置"><a href="#简化配置" class="headerlink" title="简化配置"></a>简化配置</h2><p>这是Docker初始目的，虚拟机VM最大的好处是基于你的应用配置能够无缝运行在任何平台上。Docker提供同样类似VM的能力，但是没有任何副作用，它能让你将环境和配置放入代码然后部署，同样的Docker配置能够在各种环境中使用，这实际是将应用环境和底层环境实现了解耦。</p>
-<h2 id="代码管道化管理"><a href="#代码管道化管理" class="headerlink" title="代码管道化管理"></a>代码管道化管理</h2><p>能够对代码以流式pipeline管道化进行管理，从开发者的机器到生产环境机器这个流程中都能有效管理。因为在这个流程中会有各种不同的环境，每个都可能有微小的区别，Docker提供了跨越这些异构环境以一致性的微环境，从开发到部署实现流畅发布。</p>
-<h2 id="开发人员的生产化"><a href="#开发人员的生产化" class="headerlink" title="开发人员的生产化"></a>开发人员的生产化</h2><p>在一个开发环境，我们希望我们的开发环境能更加接近于生产环境，我们会让每个服务运行在自己的VM中，这样能模拟生产环境，比如有时我们并不总是需要跨越网络连接，这样我们可以将多个Docker装载一系列服务运行在单机上最大程度模拟生产分布式部署的环境。</p>
-<h2 id="应用隔离"><a href="#应用隔离" class="headerlink" title="应用隔离"></a>应用隔离</h2><p>有很多理由你需要在一台机器上运行多个应用，这就需要将原来铁板一块monolithic的应用切分为很多微服务。实现应用之间的解耦，将多个应用服务部署在多个Docker中能轻松达到这个目的。</p>
-<h2 id="服务合并"><a href="#服务合并" class="headerlink" title="服务合并"></a>服务合并</h2><p>使用Docker也能合并多个服务以降低费用，不多的操作系统内存占用，跨实例共享多个空闲的内存，这些技术Docker能以更加紧密资源提供更有效的服务合并。</p>
-<h2 id="多租户"><a href="#多租户" class="headerlink" title="多租户"></a>多租户</h2><p>Docker能够作为云计算的多租户容器，使用Docker能容易为每个租户创建运行应该多个实例，这得益其灵活的快速环境以及有效diff命令。</p>
-<h2 id="快速部署"><a href="#快速部署" class="headerlink" title="快速部署"></a>快速部署</h2><p>Docker通过创建进程的容器，不必重新启动操作系统，几秒内能关闭，你可以在数据中心创建或销毁资源，不用担心额外消耗。典型的数据中心利用率是30%，通过更积极的资源分配，以低成本方式对一个新的实例实现一个更聚合的资源分配，我们很容易超过这个利用率，大大提高数据中心的利用效率。 </p>
-<h1 id="异步与同步的区别"><a href="#异步与同步的区别" class="headerlink" title="异步与同步的区别"></a>异步与同步的区别</h1><p>所谓同步，就是在发出一个 <em>调用</em> 时，在没有得到结果之前，该 <em>调用</em> 就不返回。但是一旦调用返回，就得到返回值了。<br>换句话说，就是由 <em>调用者</em> 主动等待这个 <em>调用</em> 的结果。</p>
-<p>而异步则是相反，<em>调用</em> 在发出之后，这个调用就直接返回了，所以没有返回结果。换句话说，当一个异步过程调用发出后，调用者不会立刻得到结果。而是在<em>调用</em>发出后，<em>被调用者</em> 通过状态、通知来通知调用者，或通过回调函数处理这个调用。</p>
-<h1 id="Object类中有哪些方法？作用是什么？"><a href="#Object类中有哪些方法？作用是什么？" class="headerlink" title="Object类中有哪些方法？作用是什么？"></a>Object类中有哪些方法？作用是什么？</h1><h2 id="getClass方法"><a href="#getClass方法" class="headerlink" title="getClass方法"></a>getClass方法</h2><p>getClass方法是一个final方法，不允许子类重写，并且也是一个native方法。返回当前运行时对象的Class对象。</p>
-<h2 id="hashCode方法"><a href="#hashCode方法" class="headerlink" title="hashCode方法"></a>hashCode方法</h2><p>hashCode方法也是一个native方法。该方法返回对象的哈希码，主要使用在哈希表中，比如JDK中的HashMap。</p>
-<h3 id="哈希码的通用约定"><a href="#哈希码的通用约定" class="headerlink" title="哈希码的通用约定"></a>哈希码的通用约定</h3><ol>
-<li><p>在java程序执行过程中，在一个对象没有被改变的前提下，无论这个对象被调用多少次，hashCode方法都会返回相同的整数值。对象的哈希码没有必要在不同的程序中保持相同的值。</p>
-</li>
-<li><p>如果2个对象使用equals方法进行比较并且相同的话，那么这2个对象的hashCode方法的值也必须相等。</p>
-</li>
-<li><p>如果根据equals方法，得到两个对象不相等，那么这2个对象的hashCode值不需要必须不相同。但是，不相等的对象的hashCode值不同的话可以提高哈希表的性能。</p>
-</li>
-</ol>
-<p>通常情况下，不同的对象产生的哈希码是不同的。默认情况下，对象的哈希码是通过将该对象的内部地址转换成一个整数来实现的。</p>
-<h2 id="equals方法"><a href="#equals方法" class="headerlink" title="equals方法"></a>equals方法</h2><p>比较两个对象是否相等。Object类的默认实现，即比较2个对象的内存地址是否相等。</p>
-<h2 id="clone方法"><a href="#clone方法" class="headerlink" title="clone方法"></a>clone方法</h2><p>创建并返回当前对象的一份拷贝。一般情况下，对于任何对象 x，表达式 x.clone() != x 为true，x.clone().getClass() == x.getClass() 也为true。</p>
-<h2 id="toString方法"><a href="#toString方法" class="headerlink" title="toString方法"></a>toString方法</h2><p>Object对象的默认实现，即输出类的<code>名字@实例</code>的哈希码的16进制。</p>
-<h2 id="notify方法"><a href="#notify方法" class="headerlink" title="notify方法"></a>notify方法</h2><p>notify方法是一个native方法，并且也是final的，不允许子类重写。</p>
-<p>唤醒一个在此对象监视器上等待的线程(监视器相当于就是锁的概念)。如果所有的线程都在此对象上等待，那么只会选择一个线程。选择是任意性的，并在对实现做出决定时发生。一个线程在对象监视器上等待可以调用wait方法。</p>
-<p>直到当前线程放弃对象上的锁之后，被唤醒的线程才可以继续处理。被唤醒的线程将以常规方式与在该对象上主动同步的其他所有线程进行竞争。例如，唤醒的线程在作为锁定此对象的下一个线程方面没有可靠的特权或劣势。</p>
-<h2 id="notifyAll方法"><a href="#notifyAll方法" class="headerlink" title="notifyAll方法"></a>notifyAll方法</h2><p>跟notify一样，唯一的区别就是会唤醒在此对象监视器上等待的所有线程，而不是一个线程。同样，如果当前线程不是对象监视器的所有者，那么调用notifyAll同样会发生IllegalMonitorStateException异常。</p>
-<h2 id="wait方法"><a href="#wait方法" class="headerlink" title="wait方法"></a>wait方法</h2><ol>
-<li><p>wait(long timeout) throws InterruptedException</p>
-<p> wait(long timeout)方法同样是一个native方法，并且也是final的，不允许子类重写。</p>
-<p> wait方法会让当前线程等待直到另外一个线程调用对象的notify或notifyAll方法，或者超过参数设置的timeout超时时间。</p>
-<p> 跟notify和notifyAll方法一样，当前线程必须是此对象的监视器所有者，否则还是会发生IllegalMonitorStateException异常。</p>
-</li>
-<li><p>wait(long timeout, int nanos) throws InterruptedException</p>
-<p> 跟wait(long timeout)方法类似，多了一个nanos参数，这个参数表示额外时间（以毫微秒为单位，范围是 0-999999）。 所以超时的时间还需要加上nanos毫秒。</p>
-<p> 需要注意的是 wait(0, 0)和wait(0)效果是一样的，即一直等待。</p>
-</li>
-<li><p>wait() throws InterruptedException</p>
-<p> 跟之前的2个wait方法一样，只不过该方法一直等待，没有超时时间这个概念。</p>
-</li>
-</ol>
-<h1 id="如何读取src目录中的文件"><a href="#如何读取src目录中的文件" class="headerlink" title="如何读取src目录中的文件"></a>如何读取src目录中的文件</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//方法一</span></div><div class="line">getClass().getResource(String name);</div><div class="line"><span class="comment">//方法二</span></div><div class="line">Object.class.getClassLoader().getResource(String name);</div><div class="line"><span class="comment">//方法三</span></div><div class="line">Object.class.getResource(String name);</div></pre></td></tr></table></figure>
-<h1 id="两个list集合怎么取无重复并集"><a href="#两个list集合怎么取无重复并集" class="headerlink" title="两个list集合怎么取无重复并集"></a>两个list集合怎么取无重复并集</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">List list1 =<span class="keyword">new</span> ArrayList();</div><div class="line">list1.add(<span class="string">"1111"</span>);</div><div class="line">list1.add(<span class="string">"2222"</span>);</div><div class="line">list1.add(<span class="string">"3333"</span>);</div><div class="line">  </div><div class="line">List list2 =<span class="keyword">new</span> ArrayList();</div><div class="line">list2.add(<span class="string">"3333"</span>);</div><div class="line">list2.add(<span class="string">"4444"</span>);</div><div class="line">list2.add(<span class="string">"5555"</span>);</div><div class="line">  </div><div class="line"><span class="comment">//并集</span></div><div class="line"><span class="comment">//list1.addAll(list2);</span></div><div class="line"><span class="comment">//交集</span></div><div class="line"><span class="comment">//list1.retainAll(list2);</span></div><div class="line"><span class="comment">//差集</span></div><div class="line"><span class="comment">//list1.removeAll(list2);</span></div><div class="line"><span class="comment">//无重复并集</span></div><div class="line">list2.removeAll(list1);</div><div class="line">list1.addAll(list2);</div></pre></td></tr></table></figure>
-<h1 id="Struts2和SpringMVC怎么接收前端传来的表单数据"><a href="#Struts2和SpringMVC怎么接收前端传来的表单数据" class="headerlink" title="Struts2和SpringMVC怎么接收前端传来的表单数据"></a>Struts2和SpringMVC怎么接收前端传来的表单数据</h1><h2 id="SpringMVC"><a href="#SpringMVC" class="headerlink" title="SpringMVC"></a>SpringMVC</h2><p>注解@RequestBody 表示接收请求里的JSON对象。<br>注解@ResponseBody表示用JSON对象的格式发送响应。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/login"</span>)</div><div class="line"><span class="meta">@ResponseBody</span></div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">(@RequestBody User user)</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">"&#123;success: true&#125;"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="Struts2"><a href="#Struts2" class="headerlink" title="Struts2"></a>Struts2</h2><ol>
-<li><p>实现ModelDriven接口</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">implements ModelDriven&lt;Object&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>实现接口的方法</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//这是一个自定义的Bean对象</span></div><div class="line"><span class="keyword">private</span> Object object;</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">getModel</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> object;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="Struts2中的action是单实例还是多实例，为什么？"><a href="#Struts2中的action是单实例还是多实例，为什么？" class="headerlink" title="Struts2中的action是单实例还是多实例，为什么？"></a>Struts2中的action是单实例还是多实例，为什么？</h1><p>Struts2中action是多例的，即一个session产生一个action。</p>
-<p>如果是单例的话，若出现两个用户都修改一个对象的属性值，则会因为用户修改时间不同，两个用户访问得到的属性不一样，操作得出的结果不一样。</p>
-<h1 id="Struts中的拦截器如何配置"><a href="#Struts中的拦截器如何配置" class="headerlink" title="Struts中的拦截器如何配置"></a>Struts中的拦截器如何配置</h1><h2 id="什么是拦截器"><a href="#什么是拦截器" class="headerlink" title="什么是拦截器"></a>什么是拦截器</h2><p>拦截器是一种可以在让用户在Action执行之前和Result执行之后进行一些功能处理的机制。 拦截器在action执行之前和result执行之后的顺序是相反的，也就是说执行的顺序是：Interceptor1—Interceptor2—Interceptor3—Action—Result—Interceptor3—Interceptor2—Interceptor1。</p>
-<h2 id="配置拦截器"><a href="#配置拦截器" class="headerlink" title="配置拦截器"></a>配置拦截器</h2><p>在struts.xml文件中定义拦截器只需要为拦截器类指定一个拦截器名，就可以完成拦截器的定义。定义拦截器使用<code>&lt;interceptor.../&gt;</code>元素，如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 通过指定拦截器名和拦截器实现类来定义拦截器--&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">interceptor</span> <span class="attr">name</span>=<span class="string">"拦截器名"</span> <span class="attr">class</span>=<span class="string">"拦截器实现类"</span> /&gt;</span></div></pre></td></tr></table></figure>
-<p>如果还需要在配置拦截器时传入拦截器参数。可以在<code>&lt;interceptor.../&gt;</code>元素中使用<code>&lt;param.../&gt;</code>子元素。如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">interceptor</span> <span class="attr">name</span>=<span class="string">"拦截器名"</span> <span class="attr">class</span>=<span class="string">"拦截器实现类"</span>&gt;</span>  </div><div class="line">	<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"参数名"</span>&gt;</span>参数值<span class="tag">&lt;/<span class="name">param</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">interceptor</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="配置拦截器栈"><a href="#配置拦截器栈" class="headerlink" title="配置拦截器栈"></a>配置拦截器栈</h2><p> 除了配置拦截器，还可以把多个拦截器连在一起组成拦截器栈。定义拦截器栈使用<code>&lt;interceptor-stack.../&gt;</code>元素，拦截器栈是由多个拦截器组成。因此需要在<code>&lt;interceptor-stack.../&gt;</code>元素中使用<code>&lt;interceptor-ref.../&gt;</code>元素来定义多个拦截器引用。配置拦截器栈如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">interceptor-stack</span> <span class="attr">name</span>=<span class="string">"拦截器栈名"</span>&gt;</span>  </div><div class="line">	<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"拦截器名"</span> /&gt;</span>  </div><div class="line">	<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"拦截器名"</span> /&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">interceptor-stack</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>从上面的结构中可以看出，一个拦截器栈是由多个拦截器组成的。但是从程序功能上看，拦截器和拦截器栈是统一的，它们包含的方法都会在Action的execute方法执行之前执行。由于拦截器栈和拦截器的功能几乎完全相同，所以我们可以将拦截器栈当成一个更大的拦截器。拦截器栈中也可以包含拦截器栈。配置如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">interceptor-stack</span> <span class="attr">name</span>=<span class="string">"拦截器栈一"</span>&gt;</span>  </div><div class="line">	<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"拦截器一"</span> /&gt;</span>  </div><div class="line">	<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"拦截器二"</span> /&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">interceptor-stack</span>&gt;</span>  </div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">interceptor-stack</span> <span class="attr">name</span>=<span class="string">"拦截器栈二"</span>&gt;</span>  </div><div class="line">	<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"拦截器三"</span> /&gt;</span>  </div><div class="line">	<span class="tag">&lt;<span class="name">interceptor-ref</span> <span class="attr">name</span>=<span class="string">"拦截器栈一"</span> /&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">interceptor-stack</span>&gt;</span></div></pre></td></tr></table></figure>
+        <p><strong>1.</strong><a href="https://nchc.dl.sourceforge.net/project/hibernate/hibernate-orm/5.2.10.Final/hibernate-release-5.2.10.Final.zip" target="_blank" rel="external"><strong>下载Hibernate</strong></a></p>
+<p><strong>2.将lib目录下的所有jar包拷贝到WEB-INF的lib目录下</strong></p>
+<p><strong>3.新建一个测试实体</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * </div><div class="line"> */</div><div class="line">package com.example.entity.Test;</div><div class="line"></div><div class="line">import java.util.Date;</div><div class="line"></div><div class="line">import javax.persistence.Column;</div><div class="line">import javax.persistence.Entity;</div><div class="line">import javax.persistence.GeneratedValue;</div><div class="line">import javax.persistence.GenerationType;</div><div class="line">import javax.persistence.Id;</div><div class="line">import javax.persistence.Table;</div><div class="line"></div><div class="line">/**</div><div class="line"> * @author pantao</div><div class="line"> *</div><div class="line"> */</div><div class="line"></div><div class="line">@Entity</div><div class="line">@Table(name = &quot;test&quot;)</div><div class="line">public class Test &#123;</div><div class="line"></div><div class="line">	/**</div><div class="line">	 * </div><div class="line">	 */</div><div class="line"></div><div class="line">	@Id</div><div class="line">	@GeneratedValue(strategy = GenerationType.IDENTITY)</div><div class="line">	@Column(name = &quot;id&quot;)</div><div class="line">	private int id;</div><div class="line"></div><div class="line">	@Column(name = &quot;create_time&quot;)</div><div class="line">	private Date ceateTime = new Date();</div><div class="line"></div><div class="line">	public Test() &#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public int getId() &#123;</div><div class="line">		return id;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void setId(int id) &#123;</div><div class="line">		this.id = id;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public Date getCeateTime() &#123;</div><div class="line">		return ceateTime;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void setCeateTime(Date ceateTime) &#123;</div><div class="line">		this.ceateTime = ceateTime;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>4.在src文件夹下新建hibernate.cfg.xml，并添加如下代码</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;!DOCTYPE hibernate-configuration SYSTEM </div><div class="line">&quot;http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd&quot;&gt;</div><div class="line"></div><div class="line">&lt;hibernate-configuration&gt;</div><div class="line">	&lt;session-factory&gt;</div><div class="line">		&lt;property name=&quot;hibernate.dialect&quot;&gt;org.hibernate.dialect.MySQLDialect&lt;/property&gt;</div><div class="line">		&lt;property name=&quot;hibernate.connection.driver_class&quot;&gt;com.mysql.jdbc.Driver&lt;/property&gt;</div><div class="line">		&lt;property name=&quot;hibernate.connection.url&quot;&gt;jdbc:mysql://127.0.0.1/databasename&lt;/property&gt;</div><div class="line">		&lt;property name=&quot;hibernate.connection.username&quot;&gt;username&lt;/property&gt;</div><div class="line">		&lt;property name=&quot;hibernate.connection.password&quot;&gt;password&lt;/property&gt;</div><div class="line"></div><div class="line">		&lt;property name=&quot;current_session_context_class&quot;&gt;thread&lt;/property&gt;</div><div class="line">		&lt;property name=&quot;hibernate.show_sql&quot;&gt;true&lt;/property&gt;</div><div class="line">		&lt;property name=&quot;hibernate.hbm2ddl.auto&quot;&gt;update&lt;/property&gt;</div><div class="line"></div><div class="line">		&lt;property name=&quot;c3p0.max_size&quot;&gt;100&lt;/property&gt;</div><div class="line">		&lt;property name=&quot;c3p0.min_size&quot;&gt;10&lt;/property&gt;</div><div class="line">		&lt;property name=&quot;c3p0.timeout&quot;&gt;5000&lt;/property&gt;</div><div class="line">		&lt;property name=&quot;c3p0.max_statements&quot;&gt;100&lt;/property&gt;</div><div class="line">		&lt;property name=&quot;c3p0.idle_test_period&quot;&gt;3000&lt;/property&gt;</div><div class="line">		&lt;property name=&quot;c3p0.acquire_increment&quot;&gt;10&lt;/property&gt;</div><div class="line">		&lt;property name=&quot;c3p0.validate&quot;&gt;false&lt;/property&gt;</div><div class="line"></div><div class="line">	    &lt;!-- 映射实体 --&gt;</div><div class="line">		&lt;mapping class=&quot;com.example.entity.Test&quot; /&gt;</div><div class="line">	&lt;/session-factory&gt;</div><div class="line">&lt;/hibernate-configuration&gt;</div></pre></td></tr></table></figure>
 <blockquote>
-<p>注：如果在两个时机为同一个参数指定不同的参数值，则使用拦截器时指定的参数值将会覆盖默认的参数值。</p>
+<p>注意修改连数据库的url（ip地址和域名均可）和数据库名，以及用户名和密码</p>
 </blockquote>
-<h2 id="配置默认拦截器"><a href="#配置默认拦截器" class="headerlink" title="配置默认拦截器"></a>配置默认拦截器</h2><p>当配置一个包时，可以为其指定默认拦截器。一旦为某个包指定了默认拦截器，如果该包中的Action没有显示指定拦截器，则默认的拦截器将会起到作用。如果我们为该包中的Action显示应用了某个拦截器，则默认的拦截器不会起作用。</p>
-<p>配置默认拦截器使用<code>&lt;default-interceptor-ref.../&gt;</code>元素，该元素作为<code>&lt;package.../&gt;</code>元素的子元素使用，为该包下的所有Action配置默认的拦截器。而且每个<code>&lt;package../&gt;</code>元素中只能包含一个<code>&lt;default-interceptor-ref.../&gt;</code>子元素，即没一个包只能指定一个默认拦截器。如果我们需要多个拦截器共同作为默认拦截器，则应该将这些拦截器定义成一个拦截器栈，然后把这个拦截器栈配置成默认拦截器即可。默认拦截器配置如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"包名"</span>&gt;</span>  </div><div class="line">	<span class="tag">&lt;<span class="name">interceptors</span>&gt;</span>  </div><div class="line">		<span class="comment">&lt;!-- 定义拦截器--&gt;</span>  </div><div class="line">		<span class="tag">&lt;<span class="name">interceptor</span> <span class="attr">...</span>/&gt;</span>  </div><div class="line">		<span class="comment">&lt;!-- 定义拦截器栈--&gt;</span>  </div><div class="line">		<span class="tag">&lt;<span class="name">interceptor-stack</span> <span class="attr">...</span>/&gt;</span>  </div><div class="line">	<span class="tag">&lt;/<span class="name">interceptors</span>&gt;</span>  </div><div class="line">	<span class="comment">&lt;!-- 配置该包下的默认拦截器--&gt;</span>  </div><div class="line">	<span class="tag">&lt;<span class="name">default-interceptor-ref</span> <span class="attr">name</span>=<span class="string">"拦截器名或者拦截器栈名"</span> /&gt;</span>  </div><div class="line">	<span class="comment">&lt;!-- 配置多个Action--&gt;</span>  </div><div class="line">	<span class="tag">&lt;<span class="name">action</span> <span class="attr">..</span>/&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">package</span>&gt;</span></div></pre></td></tr></table></figure>
-<h1 id="SSM和SSH框架的整合思想"><a href="#SSM和SSH框架的整合思想" class="headerlink" title="SSM和SSH框架的整合思想"></a>SSM和SSH框架的整合思想</h1><h2 id="SSM整合"><a href="#SSM整合" class="headerlink" title="SSM整合"></a>SSM整合</h2><h3 id="Dao层：整合MyBatis和Spring"><a href="#Dao层：整合MyBatis和Spring" class="headerlink" title="Dao层：整合MyBatis和Spring"></a>Dao层：整合MyBatis和Spring</h3><ul>
-<li><p>需要的jar包</p>
-<ul>
-<li>mybatis的jar包</li>
-<li>Spring的jar包</li>
-<li>MyBatis和Spring的整包</li>
-<li>Mysql数据库驱动</li>
-<li>数据库连接池</li>
-</ul>
-</li>
-<li><p>配置文件（注意：所有的配置文件都应该放到web文件中）</p>
-<ul>
-<li>MyBatis配置文件：SqlMapConfig.xml</li>
-<li>Spring 配置文件：applicationContext.xml</li>
-</ul>
-</li>
-<li><p>配置数据源</p>
-</li>
-<li><p>配置数据库连接池</p>
-</li>
-<li><p>配置SqlSessionFactory（MyBatis和Spring整合包中的）</p>
-</li>
-<li><p>配置mapper文件扫描器。</p>
-</li>
-</ul>
-<h3 id="Service层：配置一个包扫描器，扫描所有带-Service注解的类"><a href="#Service层：配置一个包扫描器，扫描所有带-Service注解的类" class="headerlink" title="Service层：配置一个包扫描器，扫描所有带@Service注解的类"></a>Service层：配置一个包扫描器，扫描所有带<code>@Service</code>注解的类</h3><ul>
-<li><p>使用jar包：主要是Spring的jar包</p>
-</li>
-<li><p>配置文件：applicationContext-Service.xml</p>
-</li>
-<li><p>事务配置</p>
-<ul>
-<li>applicationContext-trans.xml</li>
-<li>配置一个事物管理器</li>
-<li>配置tx</li>
-<li>配置切面</li>
-</ul>
-</li>
-</ul>
-<h3 id="表现层：使用SpringMVC，配置扫描器，扫描所有带-Controller注解的类"><a href="#表现层：使用SpringMVC，配置扫描器，扫描所有带-Controller注解的类" class="headerlink" title="表现层：使用SpringMVC，配置扫描器，扫描所有带@Controller注解的类"></a>表现层：使用SpringMVC，配置扫描器，扫描所有带<code>@Controller</code>注解的类</h3><ul>
-<li><p>使用jar包：SpringMVC和Spring的jar包</p>
-</li>
-<li><p>配置文件：springmvc.xml</p>
-</li>
-<li><p>配置注解驱动</p>
-</li>
-<li><p>配置Jsp视图解析器</p>
-</li>
-<li><p>配置web.xml</p>
-<ul>
-<li><p>配置SpringMVC的前端控制器</p>
-</li>
-<li><p>Spring容器的初始化的listener</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="SSH两两整合"><a href="#SSH两两整合" class="headerlink" title="SSH两两整合"></a>SSH两两整合</h2><h3 id="三层架构"><a href="#三层架构" class="headerlink" title="三层架构"></a>三层架构</h3><ul>
-<li><p>Web层：Struts2</p>
-</li>
-<li><p>Service层：Spring</p>
-</li>
-<li><p>DAO层：Hibernate</p>
-</li>
-</ul>
-<h3 id="整合Struts2和Spring"><a href="#整合Struts2和Spring" class="headerlink" title="整合Struts2和Spring"></a>整合Struts2和Spring</h3><ul>
-<li><p>把Struts2的Action对象的创建交给Spring管理</p>
-</li>
-<li><p>配置Bean：<code>&lt;bean id=&quot;&quot; class=&quot;&quot; scope=&quot;prototype&quot;/&gt;</code></p>
-</li>
-</ul>
-<h3 id="整合Spring和Hibernate"><a href="#整合Spring和Hibernate" class="headerlink" title="整合Spring和Hibernate"></a>整合Spring和Hibernate</h3><ul>
-<li><p>把Hibernate核心配置文件中的数据库连接配置，直接写在 Spring 核心配置文件中</p>
-</li>
-<li><p>把Hibernate的SessionFactory对象的创建交给Spring管理</p>
-</li>
-<li><p>配置在服务器启动时加载Spring核心配置文件，创建出包含 SessionFactory对象在内的一系列对象</p>
-</li>
-</ul>
-<h1 id="Hibernate的缓存原理和延迟加载原理是什么"><a href="#Hibernate的缓存原理和延迟加载原理是什么" class="headerlink" title="Hibernate的缓存原理和延迟加载原理是什么"></a>Hibernate的缓存原理和延迟加载原理是什么</h1><h2 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h2><p>Session缓存表示将查询结果放置到Session的临时存储空间（一级缓存中）。Hibernate框架默认支持一级缓存的。一级缓存的范围较小，一旦Session关闭，那么缓存失效。我们使用框架的各种方法，例如：get，load，save，update，delete等都支持一级缓存的。</p>
-<h2 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h2><p>二级缓存其实就是将查询的数据放置在SessionFactory临时存储空间中，因为一个SessionFactory可以创建多个Session对象，所以范围比Session缓存的要大，多个Session可以共享二级缓存的数据。当然了二级缓存也不能存储大量的数据，这个要根据我们电脑配置进行设置。</p>
-<h2 id="配置二级缓存"><a href="#配置二级缓存" class="headerlink" title="配置二级缓存"></a>配置二级缓存</h2><ol>
-<li><p>在hibernate.cfg.xml配置文件中添加属性标签，启用二级缓存：</p>
- <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--启用二级缓存 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">propertyname="hibernate.cache.use_second_level_cache"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>二级缓存需要使用额外的第三方组件:ehcache。需要我们拷入对应的jar包，以及将对应的ehcache.xml存放到src目录下。在这个配置文件中，我们可以设置二级缓存的大小等。</p>
-</li>
-<li><p>让框架识别添加入的ehcache缓存组件，在hibernate.cfg.xml配置文件中添加属性标签：</p>
- <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--让框架识别ehcache缓存组件 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">propertyname="hibernate.cache.provider_class"</span>&gt;</span>org.hibernate.cache.EhCacheProvider<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>设置需要缓存的映射类，这里只是将一些查询操作比较频繁的类指定即可，哪些不经常操作的数据，是没有必要利用缓存的。这里例如：</p>
- <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 将指定的类存放到二级缓存中，其中read-only是指放入缓存的数据是只读的--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">class-cache</span> <span class="attr">usage</span>=<span class="string">"read-only"</span> <span class="attr">class</span>=<span class="string">"com.ljh.hibernate.pojo.Student"</span>/&gt;</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="缓存原理"><a href="#缓存原理" class="headerlink" title="缓存原理"></a>缓存原理</h2><p>查询数据时，会首先从一级缓存中取数据，如果取上，则直接使用，否则到二级缓存中取，如果取到则直接使用，否则，就会发送语句查询数据库。这样利用一级和二级缓存会提高访问效率。</p>
-<h2 id="延迟加载"><a href="#延迟加载" class="headerlink" title="延迟加载"></a>延迟加载</h2><p>表示查询当前对象或关联对象数据时，不真正访问数据库，当使用对象非主键属性时，才真正发送查询语句，访问数据库。由于在某些情况下，查的数据在后续流程到可能用不上，如果做查询处理就多余了，所以延迟加载功能可以提高性能，合理使用即可。</p>
-<h1 id="Spring中IOC和DI的区别以及关系是什么，AOP是怎么实现的"><a href="#Spring中IOC和DI的区别以及关系是什么，AOP是怎么实现的" class="headerlink" title="Spring中IOC和DI的区别以及关系是什么，AOP是怎么实现的"></a>Spring中IOC和DI的区别以及关系是什么，AOP是怎么实现的</h1><p>IOC是一种思想，IOC理论的提出就是为了解决对象之间的“解耦”。DI就是其技术实现，松散耦合。</p>
-<p><a href="http://www.importnew.com/24305.html" title="AOP的实现原理" target="_blank" rel="external">AOP的实现原理</a></p>
-<h1 id="ArrayList和LinkedList的区别"><a href="#ArrayList和LinkedList的区别" class="headerlink" title="ArrayList和LinkedList的区别"></a>ArrayList和LinkedList的区别</h1><ul>
-<li><p>ArrayList是实现了基于动态数组的数据结构，LinkedList基于链表的数据结构。 </p>
-</li>
-<li><p>对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针。 </p>
-</li>
-<li><p>对于新增和删除操作add和remove，LinedList比较占优势，因为ArrayList要移动数据。 </p>
-</li>
-</ul>
 
       
 
@@ -660,7 +240,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java interview</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -670,7 +250,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/18/Java面试遇到的问题总结（一）/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/28/JavaWeb项目配置Hibernate/">展开全文 >></a>
         </p>
       
 
@@ -700,151 +280,32 @@
 
 
   
-    <article id="post-MarkDown语法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Tomcat使用JKS格式证书配置HTTPS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/17/MarkDown语法/">MarkDown语法</a>
+      <a class="article-title" href="/2018/05/28/Tomcat使用JKS格式证书配置HTTPS/">Tomcat使用JKS格式证书配置HTTPS</a>
     </h1>
   
 
         
-        <a href="/2017/11/17/MarkDown语法/" class="archive-article-date">
-  	<time datetime="2017-11-17T13:45:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-17</time>
+        <a href="/2018/05/28/Tomcat使用JKS格式证书配置HTTPS/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:45:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本Markdown编辑器使用<a href="https://github.com/benweet/stackedit" target="_blank" rel="external">StackEdit</a>修改而来，用它写博客，将会带来全新的体验哦：</p>
-<ul>
-<li><strong>Markdown和扩展Markdown简洁的语法</strong></li>
-<li><strong>代码块高亮</strong></li>
-<li><strong>图片链接和图片上传</strong></li>
-<li><strong><em>LaTex</em>数学公式</strong></li>
-<li><strong>UML序列图和流程图</strong></li>
-<li><strong>离线写博客</strong></li>
-<li><strong>导入导出Markdown文件</strong></li>
-<li><strong>丰富的快捷键</strong></li>
-</ul>
-<hr>
-<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><ul>
-<li>加粗    <code>Ctrl + B</code> </li>
-<li>斜体    <code>Ctrl + I</code> </li>
-<li>引用    <code>Ctrl + Q</code></li>
-<li>插入链接    <code>Ctrl + L</code></li>
-<li>插入代码    <code>Ctrl + K</code></li>
-<li>插入图片    <code>Ctrl + G</code></li>
-<li>提升标题    <code>Ctrl + H</code></li>
-<li>有序列表    <code>Ctrl + O</code></li>
-<li>无序列表    <code>Ctrl + U</code></li>
-<li>横线    <code>Ctrl + R</code></li>
-<li>撤销    <code>Ctrl + Z</code></li>
-<li>重做    <code>Ctrl + Y</code></li>
-</ul>
-<h2 id="Markdown及扩展"><a href="#Markdown及扩展" class="headerlink" title="Markdown及扩展"></a>Markdown及扩展</h2><blockquote>
-<p>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，然后转换成格式丰富的HTML页面。    —— <a href="https://zh.wikipedia.org/wiki/Markdown" target="_blank"> [ 维基百科 ]</a></p>
-</blockquote>
-<p>使用简单的符号标识不同的标题，将某些文字标记为<strong>粗体</strong>或者<em>斜体</em>，创建一个<a href="http://www.csdn.net" target="_blank" rel="external">链接</a>等，详细语法参考帮助？。</p>
-<p>本编辑器支持 <strong>Markdown Extra</strong> , 　扩展了很多好用的功能。具体请参考<a href="https://github.com/jmcmanus/pagedown-extra" title="Pagedown Extra" target="_blank" rel="external">Github</a>.  </p>
-<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p><strong>Markdown　Extra</strong>　表格语法：</p>
-<table>
-<thead>
-<tr>
-<th>项目</th>
-<th>价格</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Computer</td>
-<td>$1600</td>
-</tr>
-<tr>
-<td>Phone</td>
-<td>$12</td>
-</tr>
-<tr>
-<td>Pipe</td>
-<td>$1</td>
-</tr>
-</tbody>
-</table>
-<p>可以使用冒号来定义对齐方式：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">项目</th>
-<th style="text-align:right">价格</th>
-<th style="text-align:center">数量</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Computer</td>
-<td style="text-align:right">1600 元</td>
-<td style="text-align:center">5</td>
-</tr>
-<tr>
-<td style="text-align:left">Phone</td>
-<td style="text-align:right">12 元</td>
-<td style="text-align:center">12</td>
-</tr>
-<tr>
-<td style="text-align:left">Pipe</td>
-<td style="text-align:right">1 元</td>
-<td style="text-align:center">234</td>
-</tr>
-</tbody>
-</table>
-<p>###定义列表</p>
-<p><strong>Markdown　Extra</strong>　定义列表语法：<br>项目１<br>项目２<br>:   定义 A<br>:   定义 B</p>
-<p>项目３<br>:   定义 C</p>
-<p>:   定义 D</p>
-<pre><code>&gt; 定义D内容
-</code></pre><h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><p>代码块语法遵循标准markdown代码，例如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@requires_authorization</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">somefunc</span><span class="params">(param1=<span class="string">''</span>, param2=<span class="number">0</span>)</span>:</span></div><div class="line">    <span class="string">'''A docstring'''</span></div><div class="line">    <span class="keyword">if</span> param1 &gt; param2: <span class="comment"># interesting</span></div><div class="line">        <span class="keyword">print</span> <span class="string">'Greater'</span></div><div class="line">    <span class="keyword">return</span> (param2 - param1 + <span class="number">1</span>) <span class="keyword">or</span> <span class="keyword">None</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeClass</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>message = <span class="string">'''interpreter</span></div><div class="line"><span class="string"><span class="meta">... </span>prompt'''</span></div></pre></td></tr></table></figure></p>
-<p>###脚注<br>生成一个脚注[^footnote].<br>  [^footnote]: 这里是 <strong>脚注</strong> 的 <em>内容</em>.</p>
-<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><p>用 <code>[TOC]</code>来生成目录：</p>
-<p>[TOC]</p>
-<h3 id="数学公式"><a href="#数学公式" class="headerlink" title="数学公式"></a>数学公式</h3><p>使用MathJax渲染<em>LaTex</em> 数学公式，详见<a href="http://math.stackexchange.com/" target="_blank" rel="external">math.stackexchange.com</a>.</p>
-<ul>
-<li>行内公式，数学公式为：$\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$。</li>
-<li>块级公式：</li>
-</ul>
-<p>$$    x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$</p>
-<p>更多LaTex语法请参考 <a href="http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference" target="_blank" rel="external">这儿</a>.</p>
-<h3 id="UML-图"><a href="#UML-图" class="headerlink" title="UML 图:"></a>UML 图:</h3><p>可以渲染序列图：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">张三-&gt;李四: 嘿，小四儿, 写博客了没?</div><div class="line">Note right of 李四: 李四愣了一下，说：</div><div class="line">李四--&gt;张三: 忙得吐血，哪有时间写。</div></pre></td></tr></table></figure>
-<p>或者流程图：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">st=&gt;start: 开始</div><div class="line">e=&gt;end: 结束</div><div class="line">op=&gt;operation: 我的操作</div><div class="line">cond=&gt;condition: 确认？</div><div class="line"></div><div class="line">st-&gt;op-&gt;cond</div><div class="line">cond(yes)-&gt;e</div><div class="line">cond(no)-&gt;op</div></pre></td></tr></table></figure>
-<ul>
-<li>关于 <strong>序列图</strong> 语法，参考 <a href="http://bramp.github.io/js-sequence-diagrams/" target="_blank" rel="external">这儿</a>,</li>
-<li>关于 <strong>流程图</strong> 语法，参考 <a href="http://adrai.github.io/flowchart.js/" target="_blank" rel="external">这儿</a>.</li>
-</ul>
-<h2 id="离线写博客"><a href="#离线写博客" class="headerlink" title="离线写博客"></a>离线写博客</h2><p>即使用户在没有网络的情况下，也可以通过本编辑器离线写博客（直接在曾经使用过的浏览器中输入<a href="http://write.blog.csdn.net/mdeditor" target="_blank" rel="external">write.blog.csdn.net/mdeditor</a>即可。<strong>Markdown编辑器</strong>使用浏览器离线存储将内容保存在本地。</p>
-<p>用户写博客的过程中，内容实时保存在浏览器缓存中，在用户关闭浏览器或者其它异常情况下，内容不会丢失。用户再次打开浏览器时，会显示上次用户正在编辑的没有发表的内容。</p>
-<p>博客发表后，本地缓存将被删除。　</p>
-<p>用户可以选择 <i class="icon-disk"></i> 把正在写的博客保存到服务器草稿箱，即使换浏览器或者清除缓存，内容也不会丢失。</p>
+        <p><strong>1.上传jks证书</strong></p>
+<p><strong>2.在conf目录下的server.xml添加如下代码</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;Connector port=&quot;443&quot;   protocol=&quot;org.apache.coyote.http11.Http11NioProtocol&quot; maxThreads=&quot;150&quot; SSLEnabled=&quot;true&quot;&gt;</div><div class="line">        &lt;SSLHostConfig&gt;</div><div class="line">            &lt;Certificate certificateKeystoreFile=&quot;conf/example.com.jks&quot; certificateKeyAlias=&quot;example.com&quot;</div><div class="line">                certificateKeystorePassword=&quot;password&quot;</div><div class="line">                         type=&quot;RSA&quot; /&gt;</div><div class="line">        &lt;/SSLHostConfig&gt;</div><div class="line">    &lt;/Connector&gt;</div></pre></td></tr></table></figure>
 <blockquote>
-<p><strong>注意：</strong>虽然浏览器存储大部分时候都比较可靠，但为了您的数据安全，在联网后，<strong>请务必及时发表或者保存到服务器草稿箱</strong>。</p>
+<p>注意修改文件名和密码</p>
 </blockquote>
-<p>##浏览器兼容</p>
-<ol>
-<li>目前，本编辑器对Chrome浏览器支持最为完整。建议大家使用较新版本的Chrome。</li>
-<li>IE９以下不支持</li>
-<li>IE９，１０，１１存在以下问题<ol>
-<li>不支持离线功能</li>
-<li>IE9不支持文件导入导出</li>
-<li>IE10不支持拖拽文件导入</li>
-</ol>
-</li>
-</ol>
-<hr>
-<p><a href="http://oq4pzgtcb.bkt.clouddn.com/blogs/MarkDown语法.md" target="_blank" rel="external">下载本Markdown</a></p>
 
       
 
@@ -858,7 +319,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">markdown</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">tomcat</a>
         		</li>
       		
 		</ul>
@@ -868,7 +329,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/17/MarkDown语法/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/28/Tomcat使用JKS格式证书配置HTTPS/">展开全文 >></a>
         </p>
       
 
@@ -898,73 +359,28 @@
 
 
   
-    <article id="post-CentOS安装与使用Maven" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-如何将本地项目上传到GitHub" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/18/CentOS安装与使用Maven/">CentOS安装与使用Maven</a>
+      <a class="article-title" href="/2018/05/28/如何将本地项目上传到GitHub/">如何将本地项目上传到GitHub</a>
     </h1>
   
 
         
-        <a href="/2017/10/18/CentOS安装与使用Maven/" class="archive-article-date">
-  	<time datetime="2017-10-18T05:51:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-18</time>
+        <a href="/2018/05/28/如何将本地项目上传到GitHub/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:43:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>1. 安装 Maven</strong></p>
-<p><em>Maven 简介</em></p>
-<p>Apache Maven 是一个软件项目管理及自动构建工具，由 Apache 软件基金会所提供。基于项目对象模型（缩写：POM）概念，Maven 利用一小段描述信息能管理一个项目的构建、报告和文档等步骤。</p>
-<p><em>Java 安装</em></p>
-<p>首先我们需要准备 Java 开发环境，使用下面命令来安装 Java：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install java-1.8.0-openjdk-devel</div></pre></td></tr></table></figure></p>
-<p><em>Maven 下载</em></p>
-<p>我们可以从官网下载页获取最新的下载链接（Binary tar.gz archive）。</p>
-<p>然后我们使用 <code>wget</code> 命令将其下载：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /home</div><div class="line">wget http://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz</div></pre></td></tr></table></figure></p>
-<p>解压压缩包：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar xzvf apache-maven-3.5.0-bin.tar.gz</div></pre></td></tr></table></figure></p>
-<p>将文件夹移动至 <code>/usr/local/</code> 目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mv apache-maven-3.5.0  /usr/local/apache-maven</div></pre></td></tr></table></figure></p>
-<p><em>配置环境变量</em></p>
-<p>编辑 <code>/etc/profile</code>，在最下方添加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">MAVEN_HOME=/usr/local/apache-maven</div><div class="line">export MAVEN_HOME</div><div class="line">export PATH=$&#123;PATH&#125;:$&#123;MAVEN_HOME&#125;/bin</div></pre></td></tr></table></figure></p>
-<p>运行如下命令使环境变量生效：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source /etc/profile</div></pre></td></tr></table></figure></p>
-<p>检查 Maven 是否成功安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn -version</div></pre></td></tr></table></figure></p>
-<p><strong>2. Maven 简单使用</strong></p>
-<p><em>构建</em></p>
-<p>我们可以通过 <code>archetype:generate</code> 命令快速构建出项目骨架。</p>
-<p><em>Hello World</em></p>
-<p>我们使用该命令创建一个 helloworld 项目。过程中可一路回车键选择默认值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /home</div><div class="line">mvn archetype:generate -DgroupId=helloworld -DartifactId=helloworld</div></pre></td></tr></table></figure></p>
-<p><code>mvn</code> 指令首次执行时，会从远程“中央仓库”下载一些必需的文件，请耐心等待。</p>
-<p><em>项目结构</em></p>
-<p>可到 <code>/home/helloworld</code> 查看项目结构。</p>
-<ul>
-<li><p><code>/pom.xml</code> 为项目对象模型（Maven 项目配置）</p>
-</li>
-<li><p><code>/src/main/java</code> 用于存放源代码</p>
-</li>
-<li><p><code>/src/test/java</code> 用于存放单元测试代码</p>
-</li>
-<li><p><code>/src/target</code> 用于存放编译、打包后的输出文件</p>
-</li>
-</ul>
-<p><em>编译</em></p>
-<p>进入项目目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /home/helloworld</div></pre></td></tr></table></figure></p>
-<p>执行编译：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn compile</div></pre></td></tr></table></figure></p>
-<p>重新开启 <code>helloworld</code> 项目文件夹，可以看到生成 <code>target</code> 目录。</p>
-<p><em>运行</em></p>
-<p>你可以使用 <code>mvn</code> 指明 <code>mainClass</code> 来运行项目：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn exec:java -Dexec.mainClass=&quot;helloworld.App&quot;</div></pre></td></tr></table></figure></p>
-<p>完成后可看到终端输出了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hello World!</div></pre></td></tr></table></figure></p>
-<p><em>测试</em></p>
-<p>我们可以通过 <em>test</em> 指令来运行单元测试代码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn test</div></pre></td></tr></table></figure></p>
-<p>完成后可看到终端输出测试结果。</p>
-<p><em>打包</em></p>
-<p>通过 <code>package</code> 指令来执行打包。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn package</div></pre></td></tr></table></figure></p>
-<p>重新开启 <code>target</code> 目录，可看到生成了 <code>.jar</code> 文件。</p>
-<p>从输出的日志可以看到，执行 <code>package</code> 前，会先执行 <code>compile</code> 及 <code>test</code>，最后执行了打包。</p>
-
+        <p><img src="http://img.blog.csdn.net/20170409131507954?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjY5NTQ3NzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="GitHub新建仓库"></p>
+<ol><br><li><strong><a href="https://github.com/" target="_blank">注册GitHub</a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/new" target="_blank">新建仓库</a></strong><br><br></li><br><br><li><strong><a href="https://git-scm.com/download/win" target="_blank">下载安装Git工具</a></strong></li><br><br><li><strong>右键项目，选择菜单Git Bash Here</strong><br></li><br><br><li>执行下面代码<br><br><br><pre><code>git init<br>git add .<br>git commit -m ‘first_commit’<br> #链接是你自己的项目的https链接<br>git remote add origin https://github.com/zhazhapan/PracticalToolBox.git<br>git push origin master<br></code></pre></li><br><br><li><strong>可能遇到的错误</strong><br><br><br><ul><br><li>fatal: remote origin already exists<br><br><br><pre>执行： <code>git remote rm origin</code><br>然后再执行：<code>git remote add origin https://github.com/zhazhapan/PracticalToolBox.git</code><br> </pre><br></li><br><li>error:failed to push some refs to…….<br><br><br><pre>执行： <code>git pull origin master</code><br>然后再执行：<code>git push origin master</code><br> </pre><br></li><br><li>fatal: refusing to merge unrelated histories<br><br><br><pre>执行： <code>git pull origin master –allow-unrelated-histories</code><br>然后再执行：<code>git push origin master</code><br> </pre><br></li><br></ul><br></li><br></ol>
       
 
       
@@ -977,7 +393,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">linux maven</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
         		</li>
       		
 		</ul>
@@ -987,7 +403,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/18/CentOS安装与使用Maven/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/28/如何将本地项目上传到GitHub/">展开全文 >></a>
         </p>
       
 
@@ -1017,41 +433,119 @@
 
 
   
-    <article id="post-CentOS搭建Jenkins环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-动态规划法求解矩阵中最长的递增路径的长度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/18/CentOS搭建Jenkins环境/">CentOS搭建Jenkins环境</a>
+      <a class="article-title" href="/2018/05/28/动态规划法求解矩阵中最长的递增路径的长度/">动态规划法求解矩阵中最长的递增路径的长度</a>
     </h1>
   
 
         
-        <a href="/2017/10/18/CentOS搭建Jenkins环境/" class="archive-article-date">
-  	<time datetime="2017-10-18T05:33:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-18</time>
+        <a href="/2018/05/28/动态规划法求解矩阵中最长的递增路径的长度/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:42:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>1. 安装 Jenkins</strong></p>
-<p><em>Jenkins 简介</em></p>
-<p>Jenkins 是一个开源软件项目，是基于Java开发的一种持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件的持续集成变成可能。</p>
-<p><em>Java 安装</em></p>
-<p>首先我们需要准备 Java 环境，使用下面命令来安装 Java：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install java-1.8.0-openjdk-devel</div></pre></td></tr></table></figure></p>
-<p><em>Jenkins 安装</em></p>
-<p>为了使用 Jenkins 仓库，我们要执行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo</div><div class="line">sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key</div></pre></td></tr></table></figure></p>
-<p>如果您以前从 Jenkins 导入过 key，那么 <code>rpm --import</code> 将失败，因为您已经有一个 key。请忽略，继续下面步骤。</p>
-<p>接着我们可以使用 <code>yum</code> 安装 Jenkins：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install jenkins</div></pre></td></tr></table></figure></p>
-<p><strong>2. 启动 Jenkins</strong></p>
-<p><em>启动</em></p>
-<p>启动 Jenkins 并设置为开机启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl start jenkins.service</div><div class="line">chkconfig jenkins on</div></pre></td></tr></table></figure></p>
-<p><em>测试访问</em></p>
-<p>Jenkins 默认运行在 8080端口。</p>
+        <p>给定一个整数矩阵,找到增加最长路径的长度。</p>
+<p>从每一个单元格,你可以移到四个方向:左,右,向上或向下。你不能移到对角线移动或移动以外的边界(即缠绕是不允许的)。</p>
+<p><b>Example 1:</b></p>
+<pre>nums = [
+  [<span style="color: red;">9</span>,9,4],
+  [<span style="color: red;">6</span>,6,8],
+  [<span style="color: red;">2</span>,<span style="color: red;">1</span>,1]
+]
+</pre>
+Return <code>4</code>
+The longest increasing path is <code>[1, 2, 6, 9]</code>.
 
+<b>Example 2:</b>
+<pre>nums = [
+  [<span style="color: red;">3</span>,<span style="color: red;">4</span>,<span style="color: red;">5</span>],
+  [3,2,<span style="color: red;">6</span>],
+  [2,2,1]
+]
+</pre>
+Return <code>4</code>
+The longest increasing path is <code>[3, 4, 5, 6]</code>. Moving diagonally is not allowed.
+
+<strong>Here is my code</strong>
+<pre><code>/**
+ * 
+ */
+package com.zhazhapan.algorithm.dynamicprogramming;
+
+import java.util.Arrays;
+
+
+/**
+ * @author pantao
+ * @date 2017-04-04
+ *
+ */
+public class PathProblem {
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        int[][] test={{1,6,12,1,3},{8,4,6,10,5},{12,11,7,12,2},{2,3,4,1,13},{14,6,0,14,13}};
+        System.out.println(longestIncreasingPath(test));
+    }
+
+    static int[][] Lens;
+
+    public static int longestIncreasingPath(int[][] matrix) {
+        if (matrix.length == 0) {
+            return 0;
+        }
+        Lens = new int[matrix.length][matrix[0].length];
+        int pathLen = 0;
+        for (int i = 0; i &lt; Lens.length; i++) {
+            for (int j = 0; j &lt; Lens[i].length; j++) {
+                Lens[i][j] = -1;
+            }
+        }
+        for (int i = 0; i &lt; matrix.length; i++) {
+            for (int j = 0; j &lt; matrix[i].length; j++) {
+                pathLen = Math.max(pathLen, requestPathLength(matrix, i, j));
+            }
+        }
+        return pathLen + 1;
+    }
+    public static int requestPathLengths(int[][] matrix, int i, int j) {
+        if (Lens[i][j] != -1) {
+            return Lens[i][j];
+        }
+        int a = 0;
+        if (i - 1 &gt; -1 && matrix[i][j] &lt; matrix[i - 1][j]) {
+            a = 1 + requestPathLength(matrix, i - 1, j);
+        }
+        int b = 0;
+        if (i + 1 &lt; matrix.length && matrix[i][j] &lt; matrix[i + 1][j]) {
+            b = 1 + requestPathLength(matrix, i + 1, j);
+        }
+        int c = 0;
+        if (j - 1 &gt; -1 && matrix[i][j] &lt; matrix[i][j - 1]) {
+            c = 1 + requestPathLength(matrix, i, j - 1);
+        }
+        int d = 0;
+        if (j + 1 &lt; matrix[0].length && matrix[i][j] &lt; matrix[i][j + 1]) {
+            d = 1 + requestPathLength(matrix, i, j + 1);
+        }
+        Lens[i][j] = Math.max(Math.max(a, b), Math.max(c, d));
+        return Lens[i][j];
+    }
+}
+
+</code></pre>
       
 
       
@@ -1064,7 +558,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">linux jenkins</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -1074,7 +568,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/18/CentOS搭建Jenkins环境/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/28/动态规划法求解矩阵中最长的递增路径的长度/">展开全文 >></a>
         </p>
       
 
@@ -1104,39 +598,117 @@
 
 
   
-    <article id="post-CentOS搭建Mono开发环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-回溯算法求解数独" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/18/CentOS搭建Mono开发环境/">CentOS搭建Mono开发环境</a>
+      <a class="article-title" href="/2018/05/28/回溯算法求解数独/">回溯算法求解数独</a>
     </h1>
   
 
         
-        <a href="/2017/10/18/CentOS搭建Mono开发环境/" class="archive-article-date">
-  	<time datetime="2017-10-18T05:18:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-18</time>
+        <a href="/2018/05/28/回溯算法求解数独/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:41:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>1. 安装 Mono</strong></p>
-<p><em>安装前的准备</em></p>
-<p>执行命令安装 <code>yum-utils</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install yum-utils</div></pre></td></tr></table></figure></p>
-<p>执行命令添加安装包仓库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm --import &quot;http://keyserver.ubuntu.com/pks/lookup?op=get&amp;search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF&quot;</div></pre></td></tr></table></figure></p>
-<p>设置配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum-config-manager --add-repo http://download.mono-project.com/repo/centos7/</div></pre></td></tr></table></figure></p>
-<p><em>安装 Mono</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install mono-complete</div></pre></td></tr></table></figure></p>
-<p><strong>2. 创建并运行 Mono 程序</strong></p>
-<p><em>创建 Mono 程序</em></p>
-<p>执行命令创建程序文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd /home</div><div class="line">mkdir monohello</div><div class="line">cd monohello/</div><div class="line">touch HelloWorld.cs</div></pre></td></tr></table></figure></p>
-<p>修改 <code>HelloWorld.cs</code> 文件为如下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">using System;</div><div class="line">public class HelloWorld</div><div class="line">&#123;</div><div class="line">  public static void Main()</div><div class="line">    &#123;</div><div class="line">        Console.WriteLine(&quot;Hello Mono World&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><em>运行 Mono 程序</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mcs HelloWorld.cs</div><div class="line">mono HelloWorld.exe</div></pre></td></tr></table></figure></p>
-<p><strong>3. 完成</strong></p>
+        <p>写一个程序，解决数独求解的问题</p>
+<p>空的格子用字符  <code>‘.’</code>代替。</p>
+<p>你可以假设只有一个解</p>
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Sudoku-by-L2G-20050714.svg/250px-Sudoku-by-L2G-20050714.svg.png"></p>
+<p>一个数独 …</p>
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Sudoku-by-L2G-20050714_solution.svg/250px-Sudoku-by-L2G-20050714_solution.svg.png"></p>
+<p>…红色的数字就是解.</p>
+<p><strong>下面是我的代码</strong></p>
+<pre><code>/**
+ * 
+ */
+package com.zhazhapan.algorithm.backtracking;
 
+/**
+ * @author pantao
+ * @date 2017-04-06
+ *
+ */
+public class SudokuSolve {
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        String[] string = { "..9748...", "7........", ".2.1.9...", "..7...24.", ".64.1.59.", ".98...3..", "...8.3.2.",
+                "........6", "...2759.." };
+        char[][] board = new char[9][9];
+        // 初始化数独 
+        for (int i = 0; i &lt; 9; i++) {
+            for (int j = 0; j &lt; 9; j++) {
+                board[i][j] = string[i].charAt(j);
+            }
+        }
+        new SudokuSolve().solveSudoku(board);
+    }
+
+    public void solveSudoku(char[][] board) {
+        if (board == null || board.length != 9 || board[0].length != 9) {
+            return;
+        }
+        if (solve(board, 0, 0)) {
+             // 打印结果
+            for (int i = 0; i &lt; 9; i++) {
+                for (int j = 0; j &lt; 9; j++) {
+                    System.out.print(board[i][j] + " ");
+                }
+                System.out.println();
+            }
+        }
+    }
+
+    public boolean solve(char[][] board, int i, int j) {
+        if (j == 9) {
+            if (i == 8)
+                return true;
+            i++;
+            j = 0;
+        }
+        if (board[i][j] != '.') {
+            return solve(board, i, j + 1);
+        }
+        for (char k = '1'; k &lt;= '9'; k++) {
+            if (isValid(board, i, j, k)) {
+                board[i][j] = k;
+                if (solve(board, i, j + 1))
+                    return true;
+                else
+                    board[i][j] = '.';
+            }
+        }
+        return false;
+    }
+
+    public boolean isValid(char[][] board, int i, int j, char c) {
+
+        for (int k = 0; k &lt; 9; k++) {
+            if (board[i][k] != '.' &amp;&amp; board[i][k] == c)
+                return false;
+            if (board[k][j] != '.' &amp;&amp; board[k][j] == c)
+                return false;
+            if (board[i / 3 * 3 + k / 3][j / 3 * 3 + k % 3] != '.'
+                    &amp;&amp; board[i / 3 * 3 + k / 3][j / 3 * 3 + k % 3] == c)
+                return false;
+
+        }
+        return true;
+    }
+}
+
+</code></pre>
       
 
       
@@ -1149,7 +721,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -1159,7 +731,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/18/CentOS搭建Mono开发环境/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/28/回溯算法求解数独/">展开全文 >></a>
         </p>
       
 
@@ -1189,50 +761,126 @@
 
 
   
-    <article id="post-CentOS搭建-NET-Core开发环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-单词变换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/18/CentOS搭建-NET-Core开发环境/">CentOS搭建.NET Core开发环境</a>
+      <a class="article-title" href="/2018/05/28/单词变换/">单词变换</a>
     </h1>
   
 
         
-        <a href="/2017/10/18/CentOS搭建-NET-Core开发环境/" class="archive-article-date">
-  	<time datetime="2017-10-18T04:53:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-18</time>
+        <a href="/2018/05/28/单词变换/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:40:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>1. 安装 .Net Core 执行代码</strong></p>
-<p>.NET Core 的官方文档很详细，本实验带你建立一个.NET Core 1.1的Web运行环境，更多内容可以可以查阅 <a href="https://docs.microsoft.com/zh-cn/dotnet/core/get-started" target="_blank" rel="external">微软官方文档</a>。</p>
-<p><em>安装 .Net Core</em></p>
-<p>执行命令安装 <code>.Net Core</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo yum -y install libunwind libicu</div><div class="line">curl -SL -o dotnet.tar.gz https://go.microsoft.com/fwlink/?linkid=848821</div><div class="line">sudo mkdir -p /usr/local/dotnet &amp;&amp; sudo tar zxf dotnet.tar.gz -C /usr/local/dotnet</div><div class="line">sudo ln -s /usr/local/dotnet/dotnet /usr/local/bin</div></pre></td></tr></table></figure></p>
-<p><em>创建 Hello World 控制台程序</em></p>
-<p>创建并运行 Console 项目 <code>hwapp</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dotnet new console -o hwapp</div><div class="line">cd hwapp</div><div class="line">dotnet restore</div><div class="line">dotnet run</div></pre></td></tr></table></figure></p>
-<p><em>创建并运行 ASP.NET Core Web 应用</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cd /home</div><div class="line">mkdir aspnetcoreapp</div><div class="line">cd aspnetcoreapp</div><div class="line">dotnet new web</div><div class="line">dotnet restore</div><div class="line">dotnet run</div></pre></td></tr></table></figure></p>
-<p><strong>2. 安装 Jexus</strong></p>
-<p>通常情况下，对外提供的 Web 服务都在 <code>80</code>或者<code>443</code> 端口，而我们的 Web 应用程序默认运行在5000端口，在 Windows 上可以使用 IIS 来宿主 ASP.NET Core，在 Linux 下可以用 Nginx，Apache，Jexus 等来作为宿主。本教程向大家推荐使用国内社区自行开发的 <a href="http://www.linuxdot.net/" target="_blank" rel="external">Jexus</a>。</p>
-<p><em>安装独立版 Jexus</em></p>
-<p>执行命令安装独立版的 <code>Jexus</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl https://jexus.org/release/x64/install.sh|sh</div></pre></td></tr></table></figure></p>
-<p>配置 Jexus</p>
-<p>执行命令将 asp.net core 应用部署到 Jexus<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir -p /var/www/aspnetcore</div><div class="line">dotnet publish -o /var/www/aspnetcore</div></pre></td></tr></table></figure></p>
-<p>执行命令启动服务监听端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dotnet /var/www/aspnetcore/aspnetcoreapp.dll</div></pre></td></tr></table></figure></p>
-<p><em>配置 jexus 网站：</em></p>
-<p>创建 <code>aspnetcore</code> 配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /usr/jexus/siteconf</div><div class="line">cp default aspnetcore</div></pre></td></tr></table></figure></p>
-<p>修改 <code>aspnetcore</code> 配置文件为如下内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">port=80</div><div class="line">root=/ /var/www/aspnetcore</div><div class="line">hosts= *    #OR your.com,*.your.com</div><div class="line"></div><div class="line">AppHost=&#123;</div><div class="line">    cmd=dotnet /var/www/aspnetcore/aspnetcoreapp.dll;</div><div class="line">    root=/var/www/aspnetcore;</div><div class="line">    port=0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><em>启动 Jexus</em></p>
-<p>执行命令删除原有默认配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm -rf /usr/jexus/siteconf/default</div></pre></td></tr></table></figure></p>
-<p>执行命令启动 Jexus<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sh /usr/jexus/jws restart</div><div class="line">sh /usr/jexus/jws start</div></pre></td></tr></table></figure></p>
-<ol>
-<li>完成</li>
-</ol>
+        <p><strong>题目描述：</strong><br>有一个单词列表，一个初始单词和一个最终单词，初始单词需要通过单词列表逐步变换到最终单词，求变换所需的最短变换路径长度。<br>变换规则：每次只能变动1个字母（不可交换位置，如：从abc变成cba属于变动了2个字母），每次变换只能从单词列表中选取。<br>例如：初始单词hot，最终单词dog，单词列表[got, dot, god, dog, lot, log]，最短变换路径为[hot,dot,dog]，最短变换路径长度为3。<br>注：单词列表中包含最终单词，不包含初始单词；列表中每一项单词长度与初始单词、最终单词相同；列表中单词不重复；所有字母均为小写。</p>
+<p><strong>输入</strong><br>输入数据有三行，第一行为初始单词；第二行为最终单词；第三行为单词列表，单词和单词之间以空格分割。</p>
+<p><strong>输出</strong><br>最短变换路径长度。</p>
+<p><strong>样例输入</strong><br>hot<br>dog<br>got dot god dog lot log</p>
+<p><strong>样例输出</strong><br>3</p>
+<p><strong>提示</strong><br>寻找最短路径相关算法。</p>
+<p><strong>下面是我的答案（写得不好的地方请指正哦），如果你有最好的解决方案，请在下面评论，大家一起交流学习！</strong> </p>
+<pre><code>import java.util.ArrayList;
+import java.util.Scanner;
+
+public class TestAgain {
+
+    static int[][] matrix;// 邻接矩阵
+    static int len;// 单词个数
+    static ArrayList&lt;Integer&gt; path;// 单条路径记录
+    static ArrayList&lt;ArrayList&lt;Integer&gt;&gt; paths;// 所有路径
+
+    public static void main(String[] args) {
+        // 接收输入参数
+        Scanner scanner = new Scanner(System.in);
+        String init = scanner.nextLine();
+        String end = scanner.nextLine();
+        String list = scanner.nextLine();
+        scanner.close();
+        // 将所有单词存入数组
+        len = list.split(" ").length + 1;
+        String[] vocabulary = new String[len];
+        vocabulary[0] = init;
+        int start = 0; // 最终词所在的索引
+        for (int i = 1; i &lt; len; i++) {
+            vocabulary[i] = list.split(" ")[i - 1];
+            if (vocabulary[i].equals(end)) {
+                start = i;
+            }
+        }
+        // 构建邻接矩阵
+        matrix = nearMatrix(vocabulary);
+        path = new ArrayList&lt;Integer&gt;();
+        paths = new ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();
+        // 开始搜索
+        look(start);
+        // 寻找最短路径
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i &lt; paths.size(); i++) {
+            int k = paths.get(i).size();
+            if (k &lt; min && paths.get(i).get(k - 1) == 0) {
+                min = k;
+            }
+        }
+        System.out.println(min + 1);
+    }
+
+    public static void look(int start) {
+        for (int i = 0; i &lt; len; i++) {
+            if (matrix[start][i] == 1 && !path.contains(i)) {
+                path.add(i);
+                if (i != 0) {
+                    look(i);
+                } else {
+                    break;
+                }
+            }
+        }
+        // 添加路径
+        paths.add(path);
+        path = new ArrayList&lt;Integer&gt;();
+        int length = paths.get(paths.size() - 1).size();
+        for (int i = 0; i &lt; length - 1; i++) {
+            path.add(paths.get(paths.size() - 1).get(i));
+        }
+    }
+
+    // 构建邻接矩阵
+    public static int[][] nearMatrix(String[] vac) {
+        int[][] matrix = new int[vac.length][vac.length];
+        for (int i = 0; i &lt; vac.length; i++) {
+            for (int j = 0; j &lt; vac.length; j++) {
+                matrix[i][j] = compare(vac[i], vac[j]);
+            }
+        }
+        return matrix;
+    }
+
+    // 比较两个单词是否可变换
+    public static int compare(String s1, String s2) {
+        int k = 0;
+        for (int i = 0; i &lt; s1.length(); i++) {
+            if ((s1.charAt(i) + "").compareTo((s2.charAt(i) + "")) != 0) {
+                k++;
+                if (k > 1) {
+                    return Integer.MAX_VALUE;
+                }
+            }
+        }
+        return k;
+    }
+}
+
+</code></pre>
+
 
       
 
@@ -1246,7 +894,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -1256,7 +904,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/18/CentOS搭建-NET-Core开发环境/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/28/单词变换/">展开全文 >></a>
         </p>
       
 
@@ -1286,74 +934,120 @@
 
 
   
-    <article id="post-CentOS搭建基于ZIPKIN的数据追踪系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-i" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/18/CentOS搭建基于ZIPKIN的数据追踪系统/">CentOS搭建基于ZIPKIN的数据追踪系统</a>
+      <a class="article-title" href="/2018/05/28/i/">i++</a>
     </h1>
   
 
         
-        <a href="/2017/10/18/CentOS搭建基于ZIPKIN的数据追踪系统/" class="archive-article-date">
-  	<time datetime="2017-10-18T03:32:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-18</time>
+        <a href="/2018/05/28/i/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:39:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>1. 配置 Java 环境</strong></p>
-<p><em>安装 JDK</em></p>
-<p><code>Zipkin</code> 使用 Java8<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install java-1.8.0-openjdk* -y</div></pre></td></tr></table></figure></p>
-<p>安装完成后，查看是否安装成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -version</div></pre></td></tr></table></figure></p>
-<p><strong>2. 安装 Zipkin</strong></p>
-<p>新建目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/release/zipkin &amp;&amp; cd &quot;$_&quot;</div></pre></td></tr></table></figure></p>
-<p>下载 Zipkin<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -O zipkin.jar &apos;https://search.maven.org/remote_content?g=io.zipkin.java&amp;a=zipkin-server&amp;v=LATEST&amp;c=exec&apos;</div></pre></td></tr></table></figure></p>
-<p>启动 Zipkin<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -jar zipkin.jar</div></pre></td></tr></table></figure></p>
-<p>Zipkin 默认监听 9411 端口， 使用浏览器访问 <a href="http://yourip:9411" target="_blank" rel="external">http://yourip:9411</a> 或 <a href="http://yourdomain.com:9411" target="_blank" rel="external">http://yourdomain.com:9411</a> 即可看到 Zipkin 自带的图形化界面</p>
-<p><strong>3. 配置 MySQL 数据持久化方案</strong></p>
-<p>Zipkin 支持的持久化方案很多，如： Cassandra, MySQL, Elasticsearch。本实验使用 MySQL 5.7 作为数据持久化方案。</p>
-<p><em>安装 MySQL 5.7</em></p>
-<p>使用 <code>Ctrl + C</code> 退出上个步骤的 Java 进程并下载 rmp 包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm</div></pre></td></tr></table></figure></p>
-<p>安装 rpm 包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -Uvh mysql57-community-release-el7-9.noarch.rpm</div></pre></td></tr></table></figure></p>
-<p>安装 MySQL<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-community-server -y</div></pre></td></tr></table></figure></p>
-<p>启动 MySQL 服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start mysqld.service</div></pre></td></tr></table></figure></p>
-<p><em>设置 MySQL 密码</em></p>
-<p>获取 <code>root</code> 临时密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep &apos;temporary password&apos; /var/log/mysqld.log | awk &apos;&#123;print $NF&#125;&apos;</div></pre></td></tr></table></figure></p>
-<p>使用上一步的获得的临时密码登入 MySQL<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -uroot -p</div></pre></td></tr></table></figure></p>
-<p>设置 MySQL 账户 <code>root</code> 密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ALTER USER &apos;root&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;Xx$Zipkin2017&apos;;</div></pre></td></tr></table></figure></p>
-<p>退出 MySQL, 回到 Bash shell<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exit;</div></pre></td></tr></table></figure></p>
-<p><em>初始化 Zipkin 数据库</em></p>
-<p>编写初始化脚本</p>
-<p>请在 <code>/data/release/zipkin</code> 目录下创建 <code>zipkin_init.sql</code>，参考下面的内容。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE IF NOT EXISTS zipkin_spans (</div><div class="line">  `trace_id_high` BIGINT NOT NULL DEFAULT 0 COMMENT &apos;If non zero, this means the trace uses 128 bit traceIds instead of 64 bit&apos;,</div><div class="line">  `trace_id` BIGINT NOT NULL,</div><div class="line">  `id` BIGINT NOT NULL,</div><div class="line">  `name` VARCHAR(255) NOT NULL,</div><div class="line">  `parent_id` BIGINT,</div><div class="line">  `debug` BIT(1),</div><div class="line">  `start_ts` BIGINT COMMENT &apos;Span.timestamp(): epoch micros used for endTs query and to implement TTL&apos;,</div><div class="line">  `duration` BIGINT COMMENT &apos;Span.duration(): micros used for minDuration and maxDuration query&apos;</div><div class="line">) ENGINE=InnoDB ROW_FORMAT=COMPRESSED CHARACTER SET=utf8 COLLATE utf8_general_ci;</div><div class="line"></div><div class="line">ALTER TABLE zipkin_spans ADD UNIQUE KEY(`trace_id_high`, `trace_id`, `id`) COMMENT &apos;ignore insert on duplicate&apos;;</div><div class="line">ALTER TABLE zipkin_spans ADD INDEX(`trace_id_high`, `trace_id`, `id`) COMMENT &apos;for joining with zipkin_annotations&apos;;</div><div class="line">ALTER TABLE zipkin_spans ADD INDEX(`trace_id_high`, `trace_id`) COMMENT &apos;for getTracesByIds&apos;;</div><div class="line">ALTER TABLE zipkin_spans ADD INDEX(`name`) COMMENT &apos;for getTraces and getSpanNames&apos;;</div><div class="line">ALTER TABLE zipkin_spans ADD INDEX(`start_ts`) COMMENT &apos;for getTraces ordering and range&apos;;</div><div class="line"></div><div class="line">CREATE TABLE IF NOT EXISTS zipkin_annotations (</div><div class="line">  `trace_id_high` BIGINT NOT NULL DEFAULT 0 COMMENT &apos;If non zero, this means the trace uses 128 bit traceIds instead of 64 bit&apos;,</div><div class="line">  `trace_id` BIGINT NOT NULL COMMENT &apos;coincides with zipkin_spans.trace_id&apos;,</div><div class="line">  `span_id` BIGINT NOT NULL COMMENT &apos;coincides with zipkin_spans.id&apos;,</div><div class="line">  `a_key` VARCHAR(255) NOT NULL COMMENT &apos;BinaryAnnotation.key or Annotation.value if type == -1&apos;,</div><div class="line">  `a_value` BLOB COMMENT &apos;BinaryAnnotation.value(), which must be smaller than 64KB&apos;,</div><div class="line">  `a_type` INT NOT NULL COMMENT &apos;BinaryAnnotation.type() or -1 if Annotation&apos;,</div><div class="line">  `a_timestamp` BIGINT COMMENT &apos;Used to implement TTL; Annotation.timestamp or zipkin_spans.timestamp&apos;,</div><div class="line">  `endpoint_ipv4` INT COMMENT &apos;Null when Binary/Annotation.endpoint is null&apos;,</div><div class="line">  `endpoint_ipv6` BINARY(16) COMMENT &apos;Null when Binary/Annotation.endpoint is null, or no IPv6 address&apos;,</div><div class="line">  `endpoint_port` SMALLINT COMMENT &apos;Null when Binary/Annotation.endpoint is null&apos;,</div><div class="line">  `endpoint_service_name` VARCHAR(255) COMMENT &apos;Null when Binary/Annotation.endpoint is null&apos;</div><div class="line">) ENGINE=InnoDB ROW_FORMAT=COMPRESSED CHARACTER SET=utf8 COLLATE utf8_general_ci;</div><div class="line"></div><div class="line">ALTER TABLE zipkin_annotations ADD UNIQUE KEY(`trace_id_high`, `trace_id`, `span_id`, `a_key`, `a_timestamp`) COMMENT &apos;Ignore insert on duplicate&apos;;</div><div class="line">ALTER TABLE zipkin_annotations ADD INDEX(`trace_id_high`, `trace_id`, `span_id`) COMMENT &apos;for joining with zipkin_spans&apos;;</div><div class="line">ALTER TABLE zipkin_annotations ADD INDEX(`trace_id_high`, `trace_id`) COMMENT &apos;for getTraces/ByIds&apos;;</div><div class="line">ALTER TABLE zipkin_annotations ADD INDEX(`endpoint_service_name`) COMMENT &apos;for getTraces and getServiceNames&apos;;</div><div class="line">ALTER TABLE zipkin_annotations ADD INDEX(`a_type`) COMMENT &apos;for getTraces&apos;;</div><div class="line">ALTER TABLE zipkin_annotations ADD INDEX(`a_key`) COMMENT &apos;for getTraces&apos;;</div><div class="line">ALTER TABLE zipkin_annotations ADD INDEX(`trace_id`, `span_id`, `a_key`) COMMENT &apos;for dependencies job&apos;;</div><div class="line"></div><div class="line">CREATE TABLE IF NOT EXISTS zipkin_dependencies (</div><div class="line">  `day` DATE NOT NULL,</div><div class="line">  `parent` VARCHAR(255) NOT NULL,</div><div class="line">  `child` VARCHAR(255) NOT NULL,</div><div class="line">  `call_count` BIGINT</div><div class="line">) ENGINE=InnoDB ROW_FORMAT=COMPRESSED CHARACTER SET=utf8 COLLATE utf8_general_ci;</div><div class="line"></div><div class="line">ALTER TABLE zipkin_dependencies ADD UNIQUE KEY(`day`, `parent`, `child`);</div></pre></td></tr></table></figure>
-<p>登录 Mysql<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -u root --password=&apos;Xx$Zipkin2017&apos;</div></pre></td></tr></table></figure></p>
-<p>创建 Zipkin 数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create database zipkin;</div></pre></td></tr></table></figure></p>
-<p>切换数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">use zipkin;</div></pre></td></tr></table></figure></p>
-<p>初始化表及索引<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source /data/release/zipkin/zipkin_init.sql</div></pre></td></tr></table></figure></p>
-<p>执行以下命令会看到<code>zipkin_annotations</code>, <code>zipkin_dependencies</code>, <code>zipkin_spans</code> 三张数据表，说明初始化成功了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">show tables;</div></pre></td></tr></table></figure></p>
-<p>退出 MySQL, 回到 Bash shell<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exit</div></pre></td></tr></table></figure></p>
-<p><em>启动 Zipkin</em></p>
-<p>注： 此处默认使用教程生成的密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /data/release/zipkin</div><div class="line">STORAGE_TYPE=mysql MYSQL_HOST=localhost MYSQL_TCP_PORT=3306 MYSQL_DB=zipkin MYSQL_USER=root MYSQL_PASS=&apos;Xx$Zipkin2017&apos; \</div><div class="line">nohup java -jar zipkin.jar &amp;</div></pre></td></tr></table></figure></p>
-<p><strong>4. 创建具有数据上报能力的Demo</strong></p>
-<p>搭建 NodeJS 环境</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -</div><div class="line">yum install nodejs -y</div></pre></td></tr></table></figure>
-<p><em>创建Demo目录</em></p>
-<p>创建 <code>/data/release/service_a</code> 目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/release/service_a &amp;&amp; cd &quot;$_&quot;</div></pre></td></tr></table></figure></p>
-<p><em>使用 NPM 安装相关依赖</em></p>
-<p>请在 <code>/data/release/service_a</code> 目录下创建并编辑 <code>package.json</code>，参考下面的内容。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;name&quot;: &quot;service_a&quot;,</div><div class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</div><div class="line">  &quot;description&quot;: &quot;&quot;,</div><div class="line">  &quot;main&quot;: &quot;index.js&quot;,</div><div class="line">  &quot;scripts&quot;: &#123;&#125;,</div><div class="line">  &quot;author&quot;: &quot;&quot;,</div><div class="line">  &quot;license&quot;: &quot;ISC&quot;,</div><div class="line">  &quot;dependencies&quot;: &#123;</div><div class="line">    &quot;express&quot;: &quot;^4.15.3&quot;,</div><div class="line">    &quot;zipkin&quot;: &quot;^0.7.2&quot;,</div><div class="line">    &quot;zipkin-instrumentation-express&quot;: &quot;^0.7.2&quot;,</div><div class="line">    &quot;zipkin-transport-http&quot;: &quot;^0.7.2&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>安装相关依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install</div></pre></td></tr></table></figure></p>
-<p><em>创建并编辑 <code>app.js</code></em></p>
-<p>请在 <code>/data/release/service_a</code> 目录下创建 <code>app.js</code>，参考下面的内容。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">const express = require(&apos;express&apos;);</div><div class="line">const &#123;Tracer, ExplicitContext, BatchRecorder&#125; = require(&apos;zipkin&apos;);</div><div class="line">const &#123;HttpLogger&#125; = require(&apos;zipkin-transport-http&apos;);</div><div class="line">const zipkinMiddleware = require(&apos;zipkin-instrumentation-express&apos;).expressMiddleware;</div><div class="line"></div><div class="line">const ctxImpl = new ExplicitContext();</div><div class="line">const recorder = new BatchRecorder(&#123;</div><div class="line">    logger: new HttpLogger( &#123;</div><div class="line">        endpoint: &apos;http://127.0.0.1:9411/api/v1/spans&apos;</div><div class="line">    &#125;)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">const tracer = new Tracer(&#123;ctxImpl, recorder&#125;);</div><div class="line"></div><div class="line">const app = express();</div><div class="line"></div><div class="line">app.use(zipkinMiddleware(&#123;</div><div class="line">  tracer,</div><div class="line">  serviceName: &apos;service-a&apos;</div><div class="line">&#125;));</div><div class="line"></div><div class="line">app.use(&apos;/&apos;, (req, res, next) =&gt; &#123;</div><div class="line">    res.send(&apos;hello world&apos;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">app.listen(3000, () =&gt; &#123;</div><div class="line">  console.log(&apos;service-a listening on port 3000!&apos;)</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p><em>启动服务</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node app.js</div></pre></td></tr></table></figure></p>
-<p>该服务监听 <code>3000</code> 端口， 使用浏览器访问 <a href="http://yourip:3000" target="_blank" rel="external">http://yourip:3000</a> 或 <a href="http://yourdomain.com:3000" target="_blank" rel="external">http://yourdomain.com:3000</a> 后，看到“hello world” 的文本字样说明服务已经正常工作</p>
-<p><strong>5. 部署完成</strong></p>
+        <p><strong>例题1：下列程序的输出结果是多少？</strong></p>
+
+<pre><code>
+public class Test {
+    static {
+        int x = 5;
+    }
+    static int x, y;
+    public static void main(String[] args) {
+        x--;
+        myMethod();
+        System.out.println(x + y++ + x);
+    }
+    public static void myMethod() {
+        y = x++ + ++x;
+    }
+}
+</code></pre>
+
+<p><strong>&nbsp;&nbsp;解析</strong></p>
+
+<pre><code>
+public class Test {
+    static {
+        int x = 5;//在第一次被载入JVM时运行，但由于是局部变量，x = 5不影响后面的值
+    }
+    static int x, y;//初始化 x = 0; y = 0
+    public static void main(String[] args) {
+        x--;//x = -1
+        myMethod();
+        System.out.println(x + y++ + x);//1 + 0 + 1 = 2;
+    }
+    public static void myMethod() {
+        y = x++ + ++x;//y = -1 + 1;
+    }
+}
+//输出结果为<strong>2</strong>
+</code></pre>
+
+<p><strong>例题2：下列程序的输出结果是多少？</strong></p>
+
+<pre><code>
+import java.util.*;
+
+public class Test {
+    public static void main(String[] args) {
+        int j = 0;
+        for (int i = 0; i &lt; 100; i++) {
+            j = j++;
+        }
+        System.out.println(j);
+    }
+}
+</code></pre>
+
+<p><strong>&nbsp;&nbsp;解析：因为Java用了中间缓存变量的机制，所以j=j++可换成如下写法：</strong></p>
+
+<pre><code>
+temp = j;
+j = j + 1;
+j = temp;
+//所有输出结果为0
+</code></pre>
+
+<p><strong>例题3：下列代码的执行结果是多少？</strong></p>
+
+<pre><code>
+import java.util.*;
+
+public class Test {
+    public static void main(String[] args) {
+        int i = 0;
+        i = i++ + ++i;
+        int j = 0;
+        j = ++j + j++ + j++ + j++;
+        int k = 0;
+        k = k++ + k++ + k++ + ++k;
+        int h = 0;
+        h = ++h + ++h;
+        int p1 = 0, p2 = 0, q1 = 0, q2 = 0;
+        q1 = ++p1;
+        q2 = p2++;
+        System.out.println("i " + i);
+        System.out.println("j " + j);
+        System.out.println("k " + k);
+        System.out.println("h " + h);
+        System.out.println("p1 " + p1);
+        System.out.println("p2 " + p2);
+        System.out.println("q1 " + q1);
+        System.out.println("q2 " + q2);
+    }
+}
+//输出结果：i = 2, j = 7, k = 7, h = 3, p1 = 1, p2 = 1, q1 = 1, q2 = 0
+</code></pre>
 
       
 
@@ -1367,7 +1061,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">linux zipkin</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -1377,7 +1071,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/18/CentOS搭建基于ZIPKIN的数据追踪系统/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/28/i/">展开全文 >></a>
         </p>
       
 
@@ -1407,49 +1101,60 @@
 
 
   
-    <article id="post-CentOS搭建JavaWeb开发环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-进制转换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/18/CentOS搭建JavaWeb开发环境/">CentOS搭建JavaWeb开发环境</a>
+      <a class="article-title" href="/2018/05/28/进制转换/">进制转换</a>
     </h1>
   
 
         
-        <a href="/2017/10/18/CentOS搭建JavaWeb开发环境/" class="archive-article-date">
-  	<time datetime="2017-10-18T02:49:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-18</time>
+        <a href="/2018/05/28/进制转换/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:38:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>1. 搭建 Java 开发环境</strong></p>
-<p>此教程教大家如何配置 JDK 、Tomcat 和 Mysql</p>
-<p><em>安装 JDK</em></p>
-<p>JDK 是开发Java程序必须安装的软件，我们查看一下 <code>yum</code> 源里面的 JDK：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum list java*</div></pre></td></tr></table></figure></p>
-<p>选择适合本机的JDK，并安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install java-1.7.0-openjdk* -y</div></pre></td></tr></table></figure></p>
-<p>安装完成后，查看是否安装成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -version</div></pre></td></tr></table></figure></p>
-<p><em>安装 Tomcat</em></p>
-<p>Tomcat 是一个应用服务器，是开发和调试 <code>jsp</code> 程序的首选，可以利用它来响应 HTML 页面的访问请求。</p>
-<p>进入本地文件夹<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /usr/local</div></pre></td></tr></table></figure></p>
-<p>到官网找到 Tomcat 的下载链接，并下载到服务器中, 这里提供了一个快速下载 Tomcat 的地址：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://mc.qcloudimg.com/static/archive/fa66329388f85c08e8d6c12ceb8b2ca3/apache-tomcat-7.0.77.tar.gz</div></pre></td></tr></table></figure></p>
-<p>解压这个文件夹：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zxf apache-tomcat-7.0.77.tar.gz</div></pre></td></tr></table></figure></p>
-<p>重命名这个文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mv apache-tomcat-7.0.77 /usr/local/tomcat7</div></pre></td></tr></table></figure></p>
-<p>进入 bin 文件夹<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/tomcat7/bin</div></pre></td></tr></table></figure></p>
-<p>给这个文件夹下的所有 <code>shell</code> 脚本授予权限：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod 777 *.sh</div></pre></td></tr></table></figure>
-<p>开启tomcat服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./startup.sh</div></pre></td></tr></table></figure></p>
-<p><em>安装 MySQL</em><br>使用 <code>yum</code> 安装 MySQL：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y mysql-server mysql mysql-devel</div></pre></td></tr></table></figure></p>
-<p>安装完成后，启动 MySQL 服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service mysqld restart</div></pre></td></tr></table></figure></p>
-<p>设置 MySQL 账户 <code>root</code> 密码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/mysqladmin -u root password &apos;NC7eKyAv&apos;</div></pre></td></tr></table></figure></p>
-<p><strong>2. 访问 Tomcat</strong></p>
-<p>访问 Tomcat</p>
-<p>此时，访问 <a href="http://yourip:8080" target="_blank" rel="external">http://yourip:8080</a> 或 <a href="http://yourdomain.com" target="_blank" rel="external">http://yourdomain.com</a> 可访问到刚才启动的 Tomcat 的内置示例页面</p>
+        <p>进制转换<br>时间限制：C/C++语言 2000MS；其他语言 4000MS<br>内存限制：C/C++语言 65536KB；其他语言 589824KB<br>题目描述：<br>用英文字母a-z来分别表示数值0-25, 形成一个26进制的数值表示法。需要你写一个方法，将用a-z表示的26进制数值的字符串，转化为对应的10进制数值。</p>
+<p>输入<br>输入数据有多组，每组占一行，包含多个a-z之间的字符。</p>
+<p>输出<br>所对应表示的10进制数。</p>
+<p>样例输入<br>ba<br>bcd<br>gibbon<br>goodboy</p>
+<p>样例输出<br>26<br>731<br>74962693<br>2026285376</p>
+<p><strong>下面是我的答案，如果你有更好的解决方案，请下面评论哦，大家一起学习交流！</strong></p>
+<pre><code>import java.util.ArrayList;
+import java.util.Scanner;
 
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList value = new ArrayList();
+        while(scanner.hasNext()) {
+            String ss = scanner.nextLine();
+            if(ss.length() &lt; 1) {
+                break;
+            }
+            value.add(ss);
+        }
+        for (String string : value) {
+            System.out.println(solution(string));
+        }
+    }
+    public static long solution(String s){
+        long result = 0;
+        int len = s.length();
+        for(int i = 0; i &lt; len; i++){
+            result += (s.charAt(i) - 'a') * Math.pow(26, len -  i - 1);
+        }
+        return result;
+    }
+}
+</code></pre>
       
 
       
@@ -1462,7 +1167,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">linux java javaweb</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -1472,7 +1177,269 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/18/CentOS搭建JavaWeb开发环境/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/28/进制转换/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-水仙花数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/28/水仙花数/">水仙花数</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/28/水仙花数/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:37:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>水仙花数</p>
+<p>（编程题须知） （参考答案）<br>时间限制：C/C++语言 2000MS；其他语言 4000MS<br>内存限制：C/C++语言 32768KB；其他语言 557056KB<br>题目描述：<br>春天是鲜花的季节，水仙花就是其中最迷人的代表，数学上有个水仙花数，他是这样定义的：<br>“水仙花数”是指一个三位数，它的各位数字的立方和等于其本身，比如：153=1^3+5^3+3^3。<br>现在要求输出所有在m和n范围内的水仙花数。<br>输入<br>输入数据有多组，每组占一行，包括两个整数m和n（100&lt;=m&lt;=n&lt;=999）。<br>输出<br>对于每个测试实例，要求输出所有在给定范围内的水仙花数，就是说，输出的水仙花数必须大于等于m,并且小于等于n，如果有多个，则要求从小到大排列在一行内输出，之间用一个空格隔开;<br>如果给定的范围内不存在水仙花数，则输出no;<br>每个测试实例的输出占一行。</p>
+<p>样例输入<br>100 120<br>300 380<br>样例输出<br>no<br>370 371</p>
+<p><strong>下面是我的答案，如果你有更好的解决方案，请在下面评论哦，大家一起交流学习！</strong></p>
+<pre><code>import java.util.ArrayList;
+import java.util.Scanner;
+public class Test {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList value = new ArrayList();
+        while (scanner.hasNext()) {
+            String string = scanner.nextLine();
+            // exit
+            if (string == "q" || !string.contains(" ")) {
+                break;
+            }
+            value.add(string);
+        }
+        for (String s : value) {
+            System.out.println(solution(Integer.parseInt(s.split(" ")[0]), Integer.parseInt(s.split(" ")[1])));
+        }
+    }
+
+    public static String solution(int m, int n) {
+        String result = "";
+        if (m &gt; 99 &amp;&amp; n &lt; 1000) {
+            while (m &lt;= n) {
+                if (m == Math.pow(m / 100, 3) + Math.pow(m % 100 / 10, 3) + Math.pow(m % 10, 3)) {
+                    result += m + " ";
+                }
+                m++;
+            }
+        }
+        return result == "" ? "no" : result;
+    }
+}
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/28/水仙花数/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-按层打印二叉树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/28/按层打印二叉树/">按层打印二叉树</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/28/按层打印二叉树/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:36:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 时间限制：C/C++语言 2000MS；其他语言 4000MS<br>内存限制：C/C++语言 65536KB；其他语言 589824KB<br>题目描述：<br>给定一棵二叉树的前序（根、左、右）和中序（左、根、右）的打印结果，输出此二叉树按层（从左往右）打印结果。<br>例如一棵二叉树前序：1 2 4 5 3；中序：4 2 5 1 3。可以构建出下图所示二叉树：</p>
+<p>按层打印的结果则为：1 2 3 4 5。</p>
+<p>输入<br>第一行只有一个数字，表示二叉树的节点数n（1&lt;=n&lt;=1000）;<br>第二行由a1,a2,…,an(1&lt;=ai&lt;=1000)组成的整数序列（用空格分隔）—表示前序打印结果；<br>第三行由b1,b2,…,bn(1&lt;=bi&lt;=1000)组成的整数序列（用空格分隔）—表示中序打印结果。</p>
+<p>输出<br>c1,c2,…,cn，用空格分隔—表示按层打印的结果。</p>
+<p>样例输入<br>5<br>1 2 4 5 3<br>4 2 5 1 3</p>
+<p>样例输出<br>1 2 3 4 5</p>
+<p><strong>下面是我的答案，如果你的更好的解决方案，请在下方评论，大家一起交流学习！</strong></p>
+<pre><code>import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int nodes = Integer.parseInt(scanner.nextLine());
+        String previous = scanner.nextLine();
+        String middle = scanner.nextLine();
+        int[] pre = new int[nodes];
+        int[] mid = new int[nodes];
+        for (int i = 0; i &lt; nodes; i++) {
+            pre[i] = Integer.parseInt(previous.split(" ")[i]);
+            mid[i] = Integer.parseInt(middle.split(" ")[i]);
+        }
+        Node node = binaryTree(pre, mid);
+        // System.out.print(node.value + " ");
+        ArrayList nodeList = new ArrayList();
+        nodeList.add(node);
+        output(nodeList);
+
+    }
+
+    public static void output(ArrayList node) {
+        if (node != null &amp;&amp; node.size() &gt; 0) {
+            ArrayList nodeList = new ArrayList();
+            for (Node n : node) {
+                if (n != null) {
+                    System.out.print(n.value + " ");
+                    nodeList.add(n.left);
+                    nodeList.add(n.right);
+                }
+            }
+            output(nodeList);
+        }
+    }
+
+    public static Node binaryTree(int[] pre, int[] mid) {
+        if (pre == null || mid == null) {
+            return null;
+        }
+        Node mm = constructBinaryTreeCore(pre, mid, 0, pre.length - 1, 0, mid.length - 1);
+        return mm;
+    }
+
+    public static Node constructBinaryTreeCore(int[] pre, int[] mid, int preStart, int preEnd, int midStart,
+            int midEnd) {
+        Node tree = new Node(pre[preStart]);
+        tree.left = null;
+        tree.right = null;
+        if (preStart == preEnd &amp;&amp; midStart == midEnd) {
+            return tree;
+        }
+        int root = 0;
+        for (root = midStart; root &lt; midEnd; root++) { if (pre[preStart] == mid[root]) { break; } } int leifLength = root - midStart; int rightLength = midEnd - root; if (leifLength &gt; 0) {
+            tree.left = constructBinaryTreeCore(pre, mid, preStart + 1, preStart + leifLength, midStart, root - 1);
+        }
+        if (rightLength &gt; 0) {
+            tree.right = constructBinaryTreeCore(pre, mid, preStart + 1 + leifLength, preEnd, root + 1, midEnd);
+        }
+        return tree;
+    }
+}
+
+class Node {
+    int value;
+    Node left;
+    Node right;
+
+    public Node(int k) {
+        value = k;
+    }
+}
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/28/按层打印二叉树/">展开全文 >></a>
         </p>
       
 
@@ -1504,7 +1471,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -1620,7 +1587,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">linux maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1632,10 +1607,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">linux jenkins</a>
               </li>
              
@@ -1644,7 +1615,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">linux nginx mysql php</a>
+                <a href="javascript:void(0)" class="js-tag color5">linux pyspider</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1652,7 +1623,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux pyspider</a>
+                <a href="javascript:void(0)" class="js-tag color2">linux nginx mysql php</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1669,10 +1640,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">elipse java spring springboot</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1700,11 +1667,51 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mac</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">java maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">svn</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">java spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">java struts</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">vmware</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c# wpf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1724,15 +1731,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">linux discuz</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux git</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1740,7 +1743,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">linux git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">linux postfix dovecot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">linux seafile</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1752,15 +1763,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux seafile</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux ftp</a>
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">linux weixin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">wordpress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">linux ftp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1772,7 +1787,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">java servlet</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">python linux mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">tcp/ip</a>
               </li>
             
             <div class="clearfix"></div>
