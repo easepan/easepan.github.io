@@ -3,6 +3,146 @@
   
     
     <entry>
+      <title><![CDATA[vim使用总结]]></title>
+      <url>/2018/05/29/vim%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/</url>
+      <content type="html"><![CDATA[<h3 id="普通模式"><a href="#普通模式" class="headerlink" title="普通模式"></a>普通模式</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">键</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">i</td>
+<td style="text-align:left">从光标处插入</td>
+</tr>
+<tr>
+<td style="text-align:left">I</td>
+<td style="text-align:left">从当前行的第一个非空字符插入</td>
+</tr>
+<tr>
+<td style="text-align:left">a</td>
+<td style="text-align:left">从光标的下一个字符插入</td>
+</tr>
+<tr>
+<td style="text-align:left">A</td>
+<td style="text-align:left">从当前行的最后一个字符插入</td>
+</tr>
+<tr>
+<td style="text-align:left">o</td>
+<td style="text-align:left">从当前行的下一行插入</td>
+</tr>
+<tr>
+<td style="text-align:left">O</td>
+<td style="text-align:left">从当前行的上一行插入</td>
+</tr>
+<tr>
+<td style="text-align:left">r</td>
+<td style="text-align:left">替换光标所在的那个字符一次</td>
+</tr>
+<tr>
+<td style="text-align:left">R</td>
+<td style="text-align:left">一直替换光标所在的位置</td>
+</tr>
+<tr>
+<td style="text-align:left">dd</td>
+<td style="text-align:left">删除当前行</td>
+</tr>
+<tr>
+<td style="text-align:left">x</td>
+<td style="text-align:left">向后删除一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">X</td>
+<td style="text-align:left">向前删除一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">p</td>
+<td style="text-align:left">将剪贴板粘贴至下一行</td>
+</tr>
+<tr>
+<td style="text-align:left">P</td>
+<td style="text-align:left">将剪贴板粘贴至上一行</td>
+</tr>
+<tr>
+<td style="text-align:left">%</td>
+<td style="text-align:left">跳转到另一边匹配的括号处</td>
+</tr>
+<tr>
+<td style="text-align:left">w</td>
+<td style="text-align:left">跳转到下个单词的首字母处</td>
+</tr>
+<tr>
+<td style="text-align:left">e</td>
+<td style="text-align:left">跳转到下个单词的最后一个字母处</td>
+</tr>
+<tr>
+<td style="text-align:left">^</td>
+<td style="text-align:left">跳转到当前行的第一个非空字符处</td>
+</tr>
+<tr>
+<td style="text-align:left">g_</td>
+<td style="text-align:left">跳转到当前行的最后一个非空字符处</td>
+</tr>
+<tr>
+<td style="text-align:left">gg</td>
+<td style="text-align:left">跳转到文件开头</td>
+</tr>
+<tr>
+<td style="text-align:left">G</td>
+<td style="text-align:left">跳转到文件结束</td>
+</tr>
+<tr>
+<td style="text-align:left">b</td>
+<td style="text-align:left">跳转到上一个单词的首字母处</td>
+</tr>
+</tbody>
+</table>
+<h3 id="插入模式"><a href="#插入模式" class="headerlink" title="插入模式"></a>插入模式</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">键</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Ctrl + W</td>
+<td style="text-align:left">删除光标左边的单词</td>
+</tr>
+</tbody>
+</table>
+<h3 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">键</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">set nu</td>
+<td style="text-align:left">设置行号</td>
+</tr>
+<tr>
+<td style="text-align:left">set nonu</td>
+<td style="text-align:left">取消行号</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> vim </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[java.net.BindException: Address already in use]]></title>
       <url>/2018/05/28/java-net-BindException-Address-already-in-use/</url>
       <content type="html"><![CDATA[<p>如果你知道进程正在运行的是什么端口，你可以在终端中输入:<code>lsof -i:port</code>。</p>

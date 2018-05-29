@@ -198,6 +198,159 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-按层打印二叉树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/28/按层打印二叉树/">按层打印二叉树</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/28/按层打印二叉树/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:36:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 时间限制：C/C++语言 2000MS；其他语言 4000MS<br>内存限制：C/C++语言 65536KB；其他语言 589824KB<br>题目描述：<br>给定一棵二叉树的前序（根、左、右）和中序（左、根、右）的打印结果，输出此二叉树按层（从左往右）打印结果。<br>例如一棵二叉树前序：1 2 4 5 3；中序：4 2 5 1 3。可以构建出下图所示二叉树：</p>
+<p>按层打印的结果则为：1 2 3 4 5。</p>
+<p>输入<br>第一行只有一个数字，表示二叉树的节点数n（1&lt;=n&lt;=1000）;<br>第二行由a1,a2,…,an(1&lt;=ai&lt;=1000)组成的整数序列（用空格分隔）—表示前序打印结果；<br>第三行由b1,b2,…,bn(1&lt;=bi&lt;=1000)组成的整数序列（用空格分隔）—表示中序打印结果。</p>
+<p>输出<br>c1,c2,…,cn，用空格分隔—表示按层打印的结果。</p>
+<p>样例输入<br>5<br>1 2 4 5 3<br>4 2 5 1 3</p>
+<p>样例输出<br>1 2 3 4 5</p>
+<p><strong>下面是我的答案，如果你的更好的解决方案，请在下方评论，大家一起交流学习！</strong></p>
+<pre><code>import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int nodes = Integer.parseInt(scanner.nextLine());
+        String previous = scanner.nextLine();
+        String middle = scanner.nextLine();
+        int[] pre = new int[nodes];
+        int[] mid = new int[nodes];
+        for (int i = 0; i &lt; nodes; i++) {
+            pre[i] = Integer.parseInt(previous.split(" ")[i]);
+            mid[i] = Integer.parseInt(middle.split(" ")[i]);
+        }
+        Node node = binaryTree(pre, mid);
+        // System.out.print(node.value + " ");
+        ArrayList nodeList = new ArrayList();
+        nodeList.add(node);
+        output(nodeList);
+
+    }
+
+    public static void output(ArrayList node) {
+        if (node != null &amp;&amp; node.size() &gt; 0) {
+            ArrayList nodeList = new ArrayList();
+            for (Node n : node) {
+                if (n != null) {
+                    System.out.print(n.value + " ");
+                    nodeList.add(n.left);
+                    nodeList.add(n.right);
+                }
+            }
+            output(nodeList);
+        }
+    }
+
+    public static Node binaryTree(int[] pre, int[] mid) {
+        if (pre == null || mid == null) {
+            return null;
+        }
+        Node mm = constructBinaryTreeCore(pre, mid, 0, pre.length - 1, 0, mid.length - 1);
+        return mm;
+    }
+
+    public static Node constructBinaryTreeCore(int[] pre, int[] mid, int preStart, int preEnd, int midStart,
+            int midEnd) {
+        Node tree = new Node(pre[preStart]);
+        tree.left = null;
+        tree.right = null;
+        if (preStart == preEnd &amp;&amp; midStart == midEnd) {
+            return tree;
+        }
+        int root = 0;
+        for (root = midStart; root &lt; midEnd; root++) { if (pre[preStart] == mid[root]) { break; } } int leifLength = root - midStart; int rightLength = midEnd - root; if (leifLength &gt; 0) {
+            tree.left = constructBinaryTreeCore(pre, mid, preStart + 1, preStart + leifLength, midStart, root - 1);
+        }
+        if (rightLength &gt; 0) {
+            tree.right = constructBinaryTreeCore(pre, mid, preStart + 1 + leifLength, preEnd, root + 1, midEnd);
+        }
+        return tree;
+    }
+}
+
+class Node {
+    int value;
+    Node left;
+    Node right;
+
+    public Node(int k) {
+        value = k;
+    }
+}
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/28/按层打印二叉树/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-值传递和引用传递" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -979,82 +1132,6 @@ System.out.println(k);
 
 
   
-    <article id="post-JSP简单标签的开发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/28/JSP简单标签的开发/">JSP简单标签的开发</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/28/JSP简单标签的开发/" class="archive-article-date">
-  	<time datetime="2018-05-28T13:26:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. 新建RepeatSampleTag类，代码如下：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">package bid.zhazhapan.fims.tag;</div><div class="line"></div><div class="line">import java.io.IOException;</div><div class="line">import java.io.StringWriter;</div><div class="line">import javax.servlet.jsp.JspContext;</div><div class="line">import javax.servlet.jsp.JspException;</div><div class="line">import javax.servlet.jsp.tagext.JspFragment;</div><div class="line">import javax.servlet.jsp.tagext.SimpleTagSupport;</div><div class="line"></div><div class="line">public class RepeatSampleTag extends SimpleTagSupport &#123;</div><div class="line">	private int num;// 定义属性</div><div class="line"></div><div class="line">	public void setNum(int num) &#123;</div><div class="line">		this.num = num;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	// 覆盖方法，标签的逻辑、迭代</div><div class="line">	public void doTag() throws JspException, IOException &#123;</div><div class="line">		// 获得页面上下文对象</div><div class="line">		JspContext ctx = this.getJspContext();</div><div class="line">		// 获得封闭标签体对象</div><div class="line">		JspFragment fragment = this.getJspBody();</div><div class="line">		if (num &gt; 0) &#123;</div><div class="line">			// 定义一个字符流，用来接收标签体的内容</div><div class="line">			StringWriter writer = new StringWriter();</div><div class="line">			// 将标签体的内容输出到字符流中</div><div class="line">			fragment.invoke(writer);</div><div class="line">			// 从字符流中获得数据</div><div class="line">			String string = writer.getBuffer().toString();</div><div class="line">			for (int i = 1; i &lt; num + 1; i++) &#123;</div><div class="line">				ctx.getOut().write(i + &quot;.&quot; + string.toUpperCase() + &quot;&lt;br/&gt;&quot;);</div><div class="line">			&#125;</div><div class="line">		&#125; else &#123;</div><div class="line">			// invoke()方法传入null值，采用默认的输出流</div><div class="line">			fragment.invoke(null);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>2. 配置xml文件（<a href="http://blog.csdn.net/qq_26954773/article/details/60332169" target="_blank" rel="external">如何配置xml</a>），部分代码如下：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;javaee:tag&gt;</div><div class="line">  	&lt;javaee:name&gt;repeat&lt;/javaee:name&gt;</div><div class="line">  	&lt;javaee:tag-class&gt;bid.zhazhapan.fims.tag.RepeatSampleTag&lt;/javaee:tag-class&gt;</div><div class="line">  	&lt;javaee:body-content&gt;scriptless&lt;/javaee:body-content&gt;</div><div class="line">  	&lt;javaee:attribute&gt;</div><div class="line">  		&lt;javaee:name&gt;num&lt;/javaee:name&gt;</div><div class="line">  		&lt;javaee:required&gt;true&lt;/javaee:required&gt;</div><div class="line">  		&lt;javaee:rtexprvalue&gt;true&lt;/javaee:rtexprvalue&gt;</div><div class="line">  	&lt;/javaee:attribute&gt;</div><div class="line">  &lt;/javaee:tag&gt;</div></pre></td></tr></table></figure></p>
-<p><strong>3. 调用标签，部分代码如下：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;mytag:repeat num=&quot;5&quot;&gt;</div><div class="line">hello world</div><div class="line">&lt;/mytag:repeat&gt;</div></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/28/JSP简单标签的开发/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -1185,11 +1262,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux firekylin</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux java javaweb</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux java javaweb</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux firekylin</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1205,11 +1282,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux showdoc</a>
+                <a href="javascript:void(0)" class="js-tag color2">linux nginx mysql php</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">linux nginx mysql php</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux showdoc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1221,11 +1298,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
+                <a href="javascript:void(0)" class="js-tag color5">elipse java spring springboot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">elipse java spring springboot</a>
+                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1249,15 +1326,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mac docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mac docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1265,11 +1338,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">java maven</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">java maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1301,7 +1378,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">qiniu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux sftp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1313,11 +1398,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux sftp</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux discuz</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux discuz</a>
+                <a href="javascript:void(0)" class="js-tag color5">linux git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1329,15 +1414,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">linux postfix dovecot</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux seafile</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1346,6 +1423,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">linux seafile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">linux ftp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1361,7 +1446,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux ftp</a>
+                <a href="javascript:void(0)" class="js-tag color4">shortcut</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1382,10 +1467,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">tcp/ip</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">shortcut</a>
               </li>
             
             <div class="clearfix"></div>

@@ -198,6 +198,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-JSP简单标签的开发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/28/JSP简单标签的开发/">JSP简单标签的开发</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/28/JSP简单标签的开发/" class="archive-article-date">
+  	<time datetime="2018-05-28T13:26:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1. 新建RepeatSampleTag类，代码如下：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">package bid.zhazhapan.fims.tag;</div><div class="line"></div><div class="line">import java.io.IOException;</div><div class="line">import java.io.StringWriter;</div><div class="line">import javax.servlet.jsp.JspContext;</div><div class="line">import javax.servlet.jsp.JspException;</div><div class="line">import javax.servlet.jsp.tagext.JspFragment;</div><div class="line">import javax.servlet.jsp.tagext.SimpleTagSupport;</div><div class="line"></div><div class="line">public class RepeatSampleTag extends SimpleTagSupport &#123;</div><div class="line">	private int num;// 定义属性</div><div class="line"></div><div class="line">	public void setNum(int num) &#123;</div><div class="line">		this.num = num;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	// 覆盖方法，标签的逻辑、迭代</div><div class="line">	public void doTag() throws JspException, IOException &#123;</div><div class="line">		// 获得页面上下文对象</div><div class="line">		JspContext ctx = this.getJspContext();</div><div class="line">		// 获得封闭标签体对象</div><div class="line">		JspFragment fragment = this.getJspBody();</div><div class="line">		if (num &gt; 0) &#123;</div><div class="line">			// 定义一个字符流，用来接收标签体的内容</div><div class="line">			StringWriter writer = new StringWriter();</div><div class="line">			// 将标签体的内容输出到字符流中</div><div class="line">			fragment.invoke(writer);</div><div class="line">			// 从字符流中获得数据</div><div class="line">			String string = writer.getBuffer().toString();</div><div class="line">			for (int i = 1; i &lt; num + 1; i++) &#123;</div><div class="line">				ctx.getOut().write(i + &quot;.&quot; + string.toUpperCase() + &quot;&lt;br/&gt;&quot;);</div><div class="line">			&#125;</div><div class="line">		&#125; else &#123;</div><div class="line">			// invoke()方法传入null值，采用默认的输出流</div><div class="line">			fragment.invoke(null);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>2. 配置xml文件（<a href="http://blog.csdn.net/qq_26954773/article/details/60332169" target="_blank" rel="external">如何配置xml</a>），部分代码如下：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;javaee:tag&gt;</div><div class="line">  	&lt;javaee:name&gt;repeat&lt;/javaee:name&gt;</div><div class="line">  	&lt;javaee:tag-class&gt;bid.zhazhapan.fims.tag.RepeatSampleTag&lt;/javaee:tag-class&gt;</div><div class="line">  	&lt;javaee:body-content&gt;scriptless&lt;/javaee:body-content&gt;</div><div class="line">  	&lt;javaee:attribute&gt;</div><div class="line">  		&lt;javaee:name&gt;num&lt;/javaee:name&gt;</div><div class="line">  		&lt;javaee:required&gt;true&lt;/javaee:required&gt;</div><div class="line">  		&lt;javaee:rtexprvalue&gt;true&lt;/javaee:rtexprvalue&gt;</div><div class="line">  	&lt;/javaee:attribute&gt;</div><div class="line">  &lt;/javaee:tag&gt;</div></pre></td></tr></table></figure></p>
+<p><strong>3. 调用标签，部分代码如下：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;mytag:repeat num=&quot;5&quot;&gt;</div><div class="line">hello world</div><div class="line">&lt;/mytag:repeat&gt;</div></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/28/JSP简单标签的开发/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-JSP迭代标签" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -997,149 +1073,6 @@ bc #进入计算器 +加法 -减法 *乘法 /除法 ^指数 %余数 quit退出
 
 
   
-    <article id="post-Centos安装MySql、Java、Tomcat" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/28/Centos安装MySql、Java、Tomcat/">Centos安装MySql、Java、Tomcat</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/28/Centos安装MySql、Java、Tomcat/" class="archive-article-date">
-  	<time datetime="2018-05-28T13:09:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>一、安装MySql</strong></p>
-<ol>
-<li><p>安装MySql</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y mysql-server mysql mysql-devel</div></pre></td></tr></table></figure>
-</li>
-<li><p>启动MySql服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service mysqld start</div></pre></td></tr></table></figure>
-</li>
-<li><p>为root账号设置密码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/mysqladmin -u root password &apos;your password&apos;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><strong>二、安装Java（这里安装的8）</strong>  </p>
-<ol>
-<li><p>下载JDK</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget --no-cookies --no-check-certificate --header &quot;Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie&quot; &quot;http://download.oracle.com/otn-pub/java/jdk/8u102-b14/jdk-8u102-linux-i586.rpm&quot;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol>
-<li><p>安装JDK</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -ivh jdk-8u102-linux-i586.rpm</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol>
-<li><p>设置环境变量 </p>
-<ul>
-<li><p>编辑java.sh文件</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/profile.d/java.sh</div></pre></td></tr></table></figure>
-</li>
-<li><p>添加如下内容</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">JAVA_HOME=/usr/java/jdk1.8.0_102/</div><div class="line">PATH=$JAVA_HOME/bin:$PATH</div><div class="line">export PATH JAVA_HOME</div><div class="line">export CLASSPATH=.</div></pre></td></tr></table></figure>
-</li>
-<li><p>保存并退出，执行下面两个命令，搞定</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chmod +x /etc/profile.d/java.sh</div><div class="line">source /etc/profile.d/java.sh</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ol>
-<p><strong>三、安装Tomcat（这里安装的9）</strong> </p>
-<ol>
-<li><p>下载Tomcat </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://archive.apache.org/dist/tomcat/tomcat-9/v9.0.0.M17/bin/apache-tomcat-9.0.0.M17.tar.gz</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<pre><code>&gt; 传送门：[tomcat官网](http://tomcat.apache.org/ &quot;tomcat官网&quot;)
-</code></pre><ol>
-<li><p>解压文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zxvf apache-tomcat-9.0.0.M17.tar.gz</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol>
-<li>将解压后的目录复制到usr/local/下并命名为tomcat9</li>
-</ol>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp -R apache-tomcat-9.0.0.M17 /usr/local/tomcat9</div></pre></td></tr></table></figure>
-</code></pre><ol>
-<li><p>进入bin目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/tomcat9/bin</div></pre></td></tr></table></figure>
-</li>
-<li><p>启动tomcat</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./startup.sh</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<ul>
-<li><p>启动效果</p>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Using CATALINA_BASE:   /usr/local/tomcat9</div><div class="line">Using CATALINA_HOME:   /usr/local/tomcat9</div><div class="line">Using CATALINA_TMPDIR: /usr/local/tomcat9/temp</div><div class="line">Using JRE_HOME:        /usr/java/jdk1.8.0_102/</div><div class="line">Using CLASSPATH:       /usr/local/tomcat9/bin/bootstrap.jar:/usr/local/tomcat9/bin/tomcat-juli.jar</div><div class="line">Tomcat started.</div></pre></td></tr></table></figure>
-</code></pre></li>
-<li><p>关闭tomcat</p>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./shutdown.sh</div></pre></td></tr></table></figure>
-</code></pre></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/28/Centos安装MySql、Java、Tomcat/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
@@ -1270,11 +1203,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux firekylin</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux java javaweb</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux java javaweb</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux firekylin</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1290,11 +1223,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux showdoc</a>
+                <a href="javascript:void(0)" class="js-tag color2">linux nginx mysql php</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">linux nginx mysql php</a>
+                <a href="javascript:void(0)" class="js-tag color4">linux showdoc</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1306,11 +1239,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
+                <a href="javascript:void(0)" class="js-tag color5">elipse java spring springboot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">elipse java spring springboot</a>
+                <a href="javascript:void(0)" class="js-tag color3">eclipse</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1334,15 +1267,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mac docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mac docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1350,11 +1279,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">java maven</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">oracle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">java maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1386,7 +1319,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">qiniu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux sftp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1398,11 +1339,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux sftp</a>
+                <a href="javascript:void(0)" class="js-tag color3">linux discuz</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">linux discuz</a>
+                <a href="javascript:void(0)" class="js-tag color5">linux git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1414,15 +1355,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">linux postfix dovecot</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">linux seafile</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1431,6 +1364,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux wordpress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">linux seafile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">linux ftp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1446,7 +1387,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">linux ftp</a>
+                <a href="javascript:void(0)" class="js-tag color4">shortcut</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1467,10 +1408,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">tcp/ip</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">shortcut</a>
               </li>
             
             <div class="clearfix"></div>
