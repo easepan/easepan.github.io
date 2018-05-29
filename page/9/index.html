@@ -198,6 +198,136 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-基于CentOS搭建个人Leanote云笔记本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/17/基于CentOS搭建个人Leanote云笔记本/">基于CentOS搭建个人Leanote云笔记本</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/17/基于CentOS搭建个人Leanote云笔记本/" class="archive-article-date">
+  	<time datetime="2017-10-17T14:11:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Leanote 依赖 MongoDB 作为数据存储，下面开始安装MongoDB：<br><strong>1. 下载启动 MongoDB</strong></p>
+<ul>
+<li><p>下载 MongoDB</p>
+<p>  进入 /home 目录，并下载 MongoDB：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /home</div></pre></td></tr></table></figure>
+<p>  下载源码：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.1.tgz</div></pre></td></tr></table></figure>
+<p>  解压缩源码包：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -xzvf mongodb-linux-x86_64-3.0.1.tgz</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建用于存储的文件夹目录</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/db</div></pre></td></tr></table></figure>
+<p>  配置 MongoDB 的环境变量：</p>
+<p>  编辑 <code>/etc/profile</code>，在文件末尾追加以下配置：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export PATH=$PATH:/home/mongodb-linux-x86_64-3.0.1/bin</div></pre></td></tr></table></figure>
+<p>  并执行以下命令，使环境变量生效。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source /etc/profile</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>启动 MongoDB（启动需要 3 ~ 5 分钟，耐心等待）：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongod --bind_ip localhost --port 27017 --dbpath /data/db/ --logpath=/var/log/mongod.log --fork</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>2. 安装 Leanote</strong></p>
+<ul>
+<li><p>下载 Leanote</p>
+<p>  先进入 /home 目录</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /home</div></pre></td></tr></table></figure>
+<p>  下载 Leanote 源码</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://iweb.dl.sourceforge.net/project/leanote-bin/2.4/leanote-linux-amd64-v2.4.bin.tar.gz</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>解开压缩包：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zxvf leanote-linux-amd64-v2.4.bin.tar.gz</div></pre></td></tr></table></figure>
+</li>
+<li><p>编辑 Leanote 配置文件</p>
+<p>  编辑文件 <code>app.conf</code>，在文件中找到 <code>app.secret=</code> 项，并修改为如下内容：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.secret=qcloud666</div></pre></td></tr></table></figure>
+</li>
+<li><p>初始化数据库</p>
+<p>  导入初始化数据：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongorestore -h localhost -d leanote --dir /home/leanote/mongodb_backup/leanote_install_data/</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动 Leanote 服务</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup /bin/bash /home/leanote/bin/run.sh &gt;&gt; /var/log/leanote.log 2&gt;&amp;1 &amp;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>3. 访问 Leanote 云笔记本</strong></p>
+<p>通过访问 <a href="http://yourip:9000" target="_blank" rel="external">http://yourip:9000</a> 或 <a href="http://yourdomain.com:9000就可以了使用自己的笔记本。" target="_blank" rel="external">http://yourdomain.com:9000就可以了使用自己的笔记本。</a></p>
+<ul>
+<li><p>初始化账户： admin</p>
+</li>
+<li><p>初始化密码： abc123</p>
+</li>
+</ul>
+<p>请务必修改密码已确保使用安全！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">linux leanote</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/17/基于CentOS搭建个人Leanote云笔记本/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-基于CentOS搭建个人网盘" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1543,87 +1673,6 @@
 
 
   
-    <article id="post-使用sftp在Linux（MacOS）之间进行文件传输" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/">使用sftp在Linux（MacOS）之间进行文件传输</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/" class="archive-article-date">
-  	<time datetime="2017-10-10T15:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1. 打开终端，连接远程Linux</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sftp user@host</div><div class="line">例如：sftp root@192.168.1.2</div></pre></td></tr></table></figure></p>
-<p><strong>2. 上传文件</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">put local_path remote_path</div><div class="line">例如：put -r /home/share/read.txt /home/root</div></pre></td></tr></table></figure></p>
-<p><strong>3. 上传文件夹以文件夹里的所有内容</strong></p>
-<p>比如上传文件夹 <code>folder</code>，首先需要在远程机上创建这个文件夹，然后使用下面命令 <code>put</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">put -r /home/share/folder/* /home/root/folder</div></pre></td></tr></table></figure></p>
-<p><strong>4. 下载文件</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">get remote_path local_path</div><div class="line">例如：get -r /usr/local/some.zip /home/share</div></pre></td></tr></table></figure></p>
-<p><strong>5. 下载文件夹以文件夹里的所有内容</strong></p>
-<p>比如下载文件夹 <code>folder</code>，首先需要在本机上创建这个文件夹，然后使用下面命令 <code>get</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">get -r /usr/local/folder/* /home/share/folder</div></pre></td></tr></table></figure></p>
-<p><strong>6. 退出</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exit</div></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux sftp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/10/使用sftp在Linux（MacOS）之间进行文件传输/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
@@ -1951,6 +2000,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">tcp/ip</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">shortcut</a>
               </li>
             
             <div class="clearfix"></div>
