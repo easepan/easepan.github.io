@@ -47,15 +47,15 @@
 </tr>
 <tr>
 <td style="text-align:left">dd</td>
-<td style="text-align:left">删除当前行</td>
+<td style="text-align:left">剪切当前行</td>
 </tr>
 <tr>
 <td style="text-align:left">x</td>
-<td style="text-align:left">向后删除一个字符</td>
+<td style="text-align:left">向后剪切一个字符</td>
 </tr>
 <tr>
 <td style="text-align:left">X</td>
-<td style="text-align:left">向前删除一个字符</td>
+<td style="text-align:left">向前剪切一个字符</td>
 </tr>
 <tr>
 <td style="text-align:left">p</td>
@@ -97,8 +97,230 @@
 <td style="text-align:left">b</td>
 <td style="text-align:left">跳转到上一个单词的首字母处</td>
 </tr>
+<tr>
+<td style="text-align:left">H</td>
+<td style="text-align:left">跳转到屏幕的最上面</td>
+</tr>
+<tr>
+<td style="text-align:left">M</td>
+<td style="text-align:left">跳转到屏幕的中间</td>
+</tr>
+<tr>
+<td style="text-align:left">L</td>
+<td style="text-align:left">跳转到屏幕的最下面</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + D</td>
+<td style="text-align:left">屏幕向下滚动半页</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + U</td>
+<td style="text-align:left">屏幕向上滚动半页</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + F</td>
+<td style="text-align:left">屏幕向下滚动一页</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + B</td>
+<td style="text-align:left">屏幕向上滚动一页</td>
+</tr>
+<tr>
+<td style="text-align:left">0</td>
+<td style="text-align:left">跳转到当前行的行首</td>
+</tr>
+<tr>
+<td style="text-align:left">$</td>
+<td style="text-align:left">跳转到当前行的行尾</td>
+</tr>
+<tr>
+<td style="text-align:left">.</td>
+<td style="text-align:left">重复上一个操作</td>
+</tr>
+<tr>
+<td style="text-align:left">cw</td>
+<td style="text-align:left">剪切当前单词的最后一个字符，并进入插入模式</td>
+</tr>
+<tr>
+<td style="text-align:left">caw</td>
+<td style="text-align:left">剪切当前光标所在位置的单词，并进入插入模式</td>
+</tr>
+<tr>
+<td style="text-align:left">c$</td>
+<td style="text-align:left">剪切光标位置到当前行的行尾，并进入插入模式</td>
+</tr>
+<tr>
+<td style="text-align:left">c^</td>
+<td style="text-align:left">剪切光标位置到当前行的第一个非空字符，并进入插入模式</td>
+</tr>
+<tr>
+<td style="text-align:left">c0</td>
+<td style="text-align:left">剪切光标位置到当前行的行首，并进入插入模式</td>
+</tr>
+<tr>
+<td style="text-align:left">d0</td>
+<td style="text-align:left">剪切光标位置到当前行的行首</td>
+</tr>
+<tr>
+<td style="text-align:left">d^</td>
+<td style="text-align:left">剪切光标位置到当前行的第一个非空字符</td>
+</tr>
+<tr>
+<td style="text-align:left">d$</td>
+<td style="text-align:left">剪切光标位置到当前行的行尾</td>
+</tr>
+<tr>
+<td style="text-align:left">ci”</td>
+<td style="text-align:left">清空””之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">ci[</td>
+<td style="text-align:left">清空[]之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">ci{</td>
+<td style="text-align:left">清空{}之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">ci(</td>
+<td style="text-align:left">清空()之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">cit</td>
+<td style="text-align:left">清空xml标签之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">yi”</td>
+<td style="text-align:left">复制””之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">yi[</td>
+<td style="text-align:left">复制[]之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">yi{</td>
+<td style="text-align:left">复制{}之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">yi(</td>
+<td style="text-align:left">复制()之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">yit</td>
+<td style="text-align:left">复制xml标签之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">+</td>
+<td style="text-align:left">跳转到下一行的第一个非空字符</td>
+</tr>
+<tr>
+<td style="text-align:left">-</td>
+<td style="text-align:left">跳转到上一行的第一个非空字符</td>
+</tr>
+<tr>
+<td style="text-align:left">yy</td>
+<td style="text-align:left">复制当前行</td>
+</tr>
+<tr>
+<td style="text-align:left">y0</td>
+<td style="text-align:left">复制光标到行首</td>
+</tr>
+<tr>
+<td style="text-align:left">y$</td>
+<td style="text-align:left">复制光标到行尾</td>
+</tr>
+<tr>
+<td style="text-align:left">y^</td>
+<td style="text-align:left">复制光标到当前行的第一个非空字符</td>
+</tr>
+<tr>
+<td style="text-align:left">va{</td>
+<td style="text-align:left">选中{}之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">h</td>
+<td style="text-align:left">光标左移一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">l</td>
+<td style="text-align:left">光标右移一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + X</td>
+<td style="text-align:left">光标所在处数字减一</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + A</td>
+<td style="text-align:left">光标所在处数字加一</td>
+</tr>
+<tr>
+<td style="text-align:left">ggVG</td>
+<td style="text-align:left">全选</td>
+</tr>
+<tr>
+<td style="text-align:left">f</td>
+<td style="text-align:left">跳转到下一个匹配的字符处</td>
+</tr>
+<tr>
+<td style="text-align:left">F</td>
+<td style="text-align:left">跳转到上一个匹配的字符处</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + R</td>
+<td style="text-align:left">重做</td>
+</tr>
+<tr>
+<td style="text-align:left">u</td>
+<td style="text-align:left">复原上个操作</td>
+</tr>
+<tr>
+<td style="text-align:left">E</td>
+<td style="text-align:left">跳转到下一个语句块的结尾</td>
+</tr>
+<tr>
+<td style="text-align:left">W</td>
+<td style="text-align:left">跳转到下一个语句块的开始</td>
+</tr>
+<tr>
+<td style="text-align:left">B</td>
+<td style="text-align:left">跳转到上一个语句块的开始</td>
+</tr>
+<tr>
+<td style="text-align:left">*</td>
+<td style="text-align:left">跳转到下一个与光标处单词匹配的单词</td>
+</tr>
+<tr>
+<td style="text-align:left">#</td>
+<td style="text-align:left">跳转到上一个与光标处单词匹配的单词</td>
+</tr>
+<tr>
+<td style="text-align:left">t</td>
+<td style="text-align:left">跳转到下个匹配的字符前面</td>
+</tr>
+<tr>
+<td style="text-align:left">T</td>
+<td style="text-align:left">跳转到上个匹配的字符后面</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + V</td>
+<td style="text-align:left">可视化，块操作</td>
+</tr>
 </tbody>
 </table>
+<blockquote>
+<p><code>cw</code> : change word</p>
+<p><code>caw</code> : change a word</p>
+<p><code>ci</code> : change inside</p>
+<p><code>yi</code> : yank inside</p>
+<p><code>ya</code> : yank around</p>
+<p><code>yw</code> : yank word</p>
+<p><code>yaw</code> : yank a word</p>
+<p><code>va</code> : visual around</p>
+<p><code>vis</code> : visual inside sentence</p>
+<p><code>vib</code> : visual inside block</p>
+<p><code>vip</code> : visual inside paragraph</p>
+<p><code>dib</code> : delete inside block</p>
+</blockquote>
 <h3 id="插入模式"><a href="#插入模式" class="headerlink" title="插入模式"></a>插入模式</h3><table>
 <thead>
 <tr>
@@ -109,7 +331,23 @@
 <tbody>
 <tr>
 <td style="text-align:left">Ctrl + W</td>
-<td style="text-align:left">删除光标左边的单词</td>
+<td style="text-align:left">剪切光标左边的单词</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + I</td>
+<td style="text-align:left">在光标出插入一个tab</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + D</td>
+<td style="text-align:left">向前缩进</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + T</td>
+<td style="text-align:left">向后缩进</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + M</td>
+<td style="text-align:left">换行</td>
 </tr>
 </tbody>
 </table>
@@ -128,6 +366,30 @@
 <tr>
 <td style="text-align:left">set nonu</td>
 <td style="text-align:left">取消行号</td>
+</tr>
+<tr>
+<td style="text-align:left">x</td>
+<td style="text-align:left">保存并退出</td>
+</tr>
+<tr>
+<td style="text-align:left">q</td>
+<td style="text-align:left">退出</td>
+</tr>
+<tr>
+<td style="text-align:left">w</td>
+<td style="text-align:left">保存</td>
+</tr>
+<tr>
+<td style="text-align:left">wq</td>
+<td style="text-align:left">保存并退出</td>
+</tr>
+<tr>
+<td style="text-align:left">n1,n2s/word1/word2/g</td>
+<td style="text-align:left">在n1和n2行之间替换word1为word2</td>
+</tr>
+<tr>
+<td style="text-align:left">q!</td>
+<td style="text-align:left">强制退出</td>
 </tr>
 </tbody>
 </table>
@@ -5312,7 +5574,7 @@ bc #进入计算器 +加法 -减法 *乘法 /除法 ^指数 %余数 quit退出
 <p> <img src="https://img-blog.csdn.net/20180526110533219?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2OTU0Nzcz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="p1"></p>
 </li>
 <li><p>我的快捷键设置如下：</p>
-<p> |Windows|Mac|描述|<br> |–|–|–|<br> |Alt + Z|Ctrl + Command + F|Toggle Full Screen mode|<br> |Alt + Y|Ctrl + Shift + T|Toolbar|<br> |Alt + P|Ctrl + Shift + O|Tool Buttons|<br> |Alt + D|Ctrl + Shift + S|Status Bar|<br> |Alt + N|Ctrl + Shift + N|Navigation Bar|<br> |Alt + R|Alt + R|Open Recent|<br> |Ctrl + F4|Command + W|Close|<br> |Alt + Home|Command + 上|Jump to Navigation Bar|<br> |Ctrl + Shift + A|Shift + Command + A|Find Action|<br> |Alt + U||Super Method|<br> |Alt + Shift + E|Alt + Shift + E|Event Log|<br> |Alt + W||Extend Selection|<br> |Alt + Shift + U||Update Project|<br> |Ctrl + Insert||Copy|<br> |Shift + Insert||Paste|<br> |Ctrl + Alt + /||Duplicate Line or Selection|<br> |Ctrl + Alt + Shift + E||Recent Files|<br> |Ctrl + Shift + S||Find|<br> |Alt + G||Line/Column|<br> |Alt + Shift + H||Replace|<br> |Alt + M||Scroll to Center|<br> |Alt + Shift + O||Open|<br> |Ctrl + Alt + Q||Quick Documentation|<br> |Shift + Delete||Cut|<br> |Ctrl + Shift + Z||Redo|<br> |Alt + [||Move Caret to Code Block Start|<br> |Alt + ]||Move Caret to Code Block End|<br> ||Alt + D|Debug|<br> ||Alt + G|Add Selecttion for Next Occurrence|<br> ||Alt + H|Type Hierarchy|<br> ||Alt + I|Implement Methods|<br> ||Ctrl + Alt + M|Move Caret to Matching Brace|<br> ||Alt + O|Override Methods|<br> ||Ctrl + Alt + Command + R|Run|<br> ||Ctrl + Alt + T|Refactor This|<br> ||VCS Operations Popup|</p>
+<p> |Windows|Mac|描述|<br> |–|–|–|<br> |Alt + Z|Ctrl + Command + F|Toggle Full Screen mode|<br> |Alt + Y|Ctrl + Shift + T|Toolbar|<br> |Alt + P|Ctrl + Shift + O|Tool Buttons|<br> |Alt + D|Ctrl + Shift + S|Status Bar|<br> |Alt + N|Ctrl + Shift + N|Navigation Bar|<br> |Alt + R|Alt + R|Open Recent|<br> |Ctrl + F4|Command + W|Close|<br> |Alt + Home|Command + 上|Jump to Navigation Bar|<br> |Ctrl + Shift + A|Shift + Command + A|Find Action|<br> |Alt + U||Super Method|<br> |Alt + Shift + E|Alt + Shift + E|Event Log|<br> |Alt + W||Extend Selection|<br> |Alt + Shift + U||Update Project|<br> |Ctrl + Insert||Copy|<br> |Shift + Insert||Paste|<br> |Ctrl + Alt + /||Duplicate Line or Selection|<br> |Ctrl + Alt + Shift + E||Recent Files|<br> |Ctrl + Shift + S||Find|<br> |Alt + G||Line/Column|<br> |Alt + Shift + H||Replace|<br> |Alt + M||Scroll to Center|<br> |Alt + Shift + O||Open|<br> |Ctrl + Alt + Q||Quick Documentation|<br> |Shift + Delete||Cut|<br> |Ctrl + Shift + Z||Redo|<br> |Alt + [||Move Caret to Code Block Start|<br> |Alt + ]||Move Caret to Code Block End|<br> ||Alt + D|Debug|<br> ||Alt + G|Add Selecttion for Next Occurrence|<br> ||Alt + H|Type Hierarchy|<br> ||Alt + I|Implement Methods|<br> ||Ctrl + Alt + M|Move Caret to Matching Brace|<br> ||Alt + O|Override Methods|<br> ||Ctrl + Alt + Command + R|Run|<br> ||Ctrl + Alt + T|Refactor This|<br> |||VCS Operations Popup|<br> |Alt + A||Select All|</p>
 <blockquote>
 <p>自定义快捷键，真心不好设置啊，好多都被占用了，唉……<br>先写到这里吧，以后再补充……</p>
 </blockquote>

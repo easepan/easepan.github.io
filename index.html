@@ -260,15 +260,15 @@
 </tr>
 <tr>
 <td style="text-align:left">dd</td>
-<td style="text-align:left">删除当前行</td>
+<td style="text-align:left">剪切当前行</td>
 </tr>
 <tr>
 <td style="text-align:left">x</td>
-<td style="text-align:left">向后删除一个字符</td>
+<td style="text-align:left">向后剪切一个字符</td>
 </tr>
 <tr>
 <td style="text-align:left">X</td>
-<td style="text-align:left">向前删除一个字符</td>
+<td style="text-align:left">向前剪切一个字符</td>
 </tr>
 <tr>
 <td style="text-align:left">p</td>
@@ -310,8 +310,230 @@
 <td style="text-align:left">b</td>
 <td style="text-align:left">跳转到上一个单词的首字母处</td>
 </tr>
+<tr>
+<td style="text-align:left">H</td>
+<td style="text-align:left">跳转到屏幕的最上面</td>
+</tr>
+<tr>
+<td style="text-align:left">M</td>
+<td style="text-align:left">跳转到屏幕的中间</td>
+</tr>
+<tr>
+<td style="text-align:left">L</td>
+<td style="text-align:left">跳转到屏幕的最下面</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + D</td>
+<td style="text-align:left">屏幕向下滚动半页</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + U</td>
+<td style="text-align:left">屏幕向上滚动半页</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + F</td>
+<td style="text-align:left">屏幕向下滚动一页</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + B</td>
+<td style="text-align:left">屏幕向上滚动一页</td>
+</tr>
+<tr>
+<td style="text-align:left">0</td>
+<td style="text-align:left">跳转到当前行的行首</td>
+</tr>
+<tr>
+<td style="text-align:left">$</td>
+<td style="text-align:left">跳转到当前行的行尾</td>
+</tr>
+<tr>
+<td style="text-align:left">.</td>
+<td style="text-align:left">重复上一个操作</td>
+</tr>
+<tr>
+<td style="text-align:left">cw</td>
+<td style="text-align:left">剪切当前单词的最后一个字符，并进入插入模式</td>
+</tr>
+<tr>
+<td style="text-align:left">caw</td>
+<td style="text-align:left">剪切当前光标所在位置的单词，并进入插入模式</td>
+</tr>
+<tr>
+<td style="text-align:left">c$</td>
+<td style="text-align:left">剪切光标位置到当前行的行尾，并进入插入模式</td>
+</tr>
+<tr>
+<td style="text-align:left">c^</td>
+<td style="text-align:left">剪切光标位置到当前行的第一个非空字符，并进入插入模式</td>
+</tr>
+<tr>
+<td style="text-align:left">c0</td>
+<td style="text-align:left">剪切光标位置到当前行的行首，并进入插入模式</td>
+</tr>
+<tr>
+<td style="text-align:left">d0</td>
+<td style="text-align:left">剪切光标位置到当前行的行首</td>
+</tr>
+<tr>
+<td style="text-align:left">d^</td>
+<td style="text-align:left">剪切光标位置到当前行的第一个非空字符</td>
+</tr>
+<tr>
+<td style="text-align:left">d$</td>
+<td style="text-align:left">剪切光标位置到当前行的行尾</td>
+</tr>
+<tr>
+<td style="text-align:left">ci”</td>
+<td style="text-align:left">清空””之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">ci[</td>
+<td style="text-align:left">清空[]之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">ci{</td>
+<td style="text-align:left">清空{}之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">ci(</td>
+<td style="text-align:left">清空()之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">cit</td>
+<td style="text-align:left">清空xml标签之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">yi”</td>
+<td style="text-align:left">复制””之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">yi[</td>
+<td style="text-align:left">复制[]之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">yi{</td>
+<td style="text-align:left">复制{}之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">yi(</td>
+<td style="text-align:left">复制()之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">yit</td>
+<td style="text-align:left">复制xml标签之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">+</td>
+<td style="text-align:left">跳转到下一行的第一个非空字符</td>
+</tr>
+<tr>
+<td style="text-align:left">-</td>
+<td style="text-align:left">跳转到上一行的第一个非空字符</td>
+</tr>
+<tr>
+<td style="text-align:left">yy</td>
+<td style="text-align:left">复制当前行</td>
+</tr>
+<tr>
+<td style="text-align:left">y0</td>
+<td style="text-align:left">复制光标到行首</td>
+</tr>
+<tr>
+<td style="text-align:left">y$</td>
+<td style="text-align:left">复制光标到行尾</td>
+</tr>
+<tr>
+<td style="text-align:left">y^</td>
+<td style="text-align:left">复制光标到当前行的第一个非空字符</td>
+</tr>
+<tr>
+<td style="text-align:left">va{</td>
+<td style="text-align:left">选中{}之间的内容</td>
+</tr>
+<tr>
+<td style="text-align:left">h</td>
+<td style="text-align:left">光标左移一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">l</td>
+<td style="text-align:left">光标右移一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + X</td>
+<td style="text-align:left">光标所在处数字减一</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + A</td>
+<td style="text-align:left">光标所在处数字加一</td>
+</tr>
+<tr>
+<td style="text-align:left">ggVG</td>
+<td style="text-align:left">全选</td>
+</tr>
+<tr>
+<td style="text-align:left">f</td>
+<td style="text-align:left">跳转到下一个匹配的字符处</td>
+</tr>
+<tr>
+<td style="text-align:left">F</td>
+<td style="text-align:left">跳转到上一个匹配的字符处</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + R</td>
+<td style="text-align:left">重做</td>
+</tr>
+<tr>
+<td style="text-align:left">u</td>
+<td style="text-align:left">复原上个操作</td>
+</tr>
+<tr>
+<td style="text-align:left">E</td>
+<td style="text-align:left">跳转到下一个语句块的结尾</td>
+</tr>
+<tr>
+<td style="text-align:left">W</td>
+<td style="text-align:left">跳转到下一个语句块的开始</td>
+</tr>
+<tr>
+<td style="text-align:left">B</td>
+<td style="text-align:left">跳转到上一个语句块的开始</td>
+</tr>
+<tr>
+<td style="text-align:left">*</td>
+<td style="text-align:left">跳转到下一个与光标处单词匹配的单词</td>
+</tr>
+<tr>
+<td style="text-align:left">#</td>
+<td style="text-align:left">跳转到上一个与光标处单词匹配的单词</td>
+</tr>
+<tr>
+<td style="text-align:left">t</td>
+<td style="text-align:left">跳转到下个匹配的字符前面</td>
+</tr>
+<tr>
+<td style="text-align:left">T</td>
+<td style="text-align:left">跳转到上个匹配的字符后面</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + V</td>
+<td style="text-align:left">可视化，块操作</td>
+</tr>
 </tbody>
 </table>
+<blockquote>
+<p><code>cw</code> : change word</p>
+<p><code>caw</code> : change a word</p>
+<p><code>ci</code> : change inside</p>
+<p><code>yi</code> : yank inside</p>
+<p><code>ya</code> : yank around</p>
+<p><code>yw</code> : yank word</p>
+<p><code>yaw</code> : yank a word</p>
+<p><code>va</code> : visual around</p>
+<p><code>vis</code> : visual inside sentence</p>
+<p><code>vib</code> : visual inside block</p>
+<p><code>vip</code> : visual inside paragraph</p>
+<p><code>dib</code> : delete inside block</p>
+</blockquote>
 <h3 id="插入模式"><a href="#插入模式" class="headerlink" title="插入模式"></a>插入模式</h3><table>
 <thead>
 <tr>
@@ -322,7 +544,23 @@
 <tbody>
 <tr>
 <td style="text-align:left">Ctrl + W</td>
-<td style="text-align:left">删除光标左边的单词</td>
+<td style="text-align:left">剪切光标左边的单词</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + I</td>
+<td style="text-align:left">在光标出插入一个tab</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + D</td>
+<td style="text-align:left">向前缩进</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + T</td>
+<td style="text-align:left">向后缩进</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + M</td>
+<td style="text-align:left">换行</td>
 </tr>
 </tbody>
 </table>
@@ -341,6 +579,30 @@
 <tr>
 <td style="text-align:left">set nonu</td>
 <td style="text-align:left">取消行号</td>
+</tr>
+<tr>
+<td style="text-align:left">x</td>
+<td style="text-align:left">保存并退出</td>
+</tr>
+<tr>
+<td style="text-align:left">q</td>
+<td style="text-align:left">退出</td>
+</tr>
+<tr>
+<td style="text-align:left">w</td>
+<td style="text-align:left">保存</td>
+</tr>
+<tr>
+<td style="text-align:left">wq</td>
+<td style="text-align:left">保存并退出</td>
+</tr>
+<tr>
+<td style="text-align:left">n1,n2s/word1/word2/g</td>
+<td style="text-align:left">在n1和n2行之间替换word1为word2</td>
+</tr>
+<tr>
+<td style="text-align:left">q!</td>
+<td style="text-align:left">强制退出</td>
 </tr>
 </tbody>
 </table>
