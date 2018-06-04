@@ -305,6 +305,10 @@
 <td style="text-align:left">Ctrl + V</td>
 <td style="text-align:left">可视化，块操作</td>
 </tr>
+<tr>
+<td style="text-align:left">Ctrl + O</td>
+<td style="text-align:left">跳转到上次跳转的地方</td>
+</tr>
 </tbody>
 </table>
 <blockquote>
@@ -5472,7 +5476,7 @@ bc #进入计算器 +加法 -减法 *乘法 /除法 ^指数 %余数 quit退出
 <tbody>
 <tr>
 <td>Alt + Shift + Y</td>
-<td>Alt + Shift + Y</td>
+<td>Ctrl + Alt + Shift + Y</td>
 <td>打开有道词典</td>
 </tr>
 <tr>
